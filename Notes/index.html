@@ -66,7 +66,26 @@
       
 
       
-      <p>Here I will list some of my class notes.</p>
+      <h1 id="Notes-Toc"><a href="#Notes-Toc" class="headerlink" title="Notes Toc"></a>Notes Toc</h1><p>Here I will list some of my notes.</p>
+<p>Hopefully I can find out a way to add hyper-refs to these notes titles :)</p>
+<h2 id="Summery-Notes"><a href="#Summery-Notes" class="headerlink" title="Summery Notes"></a>Summery Notes</h2><h3 id="Physics"><a href="#Physics" class="headerlink" title="Physics"></a>Physics</h3><ul>
+<li>Electromagnetism (digital)</li>
+<li>Applied Optics (digital)</li>
+<li>Theoretical Mechanics (not yet)</li>
+</ul>
+<h3 id="Mathemetics"><a href="#Mathemetics" class="headerlink" title="Mathemetics"></a>Mathemetics</h3><ul>
+<li><p>Numerical Analysis summery notes (by hand)</p>
+</li>
+<li><p>Abstract Algebra (digital)</p>
+</li>
+<li><p>Linear Algebra (digital)</p>
+</li>
+<li><p>Mathematical Modeling (digital)</p>
+</li>
+</ul>
+<h3 id="Class-Notes"><a href="#Class-Notes" class="headerlink" title="Class Notes"></a>Class Notes</h3><ul>
+<li>PDE (Partial Differential Equations ) Notes (by hand)</li>
+</ul>
 
       
       <!-- reward -->
@@ -537,7 +556,42 @@
 
 
     
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            displayMath: [ ['$','$'], ["\\[","\\]"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+
+<!-- <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['
+
+</html>,'
+
+</html>], ["\\(","\\)"] ],
+      displayMath: [ ['$','$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script> --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>
