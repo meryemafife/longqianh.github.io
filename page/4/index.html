@@ -75,6 +75,104 @@
     
     
     
+    <article id="post-Computer-Sciences/Machine Learning/Supvised Learning" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/01/19/Computer-Sciences/Machine%20Learning/Supvised%20Learning/"
+    >监督学习</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/01/19/Computer-Sciences/Machine%20Learning/Supvised%20Learning/" class="article-date">
+  <time datetime="2020-01-19T07:04:47.652Z" itemprop="datePublished">2020-01-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Computer-Science/">Computer Science</a> / <a class="article-category-link" href="/categories/Computer-Science/Machine-Learning/">Machine Learning</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="supvised-learning">Supvised Learning</h1>
+<h2 id="linear-regression">1.Linear Regression</h2>
+<p>output hypotheses function: <span class="math display">\[h(x)= \theta^Tx\]</span></p>
+<p><span class="math inline">\(x\)</span> is the input vector: <span class="math display">\[x=(x_1,x_2,\cdots,x_n)^T\]</span></p>
+<p><span class="math inline">\(\theta\)</span> is the parameter vector: <span class="math display">\[\theta=(\theta_1,\theta_2,\cdots,\theta_n)^T\]</span></p>
+<p><span class="math inline">\(y\)</span> is the training output</p>
+<p><span class="math inline">\(X\)</span> is the training input matrix: <span class="math display">\[X= (x^{(1)},x^{(2)},\cdots,x^{(m)})\]</span></p>
+<p><span class="math inline">\(Y\)</span> is the training output matrix: <span class="math display">\[Y=(y^{(1)},y^{(2)},\cdots,y^{(m)})\]</span></p>
+<p>$\ $</p>
+<h3 id="lms-algorithm">LMS algorithm</h3>
+<ul>
+<li>cost function:<br />
+<span class="math display">\[
+J(\theta)=\frac{1}{2}\parallel{\theta^T X-Y}\parallel^2\\
+        or : J(\theta)=\frac{1}{2}\sum\limits_{i=1}^{m}(h(x^{(i)})-y^{(i)})^2
+        \notag
+\]</span></li>
+</ul>
+<p>use <strong>matrix derivative</strong> to minimize <span class="math inline">\(J\)</span></p>
+<ul>
+<li>gradient descent :</li>
+</ul>
+<p><span class="math display">\[
+\theta_j := \theta_j-\alpha \frac{\partial}{\partial\theta_j}J(\theta)
+\notag
+\]</span></p>
+<p>
+      
+      <a class="article-more-link" href="/2020/01/19/Computer-Sciences/Machine%20Learning/Supvised%20Learning/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/" rel="tag">notes</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-Computer-Sciences/HTML学习" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 

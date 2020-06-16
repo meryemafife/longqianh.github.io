@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">4k</span>
+            <span class="post-count">4.1k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">16 min</span>
+            <span class="post-count">17 min</span>
         </span>
     </span>
 </div>
@@ -481,7 +481,20 @@ E_B&#39;&amp;=E_0\cos^4\omega&#39;
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python">--广角--<br>焦距： <span class="hljs-number">4.2152</span><br>等效焦距 <span class="hljs-number">29.6573</span><br>物方视场角： <span class="hljs-number">70.6732</span><br>光瞳直径:  <span class="hljs-number">2.3418</span><br><br>--长焦--<br>焦距： <span class="hljs-number">7.5098</span><br>等效焦距 <span class="hljs-number">52.8373</span><br>物方视场角： <span class="hljs-number">42.5086</span><br>光瞳直径:  <span class="hljs-number">3.1291</span><br><br>--误差计算--<br>像高误差-主镜头: <span class="hljs-number">5.54</span> %<br>焦距误差-主镜头 <span class="hljs-number">5.38</span> %<br><br>--放大倍率计算--<br>横向放大倍率 <span class="hljs-number">0.0289</span><br>显示图像放大倍率 <span class="hljs-number">496.6452</span><br></code></pre></td></tr></table></figure>
 <h2 id="利用单反相机测量光度学参数">利用单反相机测量光度学参数</h2>
 <ol type="1">
-<li>相机没有镜头无法成像，相机的光学传感器需要一个实像。</li>
+<li><p>相机没有镜头无法成像，相机的光学传感器需要一个实像。</p></li>
+<li><p>灰度值与亮度</p></li>
+<li><p><span class="math inline">\(\gamma\)</span> 矫正：</p>
+<ul>
+<li>能量 <span class="math inline">\(=\)</span> 功率 <span class="math inline">\(\times\)</span> 时间 <span class="math inline">\(\implies\)</span> 景物亮度 <span class="math inline">\(\propto\)</span> 快门时间 ,</li>
+<li>图片亮度 <span class="math inline">\(\propto\)</span> 图片灰度</li>
+<li><span class="math inline">\(\implies\)</span> 图片灰度 $$ 快门时间</li>
+<li>但是实际的图片灰度和快门时间是非线性的，这是由于相机对图片进行了处理</li>
+<li>存储时为了压缩动态范围 做了1/2.2的处理</li>
+<li>显示还原时再进行2.2的处理</li>
+<li>我们做图得到灰度平方后和快门速度成正比 说明存储时做了1/2 的处理</li>
+<li><a href="色彩校正中的%20gamma%20值是什么？%20-%20疾风齿轮的回答%20-%20知乎%20https://www.zhihu.com/question/27467127/answer/123239180">好的理解在此</a></li>
+</ul>
+<p>曝光指数 EI</p></li>
 </ol>
 <h2 id="应用光学讨论">应用光学讨论</h2>
 <ol type="1">

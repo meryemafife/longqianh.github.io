@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">970</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -142,6 +142,21 @@
 <ul>
 <li>nargin, nargout 的使用</li>
 </ul></li>
+</ul>
+<h2 id="关于频率">关于频率</h2>
+<p>采样频率 <span class="math inline">\(f_s\)</span>：每秒取 <span class="math inline">\(f_s\)</span> 个点，计算中应该取和物理采样硬件（如示波器）的采样频率一致</p>
+<p>频率域分析中，若采样频率是 <span class="math inline">\(f_s\)</span>, 那么分析的范围是 <span class="math inline">\([0,f_s)\)</span>, 这是因为更高频率的波我们采样不到了。</p>
+<p>又由于 <span class="math inline">\([0,f_s/2),[f_s/2,f_s)\)</span> 是对称的，事实上有用的信息或者说我们需要分析的范围是 <span class="math inline">\([0,f_s/2]\)</span> 。</p>
+<p>在用 Matlab 进行频率域分析时，首先应该设置采样频率。根据物理硬件可以确定采样频率，如果是离散信号，那么采样频率就是 <span class="math inline">\(1\)</span> 。</p>
+<p>第二步应该确定采样的点数 <span class="math inline">\(N\)</span> 或者采样的持续时间 <span class="math inline">\(T\)</span>, 知道一个我们就可以确定另一个：<span class="math inline">\(N\implies T=N/f_s,\quad T\implies N=T\cdot f_s\)</span></p>
+<p>在使用 Matlab 的 fft 函数时，有几个需要注意的地方：</p>
+<ul>
+<li><p>真实信号的振幅应该是 <span class="math inline">\(A\cdot2/N\)</span> ，这个我不是很明白，查到的是这样说的，<span class="math inline">\(A\)</span> 是 fft 变换后的振幅</p></li>
+<li><p>如果采样频率是 <span class="math inline">\(f_s\)</span>, 那么 fft 时要乘一下 <span class="math inline">\(dt=1/f_s\)</span> (每秒 <span class="math inline">\(f_s\)</span> 个点，那么一个点就是 <span class="math inline">\(1/f_s\)</span> 秒) ，这是由于 Matlab 的 fft 是离散傅立叶变换，相当于 <span class="math inline">\(dt=1\)</span> ，需要补乘 <span class="math inline">\(dt\)</span></p></li>
+<li><p>频率域对应的频谱范围是 <span class="math inline">\(0\sim f_s\)</span>, 有用的信息是在 <span class="math inline">\(0~f_s/2\)</span>, Matlab 代码实现是</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-number">0</span>:(N<span class="hljs-number">-1</span>)/N*fs<br></code></pre></td></tr></table></figure>
+<p>可以用 fftshift 将 <span class="math inline">\([0,f_s)\)</span> 移为 <span class="math inline">\((-f_s/2,f_s/2]\)</span>, 然后取 <span class="math inline">\([o,f_s/2]\)</span> 的有用信息进行分析</p></li>
+<li><p>反变换 ifft 时要乘回来之前多乘的 <span class="math inline">\(1/f_s\)</span>, 即乘 <span class="math inline">\(f_s\)</span></p></li>
 </ul>
 
       

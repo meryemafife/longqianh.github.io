@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">7.3k</span>
+            <span class="post-count">7.7k</span>
         </span>
     </span>
 
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">39 min</span>
+            <span class="post-count">41 min</span>
         </span>
     </span>
 </div>
@@ -340,7 +340,7 @@ A_i\vec e_i\equiv \sum_{i=1}^n A_i\vec e_i=\vec A\notag
 \notag
 \]</span></li>
 </ul>
-<h3 id="位置矢量-vec-r-相关">位置矢量 <span class="math inline">\(\vec r\)</span> 相关</h3>
+<h3 id="位置矢量相关">位置矢量相关</h3>
 <ul>
 <li>定义</li>
 </ul>
@@ -388,10 +388,11 @@ r=\sqrt{x^2+y^2+z^2}
 <p>以上对 <span class="math inline">\(\vec r-\vec r’\)</span> 同样适用。</p>
 <h3 id="张量相关">张量相关</h3>
 <p><span class="math display">\[
-\begin{aligned}
+\begin{align}
 &amp;\iint \vec e_r d\Omega =0\\
-&amp;\iint \vec e_r\vec e_r d\Omega=\frac {4\pi}{3}\overleftrightarrow I
-\end{aligned}
+&amp;\iint \vec e_r\vec e_r d\Omega=\frac {4\pi}{3}\overleftrightarrow I\\
+&amp;\iint \vec e_r\vec e_r\vec e_r\vec e_r d\Omega 
+\end{align}
 \]</span></p>
 <h2 id="电磁学公式">2 电磁学公式</h2>
 <h3 id="高斯定律">高斯定律</h3>
@@ -718,6 +719,7 @@ U&amp;=-\vec m\cdot \vec B\\
 \end{aligned}
 \]</span></p>
 <p>​ 其中<span class="math inline">\(\vec j\)</span> 为电流密度。</p>
+<p>​ 注意它比电偶极矩多一个系数，而且是 <span class="math inline">\(\vec r’\)</span> 在前。</p>
 <ul>
 <li><p>环形电流圈（半径为 <span class="math inline">\(a\)</span> ）： <span class="math display">\[
 \begin{aligned}
@@ -1034,7 +1036,30 @@ V&amp;=\frac{1}{4\pi\varepsilon_0}\left(\frac{q_0\cos[\omega(t-\vec r_{+}/c)]}{\
 \vec B&amp;=\frac 1 c \hat r \times \vec E
 \end{align}
 \]</span></p>
-<p>t</p>
+<h4 id="磁偶极子辐射">磁偶极子辐射</h4>
+<h4 id="任意源的辐射">任意源的辐射</h4>
+<p>给定电流分布-&gt; 计算磁标势 -&gt; 计算磁感应强度 -&gt; 获得辐射角功率分布和辐射总功率 $$ <span class="math display">\[\begin{align}
+\vec S&amp;=\frac 1 {\mu_0}\left[Re \vec E\times Re\vec B\right]\\
+\vec E&amp;=c\vec B\times \vec e_r,\\\vec B&amp;=\frac 1 c \vec e_r\times \vec E\\
+\langle |Re \vec B|^2\rangle&amp;=\frac 1 2\vec B\cdot \vec B^*=\frac 1 2 |\vec B|^2\\
+
+\implies \langle \vec S\rangle&amp;=\frac {c}{2\mu_0}|\vec B|^2 \vec e_r
+\\
+\frac {dP}{d\Omega}&amp;=\frac c{2\mu_0} r^2 (\vec B\cdot\vec B^*)
+\end{align}\]</span> $$</p>
+<h4 id="辐射的远场展开">辐射的远场展开</h4>
+<p>前面的近似推导暂未整理 $$ <span class="math display">\[\begin{align}
+\vec A(\vec r,t)&amp;=\vec A_0(\theta,\varphi)\frac{e^{i(kr-\omega t)}}{r}\\
+\vec A_0(\theta,\varphi)&amp;=\frac{\mu_0}{4\pi}\int\vec J(\vec r&#39;)e^{-ikr} d\tau&#39;\\
+
+
+\end{align}\]</span> $$ 将 <span class="math inline">\(e^{-ikr}\)</span> 展开，将得到电偶极矩、磁偶极矩、电四极矩：</p>
+<h2 id="狭义相对论">11 狭义相对论</h2>
+<p>理解：每个人都有一个自己的时空。</p>
+<h3 id="间隔">间隔</h3>
+<h3 id="洛伦兹变换">洛伦兹变换</h3>
+<h3 id="固有时和固有长度">固有时和固有长度</h3>
+<p>固有时是与粒子运动相对静止的参考系所观察到的时间，一般来说我们处在地球参考系，与粒子有一个 <span class="math inline">\(V\)</span> 点相对运动速度，因此我们要研究的是固有时洛伦兹变换后的时间。</p>
 <h2 id="习题">习题</h2>
 <h3 id="高斯定律-1">高斯定律</h3>
 <p>Three isolated infinite metal (i.e. conducting) slabs have their normals along the <em>z</em> axis, so the slabs are parallel to each other. The top slab has total charge <em>Q</em>, while the bottom slab has total charge <em>q</em>. Find the charge on the top surfaces of each slab and on the bottom surfaces of each slab. (<a href="chrome-extension://ohfgljdgelakfkefopgklcohadegdpjf/https://web.pa.msu.edu/people/duxbury/courses/phy481/Fall2009/MidtermIBSolutions-2009.pdf">Solusion</a>)</p>
@@ -1118,7 +1143,7 @@ V&amp;=\frac{1}{4\pi\varepsilon_0}\left(\frac{q_0\cos[\omega(t-\vec r_{+}/c)]}{\
   
   <nav class="article-nav">
     
-      <a href="/2020/02/18/Physics/Theoretical-mechanics/" class="article-nav-link">
+      <a href="/2020/02/18/Physics/Theoretical-Mechanics/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
