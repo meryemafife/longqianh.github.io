@@ -80,6 +80,90 @@
     
     
     
+    <article id="post-Projects-Optical-system-design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/07/Projects-Optical-system-design/"
+    >Optical System Design</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/07/Projects-Optical-system-design/" class="article-date">
+  <time datetime="2020-07-07T04:15:21.000Z" itemprop="datePublished">2020-07-07</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="光学系统设计-project">光学系统设计 Project</h1>
+<h2 id="光路计算部分">光路计算部分</h2>
+<p>这是光学系统设计的光路计算 Project，具体的程序和发行版我已经放到了[GitHub上]。</p>
+<p>这是一个非专业协作的非专业项目，头文件和cpp没有分开，GitHub提交也比较混乱，文件、代码、GitHub 更加专业是我学习的方向。</p>
+<p>但是这是我较为满意的一次项目，至少我不认为这是学术垃圾。光线的计算程序写了三、四十个小时，在类的设计上花了不少功夫，我认为程序具有可拓展性、易理解性，比如要进行光路追迹，只需要声明光线，便可利用<code>ray_tracing(ray,ku,kw)</code> 函数得到输出光线。</p>
+<p>真的感谢吴恩宗做出一个无比美丽和强大的GUI，而且提供了非常细致的帮助文档。</p>
+<p>真的感谢孙昊天在我debug到绝望的时候陪着我，让我看到了希望的光。</p>
+<h2 id="光学系统设计部分">光学系统设计部分</h2>
+<p>应该说，全靠两位队友带。</p>
+<p>我是直接奔着3个透镜去做的，做完以后就做完了。吴恩宗设计了一个四透镜的，可以说，优化到了极致。孙昊天三四五都做了，而且都做得很棒，三透镜做到了F2.8，所以最后就用他的三透镜系统啦！</p>
+<p>项目报告就放到这个下面了。By the way，最后的答辩孙昊天非常认真地准备，我看着时间真的把握地很好，PPT也很妙，赞啊啊!</p>
+
+
+	<div class="row">
+    <embed src="/pdf_files/光学系统设计-项目报告.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Projects/" rel="tag">Projects</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-Projects-Audio-Analysis" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -129,6 +213,10 @@
 
 
 
+<p>Final grade ：</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggiob5huksj318e04ojrm.jpg" alt="grade" /><figcaption>grade</figcaption>
+</figure>
 
       
       <!-- reward -->
@@ -334,7 +422,24 @@ H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]
 <p>交叉验证。将数据集打乱分成 <span class="math inline">\(k\)</span> 份不相交的集合，循环训练 <span class="math inline">\(k\)</span> 次，第 <span class="math inline">\(i\)</span> 次用除了第 <span class="math inline">\(i\)</span> 集合的部分训练，用第 <span class="math inline">\(i\)</span> 集合计算损失函数，最后的损失函数为所有损失的平均。</p>
 <p>待办：这种做法的合理性和优越性</p>
 <p>K-fold cross-validation procedure</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-comment"># 算法伪代码</span><br>Define KFoldXV(D,A,L,k):<br><span class="hljs-symbol">Require:</span> D the given dataset<br><span class="hljs-symbol">Require:</span> A the learning algorithm, seen as a function that takes a dataset as input <span class="hljs-keyword">and</span> outputs a learned function<br><span class="hljs-symbol">Require:</span> L the loss function, map the chosen test example to a scalar<br><span class="hljs-symbol">Require:</span> k the number of folds<br>	<br>	Split D into k mutually exclusive subsets D_i, whose union is D<br>	<span class="hljs-keyword">for</span> i from <span class="hljs-number">1</span> to k <span class="hljs-keyword">do</span><br>    f_i = A(D\D_i) <span class="hljs-comment"># 用第i个集合之外的训练</span><br>    <span class="hljs-keyword">for</span> z_j <span class="hljs-keyword">in</span> D_i <span class="hljs-keyword">do</span><br>      e_j = L(f_i,z_j) <span class="hljs-comment"># 用第i个集合计算损失</span><br>    <span class="hljs-keyword">end</span> <span class="hljs-keyword">for</span><br>  <span class="hljs-keyword">end</span> <span class="hljs-keyword">for</span><br>	Return e<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="ruby" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode ruby" id="cb1"><code class="sourceCode ruby"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># 算法伪代码</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="dt">Define</span> <span class="dt">KFoldXV</span>(D,A,L,k):</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="dt">Require</span>: D the given dataset</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="dt">Require</span>: A the learning algorithm, seen as a function that takes a dataset as input <span class="kw">and</span> outputs a learned function</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="dt">Require</span>: L the loss function, map the chosen test example to a scalar</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="dt">Require</span>: k the number of folds</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    </a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="dt">Split</span> D into k mutually exclusive subsets <span class="dt">D_i</span>, whose union is D</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw">for</span> i from <span class="dv">1</span> to k <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    f_i = A(D\<span class="dt">D_i</span>) <span class="co"># 用第i个集合之外的训练</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="kw">for</span> z_j <span class="kw">in</span> <span class="dt">D_i</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">      e_j = L(f_i,z_j) <span class="co"># 用第i个集合计算损失</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="kw">end</span> <span class="kw">for</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">  <span class="kw">end</span> <span class="kw">for</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">    <span class="dt">Return</span> e</a></code></pre>
 <h3 id="lstm">LSTM</h3>
 <p><a href="https://zhuanlan.zhihu.com/p/32085405" target="_blank" rel="noopener">参考</a></p>
 <p>长短期记忆（Long short-term memory, LSTM）是一种特殊的RNN，主要是为了解决长序列训练过程中的梯度消失和梯度爆炸问题。</p>
@@ -342,37 +447,224 @@ H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]
 <h2 id="代码基础部分">3. 代码基础部分</h2>
 <p>慢慢填。</p>
 <h3 id="变量与常量">变量与常量</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">x = tf.constant([[<span class="hljs-number">1.0</span>]])<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb2"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1">x <span class="op">=</span> tf.constant([[<span class="fl">1.0</span>]])</a></code></pre>
 <p>注意需转化为张量（or：矩阵），外面多套一层括号。</p>
 <h3 id="tf中的函数">TF中的函数</h3>
 <h4 id="tf.one_hot">tf.one_hot</h4>
 <p><code>tf.one_hot</code> 将输入数组转化为”one-hot“型的输出。和单分类问题有这非常密切的联系（待挖掘）。</p>
 <p>比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python">-- 输入 --<br>x=[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">2</span>] <span class="hljs-comment"># 根据输出 -1 表示不属于任何一类</span><br>print(tf.one_hot(x,depth=<span class="hljs-number">6</span>)) <span class="hljs-comment"># depth 应该是总分类数</span><br><br>-- 输出 --<br>tf.Tensor(<br>[[<span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span>]<br> [<span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span>]<br> [<span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span>]<br> [<span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span>]], shape=(<span class="hljs-number">4</span>, <span class="hljs-number">6</span>), dtype=float32)<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb3"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="op">--</span> 输入 <span class="op">--</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">x<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>] <span class="co"># 根据输出 -1 表示不属于任何一类</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="bu">print</span>(tf.one_hot(x,depth<span class="op">=</span><span class="dv">6</span>)) <span class="co"># depth 应该是总分类数</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="op">--</span> 输出 <span class="op">--</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">tf.Tensor(</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">[[<span class="fl">1.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span>]</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"> [<span class="fl">0.</span> <span class="fl">1.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span>]</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"> [<span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span>]</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"> [<span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">1.</span> <span class="fl">0.</span> <span class="fl">0.</span> <span class="fl">0.</span>]], shape<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">6</span>), dtype<span class="op">=</span>float32)</a></code></pre>
 <h4 id="tf.image">tf.image</h4>
 <p>用于图像处理，可以用这个扩充数据集。</p>
 <p><a href="%5Bhttps://medium.com/@lufor129/tensorflow-%E5%9C%96%E7%89%87%E6%95%B8%E6%93%9A%E5%A2%9E%E5%BC%B7-%E4%BA%8C-%E5%9C%96%E7%89%87%E8%99%95%E7%90%86%E5%87%BD%E6%95%B8-1083fb176f9%5D(https://medium.com/@lufor129/tensorflow-圖片數據增強-二-圖片處理函數-1083fb176f9)">推荐/待继续研究</a></p>
 <h4 id="tfds.load">tfds.load</h4>
 <p>载入数据。<code>split</code> <a href="https://www.tensorflow.org/datasets/splits" target="_blank" rel="noopener">有很多玩法</a>。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tensorflow_datasets <span class="hljs-keyword">as</span> tfds<br>mnist_dataset, mnist_info = tfda.load(<span class="hljs-string">'mnist'</span>,split=<span class="hljs-string">'train'</span>,\<br>               with_info=<span class="hljs-literal">True</span>,batch_size=<span class="hljs-literal">None</span>,\<br>               shuffle_files=<span class="hljs-literal">True</span>, as_supvised=<span class="hljs-literal">True</span>)<br><br><span class="hljs-comment"># 重要参数</span><br><span class="hljs-comment"># split :  Which split of the data to load (e.g. 'train', 'test' ['train', 'test'], 'train[80%:]')</span><br><br><span class="hljs-comment"># shuffle_files </span><br><br><span class="hljs-comment"># as_supvised : bool, if True, the returned tf.data.Dataset will have a 2-tuple structure (input, label)</span><br><span class="hljs-comment"># batch_size : add a batch dimension to examples</span><br><br>mnist_train = mnist_dataset[<span class="hljs-string">'train'</span>]<br><span class="hljs-comment"># 返回迭代器(generator ) mnist_train</span><br><br>print(mnist_info)<br><span class="hljs-comment"># 数据集信息</span><br><br>-- result --<br><br>tfds.core.DatasetInfo(<br>    name=<span class="hljs-string">'mnist'</span>,<br>    version=<span class="hljs-number">3.0</span><span class="hljs-number">.1</span>,<br>    description=<span class="hljs-string">'The MNIST database of handwritten digits.'</span>,<br>    homepage=<span class="hljs-string">'http://yann.lecun.com/exdb/mnist/'</span>,<br>    features=FeaturesDict(&#123;<br>        <span class="hljs-string">'image'</span>: Image(shape=(<span class="hljs-number">28</span>, <span class="hljs-number">28</span>, <span class="hljs-number">1</span>), dtype=tf.uint8),<br>        <span class="hljs-string">'label'</span>: ClassLabel(shape=(), dtype=tf.int64, num_classes=<span class="hljs-number">10</span>),<br>    &#125;),<br>    total_num_examples=<span class="hljs-number">70000</span>,<br>    splits=&#123;<br>        <span class="hljs-string">'test'</span>: <span class="hljs-number">10000</span>,<br>        <span class="hljs-string">'train'</span>: <span class="hljs-number">60000</span>,<br>    &#125;,<br>    supervised_keys=(<span class="hljs-string">'image'</span>, <span class="hljs-string">'label'</span>),<br>    citation=<span class="hljs-string">"""@article&#123;lecun2010mnist,<br>      title=&#123;MNIST handwritten digit database&#125;,<br>      author=&#123;LeCun, Yann and Cortes, Corinna and Burges, CJ&#125;,<br>      journal=&#123;ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist&#125;,<br>      volume=&#123;2&#125;,<br>      year=&#123;2010&#125;<br>    &#125;"""</span>,<br>    redistribution_info=,<br>)<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb4"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="im">import</span> tensorflow_datasets <span class="im">as</span> tfds</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">mnist_dataset, mnist_info <span class="op">=</span> tfda.load(<span class="st">&#39;mnist&#39;</span>,split<span class="op">=</span><span class="st">&#39;train&#39;</span>,<span class="op">\</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">               with_info<span class="op">=</span><span class="va">True</span>,batch_size<span class="op">=</span><span class="va">None</span>,<span class="op">\</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">               shuffle_files<span class="op">=</span><span class="va">True</span>, as_supvised<span class="op">=</span><span class="va">True</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># 重要参数</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># split :  Which split of the data to load (e.g. &#39;train&#39;, &#39;test&#39; [&#39;train&#39;, &#39;test&#39;], &#39;train[80%:]&#39;)</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co"># shuffle_files </span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co"># as_supvised : bool, if True, the returned tf.data.Dataset will have a 2-tuple structure (input, label)</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co"># batch_size : add a batch dimension to examples</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">mnist_train <span class="op">=</span> mnist_dataset[<span class="st">&#39;train&#39;</span>]</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co"># 返回迭代器(generator ) mnist_train</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="bu">print</span>(mnist_info)</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co"># 数据集信息</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="op">--</span> result <span class="op">--</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">tfds.core.DatasetInfo(</a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">    name<span class="op">=</span><span class="st">&#39;mnist&#39;</span>,</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">    version<span class="op">=</span><span class="dv">3</span>.<span class="fl">0.1</span>,</a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">    description<span class="op">=</span><span class="st">&#39;The MNIST database of handwritten digits.&#39;</span>,</a>
+<a class="sourceLine" id="cb4-26" data-line-number="26">    homepage<span class="op">=</span><span class="st">&#39;http://yann.lecun.com/exdb/mnist/&#39;</span>,</a>
+<a class="sourceLine" id="cb4-27" data-line-number="27">    features<span class="op">=</span>FeaturesDict({</a>
+<a class="sourceLine" id="cb4-28" data-line-number="28">        <span class="st">&#39;image&#39;</span>: Image(shape<span class="op">=</span>(<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">1</span>), dtype<span class="op">=</span>tf.uint8),</a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">        <span class="st">&#39;label&#39;</span>: ClassLabel(shape<span class="op">=</span>(), dtype<span class="op">=</span>tf.int64, num_classes<span class="op">=</span><span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb4-30" data-line-number="30">    }),</a>
+<a class="sourceLine" id="cb4-31" data-line-number="31">    total_num_examples<span class="op">=</span><span class="dv">70000</span>,</a>
+<a class="sourceLine" id="cb4-32" data-line-number="32">    splits<span class="op">=</span>{</a>
+<a class="sourceLine" id="cb4-33" data-line-number="33">        <span class="st">&#39;test&#39;</span>: <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb4-34" data-line-number="34">        <span class="st">&#39;train&#39;</span>: <span class="dv">60000</span>,</a>
+<a class="sourceLine" id="cb4-35" data-line-number="35">    },</a>
+<a class="sourceLine" id="cb4-36" data-line-number="36">    supervised_keys<span class="op">=</span>(<span class="st">&#39;image&#39;</span>, <span class="st">&#39;label&#39;</span>),</a>
+<a class="sourceLine" id="cb4-37" data-line-number="37">    citation<span class="op">=</span><span class="st">&quot;&quot;&quot;@article{lecun2010mnist,</span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="st">      title={MNIST handwritten digit database},</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="st">      author={LeCun, Yann and Cortes, Corinna and Burges, CJ},</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="st">      journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="st">      volume=</span><span class="sc">{2}</span><span class="st">,</span></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="st">      year=</span><span class="sc">{2010}</span></a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="st">    }&quot;&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb4-44" data-line-number="44">    redistribution_info<span class="op">=</span>,</a>
+<a class="sourceLine" id="cb4-45" data-line-number="45">)</a></code></pre>
 <h4 id="tf.constant_initializer">tf.constant_initializer</h4>
 <p>用于初始化权重矩阵。</p>
 <p>待解决：如何查看初始化的矩阵的内容</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">W = np.array([[<br>    [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>],<br>    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>],<br>    [<span class="hljs-number">-2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>]<br>]], dtype=np.float32)<br>kernel_initializer = tf.constant_initializer(W)<br><br>print(kernel_initializer)<br><br>-- result --<br>&lt;tensorflow.python.ops.init_ops_v2.Constant object at <span class="hljs-number">0x135f09810</span>&gt;<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb5"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">W <span class="op">=</span> np.array([[</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">-1</span>],</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>],</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    [<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">]], dtype<span class="op">=</span>np.float32)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">kernel_initializer <span class="op">=</span> tf.constant_initializer(W)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="bu">print</span>(kernel_initializer)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="op">--</span> result <span class="op">--</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="op">&lt;</span>tensorflow.python.ops.init_ops_v2.Constant <span class="bu">object</span> at <span class="bn">0x135f09810</span><span class="op">&gt;</span></a></code></pre>
 <h2 id="模型搭建与训练">4. 模型搭建与训练</h2>
 <h3 id="线性回归">线性回归</h3>
 <h4 id="搭模型">搭模型</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 模版</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span><span class="hljs-params">(tf.keras.Model)</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span><br>        super().__init__()     <span class="hljs-comment"># Python 2 下使用 super(MyModel, self).__init__()</span><br>        <span class="hljs-comment"># 此处添加初始化代码（包含 call 方法中会用到的层），例如</span><br>        <span class="hljs-comment"># layer1 = tf.keras.layers.BuiltInLayer(...)</span><br>        <span class="hljs-comment"># layer2 = MyCustomLayer(...)</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">call</span><span class="hljs-params">(self, input)</span>:</span><br>        <span class="hljs-comment"># 此处添加模型调用的代码（处理输入并返回输出），例如</span><br>        <span class="hljs-comment"># x = layer1(input)</span><br>        <span class="hljs-comment"># output = layer2(x)</span><br>        <span class="hljs-keyword">return</span> output<br><br><span class="hljs-comment"># 线性模型</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Linear</span><span class="hljs-params">(tf.keras.Model)</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span><br>        super().__init__() <span class="hljs-comment"># Python 3 直接 super(). 就可以了</span><br>        <span class="hljs-comment"># 全连接层 训练的参数为矩阵A和b : y = AX+b</span><br>        self.dense = tf.keras.layers.Dense(<br>            units=<span class="hljs-number">1</span>, <span class="hljs-comment"># 输出的最后一维 feature的层数</span><br>            activation=<span class="hljs-literal">None</span>,<br>	          <span class="hljs-comment"># 设置 Keras 各层权重随机初始值</span><br>            kernel_initializer=tf.zeros_initializer(),<br>            bias_initializer=tf.zeros_initializer()<br>        )<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">call</span><span class="hljs-params">(self, input)</span>:</span><br>        output = self.dense(input)<br>        <span class="hljs-keyword">return</span> output<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb6"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># 模版</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">class</span> MyModel(tf.keras.Model):</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">        <span class="bu">super</span>().<span class="fu">__init__</span>()     <span class="co"># Python 2 下使用 super(MyModel, self).__init__()</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">        <span class="co"># 此处添加初始化代码（包含 call 方法中会用到的层），例如</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">        <span class="co"># layer1 = tf.keras.layers.BuiltInLayer(...)</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">        <span class="co"># layer2 = MyCustomLayer(...)</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">    <span class="kw">def</span> call(<span class="va">self</span>, <span class="bu">input</span>):</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">        <span class="co"># 此处添加模型调用的代码（处理输入并返回输出），例如</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">        <span class="co"># x = layer1(input)</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">        <span class="co"># output = layer2(x)</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">        <span class="cf">return</span> output</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co"># 线性模型</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="kw">class</span> Linear(tf.keras.Model):</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">        <span class="bu">super</span>().<span class="fu">__init__</span>() <span class="co"># Python 3 直接 super(). 就可以了</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">        <span class="co"># 全连接层 训练的参数为矩阵A和b : y = AX+b</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">        <span class="va">self</span>.dense <span class="op">=</span> tf.keras.layers.Dense(</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">            units<span class="op">=</span><span class="dv">1</span>, <span class="co"># 输出的最后一维 feature的层数</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">            activation<span class="op">=</span><span class="va">None</span>,</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">              <span class="co"># 设置 Keras 各层权重随机初始值</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">            kernel_initializer<span class="op">=</span>tf.zeros_initializer(),</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">            bias_initializer<span class="op">=</span>tf.zeros_initializer()</a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">        )</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28">    <span class="kw">def</span> call(<span class="va">self</span>, <span class="bu">input</span>):</a>
+<a class="sourceLine" id="cb6-29" data-line-number="29">        output <span class="op">=</span> <span class="va">self</span>.dense(<span class="bu">input</span>)</a>
+<a class="sourceLine" id="cb6-30" data-line-number="30">        <span class="cf">return</span> output</a></code></pre>
 <h4 id="训练模型">训练模型</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 手动预处理</span><br>X_raw = np.array([<span class="hljs-number">2013</span>, <span class="hljs-number">2014</span>, <span class="hljs-number">2015</span>, <span class="hljs-number">2016</span>, <span class="hljs-number">2017</span>], dtype=np.float32)<br>y_raw = np.array([<span class="hljs-number">12000</span>, <span class="hljs-number">14000</span>, <span class="hljs-number">15000</span>, <span class="hljs-number">16500</span>, <span class="hljs-number">17500</span>], dtype=np.float32)<br><br>X = (X_raw - X_raw.min()) / (X_raw.max() - X_raw.min())<br>y = (y_raw - y_raw.min()) / (y_raw.max() - y_raw.min())<br><br><br><span class="hljs-comment"># 训练</span><br>num_epoch = <span class="hljs-number">10000</span><br>model = Linear()<br>optimizer = tf.keras.optimizers.SGD(learning_rate=<span class="hljs-number">0.01</span>)<br>X = tf.constant([X])  <span class="hljs-comment"># X 是向量, [X] 是矩阵,可以转为张量</span><br>y = tf.constant([y])<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(num_epoch):<br>    <span class="hljs-keyword">with</span> tf.GradientTape() <span class="hljs-keyword">as</span> tape: <span class="hljs-comment"># 开始记录梯度</span><br>        y_pred = model(X)<br>        loss = tf.reduce_mean(tf.square(y_pred - y)) <br>        <span class="hljs-comment"># 均方误差 reduce_mean 对所有tensor所有元素求平均</span><br><br>    grads = tape.gradient(loss, model.variables) <span class="hljs-comment"># 对损失函数的每一个变量求偏导</span><br>    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))<br>    <span class="hljs-comment">#  apply_gradient 根据得到的梯度更新参数 传入一个list : [(grad_1,var_1),</span><br>    <span class="hljs-comment"># (grad_2,var_2),...,(grad_n,var_n)]</span><br>print(y_pred)<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb7"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># 手动预处理</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">X_raw <span class="op">=</span> np.array([<span class="dv">2013</span>, <span class="dv">2014</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2017</span>], dtype<span class="op">=</span>np.float32)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">y_raw <span class="op">=</span> np.array([<span class="dv">12000</span>, <span class="dv">14000</span>, <span class="dv">15000</span>, <span class="dv">16500</span>, <span class="dv">17500</span>], dtype<span class="op">=</span>np.float32)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">X <span class="op">=</span> (X_raw <span class="op">-</span> X_raw.<span class="bu">min</span>()) <span class="op">/</span> (X_raw.<span class="bu">max</span>() <span class="op">-</span> X_raw.<span class="bu">min</span>())</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">y <span class="op">=</span> (y_raw <span class="op">-</span> y_raw.<span class="bu">min</span>()) <span class="op">/</span> (y_raw.<span class="bu">max</span>() <span class="op">-</span> y_raw.<span class="bu">min</span>())</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co"># 训练</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">num_epoch <span class="op">=</span> <span class="dv">10000</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">model <span class="op">=</span> Linear()</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">optimizer <span class="op">=</span> tf.keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">X <span class="op">=</span> tf.constant([X])  <span class="co"># X 是向量, [X] 是矩阵,可以转为张量</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">y <span class="op">=</span> tf.constant([y])</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_epoch):</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">    <span class="cf">with</span> tf.GradientTape() <span class="im">as</span> tape: <span class="co"># 开始记录梯度</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">        y_pred <span class="op">=</span> model(X)</a>
+<a class="sourceLine" id="cb7-18" data-line-number="18">        loss <span class="op">=</span> tf.reduce_mean(tf.square(y_pred <span class="op">-</span> y)) </a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">        <span class="co"># 均方误差 reduce_mean 对所有tensor所有元素求平均</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">    grads <span class="op">=</span> tape.gradient(loss, model.variables) <span class="co"># 对损失函数的每一个变量求偏导</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22">    optimizer.apply_gradients(grads_and_vars<span class="op">=</span><span class="bu">zip</span>(grads, model.variables))</a>
+<a class="sourceLine" id="cb7-23" data-line-number="23">    <span class="co">#  apply_gradient 根据得到的梯度更新参数 传入一个list : [(grad_1,var_1),</span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24">    <span class="co"># (grad_2,var_2),...,(grad_n,var_n)]</span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="bu">print</span>(y_pred)</a></code></pre>
 <h4 id="评估模型">评估模型</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">sparse_categorical_accuracy = tf.keras.metrics.SparseCategoricalAccuracy()<br>num_batches = int(data_loader.num_test_data // batch_size)<br><span class="hljs-keyword">for</span> batch_index <span class="hljs-keyword">in</span> range(num_batches):<br>    start_index, end_index = batch_index * \<br>        batch_size, (batch_index + <span class="hljs-number">1</span>) * batch_size<br>    y_pred = model.predict(data_loader.test_data[start_index: end_index])<br>    sparse_categorical_accuracy.update_state(<br>        y_true=data_loader.test_label[start_index: end_index], y_pred=y_pred)<br>print(<span class="hljs-string">"test accuracy: %f"</span> % sparse_categorical_accuracy.result())<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb8"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1">sparse_categorical_accuracy <span class="op">=</span> tf.keras.metrics.SparseCategoricalAccuracy()</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">num_batches <span class="op">=</span> <span class="bu">int</span>(data_loader.num_test_data <span class="op">//</span> batch_size)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="cf">for</span> batch_index <span class="kw">in</span> <span class="bu">range</span>(num_batches):</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    start_index, end_index <span class="op">=</span> batch_index <span class="op">*</span> <span class="op">\</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">        batch_size, (batch_index <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> batch_size</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">    y_pred <span class="op">=</span> model.predict(data_loader.test_data[start_index: end_index])</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">    sparse_categorical_accuracy.update_state(</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">        y_true<span class="op">=</span>data_loader.test_label[start_index: end_index], y_pred<span class="op">=</span>y_pred)</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="bu">print</span>(<span class="st">&quot;test accuracy: </span><span class="sc">%f</span><span class="st">&quot;</span> <span class="op">%</span> sparse_categorical_accuracy.result())</a></code></pre>
 <h3 id="卷积神经网络">卷积神经网络</h3>
 <p><code>tfwiki</code> 讲的特别好。理解卷积核<span class="math inline">\((filter)\)</span>减少参数的作用，通过滑动（卷积）扫描整个图像，过程中的权重参数是同一个核的，就是所谓的共享权重。</p>
 <p>有关卷积的动态示例可以到<a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank" rel="noopener">这里</a>。有时间学一下他的<code>tex</code>代码。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CNN</span><span class="hljs-params">(tf.keras.Model)</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span><br>        super().__init__()<br>        self.conv1 = tf.keras.layers.Conv2D(<br>            filters=<span class="hljs-number">32</span>,             <span class="hljs-comment"># 卷积层神经元（卷积核）数目 </span><br>            kernel_size=[<span class="hljs-number">5</span>, <span class="hljs-number">5</span>],     <span class="hljs-comment"># 感受野大小</span><br>            padding=<span class="hljs-string">'same'</span>,         <span class="hljs-comment"># padding策略（vaild 或 same）</span><br>            activation=tf.nn.relu   <span class="hljs-comment"># 激活函数</span><br>        )<br>        self.pool1 = tf.keras.layers.MaxPool2D(pool_size=[<span class="hljs-number">2</span>, <span class="hljs-number">2</span>], strides=<span class="hljs-number">2</span>)<br>        <span class="hljs-comment"># 横向和纵向都是每两个取一个最大的，因此大小变化像这样：28,28 -&gt; 14,14</span><br>        self.conv2 = tf.keras.layers.Conv2D(<br>            filters=<span class="hljs-number">64</span>,<br>            kernel_size=[<span class="hljs-number">5</span>, <span class="hljs-number">5</span>],<br>            padding=<span class="hljs-string">'same'</span>, <span class="hljs-comment"># 'same' 策略保证卷积前后大小相同</span><br>            activation=tf.nn.relu<br>        )<br>        self.pool2 = tf.keras.layers.MaxPool2D(pool_size=[<span class="hljs-number">2</span>, <span class="hljs-number">2</span>], strides=<span class="hljs-number">2</span>)<br>        self.flatten = tf.keras.layers.Reshape(target_shape=(<span class="hljs-number">7</span> * <span class="hljs-number">7</span> * <span class="hljs-number">64</span>,))<br>        self.dense1 = tf.keras.layers.Dense(units=<span class="hljs-number">1024</span>, activation=tf.nn.relu)<br>        self.dense2 = tf.keras.layers.Dense(units=<span class="hljs-number">10</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">call</span><span class="hljs-params">(self, inputs)</span>:</span><br>        x = self.conv1(inputs)                  <span class="hljs-comment"># [batch_size, 28, 28, 32]</span><br>        x = self.pool1(x)                       <span class="hljs-comment"># [batch_size, 14, 14, 32]</span><br>        x = self.conv2(x)                       <span class="hljs-comment"># [batch_size, 14, 14, 64]</span><br>        x = self.pool2(x)                       <span class="hljs-comment"># [batch_size, 7, 7, 64]</span><br>        x = self.flatten(x)                     <span class="hljs-comment"># [batch_size, 7 * 7 * 64]</span><br>        x = self.dense1(x)                      <span class="hljs-comment"># [batch_size, 1024]</span><br>        x = self.dense2(x)                      <span class="hljs-comment"># [batch_size, 10]</span><br>        output = tf.nn.softmax(x)<br>        <span class="hljs-keyword">return</span> output<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb9"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">class</span> CNN(tf.keras.Model):</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">        <span class="bu">super</span>().<span class="fu">__init__</span>()</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">        <span class="va">self</span>.conv1 <span class="op">=</span> tf.keras.layers.Conv2D(</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">            filters<span class="op">=</span><span class="dv">32</span>,             <span class="co"># 卷积层神经元（卷积核）数目 </span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">            kernel_size<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">5</span>],     <span class="co"># 感受野大小</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">            padding<span class="op">=</span><span class="st">&#39;same&#39;</span>,         <span class="co"># padding策略（vaild 或 same）</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">            activation<span class="op">=</span>tf.nn.relu   <span class="co"># 激活函数</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">        )</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">        <span class="va">self</span>.pool1 <span class="op">=</span> tf.keras.layers.MaxPool2D(pool_size<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], strides<span class="op">=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">        <span class="co"># 横向和纵向都是每两个取一个最大的，因此大小变化像这样：28,28 -&gt; 14,14</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">        <span class="va">self</span>.conv2 <span class="op">=</span> tf.keras.layers.Conv2D(</a>
+<a class="sourceLine" id="cb9-13" data-line-number="13">            filters<span class="op">=</span><span class="dv">64</span>,</a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">            kernel_size<span class="op">=</span>[<span class="dv">5</span>, <span class="dv">5</span>],</a>
+<a class="sourceLine" id="cb9-15" data-line-number="15">            padding<span class="op">=</span><span class="st">&#39;same&#39;</span>, <span class="co"># &#39;same&#39; 策略保证卷积前后大小相同</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">            activation<span class="op">=</span>tf.nn.relu</a>
+<a class="sourceLine" id="cb9-17" data-line-number="17">        )</a>
+<a class="sourceLine" id="cb9-18" data-line-number="18">        <span class="va">self</span>.pool2 <span class="op">=</span> tf.keras.layers.MaxPool2D(pool_size<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], strides<span class="op">=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb9-19" data-line-number="19">        <span class="va">self</span>.flatten <span class="op">=</span> tf.keras.layers.Reshape(target_shape<span class="op">=</span>(<span class="dv">7</span> <span class="op">*</span> <span class="dv">7</span> <span class="op">*</span> <span class="dv">64</span>,))</a>
+<a class="sourceLine" id="cb9-20" data-line-number="20">        <span class="va">self</span>.dense1 <span class="op">=</span> tf.keras.layers.Dense(units<span class="op">=</span><span class="dv">1024</span>, activation<span class="op">=</span>tf.nn.relu)</a>
+<a class="sourceLine" id="cb9-21" data-line-number="21">        <span class="va">self</span>.dense2 <span class="op">=</span> tf.keras.layers.Dense(units<span class="op">=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23">    <span class="kw">def</span> call(<span class="va">self</span>, inputs):</a>
+<a class="sourceLine" id="cb9-24" data-line-number="24">        x <span class="op">=</span> <span class="va">self</span>.conv1(inputs)                  <span class="co"># [batch_size, 28, 28, 32]</span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25">        x <span class="op">=</span> <span class="va">self</span>.pool1(x)                       <span class="co"># [batch_size, 14, 14, 32]</span></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26">        x <span class="op">=</span> <span class="va">self</span>.conv2(x)                       <span class="co"># [batch_size, 14, 14, 64]</span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27">        x <span class="op">=</span> <span class="va">self</span>.pool2(x)                       <span class="co"># [batch_size, 7, 7, 64]</span></a>
+<a class="sourceLine" id="cb9-28" data-line-number="28">        x <span class="op">=</span> <span class="va">self</span>.flatten(x)                     <span class="co"># [batch_size, 7 * 7 * 64]</span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29">        x <span class="op">=</span> <span class="va">self</span>.dense1(x)                      <span class="co"># [batch_size, 1024]</span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30">        x <span class="op">=</span> <span class="va">self</span>.dense2(x)                      <span class="co"># [batch_size, 10]</span></a>
+<a class="sourceLine" id="cb9-31" data-line-number="31">        output <span class="op">=</span> tf.nn.softmax(x)</a>
+<a class="sourceLine" id="cb9-32" data-line-number="32">        <span class="cf">return</span> output</a></code></pre>
 <p>待看：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">kernel_initializer=tf.constant_initializer(W),<br>bias_initializer=tf.constant_initializer(b)<br>      <br><br>dataset = dataset.map(<span class="hljs-keyword">lambda</span> img, label: (tf.image.resize(img, [<span class="hljs-number">224</span>, <span class="hljs-number">224</span>]) / <span class="hljs-number">255.0</span>, label)).shuffle(<span class="hljs-number">1024</span>).batch(<span class="hljs-number">32</span>)<br>model = tf.keras.applications.MobileNetV2(weights=<span class="hljs-literal">None</span>, classes=<span class="hljs-number">5</span>)<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb10"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1">kernel_initializer<span class="op">=</span>tf.constant_initializer(W),</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">bias_initializer<span class="op">=</span>tf.constant_initializer(b)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">      </a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">dataset <span class="op">=</span> dataset.<span class="bu">map</span>(<span class="kw">lambda</span> img, label: (tf.image.resize(img, [<span class="dv">224</span>, <span class="dv">224</span>]) <span class="op">/</span> <span class="fl">255.0</span>, label)).shuffle(<span class="dv">1024</span>).batch(<span class="dv">32</span>)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">model <span class="op">=</span> tf.keras.applications.MobileNetV2(weights<span class="op">=</span><span class="va">None</span>, classes<span class="op">=</span><span class="dv">5</span>)</a></code></pre>
 
       
       <!-- reward -->
@@ -865,83 +1157,6 @@ H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]
 
 </article>
     
-    <article id="post-Projects-2020-ICM" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/02/Projects-2020-ICM/"
-    >2020-ICM</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/02/Projects-2020-ICM/" class="article-date">
-  <time datetime="2020-05-02T15:22:18.365Z" itemprop="datePublished">2020-05-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This work is mainly about the football game team strategy based on big data and is our final paper for the D problem of 2020 Interdisciplinary Contest in Modelling (ICM 2020), contributed collaboratively and equally by R.C. Luo, Y.Z. Zhang and me.</p>
-<p>Thanks cordially to the combined efforts of whole group, we fortunately won an M-prize. Due to privacy and copyright, the control number in our paper is erased.</p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/2020_ICM.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
   </article>
   
 
@@ -998,6 +1213,7 @@ H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]
       </li>
     </ul>
   </div>
+
 </footer>
       <div class="float_btns">
         <div class="totop" id="totop">

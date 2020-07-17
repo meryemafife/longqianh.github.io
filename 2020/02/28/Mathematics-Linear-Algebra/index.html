@@ -425,14 +425,20 @@ W=E_{\lambda_1}+\cdots + E_{\lambda_m}=E_{\lambda_1}\oplus \cdots \oplus E_{\lam
 <p>即证： <span class="math inline">\(\xi_1+\cdots \xi_m=0\implies \xi_i=0,\quad \xi_i\in E_{\lambda_i}\)</span></p>
 <p>注意 <span class="math inline">\(\xi_i\)</span> 是特征子空间 <span class="math inline">\(E_{\lambda_i}\)</span> 中的向量，由属于 <span class="math inline">\(\lambda_i\)</span> 的特征向量线性组合而成，仍有 <span class="math inline">\(T(\xi_i)=\lambda_i\xi_i\)</span></p>
 <p><strong>归纳</strong>证明： $$ \begin{aligned} m=2: _1+_2=0 &amp;T(_1+_2)=_1_1+_2_2=0\ &amp;(_1-_2)_2=0\ &amp;_1=_2=0\</p>
-<p>\end{aligned} <span class="math display">\[
-设对 $m-1$ 结论成立，考虑 $m$ :
-\]</span> \begin{aligned} &amp; _1++_m=0\ &amp;T(_1++_m)=_1_1++_m_m=0\ &amp;(_1-_m)<em>1++(</em>{m-1}-<em>m)</em>{m-1}=0\ &amp; <em>1==</em>{m-1}=0_m=0 \end{aligned} $$</p>
+<p>\end{aligned} $$</p>
+<p>设对 $ m-1 $ 结论成立，考虑 $ m $ : <span class="math display">\[
+\begin{aligned}
+&amp; \xi_1+\cdots+\xi_m=0\\
+&amp;T(\xi_1+\cdots+\xi_m)=\lambda_1\xi_1+\cdots+\lambda_m\xi_m=0\\
+&amp;(\lambda_1-\lambda_m)\xi_1+\cdots+(\lambda_{m-1}-\lambda_m)\xi_{m-1}=0\\
+\implies&amp; \xi_1=\cdots=\xi_{m-1}=0\implies \xi_m=0
+\end{aligned}
+\]</span></p>
 <p>由此也可以得到属于不同特征值的特征向量线性无关，因为 <span class="math inline">\(E_{\lambda_i}\cap E_{\lambda_j}={\vec 0}\)</span></p>
 <h3 id="可对角化的条件">可对角化的条件</h3>
 <p><span class="math inline">\(n\)</span> 维线性空间 <span class="math inline">\(V\)</span> 上的线性变换 <span class="math inline">\(T\)</span> 的表示矩阵 <span class="math inline">\(M(T)\)</span> 可对角化：</p>
 <p>$ $ <span class="math inline">\(T\)</span> 有 <span class="math inline">\(n\)</span> 个(线性无关的)特征向量 or <span class="math inline">\(V\)</span> 有由 <span class="math inline">\(T\)</span> 的特征向量构成的基</p>
-<p><span class="math inline">\(\iff\)</span> $V=E_{<em>1}E</em>{_m} $ (已经知道和是直和，接下来只需证明和就是 <span class="math inline">\(V\)</span> ,由有由特征向量构成的基即得)</p>
+<p><span class="math inline">\(\iff\)</span> $ V=E_{<em>1}E</em>{_m} $ (已经知道和是直和，接下来只需证明和就是 <span class="math inline">\(V\)</span> ,由有由特征向量构成的基即得)</p>
 <p><span class="math inline">\(\iff\)</span> <span class="math inline">\(T\)</span> 的每个特征值的重数等于其特征子空间的维数 ( 代数重数 <span class="math inline">\(=\)</span> 几何重数 ）, 且不同特征值的重数之和等 于 <span class="math inline">\(n\)</span></p>
 <p>注：一般情况下，代数重数大于等于几何重数，证明先放一放。</p>
 <h3 id="矩阵的秩维数与特征值">矩阵的秩、维数与特征值</h3>
@@ -686,6 +692,7 @@ x=\dim k-\dim E_\lambda+1
       </li>
     </ul>
   </div>
+
 </footer>
       <div class="float_btns">
         <div class="totop" id="totop">

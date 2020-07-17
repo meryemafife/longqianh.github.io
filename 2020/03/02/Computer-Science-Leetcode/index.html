@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">483</span>
+            <span class="post-count">506</span>
         </span>
     </span>
 
@@ -110,26 +110,111 @@
       <h1 id="leecode-题目整理">Leecode 题目整理</h1>
 <h3 id="三数之和">三数之和</h3>
 <p>排序+<strong>双指针</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">nums.sort()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n):<br>  <span class="hljs-keyword">if</span> i&gt;<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[i] == nums[i - <span class="hljs-number">1</span>]:	<span class="hljs-keyword">continue</span><br>  l = i + <span class="hljs-number">1</span><br>  r = n - <span class="hljs-number">1</span><br>  <span class="hljs-keyword">while</span>(l &lt; r):<br>    <span class="hljs-keyword">if</span> nums[i] + nums[l] + nums[r] == <span class="hljs-number">0</span>:<br>      ans.append([nums[i], nums[l], nums[r]])<br>      <span class="hljs-keyword">while</span> l&lt;r <span class="hljs-keyword">and</span> nums[r]==nums[r<span class="hljs-number">-1</span>]:	r=r<span class="hljs-number">-1</span><br>      <span class="hljs-keyword">while</span> l&lt;r <span class="hljs-keyword">and</span> nums[l]==nums[l+<span class="hljs-number">1</span>]:	l=l+<span class="hljs-number">1</span><br>      r=r<span class="hljs-number">-1</span><br>      l=l+<span class="hljs-number">1</span><br>    <span class="hljs-keyword">elif</span> nums[i] + nums[l] + nums[r] &gt; <span class="hljs-number">0</span>:	r = r - <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>: l = l + <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb1"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1">nums.sort()</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="cf">if</span> i<span class="op">&gt;</span><span class="dv">0</span> <span class="kw">and</span> nums[i] <span class="op">==</span> nums[i <span class="op">-</span> <span class="dv">1</span>]:    <span class="cf">continue</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  l <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  r <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  <span class="cf">while</span>(l <span class="op">&lt;</span> r):</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="cf">if</span> nums[i] <span class="op">+</span> nums[l] <span class="op">+</span> nums[r] <span class="op">==</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">      ans.append([nums[i], nums[l], nums[r]])</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">      <span class="cf">while</span> l<span class="op">&lt;</span>r <span class="kw">and</span> nums[r]<span class="op">==</span>nums[r<span class="dv">-1</span>]: r<span class="op">=</span>r<span class="dv">-1</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">      <span class="cf">while</span> l<span class="op">&lt;</span>r <span class="kw">and</span> nums[l]<span class="op">==</span>nums[l<span class="op">+</span><span class="dv">1</span>]: l<span class="op">=</span>l<span class="op">+</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">      r<span class="op">=</span>r<span class="dv">-1</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">      l<span class="op">=</span>l<span class="op">+</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="cf">elif</span> nums[i] <span class="op">+</span> nums[l] <span class="op">+</span> nums[r] <span class="op">&gt;</span> <span class="dv">0</span>:   r <span class="op">=</span> r <span class="op">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="cf">else</span>: l <span class="op">=</span> l <span class="op">+</span> <span class="dv">1</span></a></code></pre>
 <h3 id="两数之和">两数之和</h3>
 <p><strong>carry</strong> 用得很妙, 模拟进位</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">addTwoNumbers</span><span class="hljs-params">(self, l1: ListNode, l2: ListNode)</span> -&gt; ListNode:</span><br>  ans=ListNode(<span class="hljs-number">0</span>)<br>  head=ans<br>  carry=<span class="hljs-number">0</span><br>  <span class="hljs-keyword">while</span> l1 <span class="hljs-keyword">or</span> l2:<br>  	x=l1.val <span class="hljs-keyword">if</span> l1 <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br>  	y=l2.val <span class="hljs-keyword">if</span> l2 <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br>  	s=x+y+carry<br>  	carry=s//<span class="hljs-number">10</span><br>  	ans.next=ListNode(s%<span class="hljs-number">10</span>)<br>  	ans=ans.next<br>  	<span class="hljs-keyword">if</span> l1:<br>  		l1=l1.next<br>  	<span class="hljs-keyword">if</span> l2:<br>  		l2=l2.next<br>  	<span class="hljs-keyword">if</span> carry:<br>  		ans.next=ListNode(carry)<br>  <span class="hljs-keyword">return</span> head.next<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb2"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">def</span> addTwoNumbers(<span class="va">self</span>, l1: ListNode, l2: ListNode) <span class="op">-&gt;</span> ListNode:</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  ans<span class="op">=</span>ListNode(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  head<span class="op">=</span>ans</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  carry<span class="op">=</span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="cf">while</span> l1 <span class="kw">or</span> l2:</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    x<span class="op">=</span>l1.val <span class="cf">if</span> l1 <span class="cf">else</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    y<span class="op">=</span>l2.val <span class="cf">if</span> l2 <span class="cf">else</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    s<span class="op">=</span>x<span class="op">+</span>y<span class="op">+</span>carry</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    carry<span class="op">=</span>s<span class="op">//</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    ans.<span class="bu">next</span><span class="op">=</span>ListNode(s<span class="op">%</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">    ans<span class="op">=</span>ans.<span class="bu">next</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">    <span class="cf">if</span> l1:</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">        l1<span class="op">=</span>l1.<span class="bu">next</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">    <span class="cf">if</span> l2:</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">        l2<span class="op">=</span>l2.<span class="bu">next</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">    <span class="cf">if</span> carry:</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">        ans.<span class="bu">next</span><span class="op">=</span>ListNode(carry)</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="cf">return</span> head.<span class="bu">next</span></a></code></pre>
 <h2 id="队列">队列</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#简易版本</span><br>queue=[]<br>queue.append(data) <span class="hljs-comment">#入队</span><br>queue.pop(<span class="hljs-number">0</span>)	<span class="hljs-comment">#出队</span><br><br><span class="hljs-comment">#双向队列</span><br><span class="hljs-keyword">import</span> collections<br>que=collectione.deque()<br>que.append() <br>que.appendleft()<br>que.insert(i,x)<span class="hljs-comment">#在第i个位置插入x</span><br>que.popleft()<br>que.pop()<br>que.remove(val)<span class="hljs-comment">#移除查找到的第一个val</span><br>que.count(x)<span class="hljs-comment">#计算que中元素等于x的个数</span><br>que.rotate(n)<span class="hljs-comment">#向右循环移动n步 </span><br>que.clear()<br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb3"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#简易版本</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">queue<span class="op">=</span>[]</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">queue.append(data) <span class="co">#入队</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">queue.pop(<span class="dv">0</span>)    <span class="co">#出队</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#双向队列</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="im">import</span> collections</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">que<span class="op">=</span>collectione.deque()</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">que.append() </a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">que.appendleft()</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">que.insert(i,x)<span class="co">#在第i个位置插入x</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">que.popleft()</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">que.pop()</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">que.remove(val)<span class="co">#移除查找到的第一个val</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">que.count(x)<span class="co">#计算que中元素等于x的个数</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">que.rotate(n)<span class="co">#向右循环移动n步 </span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">que.clear()</a></code></pre>
 <h3 id="墙与门">墙与门</h3>
 <p>BFS</p>
 <p>满足条件=&gt;处理=&gt;放入队列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">used=[]<span class="hljs-comment">#走过的标记不再走</span><br>rooms[tmpk][tmpt] = rooms[i][j] + <span class="hljs-number">1</span> <span class="hljs-comment">#step是上一个的加1</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb4"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">used<span class="op">=</span>[]<span class="co">#走过的标记不再走</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">rooms[tmpk][tmpt] <span class="op">=</span> rooms[i][j] <span class="op">+</span> <span class="dv">1</span> <span class="co">#step是上一个的加1</span></a></code></pre>
 <h3 id="岛屿数量">岛屿数量</h3>
 <p>BFS ：</p>
 <p>写个bfs函数，注意每到一个点要mark。</p>
 <p>对所有可遍历点bfs（同步更新可遍历点）, 每使用一次就找到了一个模块, cnt++。</p>
 <p><strong>并查集（未）</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bfs</span><span class="hljs-params">(i, j)</span>:</span><br> queue = deque()<br> queue.appendleft((i, j))<br> grid[i][j] = <span class="hljs-string">"0"</span><br> <span class="hljs-keyword">while</span> queue:<br>   i, j = queue.pop()<br>   <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> [[<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">-1</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]]:<br>    tmp_i = i + x<br>    tmp_j = j + y<br>   <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= tmp_i &lt; row <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> &lt;= tmp_j &lt; col <span class="hljs-keyword">and</span> grid[tmp_i][tmp_j] == <span class="hljs-string">"1"</span>:<br>   	grid[tmp_i][tmp_j] = <span class="hljs-string">"0"</span><br>    queue.appendleft((tmp_i, tmp_j))<br><br> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(row):<br>   <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(col):<br>     <span class="hljs-keyword">if</span> grid[i][j] == <span class="hljs-string">"1"</span>:<br>       bfs(i, j)<br>       cnt += <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb5"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">def</span> bfs(i, j):</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"> queue <span class="op">=</span> deque()</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"> queue.appendleft((i, j))</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"> grid[i][j] <span class="op">=</span> <span class="st">&quot;0&quot;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"> <span class="cf">while</span> queue:</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">   i, j <span class="op">=</span> queue.pop()</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">   <span class="cf">for</span> x, y <span class="kw">in</span> [[<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">-1</span>], [<span class="dv">0</span>, <span class="dv">1</span>]]:</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    tmp_i <span class="op">=</span> i <span class="op">+</span> x</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    tmp_j <span class="op">=</span> j <span class="op">+</span> y</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">   <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> tmp_i <span class="op">&lt;</span> row <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> tmp_j <span class="op">&lt;</span> col <span class="kw">and</span> grid[tmp_i][tmp_j] <span class="op">==</span> <span class="st">&quot;1&quot;</span>:</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    grid[tmp_i][tmp_j] <span class="op">=</span> <span class="st">&quot;0&quot;</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">    queue.appendleft((tmp_i, tmp_j))</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(row):</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">   <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(col):</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">     <span class="cf">if</span> grid[i][j] <span class="op">==</span> <span class="st">&quot;1&quot;</span>:</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">       bfs(i, j)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">       cnt <span class="op">+=</span> <span class="dv">1</span></a></code></pre>
 <h3 id="打开转盘锁">打开转盘锁</h3>
 <p>yield 的使用</p>
 <h2 id="栈">栈</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">stack=[]<br>stack.append()<br>stack.pop()<br>stack[<span class="hljs-number">-1</span>]<span class="hljs-comment">#取出栈顶元素</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode python" id="cb6"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1">stack<span class="op">=</span>[]</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">stack.append()</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">stack.pop()</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">stack[<span class="op">-</span><span class="dv">1</span>]<span class="co">#取出栈顶元素</span></a></code></pre>
 <h3 id="最小栈">最小栈</h3>
 <p>使用两个栈，一个作为<strong>辅助栈</strong>。</p>
 
@@ -286,6 +371,7 @@
       </li>
     </ul>
   </div>
+
 </footer>
       <div class="float_btns">
         <div class="totop" id="totop">

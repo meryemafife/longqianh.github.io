@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -110,34 +110,160 @@
       <h1 id="matlab-学习笔记">Matlab 学习笔记</h1>
 <h2 id="有关信号与系统">有关信号与系统</h2>
 <h3 id="连续系统构建">连续系统构建</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs matlab">tf(b,a);  <span class="hljs-comment">%传递函数模型</span><br>s = tf(<span class="hljs-string">'s'</span>); sys = b(s)/a(s) <span class="hljs-comment">%（具体的为多项式形式）</span><br><span class="hljs-comment">% ss 状态空间模型 （了解不多）</span><br><span class="hljs-comment">% zpk 零点-极点-增益模型 （了解不多）</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb1"><code class="sourceCode matlab"><a class="sourceLine" id="cb1-1" data-line-number="1">tf(b,a);  <span class="co">%传递函数模型</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">s = tf(<span class="st">&#39;s&#39;</span>); sys = b(s)/a(s) <span class="co">%（具体的为多项式形式）</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">% ss 状态空间模型 （了解不多）</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">% zpk 零点-极点-增益模型 （了解不多）</span></a></code></pre>
 <h3 id="连续系统性质研究">连续系统性质研究</h3>
 <p>在用上面的方法构建好系统sys后，才可以进行下面的操作。</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">% 零极点图</span><br>p = pole(sys); <span class="hljs-comment">%求出零点</span><br>z = zero(sys); <span class="hljs-comment">%求出极点</span><br>pzmap(sys); <span class="hljs-comment">%画零极点图 可以设置axis使之更好看</span><br><br><span class="hljs-comment">% 响应</span><br>lsim(sys,u,t,x0) <span class="hljs-comment">%全响应</span><br>impulse(sys); <span class="hljs-comment">%单位冲激响应</span><br>step(sys); <span class="hljs-comment">%单位阶跃响应</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb2"><code class="sourceCode matlab"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">% 零极点图</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">p = pole(sys); <span class="co">%求出零点</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">z = zero(sys); <span class="co">%求出极点</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">pzmap(sys); <span class="co">%画零极点图 可以设置axis使之更好看</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">% 响应</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">lsim(sys,u,t,x0) <span class="co">%全响应</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">impulse(sys); <span class="co">%单位冲激响应</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">step(sys); <span class="co">%单位阶跃响应</span></a></code></pre>
 <h2 id="有关符号表达式">有关符号表达式</h2>
 <h3 id="符号声明">符号声明</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs matlab">syms x y; <span class="hljs-comment">%声明变量</span><br>syms f(t) g(x,y); <span class="hljs-comment">%声明函数, 里面的变量可以作为符号直接使用</span><br>syms A [m,n]; <span class="hljs-comment">%声明向量或矩阵 m*n维</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb3"><code class="sourceCode matlab"><a class="sourceLine" id="cb3-1" data-line-number="1">syms x y; <span class="co">%声明变量</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">syms f(t) g(x,y); <span class="co">%声明函数, 里面的变量可以作为符号直接使用</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">syms A [m,n]; <span class="co">%声明向量或矩阵 m*n维</span></a></code></pre>
 <h3 id="符号运算">符号运算</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs matlab">simplify(expr); <span class="hljs-comment">%化简符号表达式</span><br>root(p,x); <span class="hljs-comment">%得到符号多项式p关于x的根</span><br>solve(equ,var); <span class="hljs-comment">%计算方程的解</span><br>equs=[equ1 equ2]; vars=[var1 var2];<br>solve(equs,vars); <span class="hljs-comment">%计算方程组equs关于变量vars的解</span><br>diff(f,x,n); <span class="hljs-comment">%求符号函数f关于x的n阶导数</span><br>dsolve(equ,cond); <span class="hljs-comment">%求解带diff的常微分方程 cond为初始条件</span><br>dsolve(equs); <span class="hljs-comment">%求解常微分方程组 得到一组解S 用S.var 查看关于var的的解</span><br>laplace(f); <span class="hljs-comment">%求关于f的拉普拉斯变换 （积分下限为0）</span><br>ilaplace(F); <span class="hljs-comment">%求F的拉普拉斯逆变换</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb4"><code class="sourceCode matlab"><a class="sourceLine" id="cb4-1" data-line-number="1">simplify(expr); <span class="co">%化简符号表达式</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">root(p,x); <span class="co">%得到符号多项式p关于x的根</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">solve(equ,var); <span class="co">%计算方程的解</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">equs=[equ1 equ2]; vars=[var1 var2];</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">solve(equs,vars); <span class="co">%计算方程组equs关于变量vars的解</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">diff(f,x,n); <span class="co">%求符号函数f关于x的n阶导数</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">dsolve(equ,cond); <span class="co">%求解带diff的常微分方程 cond为初始条件</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">dsolve(equs); <span class="co">%求解常微分方程组 得到一组解S 用S.var 查看关于var的的解</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">laplace(f); <span class="co">%求关于f的拉普拉斯变换 （积分下限为0）</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">ilaplace(F); <span class="co">%求F的拉普拉斯逆变换</span></a></code></pre>
 <h3 id="符号变现赋值等">符号变现（赋值等）</h3>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs matlab">g = matlabFunction(f); <span class="hljs-comment">%生成一个虚拟函数句柄 将符号表达式转化为可以用句柄调用求具体值等函数</span><br><br>subs(s,old,new); <span class="hljs-comment">%返回s中old全部用new代替的新的表达式, 可用于符号替换（如自变量替换）和赋值</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb5"><code class="sourceCode matlab"><a class="sourceLine" id="cb5-1" data-line-number="1">g = matlabFunction(f); <span class="co">%生成一个虚拟函数句柄 将符号表达式转化为可以用句柄调用求具体值等函数</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">subs(s,old,new); <span class="co">%返回s中old全部用new代替的新的表达式, 可用于符号替换（如自变量替换）和赋值</span></a></code></pre>
 <h2 id="其他">其他</h2>
 <ul>
 <li><p>函数必须以end结尾。将其保存为.m 文件，即可在其他程 序中以文件名（注意不是函数名，文件名和函数名可以不同）调用该函数。</p></li>
-<li><p>关系运算</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs matlab">a~=b<span class="hljs-comment">%不等于</span><br>a&gt;=b<span class="hljs-comment">%大于等于</span><br>a&lt;=b<span class="hljs-comment">%小于等于</span><br></code></pre></td></tr></table></figure></li>
-<li><p>复数</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs matlab">a=<span class="hljs-number">1</span>+<span class="hljs-number">2</span><span class="hljs-built_in">i</span><br>z=<span class="hljs-built_in">real</span>(a)<span class="hljs-comment">%实部</span><br>z=<span class="hljs-built_in">imag</span>(a)<span class="hljs-comment">%虚部</span><br>z=<span class="hljs-built_in">angle</span>(a)<span class="hljs-comment">%辐角</span><br>z=<span class="hljs-built_in">abs</span>(a)<span class="hljs-comment">%模</span><br>z=<span class="hljs-built_in">conj</span>(a)<span class="hljs-comment">%共轭</span><br></code></pre></td></tr></table></figure></li>
-<li><p>向量操作</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs matlab">a=<span class="hljs-built_in">rand</span>(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)<br>b=<span class="hljs-built_in">rand</span>(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>)<br>c=<span class="hljs-built_in">dot</span>(a,b)<span class="hljs-comment">%内积</span><br>d=<span class="hljs-built_in">cross</span>(a,b)<span class="hljs-comment">%叉乘</span><br>l=<span class="hljs-built_in">length</span>(a)<span class="hljs-comment">%向量长度</span><br>median(a)<span class="hljs-comment">%中位数</span><br>std(a)<span class="hljs-comment">%标准差</span><br>s=<span class="hljs-built_in">sort</span>(a)<span class="hljs-comment">%排序</span><br><span class="hljs-comment">%还有 min max 等</span><br></code></pre></td></tr></table></figure></li>
-<li><p>矩阵操作</p></li>
+<li><p>关系运算</p></li>
 </ul>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs matlab">a=<span class="hljs-built_in">rand</span>(<span class="hljs-number">5</span>,<span class="hljs-number">3</span>)<br>b=<span class="hljs-built_in">rand</span>(<span class="hljs-number">5</span>,<span class="hljs-number">3</span>)<br>b=b'<span class="hljs-comment">%转置</span><br>c=a*b<span class="hljs-comment">%矩阵乘法</span><br>d=a.*b<span class="hljs-comment">%逐元素相乘</span><br>m=b^<span class="hljs-number">3</span><span class="hljs-comment">%幂</span><br>m=b.^<span class="hljs-number">3</span><span class="hljs-comment">%点幂</span><br><span class="hljs-built_in">size</span>(b)<span class="hljs-comment">%矩阵大小</span><br>b=<span class="hljs-built_in">reshape</span>(<span class="hljs-number">1</span>,<span class="hljs-number">15</span>)<br>b=<span class="hljs-built_in">flipud</span>(b)<span class="hljs-comment">%上下翻转 up and down</span><br>b=<span class="hljs-built_in">fliplr</span>(b)<span class="hljs-comment">%左右翻转 left and right</span><br>e=<span class="hljs-built_in">diag</span>(b)<span class="hljs-comment">%取出b的对角元素</span><br><br>left_division=a/b<span class="hljs-comment">% b*inv(a)</span><br>right_division=a\b<span class="hljs-comment">% inv(a)*b</span><br><span class="hljs-comment">%X=A\B是方程A*X=B的解，X=A\B是方程X*A=B的解 </span><br><span class="hljs-comment">%记忆：朝向哪 逆在哪</span><br></code></pre></td></tr></table></figure>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb6"><code class="sourceCode matlab"><a class="sourceLine" id="cb6-1" data-line-number="1">a~=b<span class="co">%不等于</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">a&gt;=b<span class="co">%大于等于</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">a&lt;=b<span class="co">%小于等于</span></a></code></pre>
 <ul>
-<li><p>绘图</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs matlab">x=<span class="hljs-built_in">linspace</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>,<span class="hljs-number">100</span>)<br>y1=<span class="hljs-built_in">sin</span>(x)<br>y2=<span class="hljs-built_in">cos</span>(x)<br>y3=<span class="hljs-built_in">tan</span>(x)<br><span class="hljs-built_in">plot</span>(x,y1,<span class="hljs-string">'blue'</span>,x,y2,<span class="hljs-string">'LineWidth'</span>,<span class="hljs-number">2</span>,<span class="hljs-string">'color'</span>,<span class="hljs-string">'red'</span>)<br><span class="hljs-comment">%要在同一图中画出多条曲线，只需将坐标依次放入plot函数即可</span><br>axis([<span class="hljs-number">0</span> <span class="hljs-number">4</span>*<span class="hljs-built_in">pi</span> <span class="hljs-number">-1.2</span> <span class="hljs-number">1.2</span>])<span class="hljs-comment">%设置坐标轴范围</span><br>xlim([<span class="hljs-number">1</span> <span class="hljs-number">2</span>])<span class="hljs-comment">%单独控制</span><br>xlabel(<span class="hljs-string">'x'</span>); ylabel(<span class="hljs-string">'y'</span>);<br><span class="hljs-built_in">legend</span>(<span class="hljs-string">'sin(x)'</span>,<span class="hljs-string">'cos(x)'</span>);<br>title(<span class="hljs-string">'Sine and Cosine Functions'</span>);<br><span class="hljs-comment">%title里可以使用latex语法</span><br><span class="hljs-comment">%如 ：title('$y_1=\sin(4\pi t+\pi /3)$','interpreter','latex')</span><br><span class="hljs-comment">% 注明解释器为latex即可</span><br><br><span class="hljs-comment">%绘制子图</span><br>subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>); <span class="hljs-built_in">plot</span>(x,y1);<br>subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>); <span class="hljs-built_in">plot</span>(x,y2);<br>subplot(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>); <span class="hljs-built_in">plot</span>(x,y3);<br></code></pre></td></tr></table></figure></li>
-<li><p>信号处理</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%噪声</span><br>snr=<span class="hljs-number">10</span>; <span class="hljs-comment">%Signal‐to‐noise ratio in dB.</span><br>yn=awgn(y,snr,<span class="hljs-string">'measured'</span>); <span class="hljs-comment">% Add white Gaussian noise. 白噪声</span><br><br><span class="hljs-comment">%函数</span><br>k1=<span class="hljs-number">-3</span>; k2=<span class="hljs-number">3</span>; k=k1:k2; n=<span class="hljs-number">0</span>;<br>step=stepfun(t,t0)<span class="hljs-comment">%t是向量形式的变量,t0表示延迟 阶跃函数</span><br>delta=+(k==n) <span class="hljs-comment">% 冲激函数</span><br>stem(k,delta,<span class="hljs-string">'filled'</span>)<span class="hljs-comment">% 离散函数绘制 stem为绘制杆状图</span><br><br><span class="hljs-comment">%rectpuls和tripuls函数产生指定宽度和高度的矩形和三角脉冲。</span><br></code></pre></td></tr></table></figure></li>
+<li>复数</li>
+</ul>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb7"><code class="sourceCode matlab"><a class="sourceLine" id="cb7-1" data-line-number="1">a=<span class="fl">1</span>+<span class="fl">2i</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">z=real(a)<span class="co">%实部</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">z=imag(a)<span class="co">%虚部</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">z=angle(a)<span class="co">%辐角</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">z=abs(a)<span class="co">%模</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">z=conj(a)<span class="co">%共轭</span></a></code></pre>
+<ul>
+<li>向量操作</li>
+</ul>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb8"><code class="sourceCode matlab"><a class="sourceLine" id="cb8-1" data-line-number="1">a=rand(<span class="fl">1</span>,<span class="fl">3</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">b=rand(<span class="fl">1</span>,<span class="fl">3</span>)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">c=dot(a,b)<span class="co">%内积</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">d=cross(a,b)<span class="co">%叉乘</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">l=length(a)<span class="co">%向量长度</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">median(a)<span class="co">%中位数</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">std(a)<span class="co">%标准差</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">s=sort(a)<span class="co">%排序</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">%还有 min max 等</span></a></code></pre>
+<ul>
+<li>矩阵操作</li>
+</ul>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb9"><code class="sourceCode matlab"><a class="sourceLine" id="cb9-1" data-line-number="1">a=rand(<span class="fl">5</span>,<span class="fl">3</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">b=rand(<span class="fl">5</span>,<span class="fl">3</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">b=b&#39;<span class="co">%转置</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">c=a*b<span class="co">%矩阵乘法</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">d=a.*b<span class="co">%逐元素相乘</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">m=b^<span class="fl">3</span><span class="co">%幂</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">m=b.^<span class="fl">3</span><span class="co">%点幂</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">size(b)<span class="co">%矩阵大小</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">b=reshape(<span class="fl">1</span>,<span class="fl">15</span>)</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">b=flipud(b)<span class="co">%上下翻转 up and down</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">b=fliplr(b)<span class="co">%左右翻转 left and right</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">e=diag(b)<span class="co">%取出b的对角元素</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">left_division=a/b<span class="co">% b*inv(a)</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15">right_division=a\b<span class="co">% inv(a)*b</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">%X=A\B是方程A*X=B的解，X=A\B是方程X*A=B的解 </span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">%记忆：朝向哪 逆在哪</span></a></code></pre>
+<ul>
+<li>绘图</li>
+</ul>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb10"><code class="sourceCode matlab"><a class="sourceLine" id="cb10-1" data-line-number="1">x=linspace(<span class="fl">1</span>,<span class="fl">10</span>,<span class="fl">100</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">y1=sin(x)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">y2=cos(x)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">y3=tan(x)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">plot(x,y1,<span class="st">&#39;blue&#39;</span>,x,y2,<span class="st">&#39;LineWidth&#39;</span>,<span class="fl">2</span>,<span class="st">&#39;color&#39;</span>,<span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">%要在同一图中画出多条曲线，只需将坐标依次放入plot函数即可</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">axis([<span class="fl">0</span> <span class="fl">4</span>*pi -<span class="fl">1.2</span> <span class="fl">1.2</span>])<span class="co">%设置坐标轴范围</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">xlim([<span class="fl">1</span> <span class="fl">2</span>])<span class="co">%单独控制</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">xlabel(<span class="st">&#39;x&#39;</span>); ylabel(<span class="st">&#39;y&#39;</span>);</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">legend(<span class="st">&#39;sin(x)&#39;</span>,<span class="st">&#39;cos(x)&#39;</span>);</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">title(<span class="st">&#39;Sine and Cosine Functions&#39;</span>);</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">%title里可以使用latex语法</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">%如 ：title(&#39;$y_1=\sin(4\pi t+\pi /3)$&#39;,&#39;interpreter&#39;,&#39;latex&#39;)</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">% 注明解释器为latex即可</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">%绘制子图</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17">subplot(<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">1</span>); plot(x,y1);</a>
+<a class="sourceLine" id="cb10-18" data-line-number="18">subplot(<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">2</span>); plot(x,y2);</a>
+<a class="sourceLine" id="cb10-19" data-line-number="19">subplot(<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>); plot(x,y3);</a></code></pre>
+<ul>
+<li>信号处理</li>
+</ul>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb11"><code class="sourceCode matlab"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">%噪声</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">snr=<span class="fl">10</span>; <span class="co">%Signal‐to‐noise ratio in dB.</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">yn=awgn(y,snr,<span class="st">&#39;measured&#39;</span>); <span class="co">% Add white Gaussian noise. 白噪声</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">%函数</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">k1=-<span class="fl">3</span>; k2=<span class="fl">3</span>; k=k1:k2; n=<span class="fl">0</span>;</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">step=stepfun(t,t0)<span class="co">%t是向量形式的变量,t0表示延迟 阶跃函数</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">delta=+(k==n) <span class="co">% 冲激函数</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">stem(k,delta,<span class="st">&#39;filled&#39;</span>)<span class="co">% 离散函数绘制 stem为绘制杆状图</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">%rectpuls和tripuls函数产生指定宽度和高度的矩形和三角脉冲。</span></a></code></pre>
+<ul>
 <li><p>其他技巧</p>
 <ul>
 <li>nargin, nargout 的使用</li>
@@ -153,10 +279,15 @@
 <ul>
 <li><p>真实信号的振幅应该是 <span class="math inline">\(A\cdot2/N\)</span> ，这个我不是很明白，查到的是这样说的，<span class="math inline">\(A\)</span> 是 fft 变换后的振幅</p></li>
 <li><p>如果采样频率是 <span class="math inline">\(f_s\)</span>, 那么 fft 时要乘一下 <span class="math inline">\(dt=1/f_s\)</span> (每秒 <span class="math inline">\(f_s\)</span> 个点，那么一个点就是 <span class="math inline">\(1/f_s\)</span> 秒) ，这是由于 Matlab 的 fft 是离散傅立叶变换，相当于 <span class="math inline">\(dt=1\)</span> ，需要补乘 <span class="math inline">\(dt\)</span></p></li>
-<li><p>频率域对应的频谱范围是 <span class="math inline">\(0\sim f_s\)</span>, 有用的信息是在 <span class="math inline">\(0~f_s/2\)</span>, Matlab 代码实现是</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-number">0</span>:(N<span class="hljs-number">-1</span>)/N*fs<br></code></pre></td></tr></table></figure>
-<p>可以用 fftshift 将 <span class="math inline">\([0,f_s)\)</span> 移为 <span class="math inline">\((-f_s/2,f_s/2]\)</span>, 然后取 <span class="math inline">\([o,f_s/2]\)</span> 的有用信息进行分析</p></li>
-<li><p>反变换 ifft 时要乘回来之前多乘的 <span class="math inline">\(1/f_s\)</span>, 即乘 <span class="math inline">\(f_s\)</span></p></li>
+<li><p>频率域对应的频谱范围是 <span class="math inline">\(0\sim f_s\)</span>, 有用的信息是在 <span class="math inline">\(0~f_s/2\)</span>, Matlab 代码实现是</p></li>
+</ul>
+<p class="code-caption" data-lang="matlab" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
+<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
+</p>
+<pre class="sourceCode matlab" id="cb12"><code class="sourceCode matlab"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="fl">0</span>:(N-<span class="fl">1</span>)/N*fs</a></code></pre>
+<p>可以用 fftshift 将 <span class="math inline">\([0,f_s)\)</span> 移为 <span class="math inline">\((-f_s/2,f_s/2]\)</span>, 然后取 <span class="math inline">\([o,f_s/2]\)</span> 的有用信息进行分析</p>
+<ul>
+<li>反变换 ifft 时要乘回来之前多乘的 <span class="math inline">\(1/f_s\)</span>, 即乘 <span class="math inline">\(f_s\)</span></li>
 </ul>
 
       
@@ -312,6 +443,7 @@
       </li>
     </ul>
   </div>
+
 </footer>
       <div class="float_btns">
         <div class="totop" id="totop">
