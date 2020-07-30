@@ -272,7 +272,7 @@
       
 
       
-      <p>This work is mainly about the football game team strategy based on big data and is our final paper for the D problem of 2020 Interdisciplinary Contest in Modelling (ICM 2020), contributed collaboratively and equally by R.C. Luo, Y.Z. Zhang and me.</p>
+      <p>This work is mainly about the football game team strategy based on big data and is our final paper for the D problem of 2020 Interdisciplinary Contest in Modelling (ICM 2020), contributed collaboratively and equally by R.C. Luo, Y.Z. Zhang and me. </p>
 <p>Thanks cordially to the combined efforts of whole group, we fortunately won an M-prize. Due to privacy and copyright, the control number in our paper is erased.</p>
 
 
@@ -349,56 +349,68 @@
       
 
       
-      <h1 id="matlab-学习笔记">Matlab 学习笔记</h1>
-<h2 id="有关信号与系统">有关信号与系统</h2>
-<h3 id="连续系统构建">连续系统构建</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tf(b,a);  <span class="comment">%传递函数模型</span></span><br><span class="line">s = tf(<span class="string">'s'</span>); sys = b(s)/a(s) <span class="comment">%（具体的为多项式形式）</span></span><br><span class="line"><span class="comment">% ss 状态空间模型 （了解不多）</span></span><br><span class="line"><span class="comment">% zpk 零点-极点-增益模型 （了解不多）</span></span><br></pre></td></tr></table></figure>
-<h3 id="连续系统性质研究">连续系统性质研究</h3>
-<p>在用上面的方法构建好系统sys后，才可以进行下面的操作。</p>
+      <h1 id="Matlab-学习笔记"><a href="#Matlab-学习笔记" class="headerlink" title="Matlab 学习笔记"></a>Matlab 学习笔记</h1><h2 id="有关信号与系统"><a href="#有关信号与系统" class="headerlink" title="有关信号与系统"></a>有关信号与系统</h2><h3 id="连续系统构建"><a href="#连续系统构建" class="headerlink" title="连续系统构建"></a>连续系统构建</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">tf(b,a);  <span class="comment">%传递函数模型</span></span><br><span class="line">s = tf(<span class="string">'s'</span>); sys = b(s)/a(s) <span class="comment">%（具体的为多项式形式）</span></span><br><span class="line"><span class="comment">% ss 状态空间模型 （了解不多）</span></span><br><span class="line"><span class="comment">% zpk 零点-极点-增益模型 （了解不多）</span></span><br></pre></td></tr></table></figure>
+<h3 id="连续系统性质研究"><a href="#连续系统性质研究" class="headerlink" title="连续系统性质研究"></a>连续系统性质研究</h3><p>在用上面的方法构建好系统sys后，才可以进行下面的操作。</p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 零极点图</span></span><br><span class="line">p = pole(sys); <span class="comment">%求出零点</span></span><br><span class="line">z = zero(sys); <span class="comment">%求出极点</span></span><br><span class="line">pzmap(sys); <span class="comment">%画零极点图 可以设置axis使之更好看</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 响应</span></span><br><span class="line">lsim(sys,u,t,x0) <span class="comment">%全响应</span></span><br><span class="line">impulse(sys); <span class="comment">%单位冲激响应</span></span><br><span class="line">step(sys); <span class="comment">%单位阶跃响应</span></span><br></pre></td></tr></table></figure>
-<h2 id="有关符号表达式">有关符号表达式</h2>
-<h3 id="符号声明">符号声明</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms x y; <span class="comment">%声明变量</span></span><br><span class="line">syms f(t) g(x,y); <span class="comment">%声明函数, 里面的变量可以作为符号直接使用</span></span><br><span class="line">syms A [m,n]; <span class="comment">%声明向量或矩阵 m*n维</span></span><br></pre></td></tr></table></figure>
-<h3 id="符号运算">符号运算</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">simplify(expr); <span class="comment">%化简符号表达式</span></span><br><span class="line">root(p,x); <span class="comment">%得到符号多项式p关于x的根</span></span><br><span class="line">solve(equ,var); <span class="comment">%计算方程的解</span></span><br><span class="line">equs=[equ1 equ2]; vars=[var1 var2];</span><br><span class="line">solve(equs,vars); <span class="comment">%计算方程组equs关于变量vars的解</span></span><br><span class="line">diff(f,x,n); <span class="comment">%求符号函数f关于x的n阶导数</span></span><br><span class="line">dsolve(equ,cond); <span class="comment">%求解带diff的常微分方程 cond为初始条件</span></span><br><span class="line">dsolve(equs); <span class="comment">%求解常微分方程组 得到一组解S 用S.var 查看关于var的的解</span></span><br><span class="line">laplace(f); <span class="comment">%求关于f的拉普拉斯变换 （积分下限为0）</span></span><br><span class="line">ilaplace(F); <span class="comment">%求F的拉普拉斯逆变换</span></span><br></pre></td></tr></table></figure>
-<h3 id="符号变现赋值等">符号变现（赋值等）</h3>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">g = matlabFunction(f); <span class="comment">%生成一个虚拟函数句柄 将符号表达式转化为可以用句柄调用求具体值等函数</span></span><br><span class="line"></span><br><span class="line">subs(s,old,new); <span class="comment">%返回s中old全部用new代替的新的表达式, 可用于符号替换（如自变量替换）和赋值</span></span><br></pre></td></tr></table></figure>
-<h2 id="其他">其他</h2>
+<h2 id="有关符号表达式"><a href="#有关符号表达式" class="headerlink" title="有关符号表达式"></a>有关符号表达式</h2><h3 id="符号声明"><a href="#符号声明" class="headerlink" title="符号声明"></a>符号声明</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">syms x y; <span class="comment">%声明变量</span></span><br><span class="line">syms f(t) g(x,y); <span class="comment">%声明函数, 里面的变量可以作为符号直接使用</span></span><br><span class="line">syms A [m,n]; <span class="comment">%声明向量或矩阵 m*n维</span></span><br></pre></td></tr></table></figure>
+<h3 id="符号运算"><a href="#符号运算" class="headerlink" title="符号运算"></a>符号运算</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">simplify(expr); <span class="comment">%化简符号表达式</span></span><br><span class="line">root(p,x); <span class="comment">%得到符号多项式p关于x的根</span></span><br><span class="line">solve(equ,var); <span class="comment">%计算方程的解</span></span><br><span class="line">equs=[equ1 equ2]; vars=[var1 var2];</span><br><span class="line">solve(equs,vars); <span class="comment">%计算方程组equs关于变量vars的解</span></span><br><span class="line">diff(f,x,n); <span class="comment">%求符号函数f关于x的n阶导数</span></span><br><span class="line">dsolve(equ,cond); <span class="comment">%求解带diff的常微分方程 cond为初始条件</span></span><br><span class="line">dsolve(equs); <span class="comment">%求解常微分方程组 得到一组解S 用S.var 查看关于var的的解</span></span><br><span class="line">laplace(f); <span class="comment">%求关于f的拉普拉斯变换 （积分下限为0）</span></span><br><span class="line">ilaplace(F); <span class="comment">%求F的拉普拉斯逆变换</span></span><br></pre></td></tr></table></figure>
+<h3 id="符号变现（赋值等）"><a href="#符号变现（赋值等）" class="headerlink" title="符号变现（赋值等）"></a>符号变现（赋值等）</h3><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">g = matlabFunction(f); <span class="comment">%生成一个虚拟函数句柄 将符号表达式转化为可以用句柄调用求具体值等函数</span></span><br><span class="line"></span><br><span class="line">subs(s,old,new); <span class="comment">%返回s中old全部用new代替的新的表达式, 可用于符号替换（如自变量替换）和赋值</span></span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>函数必须以end结尾。将其保存为.m 文件，即可在其他程 序中以文件名（注意不是函数名，文件名和函数名可以不同）调用该函数。</li>
+</ul>
 <ul>
-<li><p>函数必须以end结尾。将其保存为.m 文件，即可在其他程 序中以文件名（注意不是函数名，文件名和函数名可以不同）调用该函数。</p></li>
 <li><p>关系运算</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a~=b<span class="comment">%不等于</span></span><br><span class="line">a&gt;=b<span class="comment">%大于等于</span></span><br><span class="line">a&lt;=b<span class="comment">%小于等于</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a~=b<span class="comment">%不等于</span></span><br><span class="line">a&gt;=b<span class="comment">%大于等于</span></span><br><span class="line">a&lt;=b<span class="comment">%小于等于</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
 <li><p>复数</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=<span class="number">1</span>+<span class="number">2</span><span class="built_in">i</span></span><br><span class="line">z=<span class="built_in">real</span>(a)<span class="comment">%实部</span></span><br><span class="line">z=<span class="built_in">imag</span>(a)<span class="comment">%虚部</span></span><br><span class="line">z=<span class="built_in">angle</span>(a)<span class="comment">%辐角</span></span><br><span class="line">z=<span class="built_in">abs</span>(a)<span class="comment">%模</span></span><br><span class="line">z=<span class="built_in">conj</span>(a)<span class="comment">%共轭</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=<span class="number">1</span>+<span class="number">2</span><span class="built_in">i</span></span><br><span class="line">z=<span class="built_in">real</span>(a)<span class="comment">%实部</span></span><br><span class="line">z=<span class="built_in">imag</span>(a)<span class="comment">%虚部</span></span><br><span class="line">z=<span class="built_in">angle</span>(a)<span class="comment">%辐角</span></span><br><span class="line">z=<span class="built_in">abs</span>(a)<span class="comment">%模</span></span><br><span class="line">z=<span class="built_in">conj</span>(a)<span class="comment">%共轭</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
 <li><p>向量操作</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">c=<span class="built_in">dot</span>(a,b)<span class="comment">%内积</span></span><br><span class="line">d=<span class="built_in">cross</span>(a,b)<span class="comment">%叉乘</span></span><br><span class="line">l=<span class="built_in">length</span>(a)<span class="comment">%向量长度</span></span><br><span class="line">median(a)<span class="comment">%中位数</span></span><br><span class="line">std(a)<span class="comment">%标准差</span></span><br><span class="line">s=<span class="built_in">sort</span>(a)<span class="comment">%排序</span></span><br><span class="line"><span class="comment">%还有 min max 等</span></span><br></pre></td></tr></table></figure></li>
-<li><p>矩阵操作</p></li>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">c=<span class="built_in">dot</span>(a,b)<span class="comment">%内积</span></span><br><span class="line">d=<span class="built_in">cross</span>(a,b)<span class="comment">%叉乘</span></span><br><span class="line">l=<span class="built_in">length</span>(a)<span class="comment">%向量长度</span></span><br><span class="line">median(a)<span class="comment">%中位数</span></span><br><span class="line">std(a)<span class="comment">%标准差</span></span><br><span class="line">s=<span class="built_in">sort</span>(a)<span class="comment">%排序</span></span><br><span class="line"><span class="comment">%还有 min max 等</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>矩阵操作</li>
 </ul>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a=<span class="built_in">rand</span>(<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line">b=<span class="built_in">rand</span>(<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line">b=b'<span class="comment">%转置</span></span><br><span class="line">c=a*b<span class="comment">%矩阵乘法</span></span><br><span class="line">d=a.*b<span class="comment">%逐元素相乘</span></span><br><span class="line">m=b^<span class="number">3</span><span class="comment">%幂</span></span><br><span class="line">m=b.^<span class="number">3</span><span class="comment">%点幂</span></span><br><span class="line"><span class="built_in">size</span>(b)<span class="comment">%矩阵大小</span></span><br><span class="line">b=<span class="built_in">reshape</span>(<span class="number">1</span>,<span class="number">15</span>)</span><br><span class="line">b=<span class="built_in">flipud</span>(b)<span class="comment">%上下翻转 up and down</span></span><br><span class="line">b=<span class="built_in">fliplr</span>(b)<span class="comment">%左右翻转 left and right</span></span><br><span class="line">e=<span class="built_in">diag</span>(b)<span class="comment">%取出b的对角元素</span></span><br><span class="line"></span><br><span class="line">left_division=a/b<span class="comment">% b*inv(a)</span></span><br><span class="line">right_division=a\b<span class="comment">% inv(a)*b</span></span><br><span class="line"><span class="comment">%X=A\B是方程A*X=B的解，X=A\B是方程X*A=B的解 </span></span><br><span class="line"><span class="comment">%记忆：朝向哪 逆在哪</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>绘图</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x=<span class="built_in">linspace</span>(<span class="number">1</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line">y1=<span class="built_in">sin</span>(x)</span><br><span class="line">y2=<span class="built_in">cos</span>(x)</span><br><span class="line">y3=<span class="built_in">tan</span>(x)</span><br><span class="line"><span class="built_in">plot</span>(x,y1,<span class="string">'blue'</span>,x,y2,<span class="string">'LineWidth'</span>,<span class="number">2</span>,<span class="string">'color'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">%要在同一图中画出多条曲线，只需将坐标依次放入plot函数即可</span></span><br><span class="line">axis([<span class="number">0</span> <span class="number">4</span>*<span class="built_in">pi</span> <span class="number">-1.2</span> <span class="number">1.2</span>])<span class="comment">%设置坐标轴范围</span></span><br><span class="line">xlim([<span class="number">1</span> <span class="number">2</span>])<span class="comment">%单独控制</span></span><br><span class="line">xlabel(<span class="string">'x'</span>); ylabel(<span class="string">'y'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'sin(x)'</span>,<span class="string">'cos(x)'</span>);</span><br><span class="line">title(<span class="string">'Sine and Cosine Functions'</span>);</span><br><span class="line"><span class="comment">%title里可以使用latex语法</span></span><br><span class="line"><span class="comment">%如 ：title('$y_1=\sin(4\pi t+\pi /3)$','interpreter','latex')</span></span><br><span class="line"><span class="comment">% 注明解释器为latex即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%绘制子图</span></span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>); <span class="built_in">plot</span>(x,y1);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>); <span class="built_in">plot</span>(x,y2);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="built_in">plot</span>(x,y3);</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">x=<span class="built_in">linspace</span>(<span class="number">1</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line">y1=<span class="built_in">sin</span>(x)</span><br><span class="line">y2=<span class="built_in">cos</span>(x)</span><br><span class="line">y3=<span class="built_in">tan</span>(x)</span><br><span class="line"><span class="built_in">plot</span>(x,y1,<span class="string">'blue'</span>,x,y2,<span class="string">'LineWidth'</span>,<span class="number">2</span>,<span class="string">'color'</span>,<span class="string">'red'</span>)</span><br><span class="line"><span class="comment">%要在同一图中画出多条曲线，只需将坐标依次放入plot函数即可</span></span><br><span class="line">axis([<span class="number">0</span> <span class="number">4</span>*<span class="built_in">pi</span> <span class="number">-1.2</span> <span class="number">1.2</span>])<span class="comment">%设置坐标轴范围</span></span><br><span class="line">xlim([<span class="number">1</span> <span class="number">2</span>])<span class="comment">%单独控制</span></span><br><span class="line">xlabel(<span class="string">'x'</span>); ylabel(<span class="string">'y'</span>);</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">'sin(x)'</span>,<span class="string">'cos(x)'</span>);</span><br><span class="line">title(<span class="string">'Sine and Cosine Functions'</span>);</span><br><span class="line"><span class="comment">%title里可以使用latex语法</span></span><br><span class="line"><span class="comment">%如 ：title('$y_1=\sin(4\pi t+\pi /3)$','interpreter','latex')</span></span><br><span class="line"><span class="comment">% 注明解释器为latex即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%绘制子图</span></span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>); <span class="built_in">plot</span>(x,y1);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>); <span class="built_in">plot</span>(x,y2);</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>); <span class="built_in">plot</span>(x,y3);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
 <li><p>信号处理</p>
-<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%噪声</span></span><br><span class="line">snr=<span class="number">10</span>; <span class="comment">%Signal‐to‐noise ratio in dB.</span></span><br><span class="line">yn=awgn(y,snr,<span class="string">'measured'</span>); <span class="comment">% Add white Gaussian noise. 白噪声</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%函数</span></span><br><span class="line">k1=<span class="number">-3</span>; k2=<span class="number">3</span>; k=k1:k2; n=<span class="number">0</span>;</span><br><span class="line">step=stepfun(t,t0)<span class="comment">%t是向量形式的变量,t0表示延迟 阶跃函数</span></span><br><span class="line">delta=+(k==n) <span class="comment">% 冲激函数</span></span><br><span class="line">stem(k,delta,<span class="string">'filled'</span>)<span class="comment">% 离散函数绘制 stem为绘制杆状图</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%rectpuls和tripuls函数产生指定宽度和高度的矩形和三角脉冲。</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%噪声</span></span><br><span class="line">snr=<span class="number">10</span>; <span class="comment">%Signal‐to‐noise ratio in dB.</span></span><br><span class="line">yn=awgn(y,snr,<span class="string">'measured'</span>); <span class="comment">% Add white Gaussian noise. 白噪声</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%函数</span></span><br><span class="line">k1=<span class="number">-3</span>; k2=<span class="number">3</span>; k=k1:k2; n=<span class="number">0</span>;</span><br><span class="line">step=stepfun(t,t0)<span class="comment">%t是向量形式的变量,t0表示延迟 阶跃函数</span></span><br><span class="line">delta=+(k==n) <span class="comment">% 冲激函数</span></span><br><span class="line">stem(k,delta,<span class="string">'filled'</span>)<span class="comment">% 离散函数绘制 stem为绘制杆状图</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%rectpuls和tripuls函数产生指定宽度和高度的矩形和三角脉冲。</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
 <li><p>其他技巧</p>
 <ul>
-<li>nargin, nargout 的使用</li>
-</ul></li>
+<li>nargin, nargout 的使用 </li>
 </ul>
-<h2 id="关于频率">关于频率</h2>
-<p>采样频率 <span class="math inline">\(f_s\)</span>：每秒取 <span class="math inline">\(f_s\)</span> 个点，计算中应该取和物理采样硬件（如示波器）的采样频率一致</p>
-<p>频率域分析中，若采样频率是 <span class="math inline">\(f_s\)</span>, 那么分析的范围是 <span class="math inline">\([0,f_s)\)</span>, 这是因为更高频率的波我们采样不到了。</p>
-<p>又由于 <span class="math inline">\([0,f_s/2),[f_s/2,f_s)\)</span> 是对称的，事实上有用的信息或者说我们需要分析的范围是 <span class="math inline">\([0,f_s/2]\)</span> 。</p>
-<p>在用 Matlab 进行频率域分析时，首先应该设置采样频率。根据物理硬件可以确定采样频率，如果是离散信号，那么采样频率就是 <span class="math inline">\(1\)</span> 。</p>
-<p>第二步应该确定采样的点数 <span class="math inline">\(N\)</span> 或者采样的持续时间 <span class="math inline">\(T\)</span>, 知道一个我们就可以确定另一个：<span class="math inline">\(N\implies T=N/f_s,\quad T\implies N=T\cdot f_s\)</span></p>
+</li>
+</ul>
+<h2 id="关于频率"><a href="#关于频率" class="headerlink" title="关于频率"></a>关于频率</h2><p>采样频率 $f_s$：每秒取 $f_s$ 个点，计算中应该取和物理采样硬件（如示波器）的采样频率一致</p>
+<p>频率域分析中，若采样频率是 $f_s$, 那么分析的范围是 $[0,f_s)$, 这是因为更高频率的波我们采样不到了。</p>
+<p>又由于 $[0,f_s/2),[f_s/2,f_s)$ 是对称的，事实上有用的信息或者说我们需要分析的范围是 $[0,f_s/2]$ 。</p>
+<p>在用 Matlab 进行频率域分析时，首先应该设置采样频率。根据物理硬件可以确定采样频率，如果是离散信号，那么采样频率就是 $1$ 。</p>
+<p>第二步应该确定采样的点数 $N$ 或者采样的持续时间 $T$, 知道一个我们就可以确定另一个：$N\implies T=N/f_s,\quad T\implies N=T\cdot f_s$</p>
 <p>在使用 Matlab 的 fft 函数时，有几个需要注意的地方：</p>
 <ul>
-<li><p>真实信号的振幅应该是 <span class="math inline">\(A\cdot2/N\)</span> ，这个我不是很明白，查到的是这样说的，<span class="math inline">\(A\)</span> 是 fft 变换后的振幅</p></li>
-<li><p>如果采样频率是 <span class="math inline">\(f_s\)</span>, 那么 fft 时要乘一下 <span class="math inline">\(dt=1/f_s\)</span> (每秒 <span class="math inline">\(f_s\)</span> 个点，那么一个点就是 <span class="math inline">\(1/f_s\)</span> 秒) ，这是由于 Matlab 的 fft 是离散傅立叶变换，相当于 <span class="math inline">\(dt=1\)</span> ，需要补乘 <span class="math inline">\(dt\)</span></p></li>
-<li><p>频率域对应的频谱范围是 <span class="math inline">\(0\sim f_s\)</span>, 有用的信息是在 <span class="math inline">\(0~f_s/2\)</span>, Matlab 代码实现是</p>
+<li><p>真实信号的振幅应该是 $A\cdot2/N$ ，这个我不是很明白，查到的是这样说的，$A$ 是 fft 变换后的振幅</p>
+</li>
+<li><p>如果采样频率是 $f_s$, 那么 fft 时要乘一下 $dt=1/f_s$ (每秒 $f_s$ 个点，那么一个点就是 $1/f_s$ 秒) ，这是由于 Matlab 的 fft 是离散傅立叶变换，相当于 $dt=1$ ，需要补乘 $dt$</p>
+</li>
+<li><p>频率域对应的频谱范围是 $0\sim f_s$, 有用的信息是在 $0~f_s/2$, Matlab 代码实现是 </p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span>:(N<span class="number">-1</span>)/N*fs</span><br></pre></td></tr></table></figure>
-<p>可以用 fftshift 将 <span class="math inline">\([0,f_s)\)</span> 移为 <span class="math inline">\((-f_s/2,f_s/2]\)</span>, 然后取 <span class="math inline">\([o,f_s/2]\)</span> 的有用信息进行分析</p></li>
-<li><p>反变换 ifft 时要乘回来之前多乘的 <span class="math inline">\(1/f_s\)</span>, 即乘 <span class="math inline">\(f_s\)</span></p></li>
+<p>可以用 fftshift 将 $[0,f_s)$ 移为 $(-f_s/2,f_s/2]$, 然后取 $[o,f_s/2]$ 的有用信息进行分析</p>
+</li>
+<li><p>反变换 ifft 时要乘回来之前多乘的 $1/f_s$, 即乘 $f_s$</p>
+</li>
 </ul>
 
       
@@ -467,454 +479,473 @@
       
 
       
-      <h1 id="应用光学-整理">应用光学 整理</h1>
-<h2 id="几何光学基础">1. 几何光学基础</h2>
-<ul>
-<li><p>全反射 <span class="math display">\[
-I=\arcsin{\frac{n_2}{n_1}}
-\]</span></p></li>
-<li><p>矢量形式的折射定律 <span class="math display">\[
-\vec A&#39;=\vec A+P\vec N\\
-\]</span> 其中： <span class="math display">\[
+      <h1 id="应用光学-整理"><a href="#应用光学-整理" class="headerlink" title="应用光学 整理"></a>应用光学 整理</h1><h2 id="1-几何光学基础"><a href="#1-几何光学基础" class="headerlink" title="1. 几何光学基础"></a>1. 几何光学基础</h2><ul>
+<li><p>全反射</p>
+<script type="math/tex; mode=display">
+I=\arcsin{\frac{n_2}{n_1}}</script></li>
+<li><p>矢量形式的折射定律</p>
+<script type="math/tex; mode=display">
+\vec A'=\vec A+P\vec N\\</script><p>其中：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-P&amp;=(\vec A&#39;-\vec A)\cdot \vec N\\
-&amp;=n&#39;\cos I&#39;-n\cos I\\
-&amp;=\sqrt{n&#39;^2-n^2\sin ^2 I}-n\cos I
-\end{aligned}
-\]</span> 且 <span class="math inline">\(\vec A,\vec A’\)</span> 均为单位向量</p></li>
-<li><p>矢量形式的反射定律 <span class="math display">\[
-\vec A&#39;=\vec A-2(\vec N\cdot \vec A)\vec N
-\]</span></p></li>
-<li><p>光程</p>
-<p>​ 光在介质中所经过的几何路径与该介质折射率的乘积。相当于光在介质中走过路程的时间内，在真空中所走的几何路程。 <span class="math display">\[
-\notag
- s=nl=ct
-\]</span></p></li>
-<li><p>完善成像</p>
-<p>​ 等光程上完善成像的物理条件。</p></li>
+P&=(\vec A'-\vec A)\cdot \vec N\\
+&=n'\cos I'-n\cos I\\
+&=\sqrt{n'^2-n^2\sin ^2 I}-n\cos I
+\end{aligned}</script><p>且 $\vec A,\vec A’$ 均为单位向量</p>
+</li>
+<li><p>矢量形式的反射定律</p>
+<script type="math/tex; mode=display">
+\vec A'=\vec A-2(\vec N\cdot \vec A)\vec N</script></li>
 </ul>
-<h2 id="球面与球面系统">2. 球面与球面系统</h2>
-<h3 id="单个球面镜成像">单个球面镜成像</h3>
 <ul>
-<li><p>基本公式 <span class="math display">\[
+<li><p>光程</p>
+<p>​    光在介质中所经过的几何路径与该介质折射率的乘积。相当于光在介质中走过路程的时间内，在真空中所走的几何路程。</p>
+<script type="math/tex; mode=display">
+\notag
+ s=nl=ct</script></li>
+<li><p>完善成像</p>
+<p>​    等光程上完善成像的物理条件。</p>
+</li>
+</ul>
+<h2 id="2-球面与球面系统"><a href="#2-球面与球面系统" class="headerlink" title="2. 球面与球面系统"></a>2. 球面与球面系统</h2><h3 id="单个球面镜成像"><a href="#单个球面镜成像" class="headerlink" title="单个球面镜成像"></a>单个球面镜成像</h3><ul>
+<li><p>基本公式</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-&amp;\frac{n&#39;}{l&#39;}-\frac{n}{l}=\frac{n&#39;-n}{r}\\
-&amp;n&#39;u&#39;-nu=\frac{n&#39;-n}{r}h
-\end{aligned}
-\]</span></p></li>
-<li><p>光焦度 <span class="math display">\[
-\phi=\frac{n&#39;-n}{r}=\frac{n&#39;}{f&#39;}=\frac{n}{f}
-\]</span></p></li>
+&\frac{n'}{l'}-\frac{n}{l}=\frac{n'-n}{r}\\
+&n'u'-nu=\frac{n'-n}{r}h
+\end{aligned}</script></li>
+<li><p>光焦度</p>
+<script type="math/tex; mode=display">
+\phi=\frac{n'-n}{r}=\frac{n'}{f'}=\frac{n}{f}</script></li>
 <li><p>放大率</p>
 <ul>
-<li><p>横向 <span class="math display">\[
-\beta=\frac{y&#39;}{y}=\frac{l&#39;-r}{l-r}=\frac{nl&#39;}{n&#39;l}
-\]</span></p>
-<p><span class="math inline">\(\beta&gt;0\)</span> : 虚实不同；<span class="math inline">\(\beta&lt;0\)</span> : 虚实相同。</p></li>
-<li><p>轴向 <span class="math display">\[
-\alpha=\frac{dl&#39;}{dl}=\frac{nl&#39;^2}{nl^2}
-\]</span> 反应像与物的沿轴移动量之比。</p></li>
-<li><p>角度 <span class="math display">\[
-\gamma=\frac{u&#39;}{u}=\frac{l}{l&#39;}=\frac{n}{n&#39;}\frac{1}{\beta}
-\]</span></p></li>
-</ul></li>
-<li><p>关系 <span class="math display">\[
-  \alpha\gamma=\beta
-  \]</span></p></li>
+<li>横向<script type="math/tex; mode=display">
+\beta=\frac{y'}{y}=\frac{l'-r}{l-r}=\frac{nl'}{n'l}</script></li>
+</ul>
+</li>
+</ul>
+<pre><code>$\beta&gt;0$ : 虚实不同；$\beta&lt;0$ : 虚实相同。
+</code></pre><ul>
+<li>轴向<script type="math/tex; mode=display">
+\alpha=\frac{dl'}{dl}=\frac{nl'^2}{nl^2}</script>反应像与物的沿轴移动量之比。</li>
+</ul>
+<ul>
+<li>角度<script type="math/tex; mode=display">
+\gamma=\frac{u'}{u}=\frac{l}{l'}=\frac{n}{n'}\frac{1}{\beta}</script></li>
+</ul>
+<ul>
+<li>关系<script type="math/tex; mode=display">
+  \alpha\gamma=\beta</script></li>
+</ul>
+<ul>
 <li><p>不变量</p>
 <ul>
-<li><p>阿贝不变量 <span class="math display">\[
-Q=n(\frac{1}{l}-\frac{1}{r})=n&#39;(\frac{1}{l&#39;}-\frac{1}{r&#39;})
-\]</span> 阿贝不变量表征界面对某物点发出光线的偏折能力.</p></li>
-<li><p>拉赫不变量</p></li>
+<li>阿贝不变量<script type="math/tex; mode=display">
+Q=n(\frac{1}{l}-\frac{1}{r})=n'(\frac{1}{l'}-\frac{1}{r'})</script>阿贝不变量表征界面对某物点发出光线的偏折能力.</li>
 </ul>
-<p><span class="math display">\[
-J=nyu=n&#39;y&#39;u&#39;
-\]</span> ​ 推导： <span class="math display">\[
+</li>
+</ul>
+<ul>
+<li><p>拉赫不变量</p>
+<script type="math/tex; mode=display">
+J=nyu=n'y'u'</script><p>​          推导：</p>
+<script type="math/tex; mode=display">
 \notag
-\beta=\frac{y&#39;}{y}=\frac{nl&#39;}{n&#39;l}=\frac{nu}{n&#39;u&#39;}\implies nyu=n&#39;y&#39;u&#39;
-\]</span></p>
-<p>​ <span class="math inline">\(J\)</span> 大，成像范围大，成像孔径角大，传输光能多。</p>
-<p>​ 拉赫不变量表征光学系统的成像能力.</p></li>
+\beta=\frac{y'}{y}=\frac{nl'}{n'l}=\frac{nu}{n'u'}\implies nyu=n'y'u'</script><p>​        $J$ 大，成像范围大，成像孔径角大，传输光能多。</p>
+<p>​          拉赫不变量表征光学系统的成像能力.</p>
+</li>
 </ul>
-<h3 id="反射球面球面镜">反射球面（球面镜）</h3>
-<ul>
-<li><span class="math inline">\(n’=-n\)</span></li>
+<h3 id="反射球面（球面镜）"><a href="#反射球面（球面镜）" class="headerlink" title="反射球面（球面镜）"></a>反射球面（球面镜）</h3><ul>
+<li>$n’=-n$</li>
 </ul>
-<h2 id="平面和平面系统">3. 平面和平面系统</h2>
-<h3 id="平面镜">平面镜</h3>
-<ul>
+<h2 id="3-平面和平面系统"><a href="#3-平面和平面系统" class="headerlink" title="3. 平面和平面系统"></a>3. 平面和平面系统</h2><h3 id="平面镜"><a href="#平面镜" class="headerlink" title="平面镜"></a>平面镜</h3><ul>
 <li>奇次反射成镜像，偶次反射成一致像</li>
-<li>若反射光线不动，平面镜转 <span class="math inline">\(\alpha\)</span> 角，则反射光线转 <span class="math inline">\(2\alpha\)</span> 角</li>
+<li>若反射光线不动，平面镜转 $\alpha$ 角，则反射光线转 $2\alpha$ 角</li>
 </ul>
-<h3 id="双平面镜">双平面镜</h3>
-<ul>
-<li>夹角为 <span class="math inline">\(\alpha\)</span> 的双平面镜系统，物与二次反射后所成像的夹角为 <span class="math inline">\(2\alpha\)</span> .</li>
-<li>入射光线与反射光线的夹角为 <span class="math inline">\(2\alpha\)</span> .</li>
+<h3 id="双平面镜"><a href="#双平面镜" class="headerlink" title="双平面镜"></a>双平面镜</h3><ul>
+<li>夹角为 $\alpha$ 的双平面镜系统，物与二次反射后所成像的夹角为 $2\alpha$ .</li>
+<li>入射光线与反射光线的夹角为 $2\alpha$ .</li>
 </ul>
-<h3 id="平行平板">平行平板</h3>
-<ul>
-<li><p>近轴横向位移公式 <span class="math display">\[
-\Delta l&#39;=d(1-\frac{1}{n})
-\]</span></p></li>
-<li><p>近轴纵向位移公式 <span class="math display">\[
-\Delta t&#39;=di(1-\frac{1}{n})
-\]</span> <span class="math inline">\(i\)</span> 为入射角 .</p></li>
+<h3 id="平行平板"><a href="#平行平板" class="headerlink" title="平行平板"></a>平行平板</h3><ul>
+<li>近轴横向位移公式<script type="math/tex; mode=display">
+\Delta l'=d(1-\frac{1}{n})</script></li>
 </ul>
-<h3 id="反射棱镜">反射棱镜</h3>
 <ul>
+<li>近轴纵向位移公式<script type="math/tex; mode=display">
+\Delta t'=di(1-\frac{1}{n})</script>$i$ 为入射角 . </li>
+</ul>
+<h3 id="反射棱镜"><a href="#反射棱镜" class="headerlink" title="反射棱镜"></a>反射棱镜</h3><ul>
 <li><p>结构常数</p>
-<p>​ 光轴在棱镜中的长度与棱镜通光口径之比 <span class="math display">\[
-K=\frac{d}{D}
-\]</span></p></li>
-<li><p>五角棱镜 <span class="math display">\[
-K=2+\sqrt{2}
-\notag
-\]</span></p></li>
-<li><p>达夫棱镜 <span class="math display">\[
-K=\frac{1}{\sin(45^{\circ}-i)}
-\notag
-\]</span></p>
-<p>达夫棱镜的重要性质在于当它绕平行于反射面的轴转 <span class="math inline">\(\alpha\)</span> 角时，物体的反射像将转过 <span class="math inline">\(2\alpha\)</span> 角。</p></li>
-<li><p>屋脊棱镜</p>
-<p>可以增加一次反射，改变像坐标系的左右旋向。</p></li>
-<li>由物坐标求像坐标
+<p>​    光轴在棱镜中的长度与棱镜通光口径之比</p>
+<script type="math/tex; mode=display">
+K=\frac{d}{D}</script></li>
+</ul>
 <ul>
-<li>光轴方向 <span class="math inline">\(z’\)</span> 不变</li>
-<li>垂直于主截面的坐标 <span class="math inline">\(x’\)</span> 视屋脊个数而定：奇数个倒转，偶数个不变。 或者：沿方向画一画确定</li>
-<li><span class="math inline">\(y’\)</span> 坐标根据总反射次数而定：奇数次变左手系。</li>
-</ul></li>
+<li><p>五角棱镜</p>
+<script type="math/tex; mode=display">
+K=2+\sqrt{2}
+\notag</script></li>
+<li><p>达夫棱镜</p>
+<script type="math/tex; mode=display">
+K=\frac{1}{\sin(45^{\circ}-i)}
+\notag</script></li>
+</ul>
+<p>  达夫棱镜的重要性质在于当它绕平行于反射面的轴转 $\alpha$ 角时，物体的反射像将转过 $2\alpha$ 角。</p>
+<ul>
+<li><p>屋脊棱镜</p>
+<p>可以增加一次反射，改变像坐标系的左右旋向。</p>
+</li>
+</ul>
+<ul>
+<li>由物坐标求像坐标<ul>
+<li>光轴方向 $z’$ 不变</li>
+<li>垂直于主截面的坐标 $x’$ 视屋脊个数而定：奇数个倒转，偶数个不变。 或者：沿方向画一画确定</li>
+<li>$y’$ 坐标根据总反射次数而定：奇数次变左手系。</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li><p>角锥棱镜</p>
 <ul>
-<li><p>从底面以任意方向入射的光线，经三个反射面顺序反射后，以与入射光线相反的方向从底面射出。</p></li>
-<li>当棱镜角以角顶为中心向任意方向偏转时，出射光线方向不变。</li>
+<li><p>从底面以任意方向入射的光线，经三个反射面顺序反射后，以与入射光线相反的方向从底面射出。</p>
+</li>
+<li><p>当棱镜角以角顶为中心向任意方向偏转时，出射光线方向不变。</p>
+</li>
 <li>用</li>
-<li><p>矢量形式的反射定律证明</p></li>
-</ul></li>
+<li>矢量形式的反射定律证明</li>
 </ul>
-<h3 id="折射棱镜">折射棱镜</h3>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gcv1smbisuj30ad06t0sr.jpg" style="zoom: 67%;" /></p>
-<ul>
-<li><p>偏角公式 <span class="math display">\[
-\sin(\frac{\alpha+\delta_{min}}{2})=n\sin\frac{\alpha}{2}
-\]</span> 此时 <span class="math inline">\(I_1=-I_2’, I’_1=-I_2\)</span> .</p></li>
-<li><p>近轴简化：入射角有一定大小，折射角 <span class="math inline">\(\alpha\)</span> 很小 <span class="math display">\[
-\delta=\alpha\big(n\frac{\cos I&#39;_1}{\cos I_1}-1\big)
-\]</span></p></li>
-<li><p>近轴简化：入射角很小，折射角很小 <span class="math display">\[
-\delta=(n-1)\alpha
-\]</span></p></li>
+</li>
 </ul>
-<h2 id="理想光学系统">4. 理想光学系统</h2>
-<figure>
-<img src="https://tva1.sinaimg.cn/large/00831rSTly1gd5cgjb5nej32720rstdm.jpg" alt="image-20200324211216424" /><figcaption>image-20200324211216424</figcaption>
-</figure>
-<p>​ 理想光学系统，就是能对任意宽空间内的点以任意宽的光束成完善像的光学系统。</p>
-<h3 id="基本概念">（1）基本概念</h3>
+<h3 id="折射棱镜"><a href="#折射棱镜" class="headerlink" title="折射棱镜"></a>折射棱镜</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gcv1smbisuj30ad06t0sr.jpg" style="zoom: 67%;" /></p>
 <ul>
+<li><p>偏角公式</p>
+<script type="math/tex; mode=display">
+\sin(\frac{\alpha+\delta_{min}}{2})=n\sin\frac{\alpha}{2}</script><p>此时 $I_1=-I_2’, I’_1=-I_2$ .</p>
+</li>
+<li><p>近轴简化：入射角有一定大小，折射角 $\alpha$ 很小</p>
+<script type="math/tex; mode=display">
+\delta=\alpha\big(n\frac{\cos I'_1}{\cos I_1}-1\big)</script></li>
+</ul>
+<ul>
+<li>近轴简化：入射角很小，折射角很小<script type="math/tex; mode=display">
+\delta=(n-1)\alpha</script></li>
+</ul>
+<h2 id="4-理想光学系统"><a href="#4-理想光学系统" class="headerlink" title="4. 理想光学系统"></a>4. 理想光学系统</h2><p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd5cgjb5nej32720rstdm.jpg" alt="image-20200324211216424"></p>
+<p>​    理想光学系统，就是能对任意宽空间内的点以任意宽的光束成完善像的光学系统。</p>
+<h3 id="（1）基本概念"><a href="#（1）基本概念" class="headerlink" title="（1）基本概念"></a>（1）基本概念</h3><ul>
 <li>主点、主平面</li>
 <li>节点</li>
 <li>基点</li>
 <li>焦物距、焦像距</li>
 <li>光焦度：折合焦距的倒数</li>
 <li>视觉放大率</li>
-<li>物距<span class="math inline">\(\ell\)</span> : 主点到物点到距离，像距<span class="math inline">\(\ell&#39;\)</span> : 主点到像点到距离</li>
+<li>物距$\ell$ : 主点到物点到距离，像距$\ell’$ : 主点到像点到距离</li>
 </ul>
-<h3 id="作图技巧">（2）作图技巧</h3>
-<ul>
+<h3 id="（2）作图技巧"><a href="#（2）作图技巧" class="headerlink" title="（2）作图技巧"></a>（2）作图技巧</h3><ul>
 <li><p>辅助光线：</p>
 <ul>
 <li>平行光轴入射</li>
 <li>过物方焦点入射</li>
 <li>过节点入射</li>
-</ul></li>
+</ul>
+</li>
 <li><p>依据：</p>
 <ul>
-<li><p>倾斜光轴入射的平行光束过系统后会聚雨像方焦平面</p></li>
-<li><p>物方焦平面上一点发出的光束经系统后相互平行</p></li>
-<li><p>光线与物方、像方主面 的交点，其高度相等</p></li>
-</ul></li>
+<li><p>倾斜光轴入射的平行光束过系统后会聚雨像方焦平面</p>
+</li>
+<li><p>物方焦平面上一点发出的光束经系统后相互平行</p>
+</li>
+<li><p>光线与物方、像方主面 的交点，其高度相等</p>
+</li>
 </ul>
-<h3 id="公式荟萃">（3）公式荟萃</h3>
-<h4 id="焦距">焦距</h4>
-<p>单个光组： <span class="math display">\[
+</li>
+</ul>
+<h3 id="（3）公式荟萃"><a href="#（3）公式荟萃" class="headerlink" title="（3）公式荟萃"></a>（3）公式荟萃</h3><h4 id="焦距"><a href="#焦距" class="headerlink" title="焦距"></a>焦距</h4><p>单个光组：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-(基本)\quad &amp;f&#39;=\frac{h}{u&#39;},\quad f=\frac{h}{u}\\
-(牛顿公式)\quad &amp; xx&#39;=ff&#39;\\
-(高斯公式)\quad &amp;\frac{f&#39;}{l&#39;}+\frac{f}{l}=1\\
-&amp;\beta=-\frac{f}{x}=-\frac{x&#39;}{f&#39;}\\
-&amp;\frac{f&#39;}{f}=-\frac{n&#39;}{n}\\
-&amp; \varphi=\frac{n&#39;}{f&#39;}=-\frac{n}{f}\\
-(重要推论)\quad &amp;\frac{D}{2f&#39;}=u&#39;-u
-\end{aligned}
-\]</span> 两个光组： <span class="math display">\[
+(基本)\quad &f'=\frac{h}{u'},\quad f=\frac{h}{u}\\
+(牛顿公式)\quad & xx'=ff'\\
+(高斯公式)\quad &\frac{f'}{l'}+\frac{f}{l}=1\\
+&\beta=-\frac{f}{x}=-\frac{x'}{f'}\\
+&\frac{f'}{f}=-\frac{n'}{n}\\
+& \varphi=\frac{n'}{f'}=-\frac{n}{f}\\
+(重要推论)\quad &\frac{D}{2f'}=u'-u
+\end{aligned}</script><p>两个光组：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-(牛顿公式)\quad &amp;x_F&#39;=\frac{f_2 f_2&#39;}{\Delta},x_F=\frac{f_1 f_1&#39;}{\Delta} \\
-(三角形相似)\quad &amp; f&#39;=-\frac{f_1&#39; f_2&#39;}{\Delta},f=\frac{f_1 f_2}{\Delta}\\ 
-&amp;\Delta=d-f_1&#39;-f_2&#39;
-\end{aligned}
-\]</span></p>
-<p>多个光组（<span class="math inline">\(k\)</span> 个）： <span class="math display">\[
+(牛顿公式)\quad &x_F'=\frac{f_2 f_2'}{\Delta},x_F=\frac{f_1 f_1'}{\Delta} \\
+(三角形相似)\quad & f'=-\frac{f_1' f_2'}{\Delta},f=\frac{f_1 f_2}{\Delta}\\ 
+&\Delta=d-f_1'-f_2'
+\end{aligned}</script><p>多个光组（$k$ 个）：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-&amp;f&#39;=\frac{h_1}{u_k&#39;}\\
-(截距计算法) \quad &amp;f&#39;=\frac{l_1&#39;l_2&#39;\cdots l_l&#39;}{l_2l_3\cdots l_k}\\
-\end{aligned}
-\]</span></p>
-<p>​ 截距计算法：令 <span class="math inline">\(l_1=-\infty\)</span> , 对每一个光组重复应用高斯公式求得物距像距，最后可推出总焦距。</p>
-<p>望远镜系统： 将第二系统的焦距扩大到 <span class="math inline">\(\Gamma\)</span> 倍。（把远处物体拉近到感觉，张角变大了）</p>
-<h4 id="焦物距焦像距">焦物距/焦像距</h4>
-<p>牛顿公式、截距计算法。</p>
-<p>单个光组： <span class="math display">\[
+&f'=\frac{h_1}{u_k'}\\
+(截距计算法) \quad &f'=\frac{l_1'l_2'\cdots l_l'}{l_2l_3\cdots l_k}\\
+\end{aligned}</script><p>​        截距计算法：令 $l_1=-\infty$ , 对每一个光组重复应用高斯公式求得物距像距，最后可推出总焦距。</p>
+<p>望远镜系统：<br>将第二系统的焦距扩大到 $\Gamma$ 倍。（把远处物体拉近到感觉，张角变大了）</p>
+<h4 id="焦物距-焦像距"><a href="#焦物距-焦像距" class="headerlink" title="焦物距/焦像距"></a>焦物距/焦像距</h4><p>牛顿公式、截距计算法。</p>
+<p>单个光组：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-&amp;xx&#39;=ff&#39;\\
-&amp;\beta=-\frac{x&#39;}{f&#39;}=-\frac{f}{x}\\
-(焦距-焦物距-物距)\quad &amp;x=l-f,x&#39;=l&#39;-f&#39;
-\end{aligned}
-\]</span></p>
-<p>两个光组：</p>
-<p>​ 对第一光组，焦像距 <span class="math inline">\(x&#39;=\Delta\)</span>, 对第一光组，焦物距 <span class="math inline">\(x=-\Delta\)</span> <span class="math display">\[
-x_F&#39;=-\frac{f_2f_2&#39;}{\Delta},x_F=\frac{f_1f_1&#39;}{\Delta}
-\notag
-\]</span></p>
-<h4 id="放大率">放大率</h4>
-<p>$$ \begin{aligned} &amp;==-=-\ (轴向放大率)&amp; =-\ &amp;=\ (两个光组) &amp; =-=\ (重要，常用) &amp;= l=</p>
-<p>\end{aligned} $$</p>
-<h4 id="光焦度">光焦度</h4>
-<p><span class="math display">\[
+&xx'=ff'\\
+&\beta=-\frac{x'}{f'}=-\frac{f}{x}\\
+(焦距-焦物距-物距)\quad &x=l-f,x'=l'-f'
+\end{aligned}</script><p>两个光组：</p>
+<p>​    对第一光组，焦像距 $x’=\Delta$,  对第一光组，焦物距 $x=-\Delta$</p>
+<script type="math/tex; mode=display">
+x_F'=-\frac{f_2f_2'}{\Delta},x_F=\frac{f_1f_1'}{\Delta}
+\notag</script><h4 id="放大率"><a href="#放大率" class="headerlink" title="放大率"></a>放大率</h4><script type="math/tex; mode=display">
 \begin{aligned}
-(定义)\quad &amp;\phi=\frac{n&#39;}{f&#39;}=-\frac{n}{f}\\
-(空气中,双光组)\quad &amp;\phi=\phi_1+\phi_2-d\phi_1\phi_2\\
-(空气中，多光组)\quad &amp;\phi=\frac{1}{h_1}\sum_{i=1}^k h_i\phi_i
-\end{aligned}
-\]</span></p>
-<h4 id="正切计算法">正切计算法</h4>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd5bun7wn4j329a0rsjvx.jpg" alt="image-20200324211447349" style="zoom: 25%;" /></p>
+&\beta=\frac{y'}{y}=-\frac{x'}{f'}=-\frac{f}{x}\\
+(轴向放大率)\quad& \alpha=-\frac{x'}{x}\\
+&\alpha\gamma=\beta\\
+(两个光组) \quad & \beta=-\frac{f_1f_2/\Delta}{x_1-f_1f_2'/\Delta}=\frac{f_1f_2}{f_1f_1'-x_1\Delta}\\
+(重要，常用) \quad &\beta=\frac {l'} l=\frac{f'}{l+f'}
+
+\end{aligned}</script><h4 id="光焦度"><a href="#光焦度" class="headerlink" title="光焦度"></a>光焦度</h4><script type="math/tex; mode=display">
+\begin{aligned}
+(定义)\quad &\phi=\frac{n'}{f'}=-\frac{n}{f}\\
+(空气中,双光组)\quad &\phi=\phi_1+\phi_2-d\phi_1\phi_2\\
+(空气中，多光组)\quad &\phi=\frac{1}{h_1}\sum_{i=1}^k h_i\phi_i
+\end{aligned}</script><h4 id="正切计算法"><a href="#正切计算法" class="headerlink" title="正切计算法"></a>正切计算法</h4><p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd5bun7wn4j329a0rsjvx.jpg" alt="image-20200324211447349" style="zoom: 25%;" /></p>
 <p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gd5bp3fc1kj31xe0rsn21.jpg" alt="image-20200324210927813" style="zoom:25%;" /></p>
-<p>顺着光路走下去。关键是一步一步地求 <span class="math inline">\(h\)</span> 和 <span class="math inline">\(u\)</span> . $$ \begin{aligned} &amp;-=u_1'-u_1=,u_2'-u_2=,, u'<em>k-u</em>{k}=\ &amp;u_i=u'<em>{i-1}\ &amp;l_i=l'</em>{i-1}-d_i h_i=h_{i-1}-d_{i-1}u'_{i-1}\</p>
-<p>\end{aligned} $$</p>
-<h2 id="光束限制">5. 光束限制</h2>
-<h3 id="孔径光阑">孔径光阑</h3>
-<p>限制孔径角</p>
-<h3 id="视场光阑">视场光阑</h3>
-<p>限制视场角</p>
-<h3 id="渐晕光阑">渐晕光阑</h3>
-<p>拦轴外光</p>
-<h3 id="景深">景深</h3>
-<p>见课本</p>
-<h2 id="光度学基础">6. 光度学基础</h2>
-<h3 id="基本术语">基本术语</h3>
-<ul>
-<li>以电磁辐射形式发射、传输或接收的能量：辐射能 <span class="math inline">\(Q_e\)</span></li>
-<li><p>单位时间内发射、传输或接收的辐射能：辐射通量 / 辐射功率 <span class="math inline">\(\Phi_e\)</span></p></li>
-<li><p>辐射通量中人眼能感受到的部分：光通量 <span class="math inline">\(\Phi_v\)</span> （单位为流明 lm ）</p></li>
-<li>某一方向上单位立体角的光通量：发光强度 <span class="math inline">\(I_v\)</span> （单位为坎德拉 cd ）</li>
-<li>（垂直方向）单位面积接受的光通量：光照度 <span class="math inline">\(E_v\)</span> (单位为勒克斯 lx )</li>
-<li>（垂直方向）单位面积发出的光通量：光出射度 <span class="math inline">\(M_v\)</span></li>
-<li><p>光源发光投影到某一方向上单位面积的发光强度：光亮度 <span class="math inline">\(L_v\)</span> （单位为尼特 nt ）</p></li>
+<p>顺着光路走下去。关键是一步一步地求 $h$ 和 $u$ .</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\frac{1}{l'}-\frac{1}{l}=\frac{1}{f'}\implies u_1'-u_1=\frac{h_1}{f_1'},u_2'-u_2=\frac{h_2}{f_2'},\cdots, u'_k-u_{k}=\frac{h_k}{f'_k}\\
+&u_i=u'_{i-1}\\
+&l_i=l'_{i-1}-d_i \implies h_i=h_{i-1}-d_{i-1}u'_{i-1}\\
+
+
+\end{aligned}</script><h2 id="5-光束限制"><a href="#5-光束限制" class="headerlink" title="5. 光束限制"></a>5. 光束限制</h2><h3 id="孔径光阑"><a href="#孔径光阑" class="headerlink" title="孔径光阑"></a>孔径光阑</h3><p>限制孔径角</p>
+<h3 id="视场光阑"><a href="#视场光阑" class="headerlink" title="视场光阑"></a>视场光阑</h3><p>限制视场角</p>
+<h3 id="渐晕光阑"><a href="#渐晕光阑" class="headerlink" title="渐晕光阑"></a>渐晕光阑</h3><p>拦轴外光</p>
+<h3 id="景深"><a href="#景深" class="headerlink" title="景深"></a>景深</h3><p>见课本</p>
+<h2 id="6-光度学基础"><a href="#6-光度学基础" class="headerlink" title="6. 光度学基础"></a>6. 光度学基础</h2><h3 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h3><ul>
+<li>以电磁辐射形式发射、传输或接收的能量：辐射能 $Q_e$</li>
+<li><p>单位时间内发射、传输或接收的辐射能：辐射通量 / 辐射功率 $\Phi_e$</p>
+</li>
+<li><p>辐射通量中人眼能感受到的部分：光通量 $\Phi_v$ （单位为流明 lm ）</p>
+</li>
+<li><p>某一方向上单位立体角的光通量：发光强度 $I_v$ （单位为坎德拉 cd ）</p>
+</li>
+<li>（垂直方向）单位面积接受的光通量：光照度 $E_v$  (单位为勒克斯 lx )</li>
+<li>（垂直方向）单位面积发出的光通量：光出射度 $M_v$</li>
+<li>光源发光投影到某一方向上单位面积的发光强度：光亮度 $L_v$  （单位为尼特 nt ）</li>
 </ul>
 <p>理解：光照度表征表面接受的光的性质；光亮度表征光源的发光性质，用立体角度量，而且是单位面积，是一个比光出射度更好的光源发光性质描述。</p>
-<h3 id="辅助量和联系量">辅助量和联系量</h3>
-<ul>
-<li>立体角
-<ul>
-<li><span class="math inline">\(\Omega=\displaystyle\frac{S}{r^2}\)</span></li>
-<li><span class="math inline">\(d \Omega=\sin i \cdot di\cdot d\phi\)</span></li>
-<li><span class="math inline">\(\Omega=\displaystyle\iint_S \sin i did\phi=(\phi_{\max}-\phi_{\min})(\cos i_{\min}-\cos i_{\max})\)</span></li>
-<li>平面孔径角 <span class="math inline">\(U\)</span>, <span class="math inline">\(\Omega=\displaystyle\int_0^{2\pi}d\phi\int_0^U\sin i di=4\pi \sin^2\left(\frac U 2\right)\approx \pi u^2\)</span></li>
-</ul></li>
-<li><p>光谱光视效率 / 视见函数 <span class="math inline">\(V(\lambda)\)</span></p>
-<p>​ 反映人眼的光谱灵敏度，表示人眼对不同波长辐射对敏感度差异。</p>
-<p>​ 和辐射通量直接的换算： <span class="math inline">\(1W\)</span>（辐射通量）<span class="math inline">\(=683\cdot V(\lambda)\)</span> lm</p></li>
-<li><p>发光效率 <span class="math inline">\(\eta\)</span></p>
-<p>​ 辐射体发出的总光通量与该光源的耗电功率之比。</p>
-<p>​ <span class="math inline">\(\eta=\displaystyle\frac{\Phi_v}{P}\)</span></p></li>
+<h3 id="辅助量和联系量"><a href="#辅助量和联系量" class="headerlink" title="辅助量和联系量"></a>辅助量和联系量</h3><ul>
+<li>立体角<ul>
+<li>$\Omega=\displaystyle\frac{S}{r^2}$</li>
+<li>$d \Omega=\sin i \cdot di\cdot d\phi$</li>
+<li>$\Omega=\displaystyle\iint_S \sin i did\phi=(\phi_{\max}-\phi_{\min})(\cos i_{\min}-\cos i_{\max})$</li>
+<li>平面孔径角 $U$, $\Omega=\displaystyle\int_0^{2\pi}d\phi\int_0^U\sin i di=4\pi \sin^2\left(\frac U 2\right)\approx \pi u^2$</li>
 </ul>
-<h3 id="重要关系">重要关系</h3>
-<ul>
-<li><p>光亮度 : <span class="math inline">\(L_v=\displaystyle\frac{I_v}{dA\cos i}=\frac{d\Phi_v}{d\Omega dA\cos i}\)</span></p></li>
-<li><p>朗伯辐射体且面积为 <span class="math inline">\(A\)</span> : <span class="math inline">\(I_N=L_vA\)</span></p></li>
-<li><p>朗伯辐射体已知光出射度或二次辐射源 : <span class="math display">\[
-L_v=\frac{M_v}{\pi}=\frac{\rho E_v}{\pi}
-\]</span></p></li>
+</li>
 </ul>
-<h3 id="基本定律">基本定律</h3>
-<h4 id="朗伯定律">朗伯定律</h4>
-<p>一个光亮度再各个方向上均相等的发光面源（朗伯辐射体），在某一方向上的发光强度等于该面元法线方向上的发光强度与方向角余弦之积。 <span class="math display">\[
-I_i=I_N\cos i
-\]</span></p>
 <ul>
-<li><p>朗伯辐射体在孔径角 <span class="math inline">\(U\)</span> 范围内发出的光通量 <span class="math display">\[
+<li><p>光谱光视效率 / 视见函数 $V(\lambda)$</p>
+<p>​        反映人眼的光谱灵敏度，表示人眼对不同波长辐射对敏感度差异。</p>
+<p>​        和辐射通量直接的换算： $1W$（辐射通量）$=683\cdot V(\lambda)$ lm</p>
+</li>
+</ul>
+<ul>
+<li><p>发光效率 $\eta$</p>
+<p>​        辐射体发出的总光通量与该光源的耗电功率之比。</p>
+<p>​        $\eta=\displaystyle\frac{\Phi_v}{P}$</p>
+</li>
+</ul>
+<h3 id="重要关系"><a href="#重要关系" class="headerlink" title="重要关系"></a>重要关系</h3><ul>
+<li><p>光亮度 : $L_v=\displaystyle\frac{I_v}{dA\cos i}=\frac{d\Phi_v}{d\Omega dA\cos i}$</p>
+</li>
+<li><p>朗伯辐射体且面积为 $A$ : $I_N=L_vA$</p>
+</li>
+<li><p>朗伯辐射体已知光出射度或二次辐射源 : </p>
+<script type="math/tex; mode=display">
+L_v=\frac{M_v}{\pi}=\frac{\rho E_v}{\pi}</script></li>
+</ul>
+<h3 id="基本定律"><a href="#基本定律" class="headerlink" title="基本定律"></a>基本定律</h3><h4 id="朗伯定律"><a href="#朗伯定律" class="headerlink" title="朗伯定律"></a>朗伯定律</h4><p>一个光亮度再各个方向上均相等的发光面源（朗伯辐射体），在某一方向上的发光强度等于该面元法线方向上的发光强度与方向角余弦之积。</p>
+<script type="math/tex; mode=display">
+I_i=I_N\cos i</script><ul>
+<li><p>朗伯辐射体在孔径角 $U$ 范围内发出的光通量</p>
+<script type="math/tex; mode=display">
 \begin{align}
-d\Phi_v&amp;=L_v\cos i dAd\Omega\notag \\
-\implies \Phi_v&amp;=\int_0^{2\pi}d\phi\int_0^UL_v\sin i\cos idA di\notag \\
-&amp;=\pi L_v\sin^2 U dA\\
-&amp;=\pi I\sin^2 U(?)
-\end{align} 
-\]</span></p></li>
-<li><p>孔径角为 <span class="math inline">\(\displaystyle \frac \pi 2\)</span> 时（平面），<span class="math inline">\(L_v=\displaystyle \frac{\Phi_v }{\pi dA}=\frac{M_v}{\pi}\)</span></p></li>
+d\Phi_v&=L_v\cos i dAd\Omega\notag \\
+\implies \Phi_v&=\int_0^{2\pi}d\phi\int_0^UL_v\sin i\cos idA di\notag \\
+&=\pi L_v\sin^2 U dA\\
+&=\pi I\sin^2 U(?)
+\end{align}</script></li>
+<li><p>孔径角为 $\displaystyle \frac \pi 2$ 时（平面），$L_v=\displaystyle \frac{\Phi_v }{\pi dA}=\frac{M_v}{\pi}$</p>
+</li>
 </ul>
-<h4 id="距离平方反比定律">距离平方反比定律</h4>
-<p>点光源直接照射表面时，受照面光照度为 <span class="math display">\[
-E_v=\frac{I_v}{r^2}
-\]</span></p>
-<h4 id="照度余弦定则">照度余弦定则</h4>
-<p>光源不垂直于照明面元时的光照度为 <span class="math display">\[
-E_v=\frac{I_0\cos i}{r^2}=E_v\cos i
-\]</span></p>
-<h3 id="光束光亮度的传递">光束光亮度的传递</h3>
-<ul>
+<h4 id="距离平方反比定律"><a href="#距离平方反比定律" class="headerlink" title="距离平方反比定律"></a>距离平方反比定律</h4><p>点光源直接照射表面时，受照面光照度为</p>
+<script type="math/tex; mode=display">
+E_v=\frac{I_v}{r^2}</script><h4 id="照度余弦定则"><a href="#照度余弦定则" class="headerlink" title="照度余弦定则"></a>照度余弦定则</h4><p>光源不垂直于照明面元时的光照度为</p>
+<script type="math/tex; mode=display">
+E_v=\frac{I_0\cos i}{r^2}=E_v\cos i</script><h3 id="光束光亮度的传递"><a href="#光束光亮度的传递" class="headerlink" title="光束光亮度的传递"></a>光束光亮度的传递</h3><ul>
 <li>面光源照射时受照表面的光照度</li>
 </ul>
-<p><span class="math display">\[
-E_v=\frac{L_v d S_1\cos i_1\cos i_2}{r^2}
-\]</span></p>
-<p><span class="math inline">\(i_1,i_2\)</span> 分别为两面法线与距离 <span class="math inline">\(\vec r\)</span> 直接的夹角。</p>
+<script type="math/tex; mode=display">
+E_v=\frac{L_v d S_1\cos i_1\cos i_2}{r^2}</script><p>$i_1,i_2$ 分别为两面法线与距离  $\vec r$ 直接的夹角。</p>
 <ul>
-<li><p>光在无损介质中传播时，各截面上的光亮度相等。</p></li>
-<li><p>不同介质分界面上光束的传递 :</p></li>
+<li><p>光在无损介质中传播时，各截面上的光亮度相等。</p>
+</li>
+<li><p>不同介质分界面上光束的传递 :</p>
+</li>
 </ul>
-<p>$$ <span class="math display">\[\begin{align}
-  \rho&amp;\approx\left(\frac{n&#39;-n}{n&#39;+n}\right)^2,\tau=1-\rho\\
-  L_r&amp;=\rho L_i\\
-  L_t&amp;=\left(\frac{n&#39;}{n}\right)^2\tau L_i
-
-
-  \end{align}\]</span> $$</p>
-<h3 id="光学成像系统的像面照度">光学成像系统的像面照度</h3>
-<h4 id="轴上像点">轴上像点</h4>
-<p><span class="math display">\[
+<script type="math/tex; mode=display">
 \begin{align}
-E_0&#39;&amp;=\frac{\Phi_v&#39;}{dS&#39;}=\tau \frac{\pi L_v \sin^2 U dS}{dS&#39;}\\
-&amp;=\frac{1}{\beta^2}\tau \pi L_v\sin^2 U &amp;\text{(物空间)}\\
-&amp;=\left(\frac{n&#39;}{n}\right)^2\tau\pi L_v\sin^2 U&#39; &amp;\text{(像空间)}\\
-\end{align}
-\]</span></p>
-<p>其中用到正弦关系：<span class="math inline">\(ny\sin U=n’y’\sin U&#39;\)</span></p>
-<h4 id="轴外像点">轴外像点</h4>
-<p>设轴外像点 <span class="math inline">\(B’\)</span> 的像方视场角（对出瞳的张角）为 <span class="math inline">\(\omega&#39;\)</span> $$ <span class="math display">\[\begin{align}
-\sin U_B&#39;&amp;\approx \sin U&#39;\cos ^2\omega\\
-E_B&#39;&amp;=E_0\cos^4\omega&#39;
+  \rho&\approx\left(\frac{n'-n}{n'+n}\right)^2,\tau=1-\rho\\
+  L_r&=\rho L_i\\
+  L_t&=\left(\frac{n'}{n}\right)^2\tau L_i
 
-\end{align}\]</span> $$</p>
-<h2 id="像差">7. 像差</h2>
-<h3 id="概念">概念</h3>
-<p>宽光束像差：球差、彗差</p>
+
+  \end{align}</script><h3 id="光学成像系统的像面照度"><a href="#光学成像系统的像面照度" class="headerlink" title="光学成像系统的像面照度"></a>光学成像系统的像面照度</h3><h4 id="轴上像点"><a href="#轴上像点" class="headerlink" title="轴上像点"></a>轴上像点</h4><script type="math/tex; mode=display">
+\begin{align}
+E_0'&=\frac{\Phi_v'}{dS'}=\tau \frac{\pi L_v \sin^2 U dS}{dS'}\\
+&=\frac{1}{\beta^2}\tau \pi L_v\sin^2 U &\text{(物空间)}\\
+&=\left(\frac{n'}{n}\right)^2\tau\pi L_v\sin^2 U' &\text{(像空间)}\\
+\end{align}</script><p>其中用到正弦关系：$ny\sin U=n’y’\sin U’$</p>
+<h4 id="轴外像点"><a href="#轴外像点" class="headerlink" title="轴外像点"></a>轴外像点</h4><p>设轴外像点 $B’$ 的像方视场角（对出瞳的张角）为 $\omega’$</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\sin U_B'&\approx \sin U'\cos ^2\omega\\
+E_B'&=E_0\cos^4\omega'
+
+\end{align}</script><h2 id="7-像差"><a href="#7-像差" class="headerlink" title="7. 像差"></a>7. 像差</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>宽光束像差：球差、彗差</p>
 <p>细光束像差：像散、场曲、畸变、位置色差、倍率色差</p>
 <p>多看书。</p>
-<h3 id="消像差">消像差</h3>
-<ul>
+<h3 id="消像差"><a href="#消像差" class="headerlink" title="消像差"></a>消像差</h3><ul>
 <li>消球差：齐明透镜。球心和齐明点共点</li>
 <li>消其他像差：共球心透镜。（孔径光阑放到球心处）</li>
 </ul>
-<h2 id="典型光学系统">8. 典型光学系统</h2>
-<h3 id="眼睛">眼睛</h3>
-<ul>
+<h2 id="8-典型光学系统"><a href="#8-典型光学系统" class="headerlink" title="8. 典型光学系统"></a>8. 典型光学系统</h2><h3 id="眼睛"><a href="#眼睛" class="headerlink" title="眼睛"></a>眼睛</h3><ul>
 <li>近点、远点</li>
 <li>体视</li>
 </ul>
-<h3 id="显微镜">显微镜</h3>
-<ul>
-<li><span class="math inline">\(L,\beta,x,f\)</span> 之间的公式的灵活运用</li>
-<li>物体经显微物镜成像到目镜物方焦面，<span class="math inline">\(x’=\Delta\)</span></li>
+<h3 id="显微镜"><a href="#显微镜" class="headerlink" title="显微镜"></a>显微镜</h3><ul>
+<li>$L,\beta,x,f$ 之间的公式的灵活运用</li>
+<li>物体经显微物镜成像到目镜物方焦面，$x’=\Delta$</li>
 <li>放大率、有效放大率</li>
 <li>调节范围</li>
 <li>分辨率</li>
 <li>照明系统：临界照明、柯拉照明（理解共轭关系）</li>
 </ul>
-<h3 id="望远镜">望远镜</h3>
-<ul>
+<h3 id="望远镜"><a href="#望远镜" class="headerlink" title="望远镜"></a>望远镜</h3><ul>
 <li>开普勒望远镜和伽利略望远镜以及不同的光束限制关系</li>
 <li>加入转像系统（单组、双组）</li>
 <li>几何焦深</li>
 </ul>
-<h3 id="放映系统">放映系统</h3>
-<ul>
+<h3 id="放映系统"><a href="#放映系统" class="headerlink" title="放映系统"></a>放映系统</h3><ul>
 <li>光源— 聚光镜、图片— 放映物镜、光源像— 像面</li>
-<li>利用图片大小之间的关系可以得到 <span class="math inline">\(\beta\)</span> , 进而求出其他</li>
+<li>利用图片大小之间的关系可以得到 $\beta$ , 进而求出其他</li>
 <li>照度</li>
 </ul>
 <p>重要的事情：</p>
-<h1 id="应用光学实验">应用光学实验</h1>
-<h2 id="手机摄像头焦距测量">手机摄像头焦距测量</h2>
-<h3 id="通用知识手机">通用知识（手机）</h3>
-<ul>
-<li><p>手机摄像头近似认为是薄透镜</p></li>
-<li><p>视场光阑：CMOS光敏面最外面一圈</p></li>
-<li><p>一般手机数值孔径：广角～1.8，数值越小难度越大；长焦～2.4，大的到2.8</p></li>
-<li><p>一般手机焦距： 4～6mm</p></li>
+<h1 id="应用光学实验"><a href="#应用光学实验" class="headerlink" title="应用光学实验"></a>应用光学实验</h1><h2 id="手机摄像头焦距测量"><a href="#手机摄像头焦距测量" class="headerlink" title="手机摄像头焦距测量"></a>手机摄像头焦距测量</h2><h3 id="通用知识（手机）"><a href="#通用知识（手机）" class="headerlink" title="通用知识（手机）"></a>通用知识（手机）</h3><ul>
+<li><p>手机摄像头近似认为是薄透镜</p>
+</li>
+<li><p>视场光阑：CMOS光敏面最外面一圈</p>
+</li>
+<li><p>一般手机数值孔径：广角～1.8，数值越小难度越大；长焦～2.4，大的到2.8</p>
+</li>
+<li><p>一般手机焦距： 4～6mm</p>
+</li>
 <li><p>等效焦距</p>
 <ul>
-<li><p>同样焦距的镜头，在不同尺寸的感光元件上，成像视角不同，仅以镜头的物理焦距，无法比较不同相机的成像范围（视场角）。</p></li>
-<li><p>为了便于比较，人们习惯将不同尺寸感光元件上成像的视角，转化为 <em>36 x 24 mm 全画幅感光元件上同样成像视角所对应的镜头焦距</em>，这个转化后的焦距就是等效焦距</p></li>
-<li><p>物理焦距 <span class="math inline">\(\times\)</span> 转换系数 <span class="math inline">\(=\)</span> 等效焦距，</p>
-<p>其中 转换系数 <span class="math inline">\(=\)</span> 43.27 ( 全画幅对角线长) <span class="math inline">\(/\)</span> 传感器光面对角线长</p></li>
-<li><p>手机的等效焦距有个坑，1英寸手机厂商这里是 16 mm ，而不是 25.4 mm</p></li>
-</ul></li>
+<li><p>同样焦距的镜头，在不同尺寸的感光元件上，成像视角不同，仅以镜头的物理焦距，无法比较不同相机的成像范围（视场角）。</p>
+</li>
+<li><p>为了便于比较，人们习惯将不同尺寸感光元件上成像的视角，转化为 <em>36 x 24 mm 全画幅感光元件上同样成像视角所对应的镜头焦距</em>，这个转化后的焦距就是等效焦距</p>
+</li>
+<li><p>物理焦距 $\times$ 转换系数 $=$ 等效焦距，</p>
+<p>其中 转换系数 $=$ 43.27 ( 全画幅对角线长) $/$ 传感器光面对角线长</p>
+</li>
+<li><p>手机的等效焦距有个坑，1英寸手机厂商这里是 16 mm ，而不是 25.4 mm</p>
+</li>
 </ul>
-<h3 id="iphone-x-实验手机">iPhone X (实验手机)</h3>
-<ul>
+</li>
+</ul>
+<h3 id="iPhone-X-实验手机"><a href="#iPhone-X-实验手机" class="headerlink" title="iPhone X (实验手机)"></a>iPhone X (实验手机)</h3><ul>
 <li><p>iPhone X 后置摄像头</p>
 <ul>
 <li>主摄：广角 $F/1.8 $</li>
-<li>副摄：长焦 <span class="math inline">\(F/2.4\)</span></li>
-</ul></li>
-<li><p>CMOS : IMX385 1.22 µm</p></li>
-<li><p>正常拍照模式下一倍变焦用的是广角镜头，二倍变焦用的长焦镜头，人像模式下是两个镜头同时使用，后台计算像场和景深。另外，<strong>长焦镜头使用了更小的光圈，因此需要更多的光线</strong>，苹果让 iPhone 自己来判定光线是否足够，从而启动长焦镜头。</p></li>
+<li>副摄：长焦 $F/2.4$</li>
+</ul>
+</li>
+<li><p>CMOS : IMX385 1.22 µm</p>
+</li>
+<li><p>正常拍照模式下一倍变焦用的是广角镜头，二倍变焦用的长焦镜头，人像模式下是两个镜头同时使用，后台计算像场和景深。另外，<strong>长焦镜头使用了更小的光圈，因此需要更多的光线</strong>，苹果让 iPhone 自己来判定光线是否足够，从而启动长焦镜头。</p>
+</li>
 <li><p>物方视场角 FOV：视场角分物方视场角和像方视场角。一般光学设备的使用者关心的是物方视场角。</p>
-<p>对于大多数光学仪器,视场角的度量都是以成像物的直径作为视场角计算的。</p></li>
-<li><p>光瞳直径 <span class="math inline">\(=\)</span> 焦距 <span class="math inline">\(/\)</span> 光圈数 <span class="math inline">\(F\)</span></p></li>
+<p>对于大多数光学仪器,视场角的度量都是以成像物的直径作为视场角计算的。</p>
+</li>
+<li><p>光瞳直径 $=$ 焦距 $/$ 光圈数 $F$</p>
+</li>
 </ul>
-<h3 id="实验方法">实验方法</h3>
-<ul>
-<li><p>找一张白纸，用直尺画上一条直线，我画的是 150 mm <span class="math inline">\(\implies l=-150\)</span></p></li>
-<li><p>直线一端直立放一把尺子，另一端放手机</p></li>
-<li><p>一倍正常拍摄一张，用的是主（广角）镜头；二倍数字变焦放大拍摄一张，用的是副（长焦）镜头</p></li>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><ul>
+<li><p>找一张白纸，用直尺画上一条直线，我画的是 150 mm $\implies l=-150$</p>
+</li>
+<li><p>直线一端直立放一把尺子，另一端放手机</p>
+</li>
+<li><p>一倍正常拍摄一张，用的是主（广角）镜头；二倍数字变焦放大拍摄一张，用的是副（长焦）镜头</p>
+</li>
 <li><p>隔空投送到电脑上，用 PhotoShop 寻找尺子 1cm～2cm 的像素距离。</p>
-<p>具体方法为：Ctrl+R 出现横纵坐标轴，在坐标轴上右键选像素，变成像素坐标。在 1cm～2cm 画一个矩形，记录像素距离</p></li>
-<li><p>查找 CMOS 传感器的 unit cell （比如 IMX363 2.4 µm 一个像素点）, 计算实际像高</p></li>
-<li><p>由 <span class="math inline">\(\displaystyle \beta=\frac{y’}{y}=\frac{l’}{l}\)</span> 得到像距 <span class="math inline">\(l’\)</span> ，有了 <span class="math inline">\(l’\)</span> 其他的都可以算了</p></li>
-<li><p>焦距 <span class="math inline">\(f’=\displaystyle\frac{1}{1/l’-1/l}\)</span> （高斯公式）</p></li>
-<li><p>光瞳直径 <span class="math inline">\(\displaystyle D=\frac{f’}{F}\)</span> ，<span class="math inline">\(F\)</span> 为光圈数</p></li>
-<li><p>物方视场角 <span class="math inline">\(\displaystyle FOV=2\arctan\left(\frac{d/2}{l&#39;}\right)\)</span> 其中 <span class="math inline">\(d\)</span> 为传感器对角线长</p></li>
+<p>具体方法为：Ctrl+R 出现横纵坐标轴，在坐标轴上右键选像素，变成像素坐标。在 1cm～2cm 画一个矩形，记录像素距离</p>
+</li>
+<li><p>查找 CMOS 传感器的 unit cell （比如 IMX363 2.4 µm 一个像素点）, 计算实际像高</p>
+</li>
+<li><p>由 $\displaystyle \beta=\frac{y’}{y}=\frac{l’}{l}$ 得到像距 $l’$ ，有了 $l’$ 其他的都可以算了</p>
+</li>
+<li><p>焦距 $f’=\displaystyle\frac{1}{1/l’-1/l}$ （高斯公式）</p>
+</li>
+<li><p>光瞳直径 $\displaystyle D=\frac{f’}{F}$  ，$F$ 为光圈数</p>
+</li>
+<li><p>物方视场角 $\displaystyle FOV=2\arctan\left(\frac{d/2}{l’}\right)$  其中 $d$ 为传感器对角线长</p>
+</li>
 </ul>
-<h3 id="实验代码">实验代码</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_l1</span><span class="params">(px, unit, y=<span class="number">10</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 计算像高y1,像距l1</span></span><br><span class="line">    l = <span class="number">150</span></span><br><span class="line">    y1 = px * unit / <span class="number">1000</span></span><br><span class="line">    beta = y1 / y</span><br><span class="line">    l1 = beta * l</span><br><span class="line">    <span class="keyword">return</span> y1, l1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_f</span><span class="params">(l1, l)</span>:</span></span><br><span class="line">        <span class="comment"># 计算焦距</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> / l1 + <span class="number">1</span> / l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_diaglen</span><span class="params">(x, y)</span>:</span></span><br><span class="line">        <span class="comment"># 获得对角线长度</span></span><br><span class="line">    <span class="keyword">return</span> np.sqrt(x**<span class="number">2</span> + y**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_FOV</span><span class="params">(diag, l1)</span>:</span></span><br><span class="line">        <span class="comment"># 计算物方视场角</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * np.arctan(diag / <span class="number">2</span> / l1) * <span class="number">180</span> / np.pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_D</span><span class="params">(f, F)</span>:</span></span><br><span class="line">        <span class="comment"># 获得光瞳直径</span></span><br><span class="line">    <span class="keyword">return</span> f / F</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">r</span><span class="params">(x, N=<span class="number">4</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 保留四位小数</span></span><br><span class="line">    <span class="keyword">return</span> round(x, N)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">px1 = <span class="number">237</span></span><br><span class="line">px2 = <span class="number">432</span></span><br><span class="line">F1 = <span class="number">1.8</span></span><br><span class="line">F2 = <span class="number">2.4</span></span><br><span class="line">unit = <span class="number">1.22</span></span><br><span class="line">l = <span class="number">150</span></span><br><span class="line">diag = <span class="number">6.15</span></span><br><span class="line">trans = <span class="number">43.27</span> / diag</span><br><span class="line"></span><br><span class="line">y1, l1 = get_l1(px1, unit)</span><br><span class="line">y2, l2 = get_l1(px2, unit)</span><br><span class="line">f1 = get_f(l1, l)</span><br><span class="line">f2 = get_f(l2, l)</span><br><span class="line">D1 = get_D(f1, F1)</span><br><span class="line">D2 = get_D(f2, F2)</span><br><span class="line">FOV1 = get_FOV(diag, l1)</span><br><span class="line">FOV2 = get_FOV(diag, l2)</span><br><span class="line"><span class="comment"># diag = get_diaglen(5.21, 6.29)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print('传感器对角线长：', round(diag, 4))</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'--广角--'</span>)</span><br><span class="line">print(<span class="string">'焦距：'</span>, r(f1))</span><br><span class="line">print(<span class="string">'等效焦距'</span>, r(trans * f1))</span><br><span class="line">print(<span class="string">'物方视场角：'</span>, r(FOV1))</span><br><span class="line">print(<span class="string">'光瞳直径: '</span>, r(D1))</span><br><span class="line">print()</span><br><span class="line">print(<span class="string">'--长焦--'</span>)</span><br><span class="line">print(<span class="string">'焦距：'</span>, r(f2))</span><br><span class="line">print(<span class="string">'等效焦距'</span>, r(trans * f2))</span><br><span class="line">print(<span class="string">'物方视场角：'</span>, r(FOV2))</span><br><span class="line">print(<span class="string">'光瞳直径: '</span>, r(D2))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_err</span><span class="params">(y1)</span>:</span></span><br><span class="line">    l0 = <span class="number">1</span> / (<span class="number">1</span> / <span class="number">4</span> - <span class="number">1</span> / <span class="number">150</span>)</span><br><span class="line">    y0 = <span class="number">10</span> * l0 / <span class="number">150</span>  <span class="comment"># 10mm原像,150物距</span></span><br><span class="line">    <span class="keyword">return</span> np.abs(y0 - y1) / y0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print()</span><br><span class="line">print(<span class="string">'--误差计算--'</span>)</span><br><span class="line"></span><br><span class="line">err_y = get_err(y1)</span><br><span class="line">print(<span class="string">'像高误差-主镜头:'</span>, r(err_y) * <span class="number">100</span>, <span class="string">'%'</span>)</span><br><span class="line">print(<span class="string">'焦距误差-主镜头'</span>, r(np.abs((f1 - <span class="number">4.0</span>)) / <span class="number">4.0</span>) * <span class="number">100</span>, <span class="string">'%'</span>)</span><br><span class="line">beta1 = l1 / l</span><br><span class="line">print()</span><br><span class="line">print(<span class="string">'--放大倍率计算--'</span>)</span><br><span class="line">print(<span class="string">'横向放大倍率'</span>, r(beta1))</span><br><span class="line">print(<span class="string">'显示图像放大倍率'</span>, r(<span class="number">143.6</span> / (beta1 * <span class="number">10</span>)))</span><br></pre></td></tr></table></figure>
-<h5 id="结果">结果</h5>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">--广角--</span><br><span class="line">焦距： <span class="number">4.2152</span></span><br><span class="line">等效焦距 <span class="number">29.6573</span></span><br><span class="line">物方视场角： <span class="number">70.6732</span></span><br><span class="line">光瞳直径:  <span class="number">2.3418</span></span><br><span class="line"></span><br><span class="line">--长焦--</span><br><span class="line">焦距： <span class="number">7.5098</span></span><br><span class="line">等效焦距 <span class="number">52.8373</span></span><br><span class="line">物方视场角： <span class="number">42.5086</span></span><br><span class="line">光瞳直径:  <span class="number">3.1291</span></span><br><span class="line"></span><br><span class="line">--误差计算--</span><br><span class="line">像高误差-主镜头: <span class="number">5.54</span> %</span><br><span class="line">焦距误差-主镜头 <span class="number">5.38</span> %</span><br><span class="line"></span><br><span class="line">--放大倍率计算--</span><br><span class="line">横向放大倍率 <span class="number">0.0289</span></span><br><span class="line">显示图像放大倍率 <span class="number">496.6452</span></span><br></pre></td></tr></table></figure>
-<h2 id="利用单反相机测量光度学参数">利用单反相机测量光度学参数</h2>
-<ol type="1">
-<li><p>相机没有镜头无法成像，相机的光学传感器需要一个实像。</p></li>
-<li><p>灰度值与亮度</p></li>
-<li><p><span class="math inline">\(\gamma\)</span> 矫正：</p>
+<h3 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_l1</span><span class="params">(px, unit, y=<span class="number">10</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 计算像高y1,像距l1</span></span><br><span class="line">    l = <span class="number">150</span></span><br><span class="line">    y1 = px * unit / <span class="number">1000</span></span><br><span class="line">    beta = y1 / y</span><br><span class="line">    l1 = beta * l</span><br><span class="line">    <span class="keyword">return</span> y1, l1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_f</span><span class="params">(l1, l)</span>:</span></span><br><span class="line">        <span class="comment"># 计算焦距</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> / l1 + <span class="number">1</span> / l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_diaglen</span><span class="params">(x, y)</span>:</span></span><br><span class="line">        <span class="comment"># 获得对角线长度</span></span><br><span class="line">    <span class="keyword">return</span> np.sqrt(x**<span class="number">2</span> + y**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_FOV</span><span class="params">(diag, l1)</span>:</span></span><br><span class="line">        <span class="comment"># 计算物方视场角</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * np.arctan(diag / <span class="number">2</span> / l1) * <span class="number">180</span> / np.pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_D</span><span class="params">(f, F)</span>:</span></span><br><span class="line">        <span class="comment"># 获得光瞳直径</span></span><br><span class="line">    <span class="keyword">return</span> f / F</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">r</span><span class="params">(x, N=<span class="number">4</span>)</span>:</span></span><br><span class="line">        <span class="comment"># 保留四位小数</span></span><br><span class="line">    <span class="keyword">return</span> round(x, N)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">px1 = <span class="number">237</span></span><br><span class="line">px2 = <span class="number">432</span></span><br><span class="line">F1 = <span class="number">1.8</span></span><br><span class="line">F2 = <span class="number">2.4</span></span><br><span class="line">unit = <span class="number">1.22</span></span><br><span class="line">l = <span class="number">150</span></span><br><span class="line">diag = <span class="number">6.15</span></span><br><span class="line">trans = <span class="number">43.27</span> / diag</span><br><span class="line"></span><br><span class="line">y1, l1 = get_l1(px1, unit)</span><br><span class="line">y2, l2 = get_l1(px2, unit)</span><br><span class="line">f1 = get_f(l1, l)</span><br><span class="line">f2 = get_f(l2, l)</span><br><span class="line">D1 = get_D(f1, F1)</span><br><span class="line">D2 = get_D(f2, F2)</span><br><span class="line">FOV1 = get_FOV(diag, l1)</span><br><span class="line">FOV2 = get_FOV(diag, l2)</span><br><span class="line"><span class="comment"># diag = get_diaglen(5.21, 6.29)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print('传感器对角线长：', round(diag, 4))</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'--广角--'</span>)</span><br><span class="line">print(<span class="string">'焦距：'</span>, r(f1))</span><br><span class="line">print(<span class="string">'等效焦距'</span>, r(trans * f1))</span><br><span class="line">print(<span class="string">'物方视场角：'</span>, r(FOV1))</span><br><span class="line">print(<span class="string">'光瞳直径: '</span>, r(D1))</span><br><span class="line">print()</span><br><span class="line">print(<span class="string">'--长焦--'</span>)</span><br><span class="line">print(<span class="string">'焦距：'</span>, r(f2))</span><br><span class="line">print(<span class="string">'等效焦距'</span>, r(trans * f2))</span><br><span class="line">print(<span class="string">'物方视场角：'</span>, r(FOV2))</span><br><span class="line">print(<span class="string">'光瞳直径: '</span>, r(D2))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_err</span><span class="params">(y1)</span>:</span></span><br><span class="line">    l0 = <span class="number">1</span> / (<span class="number">1</span> / <span class="number">4</span> - <span class="number">1</span> / <span class="number">150</span>)</span><br><span class="line">    y0 = <span class="number">10</span> * l0 / <span class="number">150</span>  <span class="comment"># 10mm原像,150物距</span></span><br><span class="line">    <span class="keyword">return</span> np.abs(y0 - y1) / y0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print()</span><br><span class="line">print(<span class="string">'--误差计算--'</span>)</span><br><span class="line"></span><br><span class="line">err_y = get_err(y1)</span><br><span class="line">print(<span class="string">'像高误差-主镜头:'</span>, r(err_y) * <span class="number">100</span>, <span class="string">'%'</span>)</span><br><span class="line">print(<span class="string">'焦距误差-主镜头'</span>, r(np.abs((f1 - <span class="number">4.0</span>)) / <span class="number">4.0</span>) * <span class="number">100</span>, <span class="string">'%'</span>)</span><br><span class="line">beta1 = l1 / l</span><br><span class="line">print()</span><br><span class="line">print(<span class="string">'--放大倍率计算--'</span>)</span><br><span class="line">print(<span class="string">'横向放大倍率'</span>, r(beta1))</span><br><span class="line">print(<span class="string">'显示图像放大倍率'</span>, r(<span class="number">143.6</span> / (beta1 * <span class="number">10</span>)))</span><br></pre></td></tr></table></figure>
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">--广角--</span><br><span class="line">焦距： <span class="number">4.2152</span></span><br><span class="line">等效焦距 <span class="number">29.6573</span></span><br><span class="line">物方视场角： <span class="number">70.6732</span></span><br><span class="line">光瞳直径:  <span class="number">2.3418</span></span><br><span class="line"></span><br><span class="line">--长焦--</span><br><span class="line">焦距： <span class="number">7.5098</span></span><br><span class="line">等效焦距 <span class="number">52.8373</span></span><br><span class="line">物方视场角： <span class="number">42.5086</span></span><br><span class="line">光瞳直径:  <span class="number">3.1291</span></span><br><span class="line"></span><br><span class="line">--误差计算--</span><br><span class="line">像高误差-主镜头: <span class="number">5.54</span> %</span><br><span class="line">焦距误差-主镜头 <span class="number">5.38</span> %</span><br><span class="line"></span><br><span class="line">--放大倍率计算--</span><br><span class="line">横向放大倍率 <span class="number">0.0289</span></span><br><span class="line">显示图像放大倍率 <span class="number">496.6452</span></span><br></pre></td></tr></table></figure>
+<h2 id="利用单反相机测量光度学参数"><a href="#利用单反相机测量光度学参数" class="headerlink" title="利用单反相机测量光度学参数"></a>利用单反相机测量光度学参数</h2><ol>
+<li><p>相机没有镜头无法成像，相机的光学传感器需要一个实像。</p>
+</li>
+<li><p>灰度值与亮度</p>
+</li>
+<li><p>$\gamma$ 矫正：</p>
 <ul>
-<li>能量 <span class="math inline">\(=\)</span> 功率 <span class="math inline">\(\times\)</span> 时间 <span class="math inline">\(\implies\)</span> 景物亮度 <span class="math inline">\(\propto\)</span> 快门时间 ,</li>
-<li>图片亮度 <span class="math inline">\(\propto\)</span> 图片灰度</li>
-<li><span class="math inline">\(\implies\)</span> 图片灰度 $$ 快门时间</li>
+<li>能量  $=$ 功率 $\times$ 时间 $\implies$  景物亮度 $\propto$ 快门时间 , </li>
+<li>图片亮度 $\propto$ 图片灰度</li>
+<li>$\implies$ 图片灰度 $\propto $ 快门时间</li>
 <li>但是实际的图片灰度和快门时间是非线性的，这是由于相机对图片进行了处理</li>
 <li>存储时为了压缩动态范围 做了1/2.2的处理</li>
 <li>显示还原时再进行2.2的处理</li>
 <li>我们做图得到灰度平方后和快门速度成正比 说明存储时做了1/2 的处理</li>
-<li><a href="色彩校正中的%20gamma%20值是什么？%20-%20疾风齿轮的回答%20-%20知乎%20https://www.zhihu.com/question/27467127/answer/123239180">好的理解在此</a></li>
+<li><a href="色彩校正中的 gamma 值是什么？ - 疾风齿轮的回答 - 知乎 https://www.zhihu.com/question/27467127/answer/123239180">好的理解在此</a></li>
 </ul>
-<p>曝光指数 EI</p></li>
+</li>
 </ol>
-<h2 id="应用光学讨论">应用光学讨论</h2>
-<ol type="1">
+<p>   曝光指数 EI</p>
+<h2 id="应用光学讨论"><a href="#应用光学讨论" class="headerlink" title="应用光学讨论"></a>应用光学讨论</h2><ol>
 <li>双目镜筒加反射棱镜，为什么加平行平板？</li>
 </ol>
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gep1asih0cj30sg0rsh0c.jpg" alt="image-20200512014117116" style="zoom:25%;" /></p>
-<ol start="2" type="1">
-<li><p>放大镜的视觉放大率是什么？或者不是什么？还是什么也不是？</p></li>
-<li><p>在考虑显微镜的有效放大率的时候，人眼的最小分辨角取了<span class="math inline">\(2’\sim 4’\)</span>, 为什么取 <span class="math inline">\(2’\)</span> 到 <span class="math inline">\(4’\)</span>, 为什么有一个下限有一个上限？（相关：物理光学中的伪分辨）</p></li>
-<li><p>暗视场照明可以观察小于分辨极限的微小质点，这种情况是否可以看作“超分辨”？（在直播回放appopt-10-2的1:31:00左右）</p></li>
-<li><p><span class="math inline">\(50\%\)</span> 渐晕时，怎么得到的下面这个公式：</p></li>
+<ol>
+<li>放大镜的视觉放大率是什么？或者不是什么？还是什么也不是？</li>
 </ol>
-<p><span class="math display">\[
-\tan W=\frac{p}{2\Gamma f_1^\prime+f_2^\prime+\Gamma l_p^{\prime}}
-\]</span></p>
-<ol start="5" type="1">
-<li><p>焦距、孔径、视场为什么可以表征光学系统性能？（提示：结合拉氏不变量）</p></li>
-<li><p>场镜对总光焦度无贡献，其焦距是否可随意确定？</p></li>
+<ol>
+<li>在考虑显微镜的有效放大率的时候，人眼的最小分辨角取了$2’\sim 4’$, 为什么取 $2’$ 到 $4’$, 为什么有一个下限有一个上限？（相关：物理光学中的伪分辨）</li>
+</ol>
+<ol>
+<li>暗视场照明可以观察小于分辨极限的微小质点，这种情况是否可以看作“超分辨”？（在直播回放appopt-10-2的1:31:00左右）</li>
+</ol>
+<ol>
+<li>$50\%$ 渐晕时，怎么得到的下面这个公式：</li>
+</ol>
+<script type="math/tex; mode=display">
+\tan W=\frac{p}{2\Gamma f_1^\prime+f_2^\prime+\Gamma l_p^{\prime}}</script><ol>
+<li>焦距、孔径、视场为什么可以表征光学系统性能？（提示：结合拉氏不变量）</li>
+</ol>
+<ol>
+<li>场镜对总光焦度无贡献，其焦距是否可随意确定？</li>
 </ol>
 
       
@@ -983,31 +1014,22 @@ E_B&#39;&amp;=E_0\cos^4\omega&#39;
       
 
       
-      <h1 id="leecode-题目整理">Leecode 题目整理</h1>
-<h3 id="三数之和">三数之和</h3>
-<p>排序+<strong>双指针</strong></p>
+      <h1 id="Leecode-题目整理"><a href="#Leecode-题目整理" class="headerlink" title="Leecode 题目整理"></a>Leecode 题目整理</h1><h3 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h3><p>排序+<strong>双指针</strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nums.sort()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">  <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i - <span class="number">1</span>]:	<span class="keyword">continue</span></span><br><span class="line">  l = i + <span class="number">1</span></span><br><span class="line">  r = n - <span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span>(l &lt; r):</span><br><span class="line">    <span class="keyword">if</span> nums[i] + nums[l] + nums[r] == <span class="number">0</span>:</span><br><span class="line">      ans.append([nums[i], nums[l], nums[r]])</span><br><span class="line">      <span class="keyword">while</span> l&lt;r <span class="keyword">and</span> nums[r]==nums[r<span class="number">-1</span>]:	r=r<span class="number">-1</span></span><br><span class="line">      <span class="keyword">while</span> l&lt;r <span class="keyword">and</span> nums[l]==nums[l+<span class="number">1</span>]:	l=l+<span class="number">1</span></span><br><span class="line">      r=r<span class="number">-1</span></span><br><span class="line">      l=l+<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> nums[i] + nums[l] + nums[r] &gt; <span class="number">0</span>:	r = r - <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>: l = l + <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h3 id="两数之和">两数之和</h3>
-<p><strong>carry</strong> 用得很妙, 模拟进位</p>
+<h3 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h3><p><strong>carry</strong> 用得很妙, 模拟进位</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addTwoNumbers</span><span class="params">(self, l1: ListNode, l2: ListNode)</span> -&gt; ListNode:</span></span><br><span class="line">  ans=ListNode(<span class="number">0</span>)</span><br><span class="line">  head=ans</span><br><span class="line">  carry=<span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">  	x=l1.val <span class="keyword">if</span> l1 <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">  	y=l2.val <span class="keyword">if</span> l2 <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">  	s=x+y+carry</span><br><span class="line">  	carry=s//<span class="number">10</span></span><br><span class="line">  	ans.next=ListNode(s%<span class="number">10</span>)</span><br><span class="line">  	ans=ans.next</span><br><span class="line">  	<span class="keyword">if</span> l1:</span><br><span class="line">  		l1=l1.next</span><br><span class="line">  	<span class="keyword">if</span> l2:</span><br><span class="line">  		l2=l2.next</span><br><span class="line">  	<span class="keyword">if</span> carry:</span><br><span class="line">  		ans.next=ListNode(carry)</span><br><span class="line">  <span class="keyword">return</span> head.next</span><br></pre></td></tr></table></figure>
-<h2 id="队列">队列</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#简易版本</span></span><br><span class="line">queue=[]</span><br><span class="line">queue.append(data) <span class="comment">#入队</span></span><br><span class="line">queue.pop(<span class="number">0</span>)	<span class="comment">#出队</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#双向队列</span></span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line">que=collectione.deque()</span><br><span class="line">que.append() </span><br><span class="line">que.appendleft()</span><br><span class="line">que.insert(i,x)<span class="comment">#在第i个位置插入x</span></span><br><span class="line">que.popleft()</span><br><span class="line">que.pop()</span><br><span class="line">que.remove(val)<span class="comment">#移除查找到的第一个val</span></span><br><span class="line">que.count(x)<span class="comment">#计算que中元素等于x的个数</span></span><br><span class="line">que.rotate(n)<span class="comment">#向右循环移动n步 </span></span><br><span class="line">que.clear()</span><br></pre></td></tr></table></figure>
-<h3 id="墙与门">墙与门</h3>
-<p>BFS</p>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#简易版本</span></span><br><span class="line">queue=[]</span><br><span class="line">queue.append(data) <span class="comment">#入队</span></span><br><span class="line">queue.pop(<span class="number">0</span>)	<span class="comment">#出队</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#双向队列</span></span><br><span class="line"><span class="keyword">import</span> collections</span><br><span class="line">que=collectione.deque()</span><br><span class="line">que.append() </span><br><span class="line">que.appendleft()</span><br><span class="line">que.insert(i,x)<span class="comment">#在第i个位置插入x</span></span><br><span class="line">que.popleft()</span><br><span class="line">que.pop()</span><br><span class="line">que.remove(val)<span class="comment">#移除查找到的第一个val</span></span><br><span class="line">que.count(x)<span class="comment">#计算que中元素等于x的个数</span></span><br><span class="line">que.rotate(n)<span class="comment">#向右循环移动n步 </span></span><br><span class="line">que.clear()</span><br></pre></td></tr></table></figure>
+<h3 id="墙与门"><a href="#墙与门" class="headerlink" title="墙与门"></a>墙与门</h3><p>BFS</p>
 <p>满足条件=&gt;处理=&gt;放入队列</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">used=[]<span class="comment">#走过的标记不再走</span></span><br><span class="line">rooms[tmpk][tmpt] = rooms[i][j] + <span class="number">1</span> <span class="comment">#step是上一个的加1</span></span><br></pre></td></tr></table></figure>
-<h3 id="岛屿数量">岛屿数量</h3>
-<p>BFS ：</p>
+<h3 id="岛屿数量"><a href="#岛屿数量" class="headerlink" title="岛屿数量"></a>岛屿数量</h3><p>BFS ：</p>
 <p>写个bfs函数，注意每到一个点要mark。</p>
 <p>对所有可遍历点bfs（同步更新可遍历点）, 每使用一次就找到了一个模块, cnt++。</p>
 <p><strong>并查集（未）</strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bfs</span><span class="params">(i, j)</span>:</span></span><br><span class="line"> queue = deque()</span><br><span class="line"> queue.appendleft((i, j))</span><br><span class="line"> grid[i][j] = <span class="string">"0"</span></span><br><span class="line"> <span class="keyword">while</span> queue:</span><br><span class="line">   i, j = queue.pop()</span><br><span class="line">   <span class="keyword">for</span> x, y <span class="keyword">in</span> [[<span class="number">-1</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">-1</span>], [<span class="number">0</span>, <span class="number">1</span>]]:</span><br><span class="line">    tmp_i = i + x</span><br><span class="line">    tmp_j = j + y</span><br><span class="line">   <span class="keyword">if</span> <span class="number">0</span> &lt;= tmp_i &lt; row <span class="keyword">and</span> <span class="number">0</span> &lt;= tmp_j &lt; col <span class="keyword">and</span> grid[tmp_i][tmp_j] == <span class="string">"1"</span>:</span><br><span class="line">   	grid[tmp_i][tmp_j] = <span class="string">"0"</span></span><br><span class="line">    queue.appendleft((tmp_i, tmp_j))</span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span> i <span class="keyword">in</span> range(row):</span><br><span class="line">   <span class="keyword">for</span> j <span class="keyword">in</span> range(col):</span><br><span class="line">     <span class="keyword">if</span> grid[i][j] == <span class="string">"1"</span>:</span><br><span class="line">       bfs(i, j)</span><br><span class="line">       cnt += <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h3 id="打开转盘锁">打开转盘锁</h3>
-<p>yield 的使用</p>
-<h2 id="栈">栈</h2>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">stack=[]</span><br><span class="line">stack.append()</span><br><span class="line">stack.pop()</span><br><span class="line">stack[<span class="number">-1</span>]<span class="comment">#取出栈顶元素</span></span><br></pre></td></tr></table></figure>
-<h3 id="最小栈">最小栈</h3>
-<p>使用两个栈，一个作为<strong>辅助栈</strong>。</p>
+<h3 id="打开转盘锁"><a href="#打开转盘锁" class="headerlink" title="打开转盘锁"></a>打开转盘锁</h3><p>yield 的使用</p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">stack=[]</span><br><span class="line">stack.append()</span><br><span class="line">stack.pop()</span><br><span class="line">stack[<span class="number">-1</span>]<span class="comment">#取出栈顶元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="最小栈"><a href="#最小栈" class="headerlink" title="最小栈"></a>最小栈</h3><p>使用两个栈，一个作为<strong>辅助栈</strong>。</p>
 
       
       <!-- reward -->
@@ -1075,280 +1097,258 @@ E_B&#39;&amp;=E_0\cos^4\omega&#39;
       
 
       
-      <h1 id="线性代数学习笔记">线性代数学习笔记</h1>
-<p>不加入例题</p>
+      <h1 id="线性代数学习笔记"><a href="#线性代数学习笔记" class="headerlink" title="线性代数学习笔记"></a>线性代数学习笔记</h1><p>不加入例题</p>
 <p>主要是例题中用到的基本性质和定理的证明</p>
 <p>推荐网站：<a href="https://ccjou.wordpress.com/" target="_blank" rel="noopener">线代启示录</a></p>
-<h2 id="线性空间">1. 线性空间</h2>
-<h3 id="基的可扩充性">基的可扩充性</h3>
-<p><span class="math inline">\(V^n\)</span> 的任意一组线性无关的向量都可扩充为一组基。</p>
+<h2 id="1-线性空间"><a href="#1-线性空间" class="headerlink" title="1. 线性空间"></a>1. 线性空间</h2><h3 id="基的可扩充性"><a href="#基的可扩充性" class="headerlink" title="基的可扩充性"></a>基的可扩充性</h3><p>$V^n$ 的任意一组线性无关的向量都可扩充为一组基。</p>
 <p>证明：</p>
-<p>​ 对于一个有 <span class="math inline">\(m\)</span> 个向量的线性无关组，若 <span class="math inline">\(m&lt;n\)</span> ，则 <span class="math inline">\(V\)</span> 中肯定<strong>存在向量 <span class="math inline">\(x\)</span> 不能被他们表示</strong>。</p>
-<p>​ 可以证明 <span class="math inline">\(x\)</span> 与他们线性无关，把 <span class="math inline">\(x\)</span> 添进去，构成新的线性无关组。</p>
-<p>​ 这样一直添，最后可以扩充为一组基。</p>
-<h3 id="维数公式">维数公式</h3>
-<p><span class="math display">\[
+<p>​        对于一个有 $m$ 个向量的线性无关组，若 $m&lt;n$ ，则 $V$ 中肯定<strong>存在向量 $x$ 不能被他们表示</strong>。</p>
+<p>​        可以证明 $x$ 与他们线性无关，把 $x$ 添进去，构成新的线性无关组。</p>
+<p>​        这样一直添，最后可以扩充为一组基。</p>
+<h3 id="维数公式"><a href="#维数公式" class="headerlink" title="维数公式"></a>维数公式</h3><script type="math/tex; mode=display">
 dim\ W_1+dim\ W_2=dim(W_1+W_2)+dim(W_1\cap W_2)
-\notag
-\]</span></p>
-<p>证明：</p>
-<p>​ 取 <span class="math inline">\(W_1\cap W_2\)</span> 的一组基，分别扩充为 <span class="math inline">\(W_1\)</span> 和 <span class="math inline">\(W_2\)</span> 的基，</p>
-<p>​ 则它们组合起来组成的向量组可以张成 <span class="math inline">\(W_1+W_2\)</span> 。</p>
-<p>​ 接下来只需证明它们线性无关。 <span class="math display">\[
+\notag</script><p>证明：</p>
+<p>​        取 $W_1\cap W_2$ 的一组基，分别扩充为 $W_1$ 和 $W_2$ 的基，</p>
+<p>​        则它们组合起来组成的向量组可以张成 $W_1+W_2$ 。</p>
+<p>​        接下来只需证明它们线性无关。</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-W_1\cap W_2&amp;=\mathcal{L}(\alpha_1,\cdots,\alpha_r)\\
-W_1&amp;=\mathcal{L}(\alpha_1,\cdots,\alpha_r,\beta_1,\cdots,\beta_s)\\
-W_2&amp;=\mathcal{L}(\alpha_1,\cdots,\alpha_r,\gamma_1,\cdots,\gamma_t)\\
-\implies W_1+W_2&amp;=\mathcal{L}(\alpha_1,\cdots,\alpha_r,\beta_1,\cdots,\beta_s,\gamma_1,\cdots,\gamma_t)
-\end{aligned}
-\]</span></p>
-<p>​ 按线性无关定义写出式子，把 <span class="math inline">\(\gamma\)</span> 项移到等式右边，</p>
-<p>​ 利用 <span class="math inline">\(W_1\cap W_2\)</span> 可以把两边都表示成 <span class="math inline">\(\alpha\)</span> 项的线性组合，</p>
-<p>​ 依次利用移项后是 <span class="math inline">\(W_2\)</span> 和 $ W_1 $ 的基，最后得到全是 <span class="math inline">\(0\)</span>。</p>
-<h3 id="直和">直和</h3>
-<p>设 <span class="math inline">\(U_1,\cdots,U_m\)</span> 都是 <span class="math inline">\(V\)</span> 的子空间，则:</p>
+W_1\cap W_2&=\mathcal{L}(\alpha_1,\cdots,\alpha_r)\\
+W_1&=\mathcal{L}(\alpha_1,\cdots,\alpha_r,\beta_1,\cdots,\beta_s)\\
+W_2&=\mathcal{L}(\alpha_1,\cdots,\alpha_r,\gamma_1,\cdots,\gamma_t)\\
+\implies W_1+W_2&=\mathcal{L}(\alpha_1,\cdots,\alpha_r,\beta_1,\cdots,\beta_s,\gamma_1,\cdots,\gamma_t)
+\end{aligned}</script><p>​        按线性无关定义写出式子，把 $\gamma$ 项移到等式右边，</p>
+<p>​        利用 $W_1\cap W_2$ 可以把两边都表示成 $\alpha$ 项的线性组合，</p>
+<p>​        依次利用移项后是 $W_2$ 和 $ W_1 $ 的基，最后得到全是 $0$。</p>
+<h3 id="直和"><a href="#直和" class="headerlink" title="直和"></a>直和</h3><p>设 $U_1,\cdots,U_m$ 都是 $V$ 的子空间，则:</p>
 <ul>
-<li>（定义）<span class="math inline">\(U_1+\cdots+U_m\)</span> 是直和，如果 <span class="math inline">\(U_1+\cdots+U_m\)</span> 中的每个元素都可以唯一的表示成 <span class="math inline">\(u_1+\cdots+u_m\)</span> ，其中每个 <span class="math inline">\(u_j\in U_j\)</span>。</li>
-<li><p><span class="math inline">\(\iff\)</span> <span class="math inline">\(0\)</span> 唯一分解成 <span class="math inline">\(0+\cdots+0\)</span></p></li>
-<li><p>对于两个子空间的直和，<span class="math inline">\(U+W=U\oplus W\iff U\cap W=\{0\}\)</span></p></li>
+<li>（定义）$U_1+\cdots+U_m$ 是直和，如果 $U_1+\cdots+U_m$ 中的每个元素都可以唯一的表示成 $u_1+\cdots+u_m$ ，其中每个 $u_j\in U_j$。</li>
+<li><p>$\iff$ $0$ 唯一分解成 $0+\cdots+0$</p>
+</li>
+<li><p>对于两个子空间的直和，$U+W=U\oplus W\iff U\cap W=\{0\}$</p>
+</li>
 </ul>
-<h5 id="常用结论">常用结论：</h5>
-<ul>
-<li><span class="math inline">\(\dim V&lt;\infty\)</span> ，若 <span class="math inline">\(T\in \mathcal{L}[V]\)</span> 是幂等变换，则 <span class="math inline">\(V=N(T)\oplus R(T)\)</span> .</li>
-<li><span class="math inline">\(T\in\mathcal{L}[V],\dim V=n\implies V=R(T^n)\oplus N(T^n)\)</span></li>
+<h5 id="常用结论："><a href="#常用结论：" class="headerlink" title="常用结论："></a>常用结论：</h5><ul>
+<li>$\dim V&lt;\infty$ ，若 $T\in \mathcal{L}[V]$ 是幂等变换，则 $V=N(T)\oplus R(T)$ .</li>
+<li>$T\in\mathcal{L}[V],\dim V=n\implies V=R(T^n)\oplus N(T^n)$</li>
 </ul>
-<h2 id="线性映射">2. 线性映射</h2>
-<h3 id="线性映射的维数定理">线性映射的维数定理</h3>
-<p><span class="math inline">\(T:V\to W&#39;\)</span>, <span class="math inline">\(dim\ N(T)+dim\ R(T)=dim\ V\)</span></p>
-<p>即：<span class="math inline">\(dim\ Ker(T)+dim\ Im(T)=dim\ V\)</span></p>
-<p>证明1：</p>
-<p>​ 去证 <strong><span class="math inline">\(\overline T:\overline V\to W\)</span>, <span class="math inline">\(\overline v\mapsto T(v)\)</span> 是线性映射且为双射</strong>, <span class="math inline">\(\overline T\)</span> 是由 <span class="math inline">\(T\)</span> 诱导出来的线性映射。</p>
-<p>​ 其中 <span class="math inline">\(W=Im(T)\)</span>, <span class="math inline">\(\overline V=V/ker(T)\)</span>。 从而 <span class="math inline">\(V/ker(T)\cong Im(T)\)</span>。</p>
-<ol type="1">
-<li><p><span class="math inline">\(\overline T\)</span> 的<strong>定义是合理的</strong>：<span class="math inline">\(\overline T(\overline v)=T(v), \forall k\in Ker(T),\overline v=v+k\)</span></p>
-<p>这需要证明对 <span class="math inline">\(\overline v=v+k_1\)</span> 和 <span class="math inline">\(\overline {v+k_2}=\overline v=v+k_2\)</span>, <span class="math inline">\(\overline T(\overline {v+k_1})=\overline T(\overline {v+k_2})=T(v)\)</span>.</p>
-<p>即 <span class="math inline">\(\overline T(\overline v)=T(v)\)</span> 的成立不依赖于 $v’v=v+Ker(T) $ 的选取</p>
-<p>这是由于 <span class="math inline">\(\forall k\in Ker(T),\overline T(\overline {v+k})=T(v+k)=T(v)+T(k)=T(v)\)</span></p></li>
-<li><p><span class="math inline">\(\overline T\)</span> <strong>是线性映射</strong>：</p>
+<h2 id="2-线性映射"><a href="#2-线性映射" class="headerlink" title="2. 线性映射"></a>2. 线性映射</h2><h3 id="线性映射的维数定理"><a href="#线性映射的维数定理" class="headerlink" title="线性映射的维数定理"></a>线性映射的维数定理</h3><p>$T:V\to W’$,  $dim\ N(T)+dim\ R(T)=dim\ V$</p>
+<p>即：$dim\ Ker(T)+dim\ Im(T)=dim\ V$</p>
+<p>证明1： </p>
+<p>​        去证 <strong>$\overline T:\overline V\to W$, $\overline v\mapsto T(v)$ 是线性映射且为双射</strong>, $\overline T$ 是由 $T$ 诱导出来的线性映射。</p>
+<p>​        其中 $W=Im(T)$, $\overline V=V/ker(T)$。 从而 $V/ker(T)\cong Im(T)$。</p>
+<ol>
+<li><p>$\overline T$ 的<strong>定义是合理的</strong>：$\overline T(\overline v)=T(v), \forall k\in Ker(T),\overline v=v+k$</p>
+<p>这需要证明对 $\overline v=v+k_1$ 和  $\overline {v+k_2}=\overline v=v+k_2$, $\overline T(\overline {v+k_1})=\overline T(\overline {v+k_2})=T(v)$. </p>
+<p>即 $\overline T(\overline v)=T(v)$ 的成立不依赖于 $v’\in \overline v=v+Ker(T) $ 的选取</p>
+<p>这是由于 $\forall k\in Ker(T),\overline T(\overline {v+k})=T(v+k)=T(v)+T(k)=T(v)$</p>
+</li>
+<li><p>$\overline T$ <strong>是线性映射</strong>：</p>
 <ul>
 <li><p>加法：</p>
-<p><span class="math inline">\(\overline T(\overline {v_1+v_2})=T(v_1+v_2)=T(v_1)+T(v_2)=\overline T(\overline v_1)+\overline T(\overline v_2)\)</span></p></li>
+<p>$\overline T(\overline {v_1+v_2})=T(v_1+v_2)=T(v_1)+T(v_2)=\overline T(\overline v_1)+\overline T(\overline v_2)$</p>
+</li>
 <li><p>数乘：</p>
-<p><span class="math inline">\(\overline T(\lambda \overline {v})=\overline T(\overline {\lambda v})=T(\lambda v)=\lambda T(v)=\lambda\overline T(\overline v)\)</span></p></li>
-</ul></li>
-<li><p><span class="math inline">\(\overline T\)</span> <strong>是双射</strong>：</p>
+<p>$\overline T(\lambda \overline {v})=\overline T(\overline {\lambda v})=T(\lambda v)=\lambda T(v)=\lambda\overline T(\overline v)$</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>$\overline T$ <strong>是双射</strong>：</p>
 <ul>
 <li><p>单射：</p>
-<p><span class="math inline">\(\overline T(\overline v)=0=&gt;T(v)=0=&gt;v\in Ker(T)=&gt;\overline v=0\\ =&gt;Ker(\overline T)=0\)</span></p></li>
+<p>$\overline T(\overline v)=0=&gt;T(v)=0=&gt;v\in Ker(T)=&gt;\overline v=0\\ =&gt;Ker(\overline T)=0$</p>
+</li>
 <li><p>满射：</p>
-<p><span class="math inline">\(\forall w\in W=Im(T),\exists v\in V,s.t.\quad T(v)=w\\ =&gt;\exist\overline v, \overline T(\overline v)=T(v)=w\)</span></p></li>
-</ul></li>
+<p>$\forall w\in W=Im(T),\exists  v\in V,s.t.\quad T(v)=w\\ =&gt;\exist\overline v, \overline T(\overline v)=T(v)=w$</p>
+</li>
+</ul>
+</li>
 </ol>
 <p>证明2:</p>
-<p>​ 取 $ N(T)$ 的一组基 <span class="math inline">\((v_1,\cdots,v_s)\)</span> ，将其扩充为 <span class="math inline">\(V\)</span> 的一组基 <span class="math inline">\((v_1,\cdots,v_s,v_{s+1},\cdots,v_n)\)</span></p>
-<p>​ 则 <span class="math inline">\(R(T)=\mathcal{L}\big[T(v_1),\cdots,T(v_n)\big]=\mathcal{L}\big[T(v_{s+1}),\cdots,T(v_n)\big]\)</span></p>
-<p>​ 因此 <span class="math inline">\(T(v_{s+1}),\cdots,T(v_{n})\)</span> 可张成 <span class="math inline">\(R(T)\)</span> ，只需证明它们线性无关。</p>
-<p>​ 如果 <span class="math inline">\(a_1 T(v_{s+1})+\cdots +a_{n-s}T(v_{n})=0\)</span></p>
-<p>​ 则 <span class="math inline">\(T(a_1v_{s+1}+\cdots+a_{n-s}v_n)=0\)</span></p>
-<p>​ <span class="math inline">\(=&gt; a_1v_{s+1}+\cdots+a_{n-s}v_n\in N(T)\)</span></p>
-<p>​ 故 <span class="math inline">\(\exists v_1,\cdots,v_s, \quad a_1v_{s+1}+\cdots+a_{n-s}v_n=b_1v_1+\cdots b_sv_s\)</span></p>
-<p>​ 全部移到左边，由于 <span class="math inline">\(v_1,\cdots,v_n\)</span> 是 <span class="math inline">\(V\)</span> 的基，全部系数为 <span class="math inline">\(0\)</span>.</p>
-<h3 id="线性映射的一些定理">线性映射的一些定理</h3>
-<ul>
-<li><p>到更大维数向量空间的线性映射不是满的</p>
-<p>一定有东西会表示不出来</p></li>
-<li><p>到更小维数向量空间的线性映射不是单的</p></li>
+<p>​        取 $ N(T)$ 的一组基 $(v_1,\cdots,v_s)$ ，将其扩充为 $V$ 的一组基 $(v_1,\cdots,v_s,v_{s+1},\cdots,v_n)$</p>
+<p>​        则 $R(T)=\mathcal{L}\big[T(v_1),\cdots,T(v_n)\big]=\mathcal{L}\big[T(v_{s+1}),\cdots,T(v_n)\big]$</p>
+<p>​        因此 $T(v_{s+1}),\cdots,T(v_{n})$ 可张成 $R(T)$ ，只需证明它们线性无关。</p>
+<p>​        如果 $a_1 T(v_{s+1})+\cdots +a_{n-s}T(v_{n})=0$</p>
+<p>​        则 $T(a_1v_{s+1}+\cdots+a_{n-s}v_n)=0$</p>
+<p>​        $=&gt; a_1v_{s+1}+\cdots+a_{n-s}v_n\in N(T)$</p>
+<p>​        故 $\exists  v_1,\cdots,v_s, \quad a_1v_{s+1}+\cdots+a_{n-s}v_n=b_1v_1+\cdots b_sv_s$</p>
+<p>​        全部移到左边，由于 $v_1,\cdots,v_n$ 是 $V$ 的基，全部系数为 $0$.</p>
+<h3 id="线性映射的一些定理"><a href="#线性映射的一些定理" class="headerlink" title="线性映射的一些定理"></a>线性映射的一些定理</h3><ul>
+<li><p>到更大维数向量空间的线性映射不是满的 </p>
+<p>一定有东西会表示不出来</p>
+</li>
+<li><p>到更小维数向量空间的线性映射不是单的</p>
+</li>
 </ul>
-<h3 id="线性映射的矩阵表示">线性映射的矩阵表示</h3>
-<p>(搞晕了很久 现在终于弄明白了)</p>
+<h3 id="线性映射的矩阵表示"><a href="#线性映射的矩阵表示" class="headerlink" title="线性映射的矩阵表示"></a>线性映射的矩阵表示</h3><p>(搞晕了很久 现在终于弄明白了)</p>
 <p>（真的是一波三折，感谢hyw，现在应该终于终于弄明白了 2020.5.9)</p>
-<h4 id="对基">（1）对基</h4>
-<p><span class="math display">\[
+<h4 id="（1）对基"><a href="#（1）对基" class="headerlink" title="（1）对基"></a>（1）对基</h4><script type="math/tex; mode=display">
 T(e_1,\cdots,e_n)=(f_1,\cdots,f_m)M(T)\\
 Te_k=M(T)第k列
-\notag
-\]</span></p>
-<p>​ 其中，<span class="math inline">\(e\)</span> 是原空间的基， <span class="math inline">\(f\)</span> 是像空间的基。</p>
-<h4 id="对向量">（2）对向量</h4>
-<p>​ 设 <span class="math inline">\(X=(x_1,\cdots,x_n)^T\)</span> 为向量 <span class="math inline">\(\xi\)</span> 在基 <span class="math inline">\(e=(e_1,\cdots,e_n)\)</span> 下的坐标。 <span class="math display">\[
+\notag</script><p>​    其中，$e$ 是原空间的基， $f$ 是像空间的基。</p>
+<h4 id="（2）对向量"><a href="#（2）对向量" class="headerlink" title="（2）对向量"></a>（2）对向量</h4><p>​    设 $X=(x_1,\cdots,x_n)^T$ 为向量 $\xi$ 在基 $e=(e_1,\cdots,e_n)$ 下的坐标。 </p>
+<script type="math/tex; mode=display">
 \xi=(e_1,\cdots,e_n)X
-\notag
-\]</span> ​ <span class="math inline">\(T\)</span> 作用后的向量为： <span class="math display">\[
+\notag</script><p>​    $T$ 作用后的向量为：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-T(\xi)&amp;=T(e_1,\cdots,e_n)X\\
-&amp;=(f_1,\cdots,f_m)M(T)X
-\end{aligned}
-\]</span> ​ <span class="math inline">\(T\)</span> 作用后得到的向量的坐标是 <span class="math inline">\(M(T)X\)</span>.</p>
+T(\xi)&=T(e_1,\cdots,e_n)X\\
+&=(f_1,\cdots,f_m)M(T)X
+\end{aligned}</script><p>​    $T$ 作用后得到的向量的坐标是 $M(T)X$.  </p>
 <p>(美妙的证明)</p>
-<h4 id="线性映射在不同基下表示表示矩阵的关系">（3）线性映射在不同基下表示表示矩阵的关系</h4>
-<p>相似。 <span class="math display">\[
+<h4 id="（3）线性映射在不同基下表示表示矩阵的关系"><a href="#（3）线性映射在不同基下表示表示矩阵的关系" class="headerlink" title="（3）线性映射在不同基下表示表示矩阵的关系"></a>（3）线性映射在不同基下表示表示矩阵的关系</h4><p>相似。</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-T[(e_1,\cdots,e_n)]&amp;=T[(f_1,\cdots,f_m)A]\\
-&amp;=T[(f_1,\cdots,f_m)]A\\
-&amp;=(f_1,\cdots,f_m)M_fA\\
-&amp;=(e_1,\cdots,e_n)A^{-1}M_fA
-\end{aligned}
-\]</span> 所以，<span class="math inline">\(M_e=A^{-1}M_fA\)</span>, <span class="math inline">\(A\)</span> 为基的过渡矩阵，<span class="math inline">\(M_e,M_f\)</span> 为线性映射在不同基下的矩阵表示。</p>
-<h4 id="同一个向量在不同基下的坐标关系">（4）同一个向量在不同基下的坐标关系</h4>
-<p><span class="math inline">\(T:V\to W\)</span></p>
-<p><span class="math inline">\(\xi=(v_1,\cdots,v_n)A=(w_1,\cdots,w_m)B\)</span></p>
-<p>其中 <span class="math inline">\(A=(a_1,\cdots,a_n)^T\)</span>, <span class="math inline">\(B=(b_1,\cdots,b_m)^T\)</span> (注意有转置，<strong>基是行向量，坐标是列向量</strong>)</p>
-<p>是 <span class="math inline">\(\xi\)</span> 在不同基下的坐标</p>
-<p>则 ： <span class="math display">\[
-B=M(T)^{-1}A\notag
-\]</span></p>
-<h4 id="总结">（5）总结</h4>
-<p>由此可见，线性映射对应的矩阵：</p>
+T[(e_1,\cdots,e_n)]&=T[(f_1,\cdots,f_m)A]\\
+&=T[(f_1,\cdots,f_m)]A\\
+&=(f_1,\cdots,f_m)M_fA\\
+&=(e_1,\cdots,e_n)A^{-1}M_fA
+\end{aligned}</script><p>所以，$M_e=A^{-1}M_fA$, $A$ 为基的过渡矩阵，$M_e,M_f$ 为线性映射在不同基下的矩阵表示。</p>
+<h4 id="（4）同一个向量在不同基下的坐标关系"><a href="#（4）同一个向量在不同基下的坐标关系" class="headerlink" title="（4）同一个向量在不同基下的坐标关系"></a>（4）同一个向量在不同基下的坐标关系</h4><p>$T:V\to W$</p>
+<p>$\xi=(v_1,\cdots,v_n)A=(w_1,\cdots,w_m)B$</p>
+<p>其中 $A=(a_1,\cdots,a_n)^T$, $B=(b_1,\cdots,b_m)^T$ (注意有转置，<strong>基是行向量，坐标是列向量</strong>)</p>
+<p>是 $\xi$ 在不同基下的坐标</p>
+<p>则 ：</p>
+<script type="math/tex; mode=display">
+B=M(T)^{-1}A\notag</script><h4 id="（5）总结"><a href="#（5）总结" class="headerlink" title="（5）总结"></a>（5）总结</h4><p>由此可见，线性映射对应的矩阵：</p>
 <ul>
-<li><p>对基的变换是右乘作用，对基的 <span class="math inline">\(k\)</span> 分量变换后的结果为矩阵的第 <span class="math inline">\(k\)</span> 列</p></li>
-<li><p>对向量的坐标的变换为左乘</p></li>
-<li><p>在不同基下的表示矩阵相似</p></li>
-<li><p>如何求线性映射的矩阵表示 <span class="math inline">\(A\)</span>： <span class="math display">\[
+<li><p>对基的变换是右乘作用，对基的 $k$ 分量变换后的结果为矩阵的第 $k$ 列</p>
+</li>
+<li><p>对向量的坐标的变换为左乘</p>
+</li>
+<li><p>在不同基下的表示矩阵相似</p>
+</li>
+<li><p>如何求线性映射的矩阵表示 $A$：</p>
+<script type="math/tex; mode=display">
 \begin{align}
-&amp;T(e_1, e_2,\dots ,e_n)=(e_1,e_2,\dots,e_n)A\label{T-act}\\
-\implies&amp; T (e_1)=a_{11}e_1+a_{21}e_2+\cdots+a_{n1}e_n\\
-&amp; T(e_i)=a_{1i}e_1+a_{2i}e_i+\cdots+a_{ni}e_n
-\end{align}
-\]</span> 先把 <span class="math inline">\((\ref{T-act})\)</span> 写下来，然后计算 <span class="math inline">\(T\)</span> 作用到基的某个向量得到的结果，对应着 <span class="math inline">\(A\)</span> 的某<strong>列</strong>与基的线性组合，一般可以直接对照着写出来。一个 <span class="math inline">\(e_k\)</span> 可以确定 <span class="math inline">\(A\)</span> 的一列（第 <span class="math inline">\(k\)</span> 列）。</p>
+&T(e_1, e_2,\dots ,e_n)=(e_1,e_2,\dots,e_n)A\label{T-act}\\
+\implies& T (e_1)=a_{11}e_1+a_{21}e_2+\cdots+a_{n1}e_n\\
+& T(e_i)=a_{1i}e_1+a_{2i}e_i+\cdots+a_{ni}e_n
+\end{align}</script><p>先把 $(\ref{T-act})$ 写下来，然后计算 $T$ 作用到基的某个向量得到的结果，对应着 $A$ 的某<strong>列</strong>与基的线性组合，一般可以直接对照着写出来。一个 $e_k$ 可以确定 $A$ 的一列（第 $k$ 列）。</p>
 <p>小技巧：</p>
 <ul>
-<li>若基的某个向量是特征向量，则表示矩阵直接对应的那个对角元之间就是特征值，列的其他元为 <span class="math inline">\(0\)</span></li>
-</ul></li>
+<li>若基的某个向量是特征向量，则表示矩阵直接对应的那个对角元之间就是特征值，列的其他元为 $0$ </li>
 </ul>
-<h3 id="线性方程组">线性方程组</h3>
-<p>设矩阵 <span class="math inline">\(A\in M_{m\times n}(\mathbf{F})\)</span>, 若 <span class="math inline">\(r(A)=r\)</span>, 则齐次线性方程组 <span class="math inline">\(AX=0\)</span> 的解空间 <span class="math inline">\(N(A)\)</span> 是一个 <span class="math inline">\(n-r\)</span> 维子空间。</p>
+</li>
+</ul>
+<h3 id="线性方程组"><a href="#线性方程组" class="headerlink" title="线性方程组"></a>线性方程组</h3><p>设矩阵 $A\in M_{m\times n}(\mathbf{F})$, 若 $r(A)=r$, 则齐次线性方程组 $AX=0$ 的解空间 $N(A)$ 是一个 $n-r$ 维子空间。</p>
 <p>证明：</p>
-<p>​ <span class="math inline">\(A\)</span> 与一个线性映射 <span class="math inline">\(\sigma\in L(V_1,V_2)\)</span> 对应, <span class="math inline">\(\dim V_1=n, \dim V_2=m\)</span> .</p>
-<p>​ <span class="math inline">\(AX=0\)</span> 解空间中的基是 <span class="math inline">\(\sigma\)</span> 核空间的基关于 <span class="math inline">\(V_1\)</span> 的坐标, 解空间的基和 <span class="math inline">\(N(\sigma)\)</span> 的基一一对应 .</p>
+<p>​    $A$ 与一个线性映射 $\sigma\in L(V_1,V_2)$ 对应, $\dim V_1=n, \dim V_2=m$ .</p>
+<p>​    $AX=0$  解空间中的基是 $\sigma$ 核空间的基关于 $V_1$ 的坐标, 解空间的基和 $N(\sigma)$ 的基一一对应 .</p>
 <p>简单证明：</p>
-<p>​ 把 <span class="math inline">\(A\)</span> 看作线性变换， <span class="math inline">\(rank(A)=Range(A)\)</span> , <span class="math inline">\(A\)</span> 的核 <span class="math inline">\(N(A)\)</span> 就是方程组的解空间。</p>
+<p>​    把 $A$ 看作线性变换， $rank(A)=Range(A)$ , $A$ 的核 $N(A)$ 就是方程组的解空间。</p>
 <p><strong>注</strong>：矩阵的秩：矩阵列向量中极大线性无关组的元素个数，等于矩阵作为线性变换对应矩阵的像空间维数。</p>
-<h3 id="幂等变换的性质">幂等变换的性质</h3>
-<p>幂等变换: <span class="math inline">\(T:V\to W,\quad T^2=T\)</span></p>
+<h3 id="幂等变换的性质"><a href="#幂等变换的性质" class="headerlink" title="幂等变换的性质"></a>幂等变换的性质</h3><p>幂等变换: $T:V\to W,\quad T^2=T$  </p>
 <ul>
-<li><p><span class="math inline">\(N(T)=\{v-T(v)\mid v\in V \}\)</span></p></li>
-<li><span class="math inline">\(N(T)\cap R(T)=0\)</span></li>
-<li><p><span class="math inline">\(V=N(T)\oplus R(T)\)</span></p></li>
+<li><p>$N(T)=\{v-T(v)\mid v\in V \}$</p>
+</li>
+<li><p>$N(T)\cap R(T)=0$</p>
+</li>
+<li>$V=N(T)\oplus R(T)$</li>
 </ul>
 <p>证明：</p>
-<p>​ 对第二条，只需证明核空间与像空间的交是 <span class="math inline">\(0\)</span></p>
-<p>​ 如果 <span class="math inline">\(w\in N(T)\cap R(T)\)</span>, 则：</p>
-<p>​ 由于 <span class="math inline">\(w\in N(T)\)</span>, <span class="math inline">\(T(w)=0\)</span></p>
-<p>​ 由于 <span class="math inline">\(w\in R(T)\)</span>, <span class="math inline">\(\exists v\in V,w=T(v)\)</span>, <strong>两边再作用一下 <span class="math inline">\(T\)</span></strong>, 得到：<span class="math inline">\(0=T(w)=T^2(v)=T(v)=w\)</span></p>
-<p>​</p>
-<p>​ 对第一条，</p>
-<p>​ 这是由于 $vV,T^2(v)=T(v)=&gt;T[T(v)-v]=0=&gt;T(v)-vN(T)=&gt;{v-T(v)}N(T)\ vN(T),v=v-T(v)=&gt;{v-T(v)}N(T) $</p>
-<h3 id="算子">算子</h3>
-<p>算子：向量空间到自身的线性映射</p>
-<p>对有限为空间的算子 <span class="math inline">\(T\)</span>：<span class="math inline">\(T\)</span> 可逆<span class="math inline">\(\iff\)</span> <span class="math inline">\(T\)</span> 单 <span class="math inline">\(\iff T\)</span> 满</p>
-<h3 id="对偶">对偶</h3>
-<h2 id="内积空间">3. 内积空间</h2>
-<p>带有内积的向量空间。</p>
+<p>​        对第二条，只需证明核空间与像空间的交是 $0$</p>
+<p>​        如果 $w\in N(T)\cap R(T)$, 则：</p>
+<p>​                由于 $w\in N(T)$, $T(w)=0$</p>
+<p>​                由于 $w\in R(T)$, $\exists  v\in V,w=T(v)$, <strong>两边再作用一下 $T$</strong>, 得到：$0=T(w)=T^2(v)=T(v)=w$ </p>
+<p>​        </p>
+<p>​        对第一条，</p>
+<p>​        这是由于 $\forall v\in V,T^2(v)=T(v)=&gt;T[T(v)-v]=0=&gt;T(v)-v\in N(T)=&gt;\{v-T(v)\}\subseteq N(T)\\ \forall v\in N(T),v=v-T(v)=&gt;\{v-T(v)\}\supseteq N(T) $</p>
+<h3 id="算子"><a href="#算子" class="headerlink" title="算子"></a>算子</h3><p>算子：向量空间到自身的线性映射</p>
+<p>对有限为空间的算子 $T$：$T$ 可逆$\iff$ $T$ 单 $\iff T$ 满</p>
+<h3 id="对偶"><a href="#对偶" class="headerlink" title="对偶"></a>对偶</h3><h2 id="3-内积空间"><a href="#3-内积空间" class="headerlink" title="3. 内积空间"></a>3. 内积空间</h2><p>带有内积的向量空间。</p>
 <p>内积：对第一个分量成线性，对第二个分量成共轭线性，有共轭对称性。</p>
-<h3 id="线性映射的内积表示">线性映射的内积表示</h3>
-<p><span class="math display">\[
+<h3 id="线性映射的内积表示"><a href="#线性映射的内积表示" class="headerlink" title="线性映射的内积表示"></a>线性映射的内积表示</h3><script type="math/tex; mode=display">
 \begin{align}
-T((v_1,\dots,v_n)&amp;=(v_1,\dots,v_n)A\notag \\
-T(v_i)&amp;=\sum_{j=1}^n v_j a_{ji}\notag \\
-\therefore \quad a_{ij}&amp;=\langle Tv_j,v_i\rangle
-\end{align}
-\]</span></p>
-<h3 id="柯西-施瓦茨不等式">柯西-施瓦茨不等式</h3>
-<p><span class="math display">\[
-|\langle u,v \rangle|\leq\|u\|\|v\|
-\]</span></p>
-<p>证明：</p>
-<p>将 <span class="math inline">\(u\)</span> 正交分解: <span class="math display">\[
-u=\frac{\langle u,v\rangle}{\|v^2\|}v + w
-\]</span> 则 <span class="math display">\[
+T((v_1,\dots,v_n)&=(v_1,\dots,v_n)A\notag \\
+T(v_i)&=\sum_{j=1}^n v_j a_{ji}\notag \\
+\therefore \quad a_{ij}&=\langle Tv_j,v_i\rangle
+\end{align}</script><h3 id="柯西-施瓦茨不等式"><a href="#柯西-施瓦茨不等式" class="headerlink" title="柯西-施瓦茨不等式"></a>柯西-施瓦茨不等式</h3><script type="math/tex; mode=display">
+|\langle u,v \rangle|\leq\|u\|\|v\|</script><p>证明：</p>
+<p>将 $u$ 正交分解:</p>
+<script type="math/tex; mode=display">
+u=\frac{\langle u,v\rangle}{\|v^2\|}v + w</script><p>则 </p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-\|u\|^2&amp;=\bigg\|\frac{\langle u,v\rangle}{\|v^2\|}v\bigg\|^2+\|w\|^2\\
-&amp;\geq \bigg\|\frac{\langle u,v\rangle}{\|v^2\|}v\bigg\|^2=\frac{|\langle u,v\rangle|^2}{\|v\|^2}
-\end{aligned}
-\]</span> 乘过去即得。</p>
-<h3 id="schmidt-正交化">Schmidt 正交化</h3>
-<p>设 <span class="math inline">\(v_1,\dots,v_m\)</span> 是 <span class="math inline">\(V\)</span> 中的线性无关向量组，设 <span class="math inline">\(e_1=v_1/\|v_1\|\)</span>. <span class="math display">\[
-e_j=\frac{v_j-\langle v_j,e_1\rangle e_1-\cdots-\langle v_j,e_{j-1}\rangle e_{j-1}}{\|v_j-\langle v_j,e_1\rangle e_1-\cdots-\langle v_j,e_{j-1}\rangle e_{j-1}\|}
-\]</span> <span class="math inline">\(\{e_1,\dots,e_m\}\)</span> 是 <span class="math inline">\(V\)</span> 中的规范正交组。</p>
+\|u\|^2&=\bigg\|\frac{\langle u,v\rangle}{\|v^2\|}v\bigg\|^2+\|w\|^2\\
+&\geq \bigg\|\frac{\langle u,v\rangle}{\|v^2\|}v\bigg\|^2=\frac{|\langle u,v\rangle|^2}{\|v\|^2}
+\end{aligned}</script><p>乘过去即得。</p>
+<h3 id="Schmidt-正交化"><a href="#Schmidt-正交化" class="headerlink" title="Schmidt 正交化"></a>Schmidt 正交化</h3><p>设 $v_1,\dots,v_m$ 是 $V$ 中的线性无关向量组，设 $e_1=v_1/|v_1|$.</p>
+<script type="math/tex; mode=display">
+e_j=\frac{v_j-\langle v_j,e_1\rangle e_1-\cdots-\langle v_j,e_{j-1}\rangle e_{j-1}}{\|v_j-\langle v_j,e_1\rangle e_1-\cdots-\langle v_j,e_{j-1}\rangle e_{j-1}\|}</script><p>$\{e_1,\dots,e_m\}$ 是 $V$ 中的规范正交组。</p>
 <p>理解：有一组极大线性无关向量组，先确定一个向量作为A，后一个向量减去在A上的投影（分量）作为B，再后一个减去在前两个A，B上的分量作为C，类似的操作之后得到正交向量组，最后除以各自的模长。</p>
-<h3 id="舒尔定理">舒尔定理</h3>
-<p>设 <span class="math inline">\(V\)</span> 是有限维的复向量空间且 <span class="math inline">\(T\in \mathcal{L}(V,\mathbf{F})\)</span> ，则 <span class="math inline">\(T\)</span> 关于 <span class="math inline">\(V\)</span> 的某个规范正交基具有上三角矩阵。</p>
+<h3 id="舒尔定理"><a href="#舒尔定理" class="headerlink" title="舒尔定理"></a>舒尔定理</h3><p>设 $V$ 是有限维的复向量空间且 $T\in \mathcal{L}(V,\mathbf{F})$ ，则 $T$ 关于 $V$ 的某个规范正交基具有上三角矩阵。</p>
 <p>证明：</p>
-<p>​ 设 <span class="math inline">\(V=span\{v_1,\dots,v_n\}\)</span> , <span class="math inline">\(\{e_1,\dots,e_n\}\)</span> 为其规范正交基。</p>
-<p>​ 则 <span class="math inline">\(span\{e_1,\dots,e_n\}=span\{v_1,\dots,v_n\}\)</span></p>
-<p>​ 由于存在 <span class="math inline">\(T\)</span> ,其关于 <span class="math inline">\(\{v_1,\dots,v_n\}\)</span> 具有上三角矩阵，则对于每个 <span class="math inline">\(j=1,\dots,n\)</span></p>
-<p>​ $ span{v_1,,v_j}$在 <span class="math inline">\(T\)</span> 作用下不变</p>
-<p>​ 故 <span class="math inline">\(span\{e_1,\dots,e_j\}=span\{v_1,\dots,v_j\}\)</span> 在 <span class="math inline">\(T\)</span> 作用下不变</p>
-<p>​ 所以 <span class="math inline">\(T\)</span> 关于 <span class="math inline">\(\{e_1,\dots,e_n\}\)</span> 具有上三角矩阵。</p>
-<h5 id="关于上三角矩阵">关于上三角矩阵</h5>
-<p>设 <span class="math inline">\(T\in\mathcal{L}[V]\)</span>，<span class="math inline">\((v_1,\dots,v_n)\)</span> 是 <span class="math inline">\(V\)</span> 的基。</p>
+<p>​        设 $V=span\{v_1,\dots,v_n\}$ , $\{e_1,\dots,e_n\}$ 为其规范正交基。</p>
+<p>​        则 $span\{e_1,\dots,e_n\}=span\{v_1,\dots,v_n\}$</p>
+<p>​        由于存在 $T$ ,其关于 $\{v_1,\dots,v_n\}$ 具有上三角矩阵，则对于每个 $j=1,\dots,n$     </p>
+<p>​        $ span\{v_1,\dots,v_j\}$在 $T$ 作用下不变</p>
+<p>​        故 $span\{e_1,\dots,e_j\}=span\{v_1,\dots,v_j\}$ 在 $T$ 作用下不变</p>
+<p>​        所以 $T$ 关于 $\{e_1,\dots,e_n\}$ 具有上三角矩阵。</p>
+<h5 id="关于上三角矩阵"><a href="#关于上三角矩阵" class="headerlink" title="关于上三角矩阵"></a>关于上三角矩阵</h5><p>设 $T\in\mathcal{L}[V]$，$(v_1,\dots,v_n)$ 是 $V$ 的基。</p>
 <p>TFAE：</p>
 <ul>
-<li><span class="math inline">\(T\)</span> 关于 <span class="math inline">\(v_1,\dots,v_n\)</span> 的矩阵是上三角的</li>
-<li><span class="math inline">\(Tv_j\in span\{v_1,\dots,v_j\}\)</span></li>
-<li><span class="math inline">\(span\{v_1,\dots,v_j\}\)</span> 在 <span class="math inline">\(T\)</span> 作用下不变</li>
+<li>$T$ 关于 $v_1,\dots,v_n$ 的矩阵是上三角的</li>
+<li>$Tv_j\in span\{v_1,\dots,v_j\}$</li>
+<li>$span\{v_1,\dots,v_j\}$ 在 $T$ 作用下不变</li>
 </ul>
-<h3 id="对偶空间">对偶空间</h3>
-<h4 id="符号说明">符号说明</h4>
-<ul>
-<li><span class="math inline">\(\mathcal{L}(V,W)\)</span> 表示从 <span class="math inline">\(V\)</span> 到 <span class="math inline">\(W\)</span> 的全部线性映射</li>
-<li><span class="math inline">\(\mathbf{F}^{m,n}\triangleq \mathbf{F}^m\times\mathbf{F}^n\)</span> 可看作所有 <span class="math inline">\(m\times n\)</span> 矩阵</li>
-<li>线性泛函：从 <span class="math inline">\(V\)</span> 到 <span class="math inline">\(\mathbf{F}\)</span> 的线性映射，即为 <span class="math inline">\(\mathcal{L}(V,\mathbf{F})\)</span> 中的元素</li>
-<li><p>对偶空间 <span class="math inline">\(V’\)</span>：<span class="math inline">\(V\)</span> 上所有线性泛函构成的向量空间</p></li>
-<li>对偶基 <span class="math inline">\(\{\varphi_1,\dots,\varphi_n\}\)</span>： <span class="math inline">\(\varphi_j(e_k)=\delta_{jk}\)</span></li>
-<li>对偶映射 <span class="math inline">\(T’\)</span>：<span class="math inline">\(T’(\varphi)=\varphi\circ T ,\quad T’\in\mathcal{L}(V’,W’), \varphi\in W’,T’\in V&#39;\)</span></li>
-<li><p>零化子 <span class="math inline">\(U^0\)</span>：<span class="math inline">\(U^0=\{\varphi\in V’:\varphi(u)=0,\forall u\in U\},U\subset V\)</span></p></li>
+<h3 id="对偶空间"><a href="#对偶空间" class="headerlink" title="对偶空间"></a>对偶空间</h3><h4 id="符号说明"><a href="#符号说明" class="headerlink" title="符号说明"></a>符号说明</h4><ul>
+<li>$\mathcal{L}(V,W)$ 表示从 $V$ 到 $W$ 的全部线性映射</li>
+<li>$\mathbf{F}^{m,n}\triangleq \mathbf{F}^m\times\mathbf{F}^n$ 可看作所有 $m\times n$ 矩阵</li>
+<li>线性泛函：从 $V$ 到 $\mathbf{F}$ 的线性映射，即为 $\mathcal{L}(V,\mathbf{F})$ 中的元素</li>
+<li><p>对偶空间 $V’$：$V$ 上所有线性泛函构成的向量空间</p>
+</li>
+<li><p>对偶基 $\{\varphi_1,\dots,\varphi_n\}$： $\varphi_j(e_k)=\delta_{jk}$</p>
+</li>
+<li>对偶映射 $T’$：$T’(\varphi)=\varphi\circ T ,\quad T’\in\mathcal{L}(V’,W’), \varphi\in W’,T’\in V’$</li>
+<li>零化子 $U^0$：$U^0=\{\varphi\in V’:\varphi(u)=0,\forall u\in U\},U\subset V$</li>
 </ul>
-<h4 id="重要结论">重要结论</h4>
-<ul>
-<li><p><span class="math inline">\(\mathcal{M}(T)\)</span> 为 <span class="math inline">\(T\in\mathcal{L}(V,W)\)</span> 的矩阵表示 , 其实是一个从 <span class="math inline">\(\mathcal{L}(V,W)\to\mathbf{F}^{m,n}\)</span> 的同构。</p></li>
-<li>对偶映射的代数性质：<span class="math inline">\((aS+bT)’=aS’+bT’\)</span>, <span class="math inline">\((ST)’=T’S&#39;\)</span></li>
-<li><span class="math inline">\(T’\)</span> 的矩阵是 <span class="math inline">\(T\)</span> 的矩阵的转置</li>
-<li><span class="math inline">\(\dim V’=\dim V\)</span></li>
-<li><span class="math inline">\(\dim U+\dim U^0=\dim V\)</span></li>
-<li><span class="math inline">\(T 满\iff T’单, N(T’)=R(T)^0\)</span></li>
-<li><p>$ T单T’满,R(T’)=N(T)^0$</p></li>
-<li><p><span class="math inline">\(\dim R(T)=\dim R(T&#39;)\)</span></p></li>
+<h4 id="重要结论"><a href="#重要结论" class="headerlink" title="重要结论"></a>重要结论</h4><ul>
+<li><p>$\mathcal{M}(T)$ 为 $T\in\mathcal{L}(V,W)$ 的矩阵表示 , 其实是一个从 $\mathcal{L}(V,W)\to\mathbf{F}^{m,n}$ 的同构。</p>
+</li>
+<li><p>对偶映射的代数性质：$(aS+bT)’=aS’+bT’$, $(ST)’=T’S’$</p>
+</li>
+<li>$T’$ 的矩阵是 $T$ 的矩阵的转置</li>
+<li>$\dim V’=\dim V$</li>
+<li>$\dim U+\dim U^0=\dim V$</li>
+<li>$T 满\iff T’单, N(T’)=R(T)^0$</li>
+<li><p>$ T单\iff T’满,R(T’)=N(T)^0$</p>
+</li>
+<li><p>$\dim R(T)=\dim R(T’)$</p>
+</li>
 </ul>
-<h3 id="里斯表示定理">里斯表示定理</h3>
-<p>设 <span class="math inline">\(V\)</span> 是有限维的且 <span class="math inline">\(\varphi\)</span> 是 <span class="math inline">\(V\)</span> 上的线性泛函，则存在唯一的向量 <span class="math inline">\(u\in V\)</span> 使得对每个 <span class="math inline">\(v\in V\)</span> 均有 <span class="math inline">\(\varphi(v)=\langle v,u\rangle\)</span>.</p>
-<h2 id="多项式">4. 多项式</h2>
-<h3 id="带余除法">带余除法</h3>
-<p>设 <span class="math inline">\(p,s\in \mathcal{P}(\mathbb{F})\)</span> 且 <span class="math inline">\(s\neq 0\)</span>, 则存在唯一多项式 <span class="math inline">\(q,r\in\mathcal{P}(\mathbb{F})\)</span> 使得 <span class="math display">\[
+<h3 id="里斯表示定理"><a href="#里斯表示定理" class="headerlink" title="里斯表示定理"></a>里斯表示定理</h3><p>设 $V$ 是有限维的且 $\varphi$ 是 $V$ 上的线性泛函，则存在唯一的向量 $u\in V$ 使得对每个 $v\in V$ 均有 $\varphi(v)=\langle v,u\rangle$. </p>
+<h2 id="4-多项式"><a href="#4-多项式" class="headerlink" title="4. 多项式"></a>4. 多项式</h2><h3 id="带余除法"><a href="#带余除法" class="headerlink" title="带余除法"></a>带余除法</h3><p>设 $p,s\in \mathcal{P}(\mathbb{F})$ 且 $s\neq 0$, 则存在唯一多项式 $q,r\in\mathcal{P}(\mathbb{F})$ 使得</p>
+<script type="math/tex; mode=display">
 p=sq+r
-\notag
-\]</span> 且 <span class="math inline">\(\deg\ r&lt;\deg\ s\)</span> .</p>
-<p>证明：</p>
-<p>​ 记 <span class="math inline">\(n=\deg p,m =\deg s\)</span></p>
-<p>​ <span class="math inline">\(n&gt;m\)</span> 时： <span class="math display">\[
+\notag</script><p>且 $\deg\ r&lt;\deg\ s$ .</p>
+<p>证明： </p>
+<p>​        记 $n=\deg p,m =\deg s$ </p>
+<p>​        $n&gt;m$ 时：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-&amp;\because T:\mathcal{P_{n-m}}\times\mathcal{P_{m-1}}\to\mathcal{P_{n}},\quad (q,r)\mapsto sq+r \quad 是线性双射
+&\because T:\mathcal{P_{n-m}}\times\mathcal{P_{m-1}}\to\mathcal{P_{n}},\quad (q,r)\mapsto sq+r \quad 是线性双射
 \\
-&amp;\therefore\{(q,r)\mid q\in \mathcal{P_{n-m}},r\in\mathcal{P_{m-1}}\}\cong\{sq+r\mid q\in \mathcal{P_{n-m}},r\in\mathcal{P_{m-1}}\}
+&\therefore\{(q,r)\mid q\in \mathcal{P_{n-m}},r\in\mathcal{P_{m-1}}\}\cong\{sq+r\mid q\in \mathcal{P_{n-m}},r\in\mathcal{P_{m-1}}\}
 \\
-&amp;\because \dim \mathcal{P_{n-m}}\times\mathcal{P_{m-1}}=(n-m+1)+(m-1+1)=n+1\\
-&amp;\therefore \dim R(T)=n+1=\dim \mathcal{P_n}\\
-&amp;\therefore \{sq+r\mid q\in \mathcal{P_{n-m}},r\in\mathcal{P_{m-1}}\}\cong \mathcal{P_n(\mathbb{F})}
-\end{aligned}
-\]</span></p>
-<h3 id="代数基本定理">代数基本定理</h3>
-<p>任何一个次数大于 <span class="math inline">\(0\)</span> 的复多项式都至少有一个复数根。</p>
+&\because \dim \mathcal{P_{n-m}}\times\mathcal{P_{m-1}}=(n-m+1)+(m-1+1)=n+1\\
+&\therefore \dim R(T)=n+1=\dim \mathcal{P_n}\\
+&\therefore \{sq+r\mid q\in \mathcal{P_{n-m}},r\in\mathcal{P_{m-1}}\}\cong \mathcal{P_n(\mathbb{F})}
+\end{aligned}</script><h3 id="代数基本定理"><a href="#代数基本定理" class="headerlink" title="代数基本定理"></a>代数基本定理</h3><p>任何一个次数大于 $0$ 的复多项式都至少有一个复数根。</p>
 <p>证明：</p>
-<p>​ 若 <span class="math inline">\(p\in \mathbf{C}[x]\)</span> 没有根，则 <span class="math inline">\(\displaystyle\frac 1 p\)</span> 为全平面有界的解析函数。由刘维尔定理知其必为常数。</p>
-<h3 id="拉格朗日多项式">拉格朗日多项式</h3>
-<p><span class="math display">\[
-f_i (x)=\prod_{\substack{s=1\\s\neq i}}^n \frac{x-c_s}{c_i-c_s}
-\]</span></p>
-<p><span class="math inline">\(\{f_0,f_1,\dots,f_n\}\)</span> 构成了 $[x]_{n} $ 的一组代入意义下的单位正交基（ <span class="math inline">\(f_i(c_j)=\delta_{ij}\)</span>）</p>
-<p>拉格朗日插值公式： $g(x)=b_i f_i $ 满足： <span class="math inline">\(g(c_i)=b_i\)</span> .</p>
-<h2 id="矩阵">5. 矩阵</h2>
-<h3 id="秩">秩</h3>
-<ul>
+<p>​        若 $p\in \mathbf{C}[x]$  没有根，则 $\displaystyle\frac 1 p$ 为全平面有界的解析函数。由刘维尔定理知其必为常数。</p>
+<h3 id="拉格朗日多项式"><a href="#拉格朗日多项式" class="headerlink" title="拉格朗日多项式"></a>拉格朗日多项式</h3><script type="math/tex; mode=display">
+f_i (x)=\prod_{\substack{s=1\\s\neq i}}^n \frac{x-c_s}{c_i-c_s}</script><p>$\{f_0,f_1,\dots,f_n\}$ 构成了 $\mathbf{F}[x]_{\leq n} $ 的一组代入意义下的单位正交基（ $f_i(c_j)=\delta_{ij}$）</p>
+<p>拉格朗日插值公式： $g(x)=\sum b_i f_i $ 满足： $g(c_i)=b_i$ .</p>
+<h2 id="5-矩阵"><a href="#5-矩阵" class="headerlink" title="5. 矩阵"></a>5. 矩阵</h2><h3 id="秩"><a href="#秩" class="headerlink" title="秩"></a>秩</h3><ul>
 <li>定义与意义</li>
 </ul>
 <p>矩阵的列向量的极大线性无关组的元素个数。</p>
-<p><span class="math inline">\(A:m\times n\iff \sigma:\mathbb{R}^n\to\mathbb{R}^m\)</span></p>
-<p>由于： <span class="math display">\[
+<p>$A:m\times n\iff \sigma:\mathbb{R}^n\to\mathbb{R}^m$</p>
+<p>由于：</p>
+<script type="math/tex; mode=display">
 R(A)=\left(
 \begin{matrix}
 a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n\\
@@ -1357,156 +1357,134 @@ a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n\\
 a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n
 \end{matrix}
 \right)
-=\mathscr{L}\left\{ \left(\begin{aligned}a_{11}\\a_{21}\\ \vdots \\ a_{m1}\end{aligned}\right),\left(\begin{aligned}a_{12}\\a_{22}\\ \vdots \\ a_{m2}\end{aligned}\right),\cdots,\left(\begin{aligned}a_{1n}\\a_{2n}\\ \vdots \\ a_{mn}\end{aligned}\right)\right\}
-\]</span> <span class="math inline">\(A\)</span> 的列秩等于 <span class="math inline">\(A\)</span> 的列空间维数，也是对应线性映射的像空间维数 <span class="math inline">\(\dim R(A)\)</span>。</p>
+=\mathscr{L}\left\{ \left(\begin{aligned}a_{11}\\a_{21}\\ \vdots \\ a_{m1}\end{aligned}\right),\left(\begin{aligned}a_{12}\\a_{22}\\ \vdots \\ a_{m2}\end{aligned}\right),\cdots,\left(\begin{aligned}a_{1n}\\a_{2n}\\ \vdots \\ a_{mn}\end{aligned}\right)\right\}</script><p>$A$ 的列秩等于 $A$ 的列空间维数，也是对应线性映射的像空间维数 $\dim R(A)$。</p>
 <ul>
-<li>行秩 <span class="math inline">\(=\)</span> 列秩</li>
+<li>行秩 $=$ 列秩</li>
 </ul>
-<h3 id="行列式">行列式</h3>
-<ul>
-<li><span class="math inline">\(\det (A)=\det(A^T)\)</span> 证：初等矩阵转置行列式不变，将矩阵 <span class="math inline">\(A\)</span> 进行初等矩阵分解</li>
+<h3 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h3><ul>
+<li>$\det (A)=\det(A^T)$     证：初等矩阵转置行列式不变，将矩阵 $A$ 进行初等矩阵分解</li>
 </ul>
-<h2 id="特征值理论">6. 特征值理论</h2>
-<h3 id="特征向量线性无关">特征向量线性无关</h3>
-<p>相应于不同特征值的特征向量线性无关。</p>
+<h2 id="6-特征值理论"><a href="#6-特征值理论" class="headerlink" title="6. 特征值理论"></a>6. 特征值理论</h2><h3 id="特征向量线性无关"><a href="#特征向量线性无关" class="headerlink" title="特征向量线性无关"></a>特征向量线性无关</h3><p>相应于不同特征值的特征向量线性无关。</p>
 <p>证明：</p>
-<p>​ 设 <span class="math inline">\(T\in \mathcal{L}(V)\)</span> ，设 <span class="math inline">\(\lambda_1,\dots,\lambda_m\)</span> 是 <span class="math inline">\(T\)</span> 对互不相同的特征值， <span class="math inline">\(v_1,\dots,v_m\)</span> 是相应的特征向量，则 <span class="math inline">\(v_1,\dots,v_m\)</span> 是线性无关的。</p>
-<p>​ 设 <span class="math inline">\(k\)</span> 是使得 <span class="math inline">\(v_k=span\{v_1,\dots,v_{k-1}\}\)</span> 成立的<strong>最小</strong>正整数。 <span class="math display">\[
+<p>​        设 $T\in \mathcal{L}(V)$ ，设 $\lambda_1,\dots,\lambda_m$ 是 $T$ 对互不相同的特征值， $v_1,\dots,v_m$ 是相应的特征向量，则 $v_1,\dots,v_m$ 是线性无关的。</p>
+<p>​        设 $k$ 是使得 $v_k=span\{v_1,\dots,v_{k-1}\}$ 成立的<strong>最小</strong>正整数。</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-v_k&amp;=a_1v_1+\cdots+a_{k-1}v_{k-1}\\
-T(v_k)=\lambda_k v_k&amp;=a_1\lambda_1v_1+\cdots+a_{k-1}\lambda_{k-1}v_{k-1}\\
-\lambda_k v_k&amp;=a_1\lambda_k v_1+\cdots+a_{k-1}\lambda_{k}v_{k-1}
+v_k&=a_1v_1+\cdots+a_{k-1}v_{k-1}\\
+T(v_k)=\lambda_k v_k&=a_1\lambda_1v_1+\cdots+a_{k-1}\lambda_{k-1}v_{k-1}\\
+\lambda_k v_k&=a_1\lambda_k v_1+\cdots+a_{k-1}\lambda_{k}v_{k-1}
 \\
 \\
-\implies &amp;a_1(\lambda_1-\lambda_k)v_1+\cdots+a_{k-1}(\lambda_{k-1}-\lambda_{k})v_{k-1}=0\\
-\implies &amp;a_1=\cdots=a_{k-1}=0
-\end{aligned}
-\]</span> ​ 矛盾，故不存在这样的 <span class="math inline">\(k\)</span> ， 特征向量线性无关。</p>
-<h3 id="特征子空间">特征子空间</h3>
-<p>特征子空间是不变子空间。</p>
+\implies &a_1(\lambda_1-\lambda_k)v_1+\cdots+a_{k-1}(\lambda_{k-1}-\lambda_{k})v_{k-1}=0\\
+\implies &a_1=\cdots=a_{k-1}=0
+\end{aligned}</script><p>​        矛盾，故不存在这样的 $k$ ， 特征向量线性无关。</p>
+<h3 id="特征子空间"><a href="#特征子空间" class="headerlink" title="特征子空间"></a>特征子空间</h3><p>特征子空间是不变子空间。</p>
 <p>特征子空间的和是直和。</p>
-<p><span class="math inline">\(i.e.\)</span> <span class="math display">\[
+<p>$i.e.$ </p>
+<script type="math/tex; mode=display">
 W=E_{\lambda_1}+\cdots + E_{\lambda_m}=E_{\lambda_1}\oplus \cdots \oplus E_{\lambda_m}
-\notag
-\]</span> 证明：</p>
-<p>设<span class="math inline">\(\lambda_j\)</span> 和 <span class="math inline">\(E_{\lambda_j}\)</span> 是 <span class="math inline">\(n\)</span> 维线性空间 <span class="math inline">\(V\)</span> 的线性变换 <span class="math inline">\(T\)</span> 的 <span class="math inline">\(m\)</span> 个互不相同的特征值及相应的特征子空间，则只需证明<strong>零向量</strong>在 <span class="math inline">\(W\)</span> 中的<strong>分解唯一</strong>。</p>
-<p>即证： <span class="math inline">\(\xi_1+\cdots \xi_m=0\implies \xi_i=0,\quad \xi_i\in E_{\lambda_i}\)</span></p>
-<p>注意 <span class="math inline">\(\xi_i\)</span> 是特征子空间 <span class="math inline">\(E_{\lambda_i}\)</span> 中的向量，由属于 <span class="math inline">\(\lambda_i\)</span> 的特征向量线性组合而成，仍有 <span class="math inline">\(T(\xi_i)=\lambda_i\xi_i\)</span></p>
-<p><strong>归纳</strong>证明： $$ \begin{aligned} m=2: _1+_2=0 &amp;T(_1+_2)=_1_1+_2_2=0\ &amp;(_1-_2)_2=0\ &amp;_1=_2=0\</p>
-<p>\end{aligned} $$</p>
-<p>设对 $ m-1 $ 结论成立，考虑 $ m $ : <span class="math display">\[
+\notag</script><p>证明：</p>
+<p>设$\lambda_j$ 和 $E_{\lambda_j}$ 是 $n$ 维线性空间 $V$ 的线性变换 $T$ 的 $m$ 个互不相同的特征值及相应的特征子空间，则只需证明<strong>零向量</strong>在 $W$ 中的<strong>分解唯一</strong>。</p>
+<p>即证： $\xi_1+\cdots \xi_m=0\implies \xi_i=0,\quad \xi_i\in E_{\lambda_i}$ </p>
+<p>注意 $\xi_i$ 是特征子空间 $E_{\lambda_i}$ 中的向量，由属于 $\lambda_i$ 的特征向量线性组合而成，仍有 $T(\xi_i)=\lambda_i\xi_i$</p>
+<p><strong>归纳</strong>证明：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
-&amp; \xi_1+\cdots+\xi_m=0\\
-&amp;T(\xi_1+\cdots+\xi_m)=\lambda_1\xi_1+\cdots+\lambda_m\xi_m=0\\
-&amp;(\lambda_1-\lambda_m)\xi_1+\cdots+(\lambda_{m-1}-\lambda_m)\xi_{m-1}=0\\
-\implies&amp; \xi_1=\cdots=\xi_{m-1}=0\implies \xi_m=0
-\end{aligned}
-\]</span></p>
-<p>由此也可以得到属于不同特征值的特征向量线性无关，因为 <span class="math inline">\(E_{\lambda_i}\cap E_{\lambda_j}={\vec 0}\)</span></p>
-<h3 id="可对角化的条件">可对角化的条件</h3>
-<p><span class="math inline">\(n\)</span> 维线性空间 <span class="math inline">\(V\)</span> 上的线性变换 <span class="math inline">\(T\)</span> 的表示矩阵 <span class="math inline">\(M(T)\)</span> 可对角化：</p>
-<p>$ $ <span class="math inline">\(T\)</span> 有 <span class="math inline">\(n\)</span> 个(线性无关的)特征向量 or <span class="math inline">\(V\)</span> 有由 <span class="math inline">\(T\)</span> 的特征向量构成的基</p>
-<p><span class="math inline">\(\iff\)</span> $ V=E_{<em>1}E</em>{_m} $ (已经知道和是直和，接下来只需证明和就是 <span class="math inline">\(V\)</span> ,由有由特征向量构成的基即得)</p>
-<p><span class="math inline">\(\iff\)</span> <span class="math inline">\(T\)</span> 的每个特征值的重数等于其特征子空间的维数 ( 代数重数 <span class="math inline">\(=\)</span> 几何重数 ）, 且不同特征值的重数之和等 于 <span class="math inline">\(n\)</span></p>
+m=2: \quad \xi_1+\xi_2=0 &\implies T(\xi_1+\xi_2)=\lambda_1\xi_1+\lambda_2\xi_2=0\\
+&\implies (\lambda_1-\lambda_2)\xi_2=0\\
+&\implies \xi_1=\xi_2=0\\
+
+
+\end{aligned}</script><p>设对 $ m-1 $ 结论成立，考虑 $ m $ :</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& \xi_1+\cdots+\xi_m=0\\
+&T(\xi_1+\cdots+\xi_m)=\lambda_1\xi_1+\cdots+\lambda_m\xi_m=0\\
+&(\lambda_1-\lambda_m)\xi_1+\cdots+(\lambda_{m-1}-\lambda_m)\xi_{m-1}=0\\
+\implies& \xi_1=\cdots=\xi_{m-1}=0\implies \xi_m=0
+\end{aligned}</script><p>由此也可以得到属于不同特征值的特征向量线性无关，因为 $E_{\lambda_i}\cap E_{\lambda_j}={\vec 0}$</p>
+<h3 id="可对角化的条件"><a href="#可对角化的条件" class="headerlink" title="可对角化的条件"></a>可对角化的条件</h3><p>$n$ 维线性空间 $V$ 上的线性变换 $T$ 的表示矩阵 $M(T)$ 可对角化：</p>
+<p>$ \iff$  $T$ 有 $n$ 个(线性无关的)特征向量  or  $V$ 有由 $T$ 的特征向量构成的基</p>
+<p>$\iff$ $ V=E_{\lambda_1}\oplus \cdots \oplus E_{\lambda_m} $  (已经知道和是直和，接下来只需证明和就是 $V$ ,由有由特征向量构成的基即得)</p>
+<p>$\iff$ $T$ 的每个特征值的重数等于其特征子空间的维数 ( 代数重数 $=$ 几何重数 ）, 且不同特征值的重数之和等                   于 $n$ </p>
 <p>注：一般情况下，代数重数大于等于几何重数，证明先放一放。</p>
-<h3 id="矩阵的秩维数与特征值">矩阵的秩、维数与特征值</h3>
-<p>特征值个数等于矩阵的维数。其中，不等于 <span class="math inline">\(0\)</span> 且<strong>不同</strong>的特征值个数为矩阵的秩。</p>
+<h3 id="矩阵的秩、维数与特征值"><a href="#矩阵的秩、维数与特征值" class="headerlink" title="矩阵的秩、维数与特征值"></a>矩阵的秩、维数与特征值</h3><p>特征值个数等于矩阵的维数。其中，不等于 $0$ 且<strong>不同</strong>的特征值个数为矩阵的秩。</p>
 <p>也就是说，矩阵的秩是特征子空间的种类数，如何理解和证明？</p>
-<h3 id="广义特征向量">广义特征向量</h3>
-<p>广义特征向量 <span class="math inline">\(v\)</span> : 如果存在正整数 <span class="math inline">\(j\)</span> 使得 <span class="math inline">\((T-\lambda I)^j v=0\)</span> .</p>
-<p>广义特征空间 <span class="math inline">\(G(\lambda,T)\)</span> ：<span class="math inline">\(T\)</span> 的相应于 <span class="math inline">\(\lambda\)</span> 的所有广义特征向量的集合。</p>
+<h3 id="广义特征向量"><a href="#广义特征向量" class="headerlink" title="广义特征向量"></a>广义特征向量</h3><p>广义特征向量 $v$ : 如果存在正整数 $j$ 使得 $(T-\lambda I)^j v=0$ .</p>
+<p>广义特征空间 $G(\lambda,T)$ ：$T$ 的相应于 $\lambda$ 的所有广义特征向量的集合。</p>
 <p><strong>大概需要了解的有以下几点：</strong></p>
 <ul>
-<li><p>代数重数 <span class="math inline">\(d =\)</span> 广义特征空间的维数 <span class="math inline">\(\dim G_\lambda\)</span></p></li>
-<li><p><span class="math inline">\(G_\lambda=N\left((T-\lambda I)^d)\right)\)</span></p>
+<li><p>代数重数 $d =$  广义特征空间的维数 $\dim G_\lambda$</p>
+</li>
+<li><p>$G_\lambda=N\left((T-\lambda I)^d)\right)$ </p>
 <p>证明（感谢张鸿博！！）：</p>
 <ul>
-<li><p>根据互相包含可以很容易地证明 <span class="math inline">\(G_\lambda=N\left((T-\lambda I)^{\dim V}\right)\)</span></p></li>
-<li>零空间有一个包含链，<span class="math inline">\((T-\lambda I)\)</span> 的次数每增加一次，它的零空间就增加一维。最多到 <span class="math inline">\(\dim G_\lambda=d\)</span> 就停止增长了。</li>
-<li><p>于是 <span class="math inline">\(N\left((T-\lambda I)^{\dim V}\right)=N\left((T-\lambda I)^{d}\right)\)</span></p></li>
-</ul></li>
+<li><p>根据互相包含可以很容易地证明 $G_\lambda=N\left((T-\lambda I)^{\dim V}\right)$</p>
+</li>
+<li><p>零空间有一个包含链，$(T-\lambda I)$ 的次数每增加一次，它的零空间就增加一维。最多到 $\dim G_\lambda=d$ 就停止增长了。</p>
+</li>
+<li>于是 $N\left((T-\lambda I)^{\dim V}\right)=N\left((T-\lambda I)^{d}\right)$</li>
 </ul>
-<hr />
+</li>
+</ul>
+<hr>
 <p>存疑：</p>
-<p>已知 <span class="math display">\[
-G_\lambda=N\left((T-\lambda I)^{k}\right)
-\]</span> <span class="math inline">\(N\)</span> 表示核空间, <span class="math inline">\(k\)</span> 为 <span class="math inline">\(G_\lambda\)</span> 的代数重数，<span class="math inline">\(G_\lambda\)</span> 为广义特征空间。</p>
-<p>现在想办法找到 <span class="math inline">\(x\)</span> 使得 <span class="math inline">\(x\leq k\)</span> 且 <span class="math inline">\(N\left((T-\lambda I)^x\right)=N\left((T-\lambda I)^k\right)\)</span>： <span class="math display">\[
-x=\dim k-\dim E_\lambda+1
-\]</span></p>
-<ol type="1">
+<p>已知</p>
+<script type="math/tex; mode=display">
+G_\lambda=N\left((T-\lambda I)^{k}\right)</script><p>$N$ 表示核空间, $k$ 为 $G_\lambda$ 的代数重数，$G_\lambda$ 为广义特征空间。</p>
+<p>现在想办法找到 $x$ 使得 $x\leq k$ 且 $N\left((T-\lambda I)^x\right)=N\left((T-\lambda I)^k\right)$：</p>
+<script type="math/tex; mode=display">
+x=\dim k-\dim E_\lambda+1</script><ol>
 <li>如何证明？</li>
-<li>如果上面的式子是对的，<span class="math inline">\(x\)</span> 可以更小吗？</li>
+<li>如果上面的式子是对的，$x$ 可以更小吗？</li>
 </ol>
-<hr />
-<h4 id="零空间的停止增长">零空间的停止增长</h4>
-<h4 id="广义特征向量线性无关性">广义特征向量线性无关性</h4>
-<h4 id="广义特征空间">广义特征空间</h4>
-<h3 id="特征多项式">特征多项式</h3>
-<h3 id="极小多项式">极小多项式</h3>
-<ul>
-<li><span class="math inline">\(T\)</span> 是可逆的当且仅当 <span class="math inline">\(T\)</span> 的极小多项式常数项非零</li>
+<hr>
+<h4 id="零空间的停止增长"><a href="#零空间的停止增长" class="headerlink" title="零空间的停止增长"></a>零空间的停止增长</h4><h4 id="广义特征向量线性无关性"><a href="#广义特征向量线性无关性" class="headerlink" title="广义特征向量线性无关性"></a>广义特征向量线性无关性</h4><h4 id="广义特征空间"><a href="#广义特征空间" class="headerlink" title="广义特征空间"></a>广义特征空间</h4><h3 id="特征多项式"><a href="#特征多项式" class="headerlink" title="特征多项式"></a>特征多项式</h3><h3 id="极小多项式"><a href="#极小多项式" class="headerlink" title="极小多项式"></a>极小多项式</h3><ul>
+<li>$T$ 是可逆的当且仅当 $T$ 的极小多项式常数项非零</li>
 </ul>
-<h4 id="凯莱哈密顿定理">凯莱—哈密顿定理</h4>
-<h3 id="jordan-标准型">Jordan 标准型</h3>
-<h2 id="算子理论">7. 算子理论</h2>
-<h3 id="不变子空间">不变子空间</h3>
-<p>待整理</p>
-<h3 id="正交投影">正交投影</h3>
-<p>待整理</p>
-<h3 id="自伴算子">自伴算子</h3>
-<p><span class="math inline">\(T=T^*\)</span>.</p>
-<p>类比：<span class="math inline">\(z\)</span> 是实数</p>
-<h4 id="性质">性质</h4>
-<ul>
-<li><p><span class="math inline">\(\langle Tv,w\rangle=\langle v,Tw\rangle\)</span></p></li>
-<li><p>特征值都是实数</p>
-<p>证：<span class="math inline">\(\lambda\|v\|^2=\langle \lambda v,v\rangle=\langle Tv,v\rangle=\langle v,Tv\rangle=\langle v,\lambda v\rangle=\overline\lambda \|v\|^2\)</span></p></li>
-<li><p>在 <span class="math inline">\(\mathbf{C}\)</span>, 只有零算子才能使 <span class="math inline">\(Tv\)</span> 总正交于 <span class="math inline">\(v\)</span> : <span class="math inline">\(\forall v\in V ,\langle Tv,v\rangle=0\implies T\equiv 0\)</span></p>
-<p>证： <span class="math display">\[
+<h4 id="凯莱—哈密顿定理"><a href="#凯莱—哈密顿定理" class="headerlink" title="凯莱—哈密顿定理"></a>凯莱—哈密顿定理</h4><h3 id="Jordan-标准型"><a href="#Jordan-标准型" class="headerlink" title="Jordan 标准型"></a>Jordan 标准型</h3><h2 id="7-算子理论"><a href="#7-算子理论" class="headerlink" title="7. 算子理论"></a>7. 算子理论</h2><h3 id="不变子空间"><a href="#不变子空间" class="headerlink" title="不变子空间"></a>不变子空间</h3><p>待整理</p>
+<h3 id="正交投影"><a href="#正交投影" class="headerlink" title="正交投影"></a>正交投影</h3><p>待整理</p>
+<h3 id="自伴算子"><a href="#自伴算子" class="headerlink" title="自伴算子"></a>自伴算子</h3><p>$T=T^*$.</p>
+<p>类比：$z$ 是实数</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ul>
+<li><p>$\langle Tv,w\rangle=\langle v,Tw\rangle$</p>
+</li>
+<li><p>特征值都是实数 </p>
+<p>证：$\lambda|v|^2=\langle \lambda v,v\rangle=\langle Tv,v\rangle=\langle v,Tv\rangle=\langle v,\lambda v\rangle=\overline\lambda |v|^2$</p>
+</li>
+<li><p>在 $\mathbf{C}$, 只有零算子才能使 $Tv$ 总正交于 $v$ : $\forall v\in V ,\langle Tv,v\rangle=0\implies T\equiv 0$</p>
+<p>证：</p>
+<script type="math/tex; mode=display">
 \begin{aligned}
 \forall u,w\in V\\
-\langle Tu,w \rangle=&amp;\frac{\left\langle T(u+w),u+w\right\rangle-\left\langle T(u-w),u-w\right\rangle}{4}\\
-&amp;+\frac{\left\langle T(u+iw),u+iw\right\rangle-\left\langle T(u-iw),u-iw\right\rangle}{4}
-\end{aligned}
-\]</span></p></li>
-<li><p>在 <span class="math inline">\(\mathbf{C}\)</span>, $vV,Tv,v $ (充要)</p>
-<p>证： <span class="math inline">\(\langle Tv,v\rangle-\overline{\langle Tv,v\rangle}=0\)</span></p></li>
-<li><p>相应于不同特征值的特征向量正交</p></li>
-</ul>
-<h3 id="正规算子">正规算子</h3>
-<p>和伴随可交换：<span class="math inline">\(TT^*=T^*T\)</span></p>
-<p>类比：复数 <span class="math inline">\(z\)</span> : 显然 <span class="math inline">\(zz^*=z^*z\)</span></p>
-<h4 id="性质-1">性质</h4>
-<ul>
-<li><p><span class="math inline">\(\|Tv\|=\|T^* v\|\)</span> (充要)</p>
-<p>证： <span class="math inline">\(TT^*-T^*T=0\iff \forall v\in V, \langle (TT^*-T^*T)v,v\rangle=0\iff \|T^*v\|^2=\|Tv\|^2\)</span></p></li>
-<li><p><span class="math inline">\(T\)</span> 和 <span class="math inline">\(T^*\)</span> 有相同的特征向量 （是充分的吗？）</p>
-<p>具体：<span class="math inline">\(v\)</span> 是 <span class="math inline">\(T\)</span> 的相应于特征值 <span class="math inline">\(\lambda\)</span> 的特征向量，则 <span class="math inline">\(v\)</span> 也是 <span class="math inline">\(T^*\)</span> 的相应于 <span class="math inline">\(\overline\lambda\)</span> 的特征向量</p>
-<p>证：<span class="math inline">\(0=\|(T-\lambda I)v\|=\|(T-\lambda I)^*v\|=\|(T^*-\overline\lambda I)v\|\)</span></p></li>
+\langle Tu,w \rangle=&\frac{\left\langle T(u+w),u+w\right\rangle-\left\langle T(u-w),u-w\right\rangle}{4}\\
+&+\frac{\left\langle T(u+iw),u+iw\right\rangle-\left\langle T(u-iw),u-iw\right\rangle}{4}
+\end{aligned}</script></li>
+<li><p>在 $\mathbf{C}$, $\forall v\in V,\langle Tv,v\rangle\in \mathbf{R} $  (充要) </p>
+<p>证： $\langle Tv,v\rangle-\overline{\langle Tv,v\rangle}=0$</p>
+</li>
 <li><p>相应于不同特征值的特征向量正交</p>
-<p>证：<span class="math inline">\((\lambda-\mu)\langle v,w\rangle=\langle \lambda v,w\rangle-\langle v,\overline\mu w\rangle=\langle Tv,w\rangle-\langle v,T^*w\rangle=0\)</span></p>
-<p>注：<span class="math inline">\(\lambda\)</span> 是 <span class="math inline">\(T\)</span> 的特征值当且仅当 <span class="math inline">\(\overline\lambda\)</span> 是 <span class="math inline">\(T^*\)</span> 的特征值。 （ <span class="math inline">\(\det (T-\lambda I)=0\iff \det (T^*-\overline \lambda I)=0\)</span> ）</p></li>
+</li>
 </ul>
-<h3 id="幂零算子">幂零算子</h3>
-<ul>
-<li>特征值为 <span class="math inline">\(0\)</span></li>
+<h3 id="正规算子"><a href="#正规算子" class="headerlink" title="正规算子"></a>正规算子</h3><p>和伴随可交换：$TT^<em>=T^</em>T$</p>
+<p>类比：复数 $z$ : 显然 $zz^<em>=z^</em>z$</p>
+<h4 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h4><ul>
+<li><p>$|Tv|=|T^* v|$  (充要)</p>
+<p>证： $TT^<em>-T^</em>T=0\iff \forall v\in V, \langle (TT^<em>-T^</em>T)v,v\rangle=0\iff |T^*v|^2=|Tv|^2$</p>
+</li>
+<li><p>$T$ 和 $T^*$ 有相同的特征向量 （是充分的吗？）</p>
+<p>具体：$v$ 是 $T$ 的相应于特征值 $\lambda$ 的特征向量，则 $v$ 也是 $T^*$ 的相应于 $\overline\lambda$ 的特征向量</p>
+<p>证：$0=|(T-\lambda I)v|=|(T-\lambda I)^<em>v|=|(T^</em>-\overline\lambda I)v|$</p>
+</li>
+<li><p>相应于不同特征值的特征向量正交</p>
+<p>证：$(\lambda-\mu)\langle v,w\rangle=\langle \lambda v,w\rangle-\langle v,\overline\mu w\rangle=\langle Tv,w\rangle-\langle v,T^*w\rangle=0$</p>
+<p>注：$\lambda$ 是 $T$ 的特征值当且仅当 $\overline\lambda$ 是 $T^<em>$ 的特征值。 （ $\det (T-\lambda I)=0\iff \det (T^</em>-\overline \lambda I)=0$ ）</p>
+</li>
 </ul>
-<h3 id="谱分解">谱分解</h3>
-<h4 id="复谱定理">复谱定理</h4>
-<h4 id="实谱定理">实谱定理</h4>
-<h4 id="谱分解定理">谱分解定理</h4>
-<h3 id="奇异值分解">奇异值分解</h3>
-<h4 id="正算子">正算子</h4>
-<h5 id="刻画">刻画</h5>
-<h4 id="等距同构">等距同构</h4>
-<h5 id="刻画-1">刻画</h5>
-<h4 id="极分解">极分解</h4>
-<h4 id="奇异值分解-1">奇异值分解</h4>
-<h5 id="奇异值">奇异值</h5>
-<h5 id="线性变换奇异值定理">线性变换奇异值定理</h5>
-<h5 id="矩阵的奇异值分解">矩阵的奇异值分解</h5>
-
+<h3 id="幂零算子"><a href="#幂零算子" class="headerlink" title="幂零算子"></a>幂零算子</h3><ul>
+<li>特征值为 $0$</li>
+</ul>
+<h3 id="谱分解"><a href="#谱分解" class="headerlink" title="谱分解"></a>谱分解</h3><h4 id="复谱定理"><a href="#复谱定理" class="headerlink" title="复谱定理"></a>复谱定理</h4><h4 id="实谱定理"><a href="#实谱定理" class="headerlink" title="实谱定理"></a>实谱定理</h4><h4 id="谱分解定理"><a href="#谱分解定理" class="headerlink" title="谱分解定理"></a>谱分解定理</h4><h3 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h3><h4 id="正算子"><a href="#正算子" class="headerlink" title="正算子"></a>正算子</h4><h5 id="刻画"><a href="#刻画" class="headerlink" title="刻画"></a>刻画</h5><h4 id="等距同构"><a href="#等距同构" class="headerlink" title="等距同构"></a>等距同构</h4><h5 id="刻画-1"><a href="#刻画-1" class="headerlink" title="刻画"></a>刻画</h5><h4 id="极分解"><a href="#极分解" class="headerlink" title="极分解"></a>极分解</h4><h4 id="奇异值分解-1"><a href="#奇异值分解-1" class="headerlink" title="奇异值分解"></a>奇异值分解</h4><h5 id="奇异值"><a href="#奇异值" class="headerlink" title="奇异值"></a>奇异值</h5><h5 id="线性变换奇异值定理"><a href="#线性变换奇异值定理" class="headerlink" title="线性变换奇异值定理"></a>线性变换奇异值定理</h5><h5 id="矩阵的奇异值分解"><a href="#矩阵的奇异值分解" class="headerlink" title="矩阵的奇异值分解"></a>矩阵的奇异值分解</h5>
       
       <!-- reward -->
       
@@ -1573,28 +1551,28 @@ x=\dim k-\dim E_\lambda+1
       
 
       
-      <p>论文链接：http://www.nlpr.ia.ac.cn/fanbin/pub/L2-Net_CVPR17.pdf</p>
-<p>代码链接：https://github.com/yuruntian/L2-Net</p>
+      <p>论文链接：<a href="http://www.nlpr.ia.ac.cn/fanbin/pub/L2-Net_CVPR17.pdf" target="_blank" rel="noopener">http://www.nlpr.ia.ac.cn/fanbin/pub/L2-Net_CVPR17.pdf</a></p>
+<p>代码链接：<a href="https://github.com/yuruntian/L2-Net" target="_blank" rel="noopener">https://github.com/yuruntian/L2-Net</a></p>
 <p>研读次数：1</p>
-<h2 id="提出的好方法">提出的好方法</h2>
-<ul>
-<li><p>a progressive sampling strategy 渐进采样策略，可使网络在有限次数内获得大量样本</p></li>
-<li><p>Discriminative Intermediate Feature map (DIF) 在中间的特征层施加了额外的监督</p></li>
+<h2 id="提出的好方法"><a href="#提出的好方法" class="headerlink" title="提出的好方法"></a>提出的好方法</h2><ul>
+<li><p>a progressive sampling strategy 渐进采样策略，可使网络在有限次数内获得大量样本</p>
+</li>
+<li><p>Discriminative Intermediate Feature map (DIF)  在中间的特征层施加了额外的监督</p>
+</li>
 <li><p>Loss function that takes three important error aspects into account:</p>
 <ul>
 <li>descriptor similarity 未完全理解</li>
-<li>descriptor compactness : ‘An interesting finding is that the degree of overfitting is directly related to the degree of correlation among descriptor dimensions’</li>
+<li>descriptor compactness :  ‘An interesting finding is that the degree of overfitting is directly related to the degree of correlation among descriptor dimensions’ </li>
 <li>intermediate feature maps 未完全理解</li>
-</ul></li>
 </ul>
-<h3 id="须了解的相关知识">须了解的相关知识</h3>
-<ul>
+</li>
+</ul>
+<h3 id="须了解的相关知识"><a href="#须了解的相关知识" class="headerlink" title="须了解的相关知识"></a>须了解的相关知识</h3><ul>
 <li>SIFT descriptor</li>
 <li>NNS (nearest neighbor search)</li>
 <li>MatchNet (a typical Siamese network)</li>
 </ul>
-<h3 id="应用">应用</h3>
-<ul>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
 <li>实现 <em>特征匹配</em> 的神经网络的训练</li>
 </ul>
 
@@ -1666,16 +1644,15 @@ x=\dim k-\dim E_\lambda+1
       
 
       
-      <p>代码链接：https://github.com/scape-research/SOSNet</p>
+      <p>代码链接：<a href="https://github.com/scape-research/SOSNet" target="_blank" rel="noopener">https://github.com/scape-research/SOSNet</a></p>
 <p>研读次数：1</p>
 <p>对 L2-Net 和超越L2的 Hard-Net 的超越。</p>
-<h2 id="待学的东西">待学的东西</h2>
-<ul>
+<h2 id="待学的东西"><a href="#待学的东西" class="headerlink" title="待学的东西"></a>待学的东西</h2><ul>
 <li>Von Mises-Fisher distribution</li>
 <li>BOLD</li>
 <li>Hard-Net</li>
 <li>First Order Similarity (FOS)</li>
-<li><span class="math inline">\(K\)</span> Nearest Neighbors (KNN)</li>
+<li>$K$ Nearest Neighbors (KNN)</li>
 </ul>
 
       
@@ -1746,23 +1723,16 @@ x=\dim k-\dim E_\lambda+1
       
 
       
-      <h1 id="数理方法整理">数理方法整理</h1>
-<center>
-作者：黄隆钤 混合1801
-</center>
-<h2 id="一-数学物理定解问题">一 数学物理定解问题</h2>
-<h3 id="定解问题的导出">1.1 定解问题的导出</h3>
-<h4 id="振动方程">（1）振动方程</h4>
-<p><span class="math display">\[
+      <h1 id="数理方法整理"><a href="#数理方法整理" class="headerlink" title="数理方法整理"></a>数理方法整理</h1><center> 作者：黄隆钤 混合1801 </center>
+
+<h2 id="一-数学物理定解问题"><a href="#一-数学物理定解问题" class="headerlink" title="一 数学物理定解问题"></a>一 数学物理定解问题</h2><h3 id="1-1-定解问题的导出"><a href="#1-1-定解问题的导出" class="headerlink" title="1.1 定解问题的导出"></a>1.1 定解问题的导出</h3><h4 id="（1）振动方程"><a href="#（1）振动方程" class="headerlink" title="（1）振动方程"></a>（1）振动方程</h4><script type="math/tex; mode=display">
 u_{tt}-a^2u_{xx}=f\left(x,t\right)
 \\
-u_{tt}-a^2\Delta u =f\left(\mathbf{x},t\right) \qquad \left(high\ dim\right)
-\]</span></p>
-<ul>
-<li><p>弦的横振动</p>
-<p><img src="https://tva1.sinaimg.cn/large/0082zybply1gc1rytn6i6j313l0lcabz.jpg" style="zoom:50%;" /></p></li>
+u_{tt}-a^2\Delta u =f\left(\mathbf{x},t\right) \qquad \left(high\ dim\right)</script><ul>
+<li>弦的横振动</li>
 </ul>
-<p>$ \ $
+<p>  <img src="https://tva1.sinaimg.cn/large/0082zybply1gc1rytn6i6j313l0lcabz.jpg" style="zoom:50%;" /></p>
+<p>$ \\ $
       
       <a class="article-more-link" href="/2020/02/19/Physics-%E6%95%B0%E7%90%86%E6%96%B9%E6%B3%95/">阅读更多...</a>
       

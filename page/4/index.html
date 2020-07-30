@@ -120,16 +120,13 @@
       
 
       
-      <h1 id="图像信息处理">图像信息处理</h1>
-<h2 id="灰度变换与空间滤波">1 灰度变换与空间滤波</h2>
-<h3 id="灰度变换str">1.1 灰度变换：<span class="math inline">\(s=T(r)\)</span></h3>
-<ul>
-<li>图像反转：<span class="math inline">\(s=L-1-r\)</span></li>
-<li>对数变换：<span class="math inline">\(s=c\log(1+r)\)</span></li>
-<li>伽马变换：<span class="math inline">\(s=cr^\gamma\)</span></li>
+      <h1 id="图像信息处理"><a href="#图像信息处理" class="headerlink" title="图像信息处理"></a>图像信息处理</h1><h2 id="1-灰度变换与空间滤波"><a href="#1-灰度变换与空间滤波" class="headerlink" title="1  灰度变换与空间滤波"></a>1  灰度变换与空间滤波</h2><h3 id="1-1-灰度变换：-s-T-r"><a href="#1-1-灰度变换：-s-T-r" class="headerlink" title="1.1 灰度变换：$s=T(r)$"></a>1.1 灰度变换：$s=T(r)$</h3><ul>
+<li>图像反转：$s=L-1-r$</li>
+<li>对数变换：$s=c\log(1+r)$</li>
+<li>伽马变换：$s=cr^\gamma$</li>
 <li>分段分式线性变换：对比度拉伸、灰度级分层、比特平面分层</li>
 </ul>
-<p>$ \ $
+<p>$ \\ $
       
       <a class="article-more-link" href="/2020/01/24/Computer-Science-Image-Processing%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多...</a>
       
@@ -199,19 +196,15 @@
       
 
       
-      <h2 id="git学习">Git学习</h2>
-<h3 id="创建版本库">创建版本库</h3>
-<p>mkdir dirname // make directory 创建目录 dirname 为目录名</p>
+      <h2 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h2><h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p>mkdir dirname // make directory 创建目录 dirname 为目录名</p>
 <p>pwd //print working directory 查看当前工作目录的完整路径</p>
 <p>ls -a // 显示所有文件及目录，包括隐藏档</p>
 <p>git init</p>
-<h3 id="修改与提交">修改与提交</h3>
-<p>git add filename1.txt filename2.txt // 把要提交的所有<em>修改</em> 放到暂存区</p>
-<p>git commit -m &quot;what I did in this commission&quot; // 一次性把暂存区的所有修改提交到分支 -m表示message</p>
+<h3 id="修改与提交"><a href="#修改与提交" class="headerlink" title="修改与提交"></a>修改与提交</h3><p>git add filename1.txt filename2.txt // 把要提交的所有<em>修改</em> 放到暂存区</p>
+<p>git commit -m “what I did in this commission” // 一次性把暂存区的所有修改提交到分支 -m表示message</p>
 <p>git log // 查看修改日志</p>
-<p>git log --graph // 查看分支合并图</p>
-<p>git log --pretty=oneline // 每次修改在一行简明显示</p>
-<p>
+<p>git log —graph // 查看分支合并图</p>
+<p>git log —pretty=oneline // 每次修改在一行简明显示</p>
       
       <a class="article-more-link" href="/2020/01/24/Computer-Science-Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多...</a>
       
@@ -281,18 +274,14 @@
       
 
       
-      <h1 id="抽象代数内容整理">抽象代数内容整理</h1>
-<h2 id="群论">1 群论</h2>
-<h3 id="群-group">1.1 群 Group</h3>
-<h4 id="群的定义">1.1.1 群的定义</h4>
-<p>一个<em>群</em> 是带有下列性质的合成法则的集合<span class="math inline">\(G\)</span> :</p>
-<ol type="1">
+      <h1 id="抽象代数内容整理"><a href="#抽象代数内容整理" class="headerlink" title="抽象代数内容整理"></a>抽象代数内容整理</h1><h2 id="1-群论"><a href="#1-群论" class="headerlink" title="1  群论"></a>1  群论</h2><h3 id="1-1-群-Group"><a href="#1-1-群-Group" class="headerlink" title="1.1 群 Group"></a>1.1 群 Group</h3><h4 id="1-1-1-群的定义"><a href="#1-1-1-群的定义" class="headerlink" title="1.1.1 群的定义"></a>1.1.1 群的定义</h4><p>一个<em>群</em> 是带有下列性质的合成法则的集合$G$ :</p>
+<ol>
 <li>合成法则满足结合律</li>
 <li>包含单位元</li>
 <li>每个元素都有逆元</li>
 </ol>
 <p>=&gt; 消去律</p>
-<p>$ \ $
+<p>$ \\ $
       
       <a class="article-more-link" href="/2020/01/20/Mathematics-Abstract-Algebra/">阅读更多...</a>
       
@@ -360,14 +349,10 @@
       
 
       
-      <h1 id="搭建此博客过程中的心得">搭建此博客过程中的心得</h1>
-<h2 id="hexo框架">1. <a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">Hexo框架</a></h2>
-<p>看到“绑定域名”之前就可以了。</p>
+      <h1 id="搭建此博客过程中的心得"><a href="#搭建此博客过程中的心得" class="headerlink" title="搭建此博客过程中的心得"></a>搭建此博客过程中的心得</h1><h2 id="1-Hexo框架"><a href="#1-Hexo框架" class="headerlink" title="1. Hexo框架"></a>1. <a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">Hexo框架</a></h2><p>看到“绑定域名”之前就可以了。</p>
 <p>理解以下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean % 清除当前缓存</span><br><span class="line">hexo g -d % generate 生成博客</span><br><span class="line">hexo d % deploy 将博客部署到GitHub</span><br><span class="line">hexo s % hexo server的简写 之后可以在localhost上访问</span><br><span class="line">hexo new &quot;bulabula&quot; %生成名为bulabula的md文件（一篇新文章）</span><br></pre></td></tr></table></figure>
-<h2 id="购买域名">2. 购买域名</h2>
-<p>选择了阿里云，发现域名买起来也挺方便的。</p>
-<p>
+<h2 id="2-购买域名"><a href="#2-购买域名" class="headerlink" title="2. 购买域名"></a>2. 购买域名</h2><p>选择了阿里云，发现域名买起来也挺方便的。</p>
       
       <a class="article-more-link" href="/2020/01/19/Other-Things-%E6%90%AD%E5%BB%BA%E6%AD%A4%E5%8D%9A%E5%AE%A2%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%BF%83%E5%BE%97/">阅读更多...</a>
       
@@ -437,33 +422,26 @@
       
 
       
-      <h1 id="supvised-learning">Supvised Learning</h1>
-<h2 id="linear-regression">1.Linear Regression</h2>
-<p>output hypotheses function: <span class="math display">\[h(x)= \theta^Tx\]</span></p>
-<p><span class="math inline">\(x\)</span> is the input vector: <span class="math display">\[x=(x_1,x_2,\cdots,x_n)^T\]</span></p>
-<p><span class="math inline">\(\theta\)</span> is the parameter vector: <span class="math display">\[\theta=(\theta_1,\theta_2,\cdots,\theta_n)^T\]</span></p>
-<p><span class="math inline">\(y\)</span> is the training output</p>
-<p><span class="math inline">\(X\)</span> is the training input matrix: <span class="math display">\[X= (x^{(1)},x^{(2)},\cdots,x^{(m)})\]</span></p>
-<p><span class="math inline">\(Y\)</span> is the training output matrix: <span class="math display">\[Y=(y^{(1)},y^{(2)},\cdots,y^{(m)})\]</span></p>
-<p>$\ $</p>
-<h3 id="lms-algorithm">LMS algorithm</h3>
-<ul>
-<li>cost function:<br />
-<span class="math display">\[
+      <h1 id="Supvised-Learning"><a href="#Supvised-Learning" class="headerlink" title="Supvised Learning"></a>Supvised Learning</h1><h2 id="1-Linear-Regression"><a href="#1-Linear-Regression" class="headerlink" title="1.Linear Regression"></a>1.Linear Regression</h2><p>output hypotheses function:    <script type="math/tex">h(x)= \theta^Tx</script></p>
+<p>$x$  is the input vector: <script type="math/tex">x=(x_1,x_2,\cdots,x_n)^T</script></p>
+<p>$\theta$  is the parameter vector:    <script type="math/tex">\theta=(\theta_1,\theta_2,\cdots,\theta_n)^T</script></p>
+<p>$y$  is the training output </p>
+<p>$X$ is the training input matrix:   <script type="math/tex">X= (x^{(1)},x^{(2)},\cdots,x^{(m)})</script></p>
+<p>$Y$ is the training output matrix:    <script type="math/tex">Y=(y^{(1)},y^{(2)},\cdots,y^{(m)})</script></p>
+<p>$\\ $ </p>
+<h3 id="LMS-algorithm"><a href="#LMS-algorithm" class="headerlink" title="LMS algorithm"></a>LMS algorithm</h3><ul>
+<li><p>cost function:    </p>
+<script type="math/tex; mode=display">
 J(\theta)=\frac{1}{2}\parallel{\theta^T X-Y}\parallel^2\\
         or : J(\theta)=\frac{1}{2}\sum\limits_{i=1}^{m}(h(x^{(i)})-y^{(i)})^2
-        \notag
-\]</span></li>
+        \notag</script><p>use <strong>matrix derivative</strong> to minimize $J$     </p>
+</li>
+<li><p>gradient descent :    </p>
+</li>
 </ul>
-<p>use <strong>matrix derivative</strong> to minimize <span class="math inline">\(J\)</span></p>
-<ul>
-<li>gradient descent :</li>
-</ul>
-<p><span class="math display">\[
+<script type="math/tex; mode=display">
 \theta_j := \theta_j-\alpha \frac{\partial}{\partial\theta_j}J(\theta)
-\notag
-\]</span></p>
-<p>
+\notag</script>
       
       <a class="article-more-link" href="/2020/01/19/Computer-Science-Machine-Learning-Supvised-Learning/">阅读更多...</a>
       
@@ -535,8 +513,7 @@ J(\theta)=\frac{1}{2}\parallel{\theta^T X-Y}\parallel^2\\
       
 
       
-      <h1 id="html-hyper-text-markup-language">HTML: Hyper Text Markup Language</h1>
-<p>速查：https://www.w3school.com.cn/tags/att_standard_id.asp</p>
+      <h1 id="HTML-Hyper-Text-Markup-Language"><a href="#HTML-Hyper-Text-Markup-Language" class="headerlink" title="HTML: Hyper Text Markup Language"></a>HTML: Hyper Text Markup Language</h1><p>速查：<a href="https://www.w3school.com.cn/tags/att_standard_id.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/tags/att_standard_id.asp</a></p>
 
       
       <!-- reward -->
