@@ -80,6 +80,318 @@
     
     
     
+    <article id="post-Physics-Theoretical-Mechanics" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/18/Physics-Theoretical-Mechanics/"
+    >Theoretical Mechanics</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/18/Physics-Theoretical-Mechanics/" class="article-date">
+  <time datetime="2020-02-18T06:11:16.000Z" itemprop="datePublished">2020-02-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Physics/">Physics</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="理论力学笔记">理论力学笔记</h1>
+<p>朗道的《力学》是我心目中第一本几乎完美的书。简洁、让我信服。</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li><p>最小作用量原理</p>
+<ul>
+<li>$S=S(,q,t)$ Lagrangian, Euler - Lagrange Equation</li>
+<li><span class="math inline">\(S=S(\vec p,\vec q,t)\implies\)</span> Hamiltonian, Hamilton Equation</li>
+<li><span class="math inline">\(S=S(\vec q,t)\)</span> （看作时间和终点坐标的函数）<span class="math inline">\(\implies\)</span> Hamilton - Jacobi Equation</li>
+</ul></li>
+<li><p>诺特定理 Noether’s Theorem</p>
+<ul>
+<li>对称性蕴含着守恒量</li>
+<li>对称性意味着在拉格朗日量中 <span class="math inline">\(\vec q \to \vec q + K\varepsilon\)</span> , 奇数阶展开不变</li>
+</ul></li>
+<li>刘维尔定理
+<ul>
+<li>正则变换</li>
+<li>相空间
+<ul>
+<li>相积分和角变量</li>
+</ul></li>
+</ul></li>
+<li><p>数学技巧</p>
+<ul>
+<li>变量替换：勒让德变换等</li>
+<li>求解简正频率用到的谱分解方法和线性方程组方法</li>
+<li>利用复变量 <span class="math inline">\(i\)</span> 求解耦合方程</li>
+</ul></li>
+<li><p>应用</p>
+<ul>
+<li><p>有心力场</p>
+<ul>
+<li>Binet : 通过轨道反推力</li>
+<li>Runge Lenz ：第三个守恒量</li>
+<li>利用 H - J 方程可以非常方便地求解</li>
+</ul></li>
+<li><p>微振动</p></li>
+<li><p>刚体力学</p>
+<ul>
+<li><p>欧拉角</p></li>
+<li><p>转动惯量张量</p></li>
+<li><p>转动动能</p></li>
+<li><p>欧拉方程</p></li>
+</ul></li>
+<li><p>电动力学</p></li>
+<li><p>量子力学</p></li>
+</ul></li>
+<li><p>作用量</p>
+<ul>
+<li><p>最小作用量原理</p></li>
+<li><p>是正则变换的母函数</p></li>
+</ul></li>
+<li>拉格朗日量
+<ul>
+<li>正常：<span class="math inline">\(T\)</span> （粒子自由运动），<span class="math inline">\(T-V\)</span> （存在粒子间相互作用、场对粒子的作用）</li>
+<li>有外力：加入 <span class="math inline">\(V_1=-\vec F\cdot \vec l(\vec q)\)</span></li>
+<li>有约束：加入拉格朗日乘数 <span class="math inline">\(\lambda\)</span></li>
+<li>计算约束反力</li>
+</ul></li>
+<li><p>哈密顿量</p>
+<ul>
+<li>$H(p,q)=p-L $</li>
+<li><span class="math inline">\(\vec p=\displaystyle \frac {\partial L}{\partial \dot {\vec q}}\implies \dot{\vec q}=f(\vec p)\)</span> 带入把 <span class="math inline">\(\dot{\vec q}\)</span> 换成 <span class="math inline">\(\vec p\)</span></li>
+<li>哈密顿方程的第一个给出了广义动量，第二个给出了拉格朗日方程</li>
+</ul></li>
+<li><p>哈密顿 - 雅可比方程</p>
+<ul>
+<li><p>$S=S(q,t),=-H , =p $</p></li>
+<li><p>保守系：<span class="math inline">\(H=E, S=-Et+S_0(E,t)\implies t=\displaystyle \frac{\partial S_0}{\partial E}\)</span></p></li>
+</ul></li>
+</ul>
+<h2 id="运动方程">运动方程</h2>
+<p>最基本的框架。</p>
+<p>从最小作用量原理出发 <span class="math display">\[
+\delta S=0
+\]</span> 推出作用量满足拉格朗日方程 <span class="math display">\[
+\frac{d}{dt}\frac{\partial L}{\partial \dot q}-\frac{\partial L}{\partial q}=0
+\]</span> 接下来只需要通过分析确定拉格朗日函数 <span class="math inline">\(L(\dot {\vec q},\vec q,t)\)</span></p>
+<p>确定 <span class="math inline">\(L\)</span> 的基础是：</p>
+<ul>
+<li><span class="math inline">\(L\)</span> 是 <span class="math inline">\(\dot q,q,t\)</span> 的函数</li>
+<li>时空的均匀性质</li>
+<li><span class="math inline">\(L\)</span> 可以增加全导数而不改变运动方程</li>
+</ul>
+<p>接下来找到了一个规律简单的惯性参考系：相对这个参考系空间均匀各向同性，时间均匀。</p>
+<p>对大自然分类讨论，由时空的均匀性确定拉格朗日量 <span class="math inline">\(L\)</span> 的形式。</p>
+<p><span class="math inline">\(L\)</span> 可以有一个时间的全导数的变化，而不改变运动方程。</p>
+<p>在惯性参考系中，单质点自由运动：<span class="math inline">\(L\)</span> 只是速度大小的函数，不能有 <span class="math inline">\(q\)</span>， 因为空间均匀。</p>
+<p>（一般情况下我们都是相对地面这个惯性参考系考虑系统的运动，而不是在系统的固有系中。）</p>
+<h3 id="相对惯性参考系">相对惯性参考系</h3>
+<h4 id="单质点自由运动">单质点自由运动</h4>
+<p><span class="math inline">\(L\)</span> 只是速度大小的函数 <span class="math display">\[
+\implies L=\displaystyle\frac 1 2 mv^2
+\]</span> 其中 <span class="math inline">\(m\)</span> 为比例系数.</p>
+<h4 id="封闭质点系自由运动">封闭质点系自由运动</h4>
+<p>多了质点之间的相互作用，空间不再均匀， <span class="math inline">\(L\)</span> 增加了势能项 <span class="math inline">\(U(\vec q)\)</span> : <span class="math display">\[
+L=T-U=\sum_a \frac 1 2 mv_a^2-U(\vec r_1,\vec r_2,\cdots )
+\]</span></p>
+<h4 id="非封闭质点系自由运动">非封闭质点系自由运动</h4>
+<p>均匀外场中势能可以写成：<span class="math inline">\(U=-\vec F\cdot \vec r\)</span></p>
+<p>扩大质点系范围，将外力视为场纳入更大的质点系使在这个质点系封闭，势能项是这些质点系的坐标的函数。</p>
+<h4 id="有约束情形-待完善">有约束情形 （待完善）</h4>
+<p>等价于条件极值。拉格朗日量中加入拉格朗日乘子，重新用最小作用量原理推导, 得到： <span class="math display">\[
+\frac d {dt}\frac{\partial L}{\partial \dot q_i}-\frac{\partial L}{\partial q}=\sum_a \lambda_a c_{ai}
+\]</span></p>
+<h3 id="相对非惯性参考系">相对非惯性参考系</h3>
+<h4 id="平动">平动</h4>
+<p>研究以平动速度 <span class="math inline">\(\vec V(t)\)</span> 相对 惯性参考系 <span class="math inline">\(K_0\)</span> 的参考系 <span class="math inline">\(K_0’\)</span>.</p>
+<p><span class="math inline">\(\vec v_0=\vec v’+\vec V(t)\)</span> 带入 <span class="math inline">\(K_0\)</span> 中的拉格朗日函数，并去掉可以看作时间全导数的时间函数项，得到： <span class="math display">\[
+L&#39;=\frac 1 2 mv&#39;^2--U-m\vec W(t)\cdot \vec r&#39;
+\]</span> 其中 <span class="math inline">\(\vec W=\displaystyle \frac {d\vec V}{dt}\)</span> 为平动加速度。</p>
+<h4 id="平动转动">平动+转动</h4>
+<p>再引进另外一个参考系 <span class="math inline">\(K\)</span>, 以角速度 <span class="math inline">\(\vec \omega(t)\)</span> 相对 <span class="math inline">\(K’\)</span> 转动。</p>
+<p><span class="math inline">\(\vec v’=\vec v+\vec\omega \times \vec r\)</span> 带入 <span class="math inline">\(L’\)</span> 可得任意参考系中质点的拉格朗日函数： <span class="math display">\[
+L=\frac 1 2 mv^2+m\vec v\cdot(\vec \omega \times \vec r)+\frac 1 2 m(\vec\omega \times \vec r)^2-m\vec W\cdot \vec r -U
+\]</span> 利用此求出全微分 <span class="math inline">\(dL\)</span>，进而可得到相应的广义坐标、广义动量，而这些广义坐标、广义动量给出了<strong>科里奥利力</strong>、<strong>离心力</strong>。</p>
+<p>进而可求能量，这给出了<strong>离心势能</strong>。</p>
+<p>这些可以用来研究地球自转引起的一些偏移，比如<strong>傅科摆</strong>等。</p>
+<h3 id="考虑相对论性">考虑相对论性</h3>
+<p>仍是从最小作用量原理出发，利用间隔的洛伦兹不变性给出拉格朗日量，进而推出电动力学理论。（未完，需结合电动力学整合）</p>
+<h2 id="守恒定律与运动方程的积分">守恒定律与运动方程的积分</h2>
+<h4 id="能量动量角动量">能量、动量、角动量</h4>
+<p>利用守恒量进行的对运动的细致分析。</p>
+<p>时间均匀性（拉格朗日函数不显含时间）可推出能量守恒。</p>
+<p>空间均匀性（平移不变）可推出动量守恒。</p>
+<p>空间各向同性（旋转不变）可推出角动量守恒。</p>
+<p>由拉格朗日函数一并定义了系统的能量、动量、角动量： <span class="math display">\[
+\begin{align}
+E&amp;=\vec p\cdot \vec q-L\\
+\vec P&amp;= \sum_a \frac{\partial L}{\partial \dot {\vec q_a}}\\
+\vec J_k&amp;=\sum_a\frac{\partial L}{\partial \dot {\vec \varphi_a}} &amp;\vec \varphi\text { 是绕 k 轴的转角}
+\end{align}
+\]</span></p>
+<p>对于齐次势能函数，轨道有力学相似性：时间、速度、能量、角动量在不同轨道的比都等于轨道长度之比的某一幂次（两个习题暂时没解决）</p>
+<h4 id="守恒量给出的运动方程">守恒量给出的运动方程</h4>
+<p>根据系统能量的守恒、动量的守恒或者角动量的守恒，可以确定运动周期。</p>
+<p>通过振动周期也可以确定场的势能差的形式。</p>
+<p>运动边界由势能等于总能量给出。</p>
+<p>一个自由度的有界运动是 <strong>振动</strong>。</p>
+<p>二个自由度的二体问题可以通过引入质心系等价到质量为约化质量的单质点在 <strong>有心力场</strong> 中的运动。</p>
+<p>对于有心力场中的运动，能量守恒和角动量守恒决定了轨道方程。</p>
+<p>只有两种类型的有心力场，其中的一切有界运动的轨道上封闭的，这两种场的势能与 $ $ 或 <span class="math inline">\(r^2\)</span> 成正比</p>
+<p>更高的自由度便是刚体运动问题。由此引出了转动惯量张量、对称非对称陀螺、欧拉角和 <strong>欧拉方程</strong>。</p>
+<p>刚体接触的问题可以利用受约束的拉格朗日方程进行求解，也可以用角动量、角加速度、力矩等列出全部方程进行求解。</p>
+<hr />
+<p>整体的框架在“总结”部分已经搭好。但是细节方面近期应该是没有办法完完整整写一遍了，附上一些学习过程中受益匪浅的很棒的资料叭。</p>
+<p><a href="https://mega.nz/folder/cMxEzIyQ#-Exu_Cxfpu0b4MTThmw-vA" target="_blank" rel="noopener">Good Notes for Theoretical Mechanics</a></p>
+<ul>
+<li><p>学习拉格朗日方程和哈密顿方程时可以参考 Harvard 的两篇</p></li>
+<li><p>学习 H-J 方程时可以参考 Berkeley的那篇</p></li>
+</ul>
+<p>讲得都非常好 可以加深理解</p>
+<p>另外，非常建议学习一遍分析力学之后自己过一遍朗道的&lt;<力学>&gt; ，写得太赞了，简洁而深刻。可以配合鞠国兴老师的&lt;<解读>&gt;食用。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Physics-Electrodynamics" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/18/Physics-Electrodynamics/"
+    >Electrodynamics</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/18/Physics-Electrodynamics/" class="article-date">
+  <time datetime="2020-02-18T05:32:41.000Z" itemprop="datePublished">2020-02-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Physics/">Physics</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="电动力学笔记">电动力学笔记</h1>
+<h2 id="麦克斯韦方程和规范理论概述起源杨振宁">0 麦克斯韦方程和规范理论概述起源（杨振宁）</h2>
+<ul>
+<li><p>Electrotonic state, Faraday<br />
+<span class="math display">\[
+H=\nabla \times A
+\]</span></p></li>
+<li><p>Maxwell <span class="math display">\[
+Light=EM\ waves
+\]</span></p></li>
+<li><p>Maxwell : A Dynamical Theory of the Electromagnetic Field <span class="math display">\[
+energy\;\ density=\frac{1}{8\pi ^2}(E^2+H^2)
+\]</span></p></li>
+<li><p>Dirac‘s sea</p></li>
+<li><p>Renormalization <span class="math display">\[
+\alpha=(g-2)/2
+\]</span></p></li>
+<li>gauge theory 规范理论, non-Abelian gauge theory, 重整化群</li>
+<li><p>Symmetry breaking, Standard Mode</p></li>
+</ul>
+<p><strong>“妙的地方”</strong></p>
+<p>$ \ $
+      
+      <a class="article-more-link" href="/2020/02/18/Physics-Electrodynamics/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-Other-Things-2020" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -636,20 +948,12 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <p>lambda 表达式被用于创建匿名函数。</p>
 <p>表达式<code>lambda parameters: expression</code> 会产生一个函数对象。</p>
 <p>等价于：</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb1"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">def</span> <span class="op">&lt;</span><span class="kw">lambda</span><span class="op">&gt;</span>(parameters):</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="cf">return</span> expression</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> &lt;<span class="title">lambda</span>&gt;<span class="params">(parameters)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> expression</span><br></pre></td></tr></table></figure>
 <h3 id="enumerate"><code>enumerate</code></h3>
 <p>z用来遍历一个可迭代容器中的元素，同时通过一个计数器变量记录当前元素所对应的索引值。</p>
 <p>注意它能接受一个可选参数，该参数允许为本次循环中的计数器变量 (index) 设置初始值。</p>
 <p>索引是在循环请求才加载输出每个元素，使得内存使用量很低并且结构运行很快。</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb2"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="cf">for</span> i, c <span class="kw">in</span> <span class="bu">enumerate</span>(s, <span class="dv">1</span>): <span class="co"># index 从1开始了</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="bu">print</span>(i, c)</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i, c <span class="keyword">in</span> enumerate(s, <span class="number">1</span>): <span class="comment"># index 从1开始了</span></span><br><span class="line">    print(i, c)</span><br></pre></td></tr></table></figure>
 <h3 id="sorted"><code>sorted</code></h3>
 <p>对可迭代的对象进行排序操作。</p>
 <p>sort 与 sorted 区别（摘自菜鸟教程）：</p>
@@ -658,55 +962,13 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <li><p>list 的 sort 方法返回的是对已经存在的列表进行操作，无返回值，而内建函数 sorted 方法返回的是一个新的 list，而不是在原来的基础上进行的操作。</p></li>
 </ul>
 <p>高级操作：key和cmp 暂时用不上</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb3"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1">s <span class="op">=</span> <span class="st">&#39;  a,,b,s,a,aca198&#39;</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="bu">print</span>(<span class="bu">set</span>(s))</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="bu">print</span>(<span class="bu">sorted</span>(<span class="bu">set</span>(s)))</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co"># {&#39;1&#39;, &#39;8&#39;, &#39; &#39;, &#39;s&#39;, &#39;9&#39;, &#39;c&#39;, &#39;b&#39;, &#39;,&#39;, &#39;a&#39;}</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># [&#39; &#39;, &#39;,&#39;, &#39;1&#39;, &#39;8&#39;, &#39;9&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;s&#39;]</span></a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">'  a,,b,s,a,aca198'</span></span><br><span class="line">print(set(s))</span><br><span class="line">print(sorted(set(s)))</span><br><span class="line"><span class="comment"># &#123;'1', '8', ' ', 's', '9', 'c', 'b', ',', 'a'&#125;</span></span><br><span class="line"><span class="comment"># [' ', ',', '1', '8', '9', 'a', 'b', 'c', 's']</span></span><br></pre></td></tr></table></figure>
 <h3 id="yield"><code>yield</code></h3>
 <p>每执行到一个 yield 语句就会中断，并返回一个迭代值，下次执行时从 yield 的下一个语句继续执行。</p>
 <h3 id="str类"><code>str</code> 类</h3>
 <p>文本序列类型。</p>
 <p><a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#textseq" target="_blank" rel="noopener">参考文档</a></p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb4"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">s <span class="op">=</span> <span class="st">&#39;  a,,b,s,a,aca  &#39;</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co"># lower,upper 将所有字母变成小写/大写</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="bu">print</span>(s.upper())</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># &#39;  A,,B,S,A,ACA  &#39;</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># split 利用分隔符分割字符串，生成一个list</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="bu">print</span>(s.split(<span class="st">&#39;,&#39;</span>))</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co"># [&#39;  a&#39;, &#39;&#39;, &#39;b&#39;, &#39;s&#39;, &#39;a&#39;, &#39;aca  &#39;]</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co"># strip 去掉头尾空格</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="bu">print</span>(s.strip())</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co"># a,,b,s,a,aca</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co"># count 对某一个元素计数</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="bu">print</span>(s.count(<span class="st">&#39;a&#39;</span>))</a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="bu">print</span>(s.count(<span class="st">&#39;a&#39;</span>, <span class="dv">2</span>, <span class="dv">4</span>)) <span class="co"># 计数元素, 起始位置, 结束位置</span></a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co"># 4</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co"># 1</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co"># find 查找某个元素的最先出现的索引 </span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="bu">print</span>(s.find(<span class="st">&#39;a&#39;</span>))</a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="bu">print</span>(s.find(<span class="st">&#39;a&#39;</span>, <span class="dv">6</span>, <span class="dv">9</span>)) <span class="co"># 要查元素, 起始位置, 结束位置</span></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co"># 2</span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co"># -1 （没找到）</span></a>
-<a class="sourceLine" id="cb4-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co"># 注：若使用 s.index 同样可以查找 但是没找到时会反回错误</span></a>
-<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="bu">print</span>(s.index(<span class="st">&#39;a&#39;</span>, <span class="dv">6</span>, <span class="dv">9</span>))</a>
-<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co"># ValueError: substring not found</span></a>
-<a class="sourceLine" id="cb4-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co"># f-string</span></a>
-<a class="sourceLine" id="cb4-31" data-line-number="31">x<span class="op">=</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="bu">print</span>(<span class="ss">f&#39;</span><span class="sc">{x</span><span class="op">+</span><span class="dv">4</span><span class="sc">}</span><span class="ss">&#39;</span>)</a>
-<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co"># 10</span></a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">'  a,,b,s,a,aca  '</span></span><br><span class="line"><span class="comment"># lower,upper 将所有字母变成小写/大写</span></span><br><span class="line">print(s.upper())</span><br><span class="line"><span class="comment"># '  A,,B,S,A,ACA  '</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># split 利用分隔符分割字符串，生成一个list</span></span><br><span class="line">print(s.split(<span class="string">','</span>))</span><br><span class="line"><span class="comment"># ['  a', '', 'b', 's', 'a', 'aca  ']</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># strip 去掉头尾空格</span></span><br><span class="line">print(s.strip())</span><br><span class="line"><span class="comment"># a,,b,s,a,aca</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># count 对某一个元素计数</span></span><br><span class="line">print(s.count(<span class="string">'a'</span>))</span><br><span class="line">print(s.count(<span class="string">'a'</span>, <span class="number">2</span>, <span class="number">4</span>)) <span class="comment"># 计数元素, 起始位置, 结束位置</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># find 查找某个元素的最先出现的索引 </span></span><br><span class="line">print(s.find(<span class="string">'a'</span>))</span><br><span class="line">print(s.find(<span class="string">'a'</span>, <span class="number">6</span>, <span class="number">9</span>)) <span class="comment"># 要查元素, 起始位置, 结束位置</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># -1 （没找到）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注：若使用 s.index 同样可以查找 但是没找到时会反回错误</span></span><br><span class="line">print(s.index(<span class="string">'a'</span>, <span class="number">6</span>, <span class="number">9</span>))</span><br><span class="line"><span class="comment"># ValueError: substring not found</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># f-string</span></span><br><span class="line">x=<span class="number">6</span></span><br><span class="line">print(<span class="string">f'<span class="subst">&#123;x+<span class="number">4</span>&#125;</span>'</span>)</span><br><span class="line"><span class="comment"># 10</span></span><br></pre></td></tr></table></figure>
 <h3 id="file方法">File方法</h3>
 <p>待仔细研究。</p>
 <h2 id="numpy">Numpy</h2>
@@ -714,116 +976,26 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <h4 id="高级的切片操作">高级的切片操作</h4>
 <p>可以直接BGR2RGB：<code>img[:,:,::-1]</code>。</p>
 <p><a href="https://blog.csdn.net/qq_21840201/article/details/85084621?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">参考</a></p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb5"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">a<span class="op">=</span>np.random.rand(<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="bu">print</span>(a)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">[ <span class="fl">0.64061262</span>  <span class="fl">0.8451399</span>   <span class="fl">0.965673</span>    <span class="fl">0.89256687</span>  <span class="fl">0.48518743</span>]</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"> </a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="bu">print</span>(a[<span class="op">-</span><span class="dv">1</span>]) <span class="co">###取最后一个元素</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">[<span class="fl">0.48518743</span>]</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"> </a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="bu">print</span>(a[:<span class="op">-</span><span class="dv">1</span>])  <span class="co">### 除了最后一个取全部</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">[ <span class="fl">0.64061262</span>  <span class="fl">0.8451399</span>   <span class="fl">0.965673</span>    <span class="fl">0.89256687</span>]</a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"> </a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="bu">print</span>(a[::<span class="op">-</span><span class="dv">1</span>]) <span class="co">### 取从后向前（相反）的元素</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">[ <span class="fl">0.48518743</span>  <span class="fl">0.89256687</span>  <span class="fl">0.965673</span>    <span class="fl">0.8451399</span>   <span class="fl">0.64061262</span>]</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"> </a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="bu">print</span>(a[<span class="dv">2</span>::<span class="op">-</span><span class="dv">1</span>]) <span class="co">### 取从下标为2的元素翻转读取</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">[ <span class="fl">0.965673</span>  <span class="fl">0.8451399</span>   <span class="fl">0.64061262</span>]</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a=np.random.rand(<span class="number">5</span>)</span><br><span class="line">print(a)</span><br><span class="line">[ <span class="number">0.64061262</span>  <span class="number">0.8451399</span>   <span class="number">0.965673</span>    <span class="number">0.89256687</span>  <span class="number">0.48518743</span>]</span><br><span class="line"> </span><br><span class="line">print(a[<span class="number">-1</span>]) <span class="comment">###取最后一个元素</span></span><br><span class="line">[<span class="number">0.48518743</span>]</span><br><span class="line"> </span><br><span class="line">print(a[:<span class="number">-1</span>])  <span class="comment">### 除了最后一个取全部</span></span><br><span class="line">[ <span class="number">0.64061262</span>  <span class="number">0.8451399</span>   <span class="number">0.965673</span>    <span class="number">0.89256687</span>]</span><br><span class="line"> </span><br><span class="line">print(a[::<span class="number">-1</span>]) <span class="comment">### 取从后向前（相反）的元素</span></span><br><span class="line">[ <span class="number">0.48518743</span>  <span class="number">0.89256687</span>  <span class="number">0.965673</span>    <span class="number">0.8451399</span>   <span class="number">0.64061262</span>]</span><br><span class="line"> </span><br><span class="line">print(a[<span class="number">2</span>::<span class="number">-1</span>]) <span class="comment">### 取从下标为2的元素翻转读取</span></span><br><span class="line">[ <span class="number">0.965673</span>  <span class="number">0.8451399</span>   <span class="number">0.64061262</span>]</span><br></pre></td></tr></table></figure>
 <h2 id="sympy">Sympy</h2>
 <p>方便地求解符号方程组。</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb6"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co"># 一次应光作业 算不动了用py试试</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">x, y <span class="op">=</span> symbols(<span class="st">&#39;x y&#39;</span>)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">b1 <span class="op">=</span> <span class="dv">50</span> <span class="op">/</span> <span class="dv">17</span> <span class="co"># 第一个透镜的垂轴放大率</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">b2 <span class="op">=</span> <span class="fl">-3.4</span> <span class="co"># 第二个透镜的垂轴放大率</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="bu">print</span>(solve([(<span class="dv">1</span> <span class="op">-</span> b1) <span class="op">*</span> x <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span> <span class="op">/</span> b2) <span class="op">*</span> y <span class="op">-</span> <span class="dv">20</span>, <span class="dv">195</span> <span class="op">-</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">             (<span class="dv">1</span> <span class="op">-</span> b2) <span class="op">*</span> y <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> <span class="dv">1</span> <span class="op">/</span> b1) <span class="op">*</span> x <span class="op">-</span> <span class="dv">20</span>], [x, y]))</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="op">--</span> ans <span class="op">--</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12">{x: <span class="fl">14.7382920110193</span>, y: <span class="fl">37.5619834710744</span>}</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># 一次应光作业 算不动了用py试试</span></span><br><span class="line">x, y = symbols(<span class="string">'x y'</span>)</span><br><span class="line"></span><br><span class="line">b1 = <span class="number">50</span> / <span class="number">17</span> <span class="comment"># 第一个透镜的垂轴放大率</span></span><br><span class="line">b2 = <span class="number">-3.4</span> <span class="comment"># 第二个透镜的垂轴放大率</span></span><br><span class="line"></span><br><span class="line">print(solve([(<span class="number">1</span> - b1) * x + (<span class="number">1</span> - <span class="number">1</span> / b2) * y - <span class="number">20</span>, <span class="number">195</span> -</span><br><span class="line">             (<span class="number">1</span> - b2) * y - (<span class="number">1</span> - <span class="number">1</span> / b1) * x - <span class="number">20</span>], [x, y]))</span><br><span class="line"></span><br><span class="line">-- ans --</span><br><span class="line">&#123;x: <span class="number">14.7382920110193</span>, y: <span class="number">37.5619834710744</span>&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="matplotlib">Matplotlib</h2>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb7"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1">plt.yscale(<span class="st">&#39;log&#39;</span>,basey<span class="op">=</span><span class="dv">2</span>)</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">plt.yscale(<span class="string">'log'</span>,basey=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="pandas">Pandas</h2>
 <h2 id="tricks">Tricks</h2>
 <ul>
 <li><p>enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标，一般用在 for 循环当中</p></li>
-<li><p>向量范数</p></li>
-</ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb8"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="cf">while</span> <span class="bu">sum</span>(i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> f(x)) <span class="op">&gt;=</span> TOL<span class="op">**</span><span class="dv">2</span>:</a></code></pre>
-<ul>
-<li>列表一个溢出error的解决</li>
-</ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb9"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1">i <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>]</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">j <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">len</span>(i)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#j == [None, None, None, None, None, None]</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">k <span class="op">=</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="cf">for</span> l <span class="kw">in</span> i:</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">   j[k] <span class="op">=</span> l</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">   k <span class="op">+=</span> <span class="dv">1</span></a></code></pre>
-<ul>
-<li>Python中初始化一个5 x 3每项为0的数组，较好的方法</li>
-</ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb10"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1">multilist <span class="op">=</span> [[<span class="dv">0</span> <span class="cf">for</span> col <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)] <span class="cf">for</span> row <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</a></code></pre>
-<ul>
-<li>```python map(func, seq1[, seq2,…])
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p></li>
-</ul>
-<p>```</p>
-<p>第一个参数接受一个函数名，后面的参数接受一个或多个可迭代的序列，返回的是一个集合。 Python函数编程中的map()函数是将func作用于seq中的每一个元素，并将所有的调用的结果作为一个list返回。如果func为None，作用同zip()。</p>
-<ul>
-<li><p>Matrix</p>
-<pre class="sourceCode python" id="cb11"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1">D <span class="op">=</span> np.diag(np.diag(A)) <span class="co"># A的对角元构成的矩阵</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">L <span class="op">=</span> np.tri(<span class="op">*</span>np.shape(A),<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span> (<span class="op">-</span>A)  <span class="co"># A的下三角元的相反数构成的矩阵L</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">U <span class="op">=</span> D <span class="op">-</span> L <span class="op">-</span>A <span class="co">#A的上三角元的相反数构成的元素</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">M <span class="op">=</span> np.linalg.inv(D<span class="op">-</span>L)  <span class="co">#求（D-L）的逆</span></a></code></pre></li>
-<li><p>三元运算</p></li>
-</ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb12"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1">[on_true] <span class="cf">if</span> [expression] <span class="cf">else</span> [on_false]</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">x, y <span class="op">=</span> <span class="dv">50</span>, <span class="dv">25</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">small <span class="op">=</span> x <span class="cf">if</span> x <span class="op">&lt;</span> y <span class="cf">else</span> y</a></code></pre>
-<ul>
-<li>```python xk = x.copy()
-<p class="code-caption" data-lang data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p></li>
-</ul>
-<pre><code>
-  
-
-
-- 获取极值以及对应的坐标
-
-- ```python
-  res = minimize_scalar(f, bounds = (-5, 0), method = &#39;bounded&#39;)
-  print &quot;(-5, 0)&quot;, res.x</code></pre>
-<ul>
+<li><p>向量范数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> sum(i**<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> f(x)) &gt;= TOL**<span class="number">2</span>:</span><br></pre></td></tr></table></figure></li>
+<li><p>列表一个溢出error的解决</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">i = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>]</span><br><span class="line">j = [<span class="literal">None</span>] * len(i)</span><br><span class="line"><span class="comment">#j == [None, None, None, None, None, None]</span></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> i:</span><br><span class="line">   j[k] = l</span><br><span class="line">   k += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Python中初始化一个5 x 3每项为0的数组，较好的方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">multilist = [[<span class="number">0</span> <span class="keyword">for</span> col <span class="keyword">in</span> range(<span class="number">5</span>)] <span class="keyword">for</span> row <span class="keyword">in</span> range(<span class="number">3</span>)]</span><br></pre></td></tr></table></figure></li>
+<li><p>```python map(func, seq1[, seq2,…]) <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  第一个参数接受一个函数名，后面的参数接受一个或多个可迭代的序列，返回的是一个集合。</span><br><span class="line">  Python函数编程中的map()函数是将func作用于seq中的每一个元素，并将所有的调用的结果作为一个list返回。如果func为None，作用同zip()。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- Matrix</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  D = np.<span class="keyword">diag(np.diag(A)) </span><span class="comment"># A的对角元构成的矩阵</span></span><br><span class="line">  L = np.tri(*np.<span class="keyword">shape(A),-1) </span>* (-A)  <span class="comment"># A的下三角元的相反数构成的矩阵L</span></span><br><span class="line">  U = D - L -A <span class="comment">#A的上三角元的相反数构成的元素</span></span><br><span class="line">  M = np.linalg.inv(D-L)  <span class="comment">#求（D-L）的逆</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>三元运算</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[on_true] <span class="keyword">if</span> [expression] <span class="keyword">else</span> [on_false]</span><br><span class="line">x, y = <span class="number">50</span>, <span class="number">25</span></span><br><span class="line">small = x <span class="keyword">if</span> x &lt; y <span class="keyword">else</span> y</span><br></pre></td></tr></table></figure></li>
+<li><p>```python xk = x.copy() <figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 获取极值以及对应的坐标</span><br><span class="line"></span><br><span class="line">- ```python</span><br><span class="line">  res = minimize_scalar(f, bounds = (-5, 0), method = 'bounded')</span><br><span class="line">  print "(-5, 0)", res.x</span><br></pre></td></tr></table></figure></p></li>
 <li><p>Np.cos 自变量是弧度, 卡西欧计算器cos自变量是角度</p></li>
 <li><p>当函数要接受元组或者字典参数时，它分别使用 <code>*</code> 和 <code>**</code> 前缀。如果使用 <code>**</code> 前缀，多余的参数会被认为是字典。</p></li>
 </ul>
@@ -843,40 +1015,7 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <li>生成 KMeans 类</li>
 <li>使用 KMeans 中的 fit_predict 函数直接得聚类后各点对应的类标签</li>
 </ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb14"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co"># 生成n_samples个点对,data[1]是每个成员的整数标签(类别)</span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">data <span class="op">=</span> make_blobs(n_samples<span class="op">=</span><span class="dv">500</span>, n_features<span class="op">=</span><span class="dv">2</span>, centers<span class="op">=</span><span class="dv">8</span>,</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">                  cluster_std<span class="op">=</span><span class="fl">1.6</span>, random_state<span class="op">=</span><span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb14-9" data-line-number="9">points <span class="op">=</span> data[<span class="dv">0</span>]</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">fig1 <span class="op">=</span> plt.figure()  <span class="co"># 生成画布</span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11">fig1 <span class="op">=</span> plt.scatter(points[:, <span class="dv">0</span>], points[:, <span class="dv">1</span>], c<span class="op">=</span>data[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb14-12" data-line-number="12">                   cmap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)</a>
-<a class="sourceLine" id="cb14-13" data-line-number="13">plt.title(<span class="st">&#39;before&#39;</span>)</a>
-<a class="sourceLine" id="cb14-14" data-line-number="14">plt.xlim(<span class="op">-</span><span class="dv">15</span>, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb14-15" data-line-number="15">plt.ylim(<span class="op">-</span><span class="dv">15</span>, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb14-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="co"># create kmeans object</span></a>
-<a class="sourceLine" id="cb14-18" data-line-number="18">kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb14-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb14-20" data-line-number="20"><span class="co"># print location of clusters learned by kmeans object</span></a>
-<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="co"># print(kmeans.cluster_centers_)</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb14-23" data-line-number="23">km_res <span class="op">=</span> kmeans.fit_predict(points)</a>
-<a class="sourceLine" id="cb14-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb14-25" data-line-number="25">fig2 <span class="op">=</span> plt.figure()</a>
-<a class="sourceLine" id="cb14-26" data-line-number="26">fig2 <span class="op">=</span> plt.scatter(points[:, <span class="dv">0</span>], points[:, <span class="dv">1</span>], c<span class="op">=</span>km_res,</a>
-<a class="sourceLine" id="cb14-27" data-line-number="27">                   cmap<span class="op">=</span><span class="st">&#39;viridis&#39;</span>)  <span class="co"># c:color 按data[1]给每个点对应的颜色</span></a>
-<a class="sourceLine" id="cb14-28" data-line-number="28">plt.title(<span class="st">&#39;after&#39;</span>)</a>
-<a class="sourceLine" id="cb14-29" data-line-number="29">plt.xlim(<span class="op">-</span><span class="dv">15</span>, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb14-30" data-line-number="30">plt.ylim(<span class="op">-</span><span class="dv">15</span>, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb14-31" data-line-number="31">plt.show()</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_blobs</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成n_samples个点对,data[1]是每个成员的整数标签(类别)</span></span><br><span class="line">data = make_blobs(n_samples=<span class="number">500</span>, n_features=<span class="number">2</span>, centers=<span class="number">8</span>,</span><br><span class="line">                  cluster_std=<span class="number">1.6</span>, random_state=<span class="number">50</span>)</span><br><span class="line">points = data[<span class="number">0</span>]</span><br><span class="line">fig1 = plt.figure()  <span class="comment"># 生成画布</span></span><br><span class="line">fig1 = plt.scatter(points[:, <span class="number">0</span>], points[:, <span class="number">1</span>], c=data[<span class="number">1</span>],</span><br><span class="line">                   cmap=<span class="string">'viridis'</span>)</span><br><span class="line">plt.title(<span class="string">'before'</span>)</span><br><span class="line">plt.xlim(<span class="number">-15</span>, <span class="number">15</span>)</span><br><span class="line">plt.ylim(<span class="number">-15</span>, <span class="number">15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># create kmeans object</span></span><br><span class="line">kmeans = KMeans(n_clusters=<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print location of clusters learned by kmeans object</span></span><br><span class="line"><span class="comment"># print(kmeans.cluster_centers_)</span></span><br><span class="line"></span><br><span class="line">km_res = kmeans.fit_predict(points)</span><br><span class="line"></span><br><span class="line">fig2 = plt.figure()</span><br><span class="line">fig2 = plt.scatter(points[:, <span class="number">0</span>], points[:, <span class="number">1</span>], c=km_res,</span><br><span class="line">                   cmap=<span class="string">'viridis'</span>)  <span class="comment"># c:color 按data[1]给每个点对应的颜色</span></span><br><span class="line">plt.title(<span class="string">'after'</span>)</span><br><span class="line">plt.xlim(<span class="number">-15</span>, <span class="number">15</span>)</span><br><span class="line">plt.ylim(<span class="number">-15</span>, <span class="number">15</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <h4 id="层次分析聚类">2. 层次分析聚类</h4>
 <p>层次化聚类方法。</p>
 <p>从每个点各为一类开始，“归并”。</p>
@@ -886,32 +1025,7 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <li>进行层次聚类，使用ward提出的离差平方和方法效果较好： linkage函数。 注：返回的Z的第一列和第二列代表聚集的两类的序列号，第三列代表第一列和第二列序号所代表的集群在聚集时的距离(与层次聚类图的高度相等)，第四列代表聚集时所包含的原始数据的个数</li>
 <li>绘制树状图 dendrogram 函数</li>
 </ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb15"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="im">import</span> pandas <span class="im">as</span> pd</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="im">import</span> scipy</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="im">import</span> scipy.cluster.hierarchy <span class="im">as</span> sch</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co"># 生成待聚类的数据点,这里生成了20个点,每个点4维:</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">points <span class="op">=</span> scipy.randn(<span class="dv">20</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co"># 生成点与点之间的距离矩阵,这里用的欧氏距离:</span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12">disMat <span class="op">=</span> sch.distance.pdist(points, <span class="st">&#39;euclidean&#39;</span>)</a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co"># 进行层次聚类:</span></a>
-<a class="sourceLine" id="cb15-14" data-line-number="14">Z <span class="op">=</span> sch.linkage(disMat, method<span class="op">=</span><span class="st">&#39;ward&#39;</span>)</a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co"># 将层级聚类结果以树状图表示出来并保存为plot_dendrogram.png</span></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16">P <span class="op">=</span> sch.dendrogram(Z)</a>
-<a class="sourceLine" id="cb15-17" data-line-number="17">plt.savefig(<span class="st">&#39;plot_dendrogram.png&#39;</span>)</a>
-<a class="sourceLine" id="cb15-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="co"># 根据linkage matrix Z得到聚类结果:</span></a>
-<a class="sourceLine" id="cb15-20" data-line-number="20">cluster <span class="op">=</span> sch.fcluster(Z, t<span class="op">=</span><span class="dv">4</span>, criterion<span class="op">=</span><span class="st">&#39;maxclust&#39;</span>)<span class="co">#t表示最大聚类簇数</span></a>
-<a class="sourceLine" id="cb15-21" data-line-number="21"><span class="bu">print</span>(<span class="st">&quot;Original cluster by hierarchy clustering:</span><span class="ch">\n</span><span class="st">&quot;</span>, cluster)</a>
-<a class="sourceLine" id="cb15-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb15-23" data-line-number="23">plt.show()</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> scipy</span><br><span class="line"><span class="keyword">import</span> scipy.cluster.hierarchy <span class="keyword">as</span> sch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成待聚类的数据点,这里生成了20个点,每个点4维:</span></span><br><span class="line">points = scipy.randn(<span class="number">20</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成点与点之间的距离矩阵,这里用的欧氏距离:</span></span><br><span class="line">disMat = sch.distance.pdist(points, <span class="string">'euclidean'</span>)</span><br><span class="line"><span class="comment"># 进行层次聚类:</span></span><br><span class="line">Z = sch.linkage(disMat, method=<span class="string">'ward'</span>)</span><br><span class="line"><span class="comment"># 将层级聚类结果以树状图表示出来并保存为plot_dendrogram.png</span></span><br><span class="line">P = sch.dendrogram(Z)</span><br><span class="line">plt.savefig(<span class="string">'plot_dendrogram.png'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据linkage matrix Z得到聚类结果:</span></span><br><span class="line">cluster = sch.fcluster(Z, t=<span class="number">4</span>, criterion=<span class="string">'maxclust'</span>)<span class="comment">#t表示最大聚类簇数</span></span><br><span class="line">print(<span class="string">"Original cluster by hierarchy clustering:\n"</span>, cluster)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <h3 id="主成分分析-pca">主成分分析 PCA</h3>
 <p>Principle Component Analysis. 将相关度很高的向量转化为相关度较低的向量。</p>
 <p>Python 实现：</p>
@@ -926,72 +1040,9 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <li>fit(X) 利用主成分分析法对X降维和变换，X已经改变</li>
 <li>transform(X) 返回 n_samples<span class="math inline">\(\times\)</span> n_components 的切掉后面的矩阵</li>
 </ul>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb16"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">x <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">1</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">8</span>]])</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="fl">0.9</span>)</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">y <span class="op">=</span> pca.fit_transform(x)</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="bu">print</span>(<span class="st">&quot;累计贡献率：&quot;</span>, pca.explained_variance_ratio_)</a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="bu">print</span>(<span class="st">&quot;变换后的x&quot;</span>, y)</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">#or:</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#pca.fit(x)</span></a>
-<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#y=pca.transform(x)</span></a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">x = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">8</span>]])</span><br><span class="line">pca = PCA(n_components=<span class="number">0.9</span>)</span><br><span class="line">y = pca.fit_transform(x)</span><br><span class="line">print(<span class="string">"累计贡献率："</span>, pca.explained_variance_ratio_)</span><br><span class="line">print(<span class="string">"变换后的x"</span>, y)</span><br><span class="line"><span class="comment">#or:</span></span><br><span class="line"><span class="comment">#pca.fit(x)</span></span><br><span class="line"><span class="comment">#y=pca.transform(x)</span></span><br></pre></td></tr></table></figure>
 <p>（numpy练习）</p>
-<p class="code-caption" data-lang="python" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code">
-<span class="code-caption-label"></span><a class="code-caption-copy">Copy Code</a>
-</p>
-<pre class="sourceCode python" id="cb17"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co"># 归一化</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">def</span> stdData(dataMat):</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">    meanVal <span class="op">=</span> np.mean(dataMat, axis<span class="op">=</span><span class="dv">0</span>)  <span class="co"># 按列求均值，即求各个特征的均值</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">    _, n <span class="op">=</span> dataMat.shape</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">    stdval <span class="op">=</span> np.std(dataMat, axis<span class="op">=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb17-8" data-line-number="8">    newData <span class="op">=</span> (dataMat <span class="op">-</span> meanVal)</a>
-<a class="sourceLine" id="cb17-9" data-line-number="9">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</a>
-<a class="sourceLine" id="cb17-10" data-line-number="10">        newData[:, i] <span class="op">/=</span> stdval[i]</a>
-<a class="sourceLine" id="cb17-11" data-line-number="11">    <span class="cf">return</span> newData</a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="kw">def</span> percentage2n(eigVals, percentage):</a>
-<a class="sourceLine" id="cb17-15" data-line-number="15">    sortEig <span class="op">=</span> np.sort(eigVals)  <span class="co"># 升序</span></a>
-<a class="sourceLine" id="cb17-16" data-line-number="16">    sortEig <span class="op">=</span> sortEig[<span class="op">-</span><span class="dv">1</span>::<span class="op">-</span><span class="dv">1</span>]  <span class="co"># 逆转，即降序</span></a>
-<a class="sourceLine" id="cb17-17" data-line-number="17">    arraySum <span class="op">=</span> <span class="bu">sum</span>(sortEig)</a>
-<a class="sourceLine" id="cb17-18" data-line-number="18">    tmpSum <span class="op">=</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb17-19" data-line-number="19">    num <span class="op">=</span> <span class="dv">0</span></a>
-<a class="sourceLine" id="cb17-20" data-line-number="20">    contribute <span class="op">=</span> []  <span class="co"># 信息贡献率</span></a>
-<a class="sourceLine" id="cb17-21" data-line-number="21">    <span class="cf">for</span> i <span class="kw">in</span> sortEig:</a>
-<a class="sourceLine" id="cb17-22" data-line-number="22">        contribute.append(i <span class="op">/</span> arraySum)</a>
-<a class="sourceLine" id="cb17-23" data-line-number="23">    contribute <span class="op">=</span> np.array(contribute)</a>
-<a class="sourceLine" id="cb17-24" data-line-number="24">    <span class="cf">for</span> i <span class="kw">in</span> sortEig:</a>
-<a class="sourceLine" id="cb17-25" data-line-number="25">        tmpSum <span class="op">+=</span> i</a>
-<a class="sourceLine" id="cb17-26" data-line-number="26">        num <span class="op">+=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb17-27" data-line-number="27">        <span class="cf">if</span> tmpSum <span class="op">&gt;=</span> arraySum <span class="op">*</span> percentage:</a>
-<a class="sourceLine" id="cb17-28" data-line-number="28">            <span class="cf">return</span> num, contribute</a>
-<a class="sourceLine" id="cb17-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb17-30" data-line-number="30"><span class="co">#主成分分析</span></a>
-<a class="sourceLine" id="cb17-31" data-line-number="31"><span class="kw">def</span> PCA(dataMat, percentage<span class="op">=</span><span class="fl">0.9</span>):</a>
-<a class="sourceLine" id="cb17-32" data-line-number="32">    newData <span class="op">=</span> stdData(dataMat)</a>
-<a class="sourceLine" id="cb17-33" data-line-number="33">    corMat <span class="op">=</span> np.corrcoef(newData, rowvar<span class="op">=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb17-34" data-line-number="34">    <span class="co"># 求特征值和特征向量,特征向量是按列放的，即一列代表一个特征向量</span></a>
-<a class="sourceLine" id="cb17-35" data-line-number="35">    eigVals, eigVects <span class="op">=</span> np.linalg.eig(np.mat(corMat))</a>
-<a class="sourceLine" id="cb17-36" data-line-number="36">    eigValIndice <span class="op">=</span> np.argsort(eigVals)  <span class="co"># 对特征值从小到大排序</span></a>
-<a class="sourceLine" id="cb17-37" data-line-number="37">    n, contribute <span class="op">=</span> percentage2n(eigVals, percentage)  <span class="co"># 达到累积贡献率百分比的n,默认90%</span></a>
-<a class="sourceLine" id="cb17-38" data-line-number="38">    n_eigValIndice <span class="op">=</span> eigValIndice[<span class="op">-</span><span class="dv">1</span>:<span class="op">-</span>(n <span class="op">+</span> <span class="dv">1</span>):<span class="op">-</span><span class="dv">1</span>]  <span class="co"># 最大的n个特征值的下标</span></a>
-<a class="sourceLine" id="cb17-39" data-line-number="39">    n_eigVect <span class="op">=</span> eigVects[:, n_eigValIndice]  <span class="co"># 最大的n个特征值对应的特征向量</span></a>
-<a class="sourceLine" id="cb17-40" data-line-number="40">    lowDDataMat <span class="op">=</span> newData[:,:n] <span class="op">*</span> n_eigVect  <span class="co"># 低维特征空间的数据</span></a>
-<a class="sourceLine" id="cb17-41" data-line-number="41">    contribute <span class="op">=</span> contribute[:n]</a>
-<a class="sourceLine" id="cb17-42" data-line-number="42">    score <span class="op">=</span> np.<span class="bu">float</span>(contribute <span class="op">*</span> lowDDataMat)  <span class="co"># 基于主成分分析的综合评价得分</span></a>
-<a class="sourceLine" id="cb17-43" data-line-number="43">    <span class="cf">return</span> lowDDataMat, score</a>
-<a class="sourceLine" id="cb17-44" data-line-number="44"></a>
-<a class="sourceLine" id="cb17-45" data-line-number="45"></a>
-<a class="sourceLine" id="cb17-46" data-line-number="46">x <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">1</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">8</span>]])</a>
-<a class="sourceLine" id="cb17-47" data-line-number="47"><span class="bu">print</span>(PCA(x))</a></code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 归一化</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">stdData</span><span class="params">(dataMat)</span>:</span></span><br><span class="line">    meanVal = np.mean(dataMat, axis=<span class="number">0</span>)  <span class="comment"># 按列求均值，即求各个特征的均值</span></span><br><span class="line">    _, n = dataMat.shape</span><br><span class="line">    stdval = np.std(dataMat, axis=<span class="number">0</span>)</span><br><span class="line">    newData = (dataMat - meanVal)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        newData[:, i] /= stdval[i]</span><br><span class="line">    <span class="keyword">return</span> newData</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">percentage2n</span><span class="params">(eigVals, percentage)</span>:</span></span><br><span class="line">    sortEig = np.sort(eigVals)  <span class="comment"># 升序</span></span><br><span class="line">    sortEig = sortEig[<span class="number">-1</span>::<span class="number">-1</span>]  <span class="comment"># 逆转，即降序</span></span><br><span class="line">    arraySum = sum(sortEig)</span><br><span class="line">    tmpSum = <span class="number">0</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    contribute = []  <span class="comment"># 信息贡献率</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> sortEig:</span><br><span class="line">        contribute.append(i / arraySum)</span><br><span class="line">    contribute = np.array(contribute)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> sortEig:</span><br><span class="line">        tmpSum += i</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> tmpSum &gt;= arraySum * percentage:</span><br><span class="line">            <span class="keyword">return</span> num, contribute</span><br><span class="line"></span><br><span class="line"><span class="comment">#主成分分析</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">PCA</span><span class="params">(dataMat, percentage=<span class="number">0.9</span>)</span>:</span></span><br><span class="line">    newData = stdData(dataMat)</span><br><span class="line">    corMat = np.corrcoef(newData, rowvar=<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 求特征值和特征向量,特征向量是按列放的，即一列代表一个特征向量</span></span><br><span class="line">    eigVals, eigVects = np.linalg.eig(np.mat(corMat))</span><br><span class="line">    eigValIndice = np.argsort(eigVals)  <span class="comment"># 对特征值从小到大排序</span></span><br><span class="line">    n, contribute = percentage2n(eigVals, percentage)  <span class="comment"># 达到累积贡献率百分比的n,默认90%</span></span><br><span class="line">    n_eigValIndice = eigValIndice[<span class="number">-1</span>:-(n + <span class="number">1</span>):<span class="number">-1</span>]  <span class="comment"># 最大的n个特征值的下标</span></span><br><span class="line">    n_eigVect = eigVects[:, n_eigValIndice]  <span class="comment"># 最大的n个特征值对应的特征向量</span></span><br><span class="line">    lowDDataMat = newData[:,:n] * n_eigVect  <span class="comment"># 低维特征空间的数据</span></span><br><span class="line">    contribute = contribute[:n]</span><br><span class="line">    score = np.float(contribute * lowDDataMat)  <span class="comment"># 基于主成分分析的综合评价得分</span></span><br><span class="line">    <span class="keyword">return</span> lowDDataMat, score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">4</span>], [<span class="number">5</span>, <span class="number">8</span>]])</span><br><span class="line">print(PCA(x))</span><br></pre></td></tr></table></figure>
 
       
       <!-- reward -->
@@ -1079,167 +1130,6 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
 <p>
       
       <a class="article-more-link" href="/2020/01/25/LaTex-Latex-Tricks/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Computer-Science-Image-Processing学习笔记" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/01/24/Computer-Science-Image-Processing%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
-    >Image Processing 学习笔记</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/01/24/Computer-Science-Image-Processing%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time datetime="2020-01-24T15:34:36.000Z" itemprop="datePublished">2020-01-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Computer-Science/">Computer Science</a> / <a class="article-category-link" href="/categories/Computer-Science/Image-Processing/">Image Processing</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h1 id="图像信息处理">图像信息处理</h1>
-<h2 id="灰度变换与空间滤波">1 灰度变换与空间滤波</h2>
-<h3 id="灰度变换str">1.1 灰度变换：<span class="math inline">\(s=T(r)\)</span></h3>
-<ul>
-<li>图像反转：<span class="math inline">\(s=L-1-r\)</span></li>
-<li>对数变换：<span class="math inline">\(s=c\log(1+r)\)</span></li>
-<li>伽马变换：<span class="math inline">\(s=cr^\gamma\)</span></li>
-<li>分段分式线性变换：对比度拉伸、灰度级分层、比特平面分层</li>
-</ul>
-<p>$ \ $
-      
-      <a class="article-more-link" href="/2020/01/24/Computer-Science-Image-Processing%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Computer-Science-Git学习笔记" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/01/24/Computer-Science-Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
-    >Computer-Science-Git学习笔记</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/01/24/Computer-Science-Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time datetime="2020-01-24T00:04:02.033Z" itemprop="datePublished">2020-01-24</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Computer-Science/">Computer Science</a> / <a class="article-category-link" href="/categories/Computer-Science/Git/">Git</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="git学习">Git学习</h2>
-<h3 id="创建版本库">创建版本库</h3>
-<p>mkdir dirname // make directory 创建目录 dirname 为目录名</p>
-<p>pwd //print working directory 查看当前工作目录的完整路径</p>
-<p>ls -a // 显示所有文件及目录，包括隐藏档</p>
-<p>git init</p>
-<h3 id="修改与提交">修改与提交</h3>
-<p>git add filename1.txt filename2.txt // 把要提交的所有<em>修改</em> 放到暂存区</p>
-<p>git commit -m &quot;what I did in this commission&quot; // 一次性把暂存区的所有修改提交到分支 -m表示message</p>
-<p>git log // 查看修改日志</p>
-<p>git log --graph // 查看分支合并图</p>
-<p>git log --pretty=oneline // 每次修改在一行简明显示</p>
-<p>
-      
-      <a class="article-more-link" href="/2020/01/24/Computer-Science-Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多...</a>
       
       
       <!-- reward -->

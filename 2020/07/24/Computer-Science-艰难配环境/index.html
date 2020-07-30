@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Categories |  Peter&#39;s Blog
+    艰难配环境 |  Peter&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -41,213 +41,192 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content on">
       <section class="outer">
+  <article id="post-Computer-Science-艰难配环境" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  艰难配环境
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/24/Computer-Science-%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time datetime="2020-07-24T06:46:47.000Z" itemprop="datePublished">2020-07-24</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">278</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">1 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="sublime-text-配-python3.7-macos">Sublime Text 配 Python3.7 （macOS）</h2>
+<p>Browse Packages —&gt; User —&gt;新建 Python3.7.sublime-build</p>
+<p>写入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/usr/local/bin/python3"</span>, <span class="string">"-u"</span>, <span class="string">"<span class="variable">$file</span>"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span>,</span><br><span class="line">    <span class="string">"env"</span>:&#123;  <span class="string">"PYTHONPATH"</span>:<span class="string">"/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages:/Users/huanglongqian/anaconda3/lib/python3.7/site-packages"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>cmd的确定：相当于在terminal使用python3运行当前py文件，终端中使输入<code>which python3.7</code> 即可获得路径</p></li>
+<li><p>env的重要：添加环境变量，一番摸索后发现这个就相当于</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.append(<span class="string">'python_path'</span>)</span><br></pre></td></tr></table></figure>
+<p>往env中添加好后，就不需要每次都这样写了！</p></li>
+<li><p>我添加的这个，主要是<code>import cv2</code> 一直报错，但是终端中import却没问题，于是心生一计：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python3</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> cv2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cv2.__file__</span><br></pre></td></tr></table></figure>
+<p>把得到的路径放到环境变量里就好了。</p></li>
+<li><p>发现 <code>import slidingwindow</code>也出了问题，一看原来放到了python3.8的里面，于是故伎重演，PYTHONPATH再加一个，注意中间是用冒号隔开</p></li>
+<li><p>太混乱了，<code>import tensorflow</code>居然也出了问题，找了一下目前改成annoconda的目录里面的tensorflow，pip3 install的不知道放到了哪里去了orz</p></li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://longqianh.com/2020/07/24/Computer-Science-%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
   
-    <h1 class="page-type-title">Categories</h1>
-    <!-- <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Deep-Learning/">Deep Learning</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Deep-Learning/Paper-Notes/">Paper Notes</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Git/">Git</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Image-Processing/">Image Processing</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Language-Learning/">Language Learning</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Language-Learning/Matlab/">Matlab</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Language-Learning/Python/">Python</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Machine-Learning/">Machine Learning</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Machine-Learning/Neural-Networks/">Neural Networks</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Practice/">Practice</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Web/">Web</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/Web/html/">html</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LaTex/">LaTex</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Life/">Life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/Algebra/">Algebra</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/Mathematics-Modeling/">Mathematics Modeling</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Physics/">Physics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Projects/">Projects</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Projects/Optics/">Optics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Projects/Signals-and-Systems/">Signals and Systems</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/life/movie/">movie</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/notes/">notes</a></li></ul> -->
-    <ul class="category-list">
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/" title="Computer Science">
-            <li class="category-list-item">
-            Computer Science<i>11</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Web/" title="Web">
-            <li class="category-list-item">
-            Web<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Git/" title="Git">
-            <li class="category-list-item">
-            Git<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Language-Learning/" title="Language Learning">
-            <li class="category-list-item">
-            Language Learning<i>2</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Machine-Learning/" title="Machine Learning">
-            <li class="category-list-item">
-            Machine Learning<i>3</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Practice/" title="Practice">
-            <li class="category-list-item">
-            Practice<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Image-Processing/" title="Image Processing">
-            <li class="category-list-item">
-            Image Processing<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/LaTex/" title="LaTex">
-            <li class="category-list-item">
-            LaTex<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Web/html/" title="html">
-            <li class="category-list-item">
-            html<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Mathematics/" title="Mathematics">
-            <li class="category-list-item">
-            Mathematics<i>4</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Language-Learning/Matlab/" title="Matlab">
-            <li class="category-list-item">
-            Matlab<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/life/" title="life">
-            <li class="category-list-item">
-            life<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Machine-Learning/Neural-Networks/" title="Neural Networks">
-            <li class="category-list-item">
-            Neural Networks<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Physics/" title="Physics">
-            <li class="category-list-item">
-            Physics<i>4</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Life/" title="Life">
-            <li class="category-list-item">
-            Life<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/notes/" title="notes">
-            <li class="category-list-item">
-            notes<i>2</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Language-Learning/Python/" title="Python">
-            <li class="category-list-item">
-            Python<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Projects/" title="Projects">
-            <li class="category-list-item">
-            Projects<i>6</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Mathematics/Algebra/" title="Algebra">
-            <li class="category-list-item">
-            Algebra<i>2</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Mathematics/Mathematics-Modeling/" title="Mathematics Modeling">
-            <li class="category-list-item">
-            Mathematics Modeling<i>2</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/life/movie/" title="movie">
-            <li class="category-list-item">
-            movie<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Projects/Optics/" title="Optics">
-            <li class="category-list-item">
-            Optics<i>4</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Projects/Signals-and-Systems/" title="Signals and Systems">
-            <li class="category-list-item">
-            Signals and Systems<i>1</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Deep-Learning/" title="Deep Learning">
-            <li class="category-list-item">
-            Deep Learning<i>2</i>
-            </li>
-          </a>
-        
-      
-         
-          <a class="category-list-link" href="/categories/Computer-Science/Deep-Learning/Paper-Notes/" title="Paper Notes">
-            <li class="category-list-item">
-            Paper Notes<i>2</i>
-            </li>
-          </a>
-        
-      
-      </ul>
   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/30/Projects-FSO-communication-system/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            FSO Communication System
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/07/Projects-Optical-system-design/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Optical System Design</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
 </section>
       <footer class="footer">
   <div class="outer">
@@ -416,6 +395,23 @@
 </script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
