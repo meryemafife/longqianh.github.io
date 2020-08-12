@@ -69,7 +69,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">750</span>
+            <span class="post-count">892</span>
         </span>
     </span>
 
@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">2 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -121,12 +121,24 @@
 <p>我从<a href="https://hexo.io/themes/" target="_blank" rel="noopener">各种hexo的主题</a>里选择了 Ayer 主题， 然后修改.yml文件、一些.ejs文件，然后更换了一些图片。从Google的主题上拿下来了一个钢铁侠的超好看背景图片，然后从一些icon网站下了一些钢铁侠的图标，用PS反相操作一下，把黑色反转成白色以突出，就成了现在的模样。</p>
 <h2 id="一些常见问题">5. 一些常见问题</h2>
 <ul>
-<li><p>hexo g 失败：</p>
+<li><p>hexo g 失败</p>
 <p>‘YAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 6, column 1’</p></li>
 </ul>
 <p>解决：</p>
 <p>title: hexo 注意冒号后面要加空格</p>
 <p>categories 下面的’-’ 号，后面也要加空格再写字</p>
+<ul>
+<li><p>hexo d 失败</p>
+<p>某一天突然hexo d失败，说access failed，查了一下发现GitHub上的SSH没了。</p>
+<p>到settings的deploy keys，Add deploy key，然后回到自己本地的github.io的文件夹，获取ssh key：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "邮箱名"</span><br></pre></td></tr></table></figure>
+<p>这里邮箱名应该是GitHub的注册邮箱。</p>
+<p>然后进入.ssh文件夹，打开id_rsa，全选复制到GitHub的ssh key那里，选上下面的write access，然后就可以了。</p>
+<p>可以测试一下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>应该是可以得到回应的。</p>
+<p>接下来 <code>hexo g -d</code> 就可以部署啦！</p></li>
+</ul>
 <h2 id="日志">6. 日志</h2>
 <p><strong>2020.5.4</strong></p>
 <ul>
