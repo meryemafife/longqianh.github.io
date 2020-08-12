@@ -80,6 +80,413 @@
     
     
     
+    <article id="post-Computer-Science-C-Cpp-Notes" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/07/Computer-Science-C-Cpp-Notes/"
+    >Cpp-Notes</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/07/Computer-Science-C-Cpp-Notes/" class="article-date">
+  <time datetime="2020-08-07T15:55:44.000Z" itemprop="datePublished">2020-08-07</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="C-Notes"><a href="#C-Notes" class="headerlink" title="C++ Notes"></a>C++ Notes</h2><h3 id="头文件保护"><a href="#头文件保护" class="headerlink" title="头文件保护"></a>头文件保护</h3><p>为防止被多重包含，添加预处理指令。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _HPP_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _HPP_H_</span></span><br><span class="line"><span class="comment">/*头文件的一系列声明*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="右值语意、转移引用、完美转发"><a href="#右值语意、转移引用、完美转发" class="headerlink" title="右值语意、转移引用、完美转发"></a>右值语意、转移引用、完美转发</h3><h3 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::make_shared</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span></span><br></pre></td></tr></table></figure>
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Physics-Holography-Road" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/06/Physics-Holography-Road/"
+    >Holography</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/06/Physics-Holography-Road/" class="article-date">
+  <time datetime="2020-08-06T12:25:38.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is a notes for my works in holography field. </p>
+<p>And big thanks to Zhongyuan Guo.</p>
+<h2 id="Laser-Holography"><a href="#Laser-Holography" class="headerlink" title="Laser Holography"></a>Laser Holography</h2><p>I started doing semi-conductor holography with my roommates and Jiahao Jiang who has graduated now in our Sophomore year.</p>
+<p>Here is the <a href="/2020/05/03/Projects-Laser-holography/index.html">link</a> to that project.</p>
+<p>I have to say that I forget most of the details, but configuring my own fixer and developer (显影液和定影液) and building the optic path and finally seeing the results is a procedure that has no technical content but somehow a sense of accomplishment.</p>
+<h2 id="3-dim-Holography"><a href="#3-dim-Holography" class="headerlink" title="3-dim Holography"></a>3-dim Holography</h2><p>全息的路艰难而漫长，但是充满有趣与理想。我想，还是不写蹩脚的英文了，用中文回顾一下我的所思所想。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>光从激光器发出，进入相位型空间光调制器，然后转了个角度出来，到达我们的观察平面。</p>
+<p>这中间发生了什么？</p>
+<p>我们要对光进行建模，用硬核而真实的物理去解释它。</p>
+<h4 id="入射光"><a href="#入射光" class="headerlink" title="入射光"></a>入射光</h4><p>入射光为激光器发射出的激光，可以看成电磁场（光场），它满足麦克斯韦方程，进而满足<a href="https://zhuanlan.zhihu.com/p/65634398" target="_blank" rel="noopener">波动方程</a></p>
+<script type="math/tex; mode=display">
+\nabla^2 \vec E-\frac 1 {c^2} \frac{\partial^2 \vec E}{\partial t^2}=0</script><p>假设解为一般形式</p>
+<script type="math/tex; mode=display">
+U(\vec r,t)=U(\vec r)e^{-2i\pi\nu t}</script><p>带入可以得到三类解，第一类为角谱衍射积分，第二、三类为瑞丽-索末菲积分，我们不进行研究。</p>
+<p>对角谱衍射积分中的根号进行一阶近似，就可以得到菲涅尔衍射积分：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+U(x,y,d_0)=\frac{\exp(ikd_0)}{i\lambda d_0}\exp\left[\frac{i\pi}{\lambda d_0}(x^2+y^2)\right]\times\notag\\
+\iint U(X,Y,0)\exp\left[\frac{i\pi}{\lambda d_0}(X^2+Y^2)\right]\notag \\
+\exp\left[-2i\pi\left(\frac{x}{\lambda d_0}X+\frac{y}{\lambda d_0}Y\right)\right]dXdY
+\end{align}</script><p>这个积分在数值计算中就是程序中的 <code>s_fft</code> 函数。</p>
+<h4 id="传播与SLM调制"><a href="#传播与SLM调制" class="headerlink" title="传播与SLM调制"></a>传播与SLM调制</h4><p>光经过空间光调制器（SLM）然后出来。这中间又发生了什么？</p>
+<p>(SLM)可以在空间上调制光的强度和相位分布，是一种动态光学元件。</p>
+<p>入射光经过了相位型SLM的调制，相位发生了变化。</p>
+<p>具体咋变的我不太清楚，写信询问刘旭老师，静候答复。</p>
+<h3 id="三维物体的数值编码"><a href="#三维物体的数值编码" class="headerlink" title="三维物体的数值编码"></a>三维物体的数值编码</h3><p>弄不清楚SLM调制的原理是一个很让人头大的事情，但是还是要把东西捋一遍，看看我都干了啥。</p>
+<p>这一部分主要是记录如何将三维物体编码成相息图，也算是Matlab程序的一个说明。</p>
+<p>将相息图加载到相位型空间光调制器上，激光一照就可以神奇地显示我们准备展示的三维物体。</p>
+<h4 id="1-加载三维物体"><a href="#1-加载三维物体" class="headerlink" title="1 加载三维物体"></a>1 加载三维物体</h4><p>加载好的三维物体为一个 $P\times3$ 的矩阵，$P$ 为点数，$3$ 分别对应 $xyz$ 坐标。</p>
+<h4 id="2-切片"><a href="#2-切片" class="headerlink" title="2 切片"></a>2 切片</h4><p>对应 <code>cut_pieces</code> 函数。</p>
+<p>首先整理三维物体，把它的最小 $z$ 坐标归 $0$。然后按照 $z$ 坐标从小到大对点重排，最后按照特定的步长 $\Delta$ 进行切片，$z$ 坐标在某 $\Delta$ 范围内的所有点都投影到一个平面上，这个投影后的图片就是我们的“切片”。</p>
+<p><del>整体思路是将每张切片图编码成相息图，最后叠加起来。我想，简单叠加是可行的，原因是这样的：比如一开始的相息图是一个兔子的耳朵，光照射后就是兔子的耳朵。加上一张兔子的身子的相息图，那么光照射后显然就会多了兔子的身子。加上兔子的身子的相息图并不会改变兔子的耳朵（位置不一样的话），既然可以把三维物体分为两截点的简单和（耳朵+兔子），那么三维物体的相息图就可以分解为相息图的简单和（耳朵的相息图+兔子的相息图）。这应该是由于二者的一一对应：纵观编码过程我们应该不难得到二者的一个 $mapping$ 函数。我愿称之为<strong>相息图的可加性。</strong></del></p>
+<p><del>备注：相息图的可加性应该是非常非常有用的。如果相息图足够大，那么我们就可以构建自己的三维王国了。</del></p>
+<h4 id="3-数据预处理"><a href="#3-数据预处理" class="headerlink" title="3 数据预处理"></a>3 数据预处理</h4><p>对应 <code>initialize</code> 函数。</p>
+<p>生成像素点阵列并调整所切图片。</p>
+<p>这里有点绕，和自己想的有些不一样，我按照实验成功的代码的顺序解释。</p>
+<p>空间光调制器的面为“观察平面”（即衍射积分后的平面），上面的点为 <code>x,y</code>；</p>
+<p>全息像所成在的有机玻璃板为“衍射平面”，上面的点为<code>x0,y0</code>。</p>
+<p><strong>对切好的图片进行调整和缩放，调整是把大小调为与空间光调制器分辨率一致，缩放是将周围补上 $0$。</strong></p>
+<p>最后在图片上加入随机相位，生成复振幅 $U_0$ 和振幅 $A_0$。</p>
+<h4 id="4-三维物体信息编码"><a href="#4-三维物体信息编码" class="headerlink" title="4 三维物体信息编码"></a>4 三维物体信息编码</h4><p>将每张切片进行 S-FFT（菲涅尔衍射积分数值计算）后的复振幅全部加起来，再提取出相位，就得到了三维物体的相息图。</p>
+<h5 id="为什么这么编码"><a href="#为什么这么编码" class="headerlink" title="为什么这么编码"></a>为什么这么编码</h5><p>我也感觉怪怪的，自己的解释是当时把观察平面当作衍射平面，从观察平面到SLM进行S-FFT编码，把光调制成了编码后的相位，这也许可以看作逆编码。光入射到SLM后会反射，这个过程有一个菲涅尔衍射积分来表述，可以看成从SLM到观察平面到正编码，也就是光的传播是一个解码过程。因此光一照，就可以看到三维图像了。</p>
+<h4 id="5-模拟再现"><a href="#5-模拟再现" class="headerlink" title="5 模拟再现"></a>5 模拟再现</h4><p>对切片进行 I-FFT（逆变换），然后用其乘原图振幅。</p>
+<p>取结果的振幅，然后乘一个增加亮度的系数，就得到了亮度增强的模拟再现图。</p>
+<h3 id="试验与效果"><a href="#试验与效果" class="headerlink" title="试验与效果"></a>试验与效果</h3><p>对比模拟再现图和实验效果图。</p>
+<h3 id="To-Dos"><a href="#To-Dos" class="headerlink" title="To-Dos"></a>To-Dos</h3><ul>
+<li>对比迭代的效果</li>
+</ul>
+<h3 id="ideas"><a href="#ideas" class="headerlink" title="ideas"></a>ideas</h3><ul>
+<li>深度学习GAN，生成相息图。</li>
+<li>尝试叠加相息图，看一下有没有可加性</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-Deep-Learning-Action-Recognition-Road" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/06/Computer-Science-Deep-Learning-Action-Recognition-Road/"
+    >Action-Recognition-Road</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/06/Computer-Science-Deep-Learning-Action-Recognition-Road/" class="article-date">
+  <time datetime="2020-08-06T12:19:55.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is a notes for action recognition things in deep learning field. Started this in 2020’s summer in a Huawei’s Ascend project with Hongyu Chen, Yifan Yu and Longzhong Lin. </p>
+<h2 id="Pose-Estimation"><a href="#Pose-Estimation" class="headerlink" title="Pose Estimation"></a>Pose Estimation</h2><ul>
+<li>OpenPose</li>
+<li>Tf-pose</li>
+<li>AlphaPose</li>
+</ul>
+<h2 id="Action-Recognition"><a href="#Action-Recognition" class="headerlink" title="Action Recognition"></a>Action Recognition</h2><ul>
+<li>ST-GCN</li>
+<li>MS-G3D</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-Deep-Learning-Image-Matching-Road" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/06/Computer-Science-Deep-Learning-Image-Matching-Road/"
+    >Image-Matching Road</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/06/Computer-Science-Deep-Learning-Image-Matching-Road/" class="article-date">
+  <time datetime="2020-08-06T11:25:01.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is a notes for image imatching things in deep learning field. </p>
+<p>Started this in 2020’s summer and it is a part of a SRTP project regarding an AR app, with Haojie He and Lingming Zhang.</p>
+<h2 id="SuperPoint-amp-SuperGlue"><a href="#SuperPoint-amp-SuperGlue" class="headerlink" title="SuperPoint &amp; SuperGlue"></a>SuperPoint &amp; SuperGlue</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>SuperPoint is a great feature extractor.</p>
+<p>SuperGlue is a good image matching network based on features extracted from image.</p>
+<p>It is a really nice project by Magic Leap. </p>
+<p>I did a little simplification and put the code <a href="https://github.com/longqianh/Image-Matching.git" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="Experience-and-thoughts"><a href="#Experience-and-thoughts" class="headerlink" title="Experience and thoughts"></a>Experience and thoughts</h3><p>For SuperPoint, I think it is a mature network and can be used as a helpful feature extracting tool. (And there are some wonderful tricks in the code! )</p>
+<p>For SuperGlue, I didn’t quite get the key of it, such as the Attention Network, the Encoding Method.</p>
+<p> In addition, it is quite hard to transfer models from SuperGlue. I have already transferred SuperPoint into Libtorch code and it can be used in C++. It is also easy to be transfered to ONNX or other frameworks. However, I suffered a lot to transfer SuperGlue into libtorch code or ONNX. Hence the SuperGlue can work fine on Python but has some difficulty ( for me ) to be deployed.</p>
+<p>So I think later on I will find a more simple ( hopefully, also more powerful ) matching network so that it can be easily deployed. Or maybe I can create my own networks and do some trainings.</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-C-CMake-Notes" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/04/Computer-Science-C-CMake-Notes/"
+    >Cmake Notes</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/04/Computer-Science-C-CMake-Notes/" class="article-date">
+  <time datetime="2020-08-04T12:05:05.000Z" itemprop="datePublished">2020-08-04</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="Notes-for-cmake-commands"><a href="#Notes-for-cmake-commands" class="headerlink" title="Notes for cmake commands"></a>Notes for cmake commands</h2><p><code>add_executable(executable_name main.cpp)</code></p>
+<p>使用给定的源文件，为工程引入一个可执行文件。</p>
+<h3 id="add-libraries"><a href="#add-libraries" class="headerlink" title="add libraries"></a>add libraries</h3><p>添加静态库。</p>
+<ul>
+<li>internal library</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(say-hello hello.hpp hello.cpp)</span><br><span class="line"><span class="comment"># will generate static library *.a</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(a main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(a PRIVATE say-hello)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>external library : take <strong>opencv</strong> as an example</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(OpenCV_DIR /usr/local/Cellar/opencv/<span class="number">4.4</span>.<span class="number">0</span>/lib/cmake/opencv4) <span class="comment"># path to opencv where there is .cmake file</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV REQUIRED)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(a <span class="variable">$&#123;OpenCV_LIBS&#125;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="add-link-libraries"><a href="#add-link-libraries" class="headerlink" title="add_link_libraries"></a>add_link_libraries</h3><p>添加动态链接库。</p>
+<h4 id="internal"><a href="#internal" class="headerlink" title="internal"></a>internal</h4><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">link_directories</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib) <span class="comment"># path to the dylib</span></span><br><span class="line"><span class="keyword">add_executable</span>(a main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> dylibpath)</span><br></pre></td></tr></table></figure>
+<h4 id="external"><a href="#external" class="headerlink" title="external"></a>external</h4><p>Take <strong>libtorch</strong> as an example.</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(Torch REAUIRED) <span class="comment"># find an external project, and load its settings</span></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"find libtorch in: $&#123;TORCH_LIBRARIES&#125;"</span>) <span class="comment"># print message</span></span><br><span class="line"><span class="keyword">add_executable</span>(a main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(a <span class="variable">$&#123;TORCH_LIBRARIES&#125;</span>) </span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> a PROPERTY CXX_STANDARD <span class="number">14</span>) <span class="comment"># You need C++14 to compile PyTorch</span></span><br></pre></td></tr></table></figure>
+<h3 id="how-to-build"><a href="#how-to-build" class="headerlink" title="how to build"></a>how to build</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake .. # CMakeLists.txt in ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-Projects-FSO-communication-system" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -625,463 +1032,13 @@
 
 </article>
     
-    <article id="post-Computer-Science-Machine-Learning-TensorFlow-Notes" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/05/Computer-Science-Machine-Learning-TensorFlow-Notes/"
-    >TensorFlow Notes</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/05/Computer-Science-Machine-Learning-TensorFlow-Notes/" class="article-date">
-  <time datetime="2020-05-05T13:18:07.000Z" itemprop="datePublished">2020-05-05</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Computer-Science/">Computer Science</a> / <a class="article-category-link" href="/categories/Computer-Science/Machine-Learning/">Machine Learning</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is my notes for TensorFlow.</p>
-<p>推荐网站：</p>
-<ul>
-<li><a href="tf.wiki">简单粗暴 TensorFlow 2</a> </li>
-<li><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras 中文文档</a></li>
-</ul>
-<h1 id="TensorFlow-学习笔记"><a href="#TensorFlow-学习笔记" class="headerlink" title="TensorFlow 学习笔记"></a>TensorFlow 学习笔记</h1><h2 id="1-数学基础部分"><a href="#1-数学基础部分" class="headerlink" title="1. 数学基础部分"></a>1. 数学基础部分</h2><h3 id="损失函数：交叉熵"><a href="#损失函数：交叉熵" class="headerlink" title="损失函数：交叉熵"></a>损失函数：交叉熵</h3><p><a href="https://blog.csdn.net/tsyccnh/article/details/79163834" target="_blank" rel="noopener">参考文章：深入理解交叉熵</a></p>
-<ol>
-<li><p>来源 ：信息论</p>
-</li>
-<li><p>信息量:  </p>
-</li>
-</ol>
-<script type="math/tex; mode=display">
-I(x)=-\ln \left[p(x)\right]</script><p>衡量事件 $X=x$ 包含信息的多少，发生概率越小，信息量越大。</p>
-<ol>
-<li>信息熵：</li>
-</ol>
-<script type="math/tex; mode=display">
-H(X)=E\left[I(X)\right]=-\sum_{i=1}^n p(x_i)\ln\left[p(x_i)\right]</script><p>事件包含的信息量的期望。</p>
-<ol>
-<li>相对熵：KL divergence<script type="math/tex; mode=display">
-D_{KL}(A\| B)=-\sum_{i=1}^n p_A(x_i)\ln\left[\frac{p_A(x_i)}{p_B(x_i)}\right]</script></li>
-</ol>
-<p>$A$ 与 $B$ 之间的对数差（即是信息量的差）在 $A$ 上的期望值。</p>
-<p>理解：相对熵在数学上为 $A$ 和$B$ 对数差的期望，进一步可以看成是 <strong>$B$ 对$A$ 的信息量的差的期望</strong>。非常符合直觉。</p>
-<ol>
-<li>交叉熵<script type="math/tex; mode=display">
-\begin{align}
-D_{KL}(A\|B)&=-\sum_{i=1}^n p_A(x_i)\ln\left[p_A(x_i)\right]+\sum_{i=1}^n p_A(x_i)\ln\left[ p_B(x_i)\right]\\
-&=H(A)+H(A,B)
-\end{align}</script></li>
-</ol>
-<p>后一项 $H(A,B)$ 就是交叉熵：</p>
-<script type="math/tex; mode=display">
-H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]</script><ol>
-<li>应用</li>
-</ol>
-<p>机器学习中，$A$ 为真实分布，$B$ 为预测分布。由于 $A$ 的信息量是不变的，相对熵中可以只关注交叉熵。交叉熵作为损失函数很好地衡量信息量的差。</p>
-<p>线性回归问题中均方误差 $MSE$ 比较好用，在<strong>逻辑分类问题</strong>中交叉熵更加符合直觉。</p>
-<h2 id="2-算法基础部分"><a href="#2-算法基础部分" class="headerlink" title="2. 算法基础部分"></a>2. 算法基础部分</h2><h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>待办：研究论文的数学部分</p>
-<p><a href="https://blog.csdn.net/willduan1/article/details/78070086" target="_blank" rel="noopener">参考网站</a></p>
-<p>理解：更好地更新权重参数</p>
-<p>应用：Well suited for problems that are large in terms of data and/or parameters. The method is also appropriate for non-stationary objectives and problems with<br>very noisy and/or sparse gradients.</p>
-<h3 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross Validation"></a>Cross Validation</h3><p>交叉验证。将数据集打乱分成 $k$ 份不相交的集合，循环训练 $k$  次，第 $i$ 次用除了第 $i$ 集合的部分训练，用第 $i$  集合计算损失函数，最后的损失函数为所有损失的平均。</p>
-<p>待办：这种做法的合理性和优越性</p>
-<p>K-fold cross-validation procedure</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 算法伪代码</span></span><br><span class="line">Define KFoldXV(D,A,L,k)<span class="symbol">:</span></span><br><span class="line"><span class="symbol">Require:</span> D the given dataset</span><br><span class="line"><span class="symbol">Require:</span> A the learning algorithm, seen as a function that takes a dataset as input <span class="keyword">and</span> outputs a learned function</span><br><span class="line"><span class="symbol">Require:</span> L the loss function, map the chosen test example to a scalar</span><br><span class="line"><span class="symbol">Require:</span> k the number of folds</span><br><span class="line">	</span><br><span class="line">	Split D into k mutually exclusive subsets D_i, whose union is D</span><br><span class="line">	<span class="keyword">for</span> i from <span class="number">1</span> to k <span class="keyword">do</span></span><br><span class="line">    f_i = A(D\D_i) <span class="comment"># 用第i个集合之外的训练</span></span><br><span class="line">    <span class="keyword">for</span> z_j <span class="keyword">in</span> D_i <span class="keyword">do</span></span><br><span class="line">      e_j = L(f_i,z_j) <span class="comment"># 用第i个集合计算损失</span></span><br><span class="line">    <span class="keyword">end</span> <span class="keyword">for</span></span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">for</span></span><br><span class="line">	Return e</span><br></pre></td></tr></table></figure>
-<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p><a href="https://zhuanlan.zhihu.com/p/32085405" target="_blank" rel="noopener">参考</a></p>
-<p>长短期记忆（Long short-term memory, LSTM）是一种特殊的RNN，主要是为了解决长序列训练过程中的梯度消失和梯度爆炸问题。</p>
-<p>待办：关于激活函数 $\tanh$</p>
-<h2 id="3-代码基础部分"><a href="#3-代码基础部分" class="headerlink" title="3. 代码基础部分"></a>3. 代码基础部分</h2><p>慢慢填。</p>
-<h3 id="变量与常量"><a href="#变量与常量" class="headerlink" title="变量与常量"></a>变量与常量</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = tf.constant([[<span class="number">1.0</span>]])</span><br></pre></td></tr></table></figure>
-<p>注意需转化为张量（or：矩阵），外面多套一层括号。</p>
-<h3 id="TF中的函数"><a href="#TF中的函数" class="headerlink" title="TF中的函数"></a>TF中的函数</h3><h4 id="tf-one-hot"><a href="#tf-one-hot" class="headerlink" title="tf.one_hot"></a>tf.one_hot</h4><p><code>tf.one_hot</code> 将输入数组转化为”one-hot“型的输出。和单分类问题有这非常密切的联系（待挖掘）。</p>
-<p>比如：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">-- 输入 --</span><br><span class="line">x=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">2</span>] <span class="comment"># 根据输出 -1 表示不属于任何一类</span></span><br><span class="line">print(tf.one_hot(x,depth=<span class="number">6</span>)) <span class="comment"># depth 应该是总分类数</span></span><br><span class="line"></span><br><span class="line">-- 输出 --</span><br><span class="line">tf.Tensor(</span><br><span class="line">[[<span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">0.</span> <span class="number">1.</span> <span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]], shape=(<span class="number">4</span>, <span class="number">6</span>), dtype=float32)</span><br></pre></td></tr></table></figure>
-<h4 id="tf-image"><a href="#tf-image" class="headerlink" title="tf.image"></a>tf.image</h4><p>用于图像处理，可以用这个扩充数据集。</p>
-<p><a href="[https://medium.com/@lufor129/tensorflow-%E5%9C%96%E7%89%87%E6%95%B8%E6%93%9A%E5%A2%9E%E5%BC%B7-%E4%BA%8C-%E5%9C%96%E7%89%87%E8%99%95%E7%90%86%E5%87%BD%E6%95%B8-1083fb176f9](https://medium.com/@lufor129/tensorflow-圖片數據增強-二-圖片處理函數-1083fb176f9">推荐/待继续研究</a>)</p>
-<h4 id="tfds-load"><a href="#tfds-load" class="headerlink" title="tfds.load"></a>tfds.load</h4><p>载入数据。<code>split</code> <a href="https://www.tensorflow.org/datasets/splits" target="_blank" rel="noopener">有很多玩法</a>。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow_datasets <span class="keyword">as</span> tfds</span><br><span class="line">mnist_dataset, mnist_info = tfda.load(<span class="string">'mnist'</span>,split=<span class="string">'train'</span>,\</span><br><span class="line">               with_info=<span class="literal">True</span>,batch_size=<span class="literal">None</span>,\</span><br><span class="line">               shuffle_files=<span class="literal">True</span>, as_supvised=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重要参数</span></span><br><span class="line"><span class="comment"># split :  Which split of the data to load (e.g. 'train', 'test' ['train', 'test'], 'train[80%:]')</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># shuffle_files </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># as_supvised : bool, if True, the returned tf.data.Dataset will have a 2-tuple structure (input, label)</span></span><br><span class="line"><span class="comment"># batch_size : add a batch dimension to examples</span></span><br><span class="line"></span><br><span class="line">mnist_train = mnist_dataset[<span class="string">'train'</span>]</span><br><span class="line"><span class="comment"># 返回迭代器(generator ) mnist_train</span></span><br><span class="line"></span><br><span class="line">print(mnist_info)</span><br><span class="line"><span class="comment"># 数据集信息</span></span><br><span class="line"></span><br><span class="line">-- result --</span><br><span class="line"></span><br><span class="line">tfds.core.DatasetInfo(</span><br><span class="line">    name=<span class="string">'mnist'</span>,</span><br><span class="line">    version=<span class="number">3.0</span><span class="number">.1</span>,</span><br><span class="line">    description=<span class="string">'The MNIST database of handwritten digits.'</span>,</span><br><span class="line">    homepage=<span class="string">'http://yann.lecun.com/exdb/mnist/'</span>,</span><br><span class="line">    features=FeaturesDict(&#123;</span><br><span class="line">        <span class="string">'image'</span>: Image(shape=(<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>), dtype=tf.uint8),</span><br><span class="line">        <span class="string">'label'</span>: ClassLabel(shape=(), dtype=tf.int64, num_classes=<span class="number">10</span>),</span><br><span class="line">    &#125;),</span><br><span class="line">    total_num_examples=<span class="number">70000</span>,</span><br><span class="line">    splits=&#123;</span><br><span class="line">        <span class="string">'test'</span>: <span class="number">10000</span>,</span><br><span class="line">        <span class="string">'train'</span>: <span class="number">60000</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    supervised_keys=(<span class="string">'image'</span>, <span class="string">'label'</span>),</span><br><span class="line">    citation=<span class="string">"""@article&#123;lecun2010mnist,</span></span><br><span class="line"><span class="string">      title=&#123;MNIST handwritten digit database&#125;,</span></span><br><span class="line"><span class="string">      author=&#123;LeCun, Yann and Cortes, Corinna and Burges, CJ&#125;,</span></span><br><span class="line"><span class="string">      journal=&#123;ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist&#125;,</span></span><br><span class="line"><span class="string">      volume=&#123;2&#125;,</span></span><br><span class="line"><span class="string">      year=&#123;2010&#125;</span></span><br><span class="line"><span class="string">    &#125;"""</span>,</span><br><span class="line">    redistribution_info=,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h4 id="tf-constant-initializer"><a href="#tf-constant-initializer" class="headerlink" title="tf.constant_initializer"></a>tf.constant_initializer</h4><p>用于初始化权重矩阵。</p>
-<p>待解决：如何查看初始化的矩阵的内容</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">W = np.array([[</span><br><span class="line">    [<span class="number">0</span>, <span class="number">0</span>, <span class="number">-1</span>],</span><br><span class="line">    [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">    [<span class="number">-2</span>, <span class="number">0</span>, <span class="number">2</span>]</span><br><span class="line">]], dtype=np.float32)</span><br><span class="line">kernel_initializer = tf.constant_initializer(W)</span><br><span class="line"></span><br><span class="line">print(kernel_initializer)</span><br><span class="line"></span><br><span class="line">-- result --</span><br><span class="line">&lt;tensorflow.python.ops.init_ops_v2.Constant object at <span class="number">0x135f09810</span>&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="4-模型搭建与训练"><a href="#4-模型搭建与训练" class="headerlink" title="4. 模型搭建与训练"></a>4. 模型搭建与训练</h2><h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><h4 id="搭模型"><a href="#搭模型" class="headerlink" title="搭模型"></a>搭模型</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 模版</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span><span class="params">(tf.keras.Model)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()     <span class="comment"># Python 2 下使用 super(MyModel, self).__init__()</span></span><br><span class="line">        <span class="comment"># 此处添加初始化代码（包含 call 方法中会用到的层），例如</span></span><br><span class="line">        <span class="comment"># layer1 = tf.keras.layers.BuiltInLayer(...)</span></span><br><span class="line">        <span class="comment"># layer2 = MyCustomLayer(...)</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        <span class="comment"># 此处添加模型调用的代码（处理输入并返回输出），例如</span></span><br><span class="line">        <span class="comment"># x = layer1(input)</span></span><br><span class="line">        <span class="comment"># output = layer2(x)</span></span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="comment"># 线性模型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Linear</span><span class="params">(tf.keras.Model)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__() <span class="comment"># Python 3 直接 super(). 就可以了</span></span><br><span class="line">        <span class="comment"># 全连接层 训练的参数为矩阵A和b : y = AX+b</span></span><br><span class="line">        self.dense = tf.keras.layers.Dense(</span><br><span class="line">            units=<span class="number">1</span>, <span class="comment"># 输出的最后一维 feature的层数</span></span><br><span class="line">            activation=<span class="literal">None</span>,</span><br><span class="line">	          <span class="comment"># 设置 Keras 各层权重随机初始值</span></span><br><span class="line">            kernel_initializer=tf.zeros_initializer(),</span><br><span class="line">            bias_initializer=tf.zeros_initializer()</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        output = self.dense(input)</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
-<h4 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 手动预处理</span></span><br><span class="line">X_raw = np.array([<span class="number">2013</span>, <span class="number">2014</span>, <span class="number">2015</span>, <span class="number">2016</span>, <span class="number">2017</span>], dtype=np.float32)</span><br><span class="line">y_raw = np.array([<span class="number">12000</span>, <span class="number">14000</span>, <span class="number">15000</span>, <span class="number">16500</span>, <span class="number">17500</span>], dtype=np.float32)</span><br><span class="line"></span><br><span class="line">X = (X_raw - X_raw.min()) / (X_raw.max() - X_raw.min())</span><br><span class="line">y = (y_raw - y_raw.min()) / (y_raw.max() - y_raw.min())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">num_epoch = <span class="number">10000</span></span><br><span class="line">model = Linear()</span><br><span class="line">optimizer = tf.keras.optimizers.SGD(learning_rate=<span class="number">0.01</span>)</span><br><span class="line">X = tf.constant([X])  <span class="comment"># X 是向量, [X] 是矩阵,可以转为张量</span></span><br><span class="line">y = tf.constant([y])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_epoch):</span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape: <span class="comment"># 开始记录梯度</span></span><br><span class="line">        y_pred = model(X)</span><br><span class="line">        loss = tf.reduce_mean(tf.square(y_pred - y)) </span><br><span class="line">        <span class="comment"># 均方误差 reduce_mean 对所有tensor所有元素求平均</span></span><br><span class="line"></span><br><span class="line">    grads = tape.gradient(loss, model.variables) <span class="comment"># 对损失函数的每一个变量求偏导</span></span><br><span class="line">    optimizer.apply_gradients(grads_and_vars=zip(grads, model.variables))</span><br><span class="line">    <span class="comment">#  apply_gradient 根据得到的梯度更新参数 传入一个list : [(grad_1,var_1),</span></span><br><span class="line">    <span class="comment"># (grad_2,var_2),...,(grad_n,var_n)]</span></span><br><span class="line">print(y_pred)</span><br></pre></td></tr></table></figure>
-<h4 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sparse_categorical_accuracy = tf.keras.metrics.SparseCategoricalAccuracy()</span><br><span class="line">num_batches = int(data_loader.num_test_data // batch_size)</span><br><span class="line"><span class="keyword">for</span> batch_index <span class="keyword">in</span> range(num_batches):</span><br><span class="line">    start_index, end_index = batch_index * \</span><br><span class="line">        batch_size, (batch_index + <span class="number">1</span>) * batch_size</span><br><span class="line">    y_pred = model.predict(data_loader.test_data[start_index: end_index])</span><br><span class="line">    sparse_categorical_accuracy.update_state(</span><br><span class="line">        y_true=data_loader.test_label[start_index: end_index], y_pred=y_pred)</span><br><span class="line">print(<span class="string">"test accuracy: %f"</span> % sparse_categorical_accuracy.result())</span><br></pre></td></tr></table></figure>
-<h3 id="卷积神经网络"><a href="#卷积神经网络" class="headerlink" title="卷积神经网络"></a>卷积神经网络</h3><p><code>tfwiki</code> 讲的特别好。理解卷积核$(filter)$减少参数的作用，通过滑动（卷积）扫描整个图像，过程中的权重参数是同一个核的，就是所谓的共享权重。</p>
-<p>有关卷积的动态示例可以到<a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank" rel="noopener">这里</a>。有时间学一下他的<code>tex</code>代码。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNN</span><span class="params">(tf.keras.Model)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.conv1 = tf.keras.layers.Conv2D(</span><br><span class="line">            filters=<span class="number">32</span>,             <span class="comment"># 卷积层神经元（卷积核）数目 </span></span><br><span class="line">            kernel_size=[<span class="number">5</span>, <span class="number">5</span>],     <span class="comment"># 感受野大小</span></span><br><span class="line">            padding=<span class="string">'same'</span>,         <span class="comment"># padding策略（vaild 或 same）</span></span><br><span class="line">            activation=tf.nn.relu   <span class="comment"># 激活函数</span></span><br><span class="line">        )</span><br><span class="line">        self.pool1 = tf.keras.layers.MaxPool2D(pool_size=[<span class="number">2</span>, <span class="number">2</span>], strides=<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 横向和纵向都是每两个取一个最大的，因此大小变化像这样：28,28 -&gt; 14,14</span></span><br><span class="line">        self.conv2 = tf.keras.layers.Conv2D(</span><br><span class="line">            filters=<span class="number">64</span>,</span><br><span class="line">            kernel_size=[<span class="number">5</span>, <span class="number">5</span>],</span><br><span class="line">            padding=<span class="string">'same'</span>, <span class="comment"># 'same' 策略保证卷积前后大小相同</span></span><br><span class="line">            activation=tf.nn.relu</span><br><span class="line">        )</span><br><span class="line">        self.pool2 = tf.keras.layers.MaxPool2D(pool_size=[<span class="number">2</span>, <span class="number">2</span>], strides=<span class="number">2</span>)</span><br><span class="line">        self.flatten = tf.keras.layers.Reshape(target_shape=(<span class="number">7</span> * <span class="number">7</span> * <span class="number">64</span>,))</span><br><span class="line">        self.dense1 = tf.keras.layers.Dense(units=<span class="number">1024</span>, activation=tf.nn.relu)</span><br><span class="line">        self.dense2 = tf.keras.layers.Dense(units=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        x = self.conv1(inputs)                  <span class="comment"># [batch_size, 28, 28, 32]</span></span><br><span class="line">        x = self.pool1(x)                       <span class="comment"># [batch_size, 14, 14, 32]</span></span><br><span class="line">        x = self.conv2(x)                       <span class="comment"># [batch_size, 14, 14, 64]</span></span><br><span class="line">        x = self.pool2(x)                       <span class="comment"># [batch_size, 7, 7, 64]</span></span><br><span class="line">        x = self.flatten(x)                     <span class="comment"># [batch_size, 7 * 7 * 64]</span></span><br><span class="line">        x = self.dense1(x)                      <span class="comment"># [batch_size, 1024]</span></span><br><span class="line">        x = self.dense2(x)                      <span class="comment"># [batch_size, 10]</span></span><br><span class="line">        output = tf.nn.softmax(x)</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
-<p>待看：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">kernel_initializer=tf.constant_initializer(W),</span><br><span class="line">bias_initializer=tf.constant_initializer(b)</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">dataset = dataset.map(<span class="keyword">lambda</span> img, label: (tf.image.resize(img, [<span class="number">224</span>, <span class="number">224</span>]) / <span class="number">255.0</span>, label)).shuffle(<span class="number">1024</span>).batch(<span class="number">32</span>)</span><br><span class="line">model = tf.keras.applications.MobileNetV2(weights=<span class="literal">None</span>, classes=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="tf-data"><a href="#tf-data" class="headerlink" title="tf.data"></a>tf.data</h2>
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Projects-Laser-holography" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Projects-Laser-holography/"
-    >Laser Holography</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Projects-Laser-holography/" class="article-date">
-  <time datetime="2020-05-02T19:00:58.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a> / <a class="article-category-link" href="/categories/Projects/Optics/">Optics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is the my final report for Semiconductor Laser Holography experiement in physics experiment course.</p>
-<p>I did the experiment with my dear roommates Yiheng Mao and Weiming Zhou, under the guidance of teacher Xing Chen. </p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/半导体激光全息实验总结.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Projects-Optomechanical-Structural-Design" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Projects-Optomechanical-Structural-Design/"
-    >Optomechanical Structural Design</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Projects-Optomechanical-Structural-Design/" class="article-date">
-  <time datetime="2020-05-02T18:25:25.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a> / <a class="article-category-link" href="/categories/Projects/Optics/">Optics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is the major assignment for our optomechanical structural design course. Thanks a lot for Xiaowen Wang, Longxun Cao and Hanmo Mei. That  week we all had little time for sleep and we finally made a really big guy! Although that period was very hard , I really cherish it.</p>
-<p>I will make it more detailed when I have time.</p>
-<h3 id="工程图汇总"><a href="#工程图汇总" class="headerlink" title="工程图汇总"></a>工程图汇总</h3>
-
-	<div class="row">
-    <embed src="/pdf_files/钢铁侠手臂台灯-工程图汇总.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-<h3 id="设计文件"><a href="#设计文件" class="headerlink" title="设计文件"></a>设计文件</h3>
-
-	<div class="row">
-    <embed src="/pdf_files/钢铁侠手臂台灯项目设计文件.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Notes-byhand-NA-notes" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Notes-byhand-NA-notes/"
-    >NA-Notes</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Notes-byhand-NA-notes/" class="article-date">
-  <time datetime="2020-05-02T18:12:18.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is my class notes for Numerical Analysis. Hopefully one day I can organize it into an electronic version.</p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/数值分析方法.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Notes-byhand-pde-notes" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Notes-byhand-pde-notes/"
-    >PDE-Notes</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Notes-byhand-pde-notes/" class="article-date">
-  <time datetime="2020-05-02T18:04:58.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is my class notes for PDE (partial differential equations ) course.</p>
-<p>Due to the capacity limit, I cannot upload it (200+MB), but I found an alternative way. I uploaded it to MEGA and you can get access to the note by the following url.</p>
-<p><a href="https://mega.nz/file/cdoVkDiJ#qT23xZ6WbVRNxoJ8iNsJOmXdWt_pfr5fzG3UyVoem8Q" target="_blank" rel="noopener">PDE-Note-by-Peter :)</a></p>
-<p>By the way, the file seems too large so you need to wait for a moment or just download it, please execuse me.</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
@@ -1469,42 +1426,7 @@ H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]</script><ol>
 
 
     
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            displayMath: [ ['$','$'], ["\\[","\\]"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script>
-
-
-<!-- <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['
-
-</html>,'
-
-</html>], ["\\(","\\)"] ],
-      displayMath: [ ['$','$'], ["\\[","\\]"] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { availableFonts: ["TeX"] }
-  });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script> --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>
