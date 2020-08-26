@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -103,54 +103,71 @@
       
 
       
-      <p>This is a notes for my works in holography field. </p>
+      <p>This is a notes for my works in holography field.</p>
 <p>And big thanks to Zhongyuan Guo.</p>
-<h2 id="Laser-Holography"><a href="#Laser-Holography" class="headerlink" title="Laser Holography"></a>Laser Holography</h2><p>I started doing semi-conductor holography with my roommates and Jiahao Jiang who has graduated now in our Sophomore year.</p>
+<h2 id="laser-holography">Laser Holography</h2>
+<p>I started doing semi-conductor holography with my roommates and Jiahao Jiang who has graduated now in our Sophomore year.</p>
 <p>Here is the <a href="/2020/05/03/Projects-Laser-holography/index.html">link</a> to that project.</p>
 <p>I have to say that I forget most of the details, but configuring my own fixer and developer (显影液和定影液) and building the optic path and finally seeing the results is a procedure that has no technical content but somehow a sense of accomplishment.</p>
-<h2 id="3-dim-Holography"><a href="#3-dim-Holography" class="headerlink" title="3-dim Holography"></a>3-dim Holography</h2><p>全息的路艰难而漫长，但是充满有趣与理想。我想，还是不写蹩脚的英文了，用中文回顾一下我的所思所想。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>光从激光器发出，进入相位型空间光调制器，然后转了个角度出来，到达我们的观察平面。</p>
+<h2 id="dim-holography">3-dim Holography</h2>
+<p>全息的路艰难而漫长，但是充满有趣与理想。我想，还是不写蹩脚的英文了，用中文回顾一下我的所思所想。</p>
+<h3 id="原理">原理</h3>
+<p>光从激光器发出，进入相位型空间光调制器，然后转了个角度出来，到达我们的观察平面。</p>
 <p>这中间发生了什么？</p>
 <p>我们要对光进行建模，用硬核而真实的物理去解释它。</p>
-<h4 id="入射光"><a href="#入射光" class="headerlink" title="入射光"></a>入射光</h4><p>入射光为激光器发射出的激光，可以看成电磁场（光场），它满足麦克斯韦方程，进而满足<a href="https://zhuanlan.zhihu.com/p/65634398" target="_blank" rel="noopener">波动方程</a></p>
-<script type="math/tex; mode=display">
-\nabla^2 \vec E-\frac 1 {c^2} \frac{\partial^2 \vec E}{\partial t^2}=0</script><p>假设解为一般形式</p>
-<script type="math/tex; mode=display">
-U(\vec r,t)=U(\vec r)e^{-2i\pi\nu t}</script><p>带入可以得到三类解，第一类为角谱衍射积分，第二、三类为瑞丽-索末菲积分，我们不进行研究。</p>
-<p>对角谱衍射积分中的根号进行一阶近似，就可以得到菲涅尔衍射积分：</p>
-<script type="math/tex; mode=display">
+<h4 id="入射光">入射光</h4>
+<p>入射光为激光器发射出的激光，可以看成电磁场（光场），它满足麦克斯韦方程，进而满足<a href="https://zhuanlan.zhihu.com/p/65634398" target="_blank" rel="noopener">波动方程</a> <span class="math display">\[
+\nabla^2 \vec E-\frac 1 {c^2} \frac{\partial^2 \vec E}{\partial t^2}=0
+\]</span> 假设解为一般形式 <span class="math display">\[
+U(\vec r,t)=U(\vec r)e^{-2i\pi\nu t}
+\]</span> 带入可以得到三类解，第一类为角谱衍射积分，第二、三类为瑞丽-索末菲积分，我们不进行研究。</p>
+<p>对角谱衍射积分中的根号进行一阶近似，就可以得到菲涅尔衍射积分： <span class="math display">\[
 \begin{align}
 U(x,y,d_0)=\frac{\exp(ikd_0)}{i\lambda d_0}\exp\left[\frac{i\pi}{\lambda d_0}(x^2+y^2)\right]\times\notag\\
 \iint U(X,Y,0)\exp\left[\frac{i\pi}{\lambda d_0}(X^2+Y^2)\right]\notag \\
 \exp\left[-2i\pi\left(\frac{x}{\lambda d_0}X+\frac{y}{\lambda d_0}Y\right)\right]dXdY
-\end{align}</script><p>这个积分在数值计算中就是程序中的 <code>s_fft</code> 函数。</p>
-<h4 id="传播与SLM调制"><a href="#传播与SLM调制" class="headerlink" title="传播与SLM调制"></a>传播与SLM调制</h4><p>光经过空间光调制器（SLM）然后出来。这中间又发生了什么？</p>
+\end{align}
+\]</span> 这个积分在数值计算中就是程序中的 <code>s_fft</code> 函数。</p>
+<h4 id="传播与slm调制">传播与SLM调制</h4>
+<p>光经过空间光调制器（SLM）然后出来。这中间又发生了什么？</p>
 <p>(SLM)可以在空间上调制光的强度和相位分布，是一种动态光学元件。</p>
 <p>入射光经过了相位型SLM的调制，相位发生了变化。</p>
-<p> 具体怎么变得还需要再探究啊。</p>
-<h3 id="三维物体的数值编码"><a href="#三维物体的数值编码" class="headerlink" title="三维物体的数值编码"></a>三维物体的数值编码</h3><p>弄不清楚SLM调制的原理是一个很让人头大的事情，但是还是要把东西捋一遍，看看我都干了啥。</p>
+<p>具体怎么变得还需要再探究啊。</p>
+<h3 id="三维物体的数值编码">三维物体的数值编码</h3>
+<p>弄不清楚SLM调制的原理是一个很让人头大的事情，但是还是要把东西捋一遍，看看我都干了啥。</p>
 <p>这一部分主要是记录如何将三维物体编码成相息图，也算是Matlab程序的一个说明。</p>
 <p>将相息图加载到相位型空间光调制器上，激光一照就可以神奇地显示我们准备展示的三维物体。</p>
-<h4 id="1-加载三维物体"><a href="#1-加载三维物体" class="headerlink" title="1 加载三维物体"></a>1 加载三维物体</h4><p>加载好的三维物体为一个 $P\times3$ 的矩阵，$P$ 为点数，$3$ 分别对应 $xyz$ 坐标。</p>
-<h4 id="2-切片"><a href="#2-切片" class="headerlink" title="2 切片"></a>2 切片</h4><p>对应 <code>cut_pieces</code> 函数。</p>
-<p>首先整理三维物体，把它的最小 $z$ 坐标归 $0$。然后按照 $z$ 坐标从小到大对点重排，最后按照特定的步长 $\Delta$ 进行切片，$z$ 坐标在某 $\Delta$ 范围内的所有点都投影到一个平面上，这个投影后的图片就是我们的“切片”。</p>
-<p><del>整体思路是将每张切片图编码成相息图，最后叠加起来。我想，简单叠加是可行的，原因是这样的：比如一开始的相息图是一个兔子的耳朵，光照射后就是兔子的耳朵。加上一张兔子的身子的相息图，那么光照射后显然就会多了兔子的身子。加上兔子的身子的相息图并不会改变兔子的耳朵（位置不一样的话），既然可以把三维物体分为两截点的简单和（耳朵+兔子），那么三维物体的相息图就可以分解为相息图的简单和（耳朵的相息图+兔子的相息图）。这应该是由于二者的一一对应：纵观编码过程我们应该不难得到二者的一个 $mapping$ 函数。我愿称之为<strong>相息图的可加性。</strong></del></p>
+<h4 id="加载三维物体">1 加载三维物体</h4>
+<p>加载好的三维物体为一个 <span class="math inline">\(P\times3\)</span> 的矩阵，<span class="math inline">\(P\)</span> 为点数，<span class="math inline">\(3\)</span> 分别对应 <span class="math inline">\(xyz\)</span> 坐标。</p>
+<h4 id="切片">2 切片</h4>
+<p>对应 <code>cut_pieces</code> 函数。</p>
+<p>首先整理三维物体，把它的最小 <span class="math inline">\(z\)</span> 坐标归 <span class="math inline">\(0\)</span>。然后按照 <span class="math inline">\(z\)</span> 坐标从小到大对点重排，最后按照特定的步长 <span class="math inline">\(\Delta\)</span> 进行切片，<span class="math inline">\(z\)</span> 坐标在某 <span class="math inline">\(\Delta\)</span> 范围内的所有点都投影到一个平面上，这个投影后的图片就是我们的“切片”。</p>
+<p><del>整体思路是将每张切片图编码成相息图，最后叠加起来。我想，简单叠加是可行的，原因是这样的：比如一开始的相息图是一个兔子的耳朵，光照射后就是兔子的耳朵。加上一张兔子的身子的相息图，那么光照射后显然就会多了兔子的身子。加上兔子的身子的相息图并不会改变兔子的耳朵（位置不一样的话），既然可以把三维物体分为两截点的简单和（耳朵+兔子），那么三维物体的相息图就可以分解为相息图的简单和（耳朵的相息图+兔子的相息图）。这应该是由于二者的一一对应：纵观编码过程我们应该不难得到二者的一个 <span class="math inline">\(mapping\)</span> 函数。我愿称之为<strong>相息图的可加性。</strong></del></p>
 <p><del>备注：相息图的可加性应该是非常非常有用的。如果相息图足够大，那么我们就可以构建自己的三维王国了。</del></p>
-<h4 id="3-数据预处理"><a href="#3-数据预处理" class="headerlink" title="3 数据预处理"></a>3 数据预处理</h4><p>对应 <code>initialize</code> 函数。</p>
+<h4 id="数据预处理">3 数据预处理</h4>
+<p>对应 <code>initialize</code> 函数。</p>
 <p>生成像素点阵列并调整所切图片。</p>
 <p>这里有点绕，和自己想的有些不一样，我按照实验成功的代码的顺序解释。</p>
 <p>空间光调制器的面为“观察平面”（即衍射积分后的平面），上面的点为 <code>x,y</code>；</p>
 <p>全息像所成在的有机玻璃板为“衍射平面”，上面的点为<code>x0,y0</code>。</p>
-<p><strong>对切好的图片进行调整和缩放，调整是把大小调为与空间光调制器分辨率一致，缩放是将周围补上 $0$。</strong></p>
-<p>最后在图片上加入随机相位，生成复振幅 $U_0$ 和振幅 $A_0$。</p>
-<h4 id="4-三维物体信息编码"><a href="#4-三维物体信息编码" class="headerlink" title="4 三维物体信息编码"></a>4 三维物体信息编码</h4><p>将每张切片进行 S-FFT（菲涅尔衍射积分数值计算）后的复振幅全部加起来，再提取出相位，就得到了三维物体的相息图。</p>
-<h5 id="为什么这么编码"><a href="#为什么这么编码" class="headerlink" title="为什么这么编码"></a>为什么这么编码</h5><p>我也感觉怪怪的，自己的解释是当时把观察平面当作衍射平面，从观察平面到SLM进行S-FFT编码，把光调制成了编码后的相位，这也许可以看作逆编码。光入射到SLM后会反射，这个过程有一个菲涅尔衍射积分来表述，可以看成从SLM到观察平面到正编码，也就是光的传播是一个解码过程。因此光一照，就可以看到三维图像了。</p>
-<h4 id="5-模拟再现"><a href="#5-模拟再现" class="headerlink" title="5 模拟再现"></a>5 模拟再现</h4><p>对切片进行 I-FFT（逆变换），然后用其乘原图振幅。</p>
+<p><strong>对切好的图片进行调整和缩放，调整是把大小调为与空间光调制器分辨率一致，缩放是将周围补上 <span class="math inline">\(0\)</span>。</strong></p>
+<p>最后在图片上加入随机相位，生成复振幅 <span class="math inline">\(U_0\)</span> 和振幅 <span class="math inline">\(A_0\)</span>。</p>
+<h4 id="三维物体信息编码">4 三维物体信息编码</h4>
+<p>将每张切片进行 S-FFT（菲涅尔衍射积分数值计算）后的复振幅全部加起来，再提取出相位，就得到了三维物体的相息图。</p>
+<h5 id="为什么这么编码">为什么这么编码</h5>
+<p>我也感觉怪怪的，自己的解释是当时把观察平面当作衍射平面，从观察平面到SLM进行S-FFT编码，把光调制成了编码后的相位，这也许可以看作逆编码。光入射到SLM后会反射，这个过程有一个菲涅尔衍射积分来表述，可以看成从SLM到观察平面到正编码，也就是光的传播是一个解码过程。因此光一照，就可以看到三维图像了。</p>
+<h4 id="模拟再现">5 模拟再现</h4>
+<p>对切片进行 I-FFT（逆变换），然后用其乘原图振幅。</p>
 <p>取结果的振幅，然后乘一个增加亮度的系数，就得到了亮度增强的模拟再现图。</p>
-<h4 id="6-实验效果图"><a href="#6-实验效果图" class="headerlink" title="6 实验效果图"></a>6 实验效果图</h4><p>非常好看！感动地哭！</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghr77l5ggkj313z0u00ya.jpg" alt="res"></p>
-<h3 id="三维显示"><a href="#三维显示" class="headerlink" title="三维显示"></a>三维显示</h3><p>刘旭老师说，“用一个小杯子，里面掺进去一些牛奶，形成各种浓度的悬浊液，如果是三维显示，那么在悬浊液中就会有体三维的效果，浓度要好好的调一下，不能太浓，太浓的话就一个长长的光束的尾巴”，一定要好好做一下！</p>
-<h3 id="ideas"><a href="#ideas" class="headerlink" title="ideas"></a>ideas</h3><ul>
+<h4 id="实验效果图">6 实验效果图</h4>
+<p>非常好看！感动地哭！</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghr77l5ggkj313z0u00ya.jpg" alt="res" /><figcaption>res</figcaption>
+</figure>
+<h3 id="三维显示">三维显示</h3>
+<p>刘旭老师说，“用一个小杯子，里面掺进去一些牛奶，形成各种浓度的悬浊液，如果是三维显示，那么在悬浊液中就会有体三维的效果，浓度要好好的调一下，不能太浓，太浓的话就一个长长的光束的尾巴”，一定要好好做一下！</p>
+<h3 id="ideas">ideas</h3>
+<ul>
 <li>深度学习GAN，生成相息图。</li>
 <li>尝试叠加相息图，看一下有没有可加性</li>
 </ul>
@@ -663,7 +680,42 @@ U(x,y,d_0)=\frac{\exp(ikd_0)}{i\lambda d_0}\exp\left[\frac{i\pi}{\lambda d_0}(x^
 
 
     
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            displayMath: [ ['$','$'], ["\\[","\\]"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+
+<!-- <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['
+
+</html>,'
+
+</html>], ["\\(","\\)"] ],
+      displayMath: [ ['$','$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script> --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>

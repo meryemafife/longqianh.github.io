@@ -103,10 +103,15 @@
       
 
       
-      <h2 id="C-Notes"><a href="#C-Notes" class="headerlink" title="C++ Notes"></a>C++ Notes</h2><h3 id="头文件保护"><a href="#头文件保护" class="headerlink" title="头文件保护"></a>头文件保护</h3><p>为防止被多重包含，添加预处理指令。</p>
+      <h2 id="c-notes">C++ Notes</h2>
+<h3 id="头文件保护">头文件保护</h3>
+<p>为防止被多重包含，添加预处理指令。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _HPP_H_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _HPP_H_</span></span><br><span class="line"><span class="comment">/*头文件的一系列声明*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="右值语意、转移引用、完美转发"><a href="#右值语意、转移引用、完美转发" class="headerlink" title="右值语意、转移引用、完美转发"></a>右值语意、转移引用、完美转发</h3><h3 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::make_shared</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span></span><br></pre></td></tr></table></figure>
-<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3>
+<h3 id="右值语意转移引用完美转发">右值语意、转移引用、完美转发</h3>
+<h3 id="智能指针">智能指针</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::make_shared</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span></span><br></pre></td></tr></table></figure>
+<h3 id="字节对齐">字节对齐</h3>
+
       
       <!-- reward -->
       
@@ -615,7 +620,42 @@
 
 
     
-  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            displayMath: [ ['$','$'], ["\\[","\\]"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+
+<!-- <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['
+
+</html>,'
+
+</html>], ["\\(","\\)"] ],
+      displayMath: [ ['$','$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js"></script> --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>
