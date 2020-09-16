@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Mathematics Models |  Peter&#39;s Blog
+    随机过程复习总结 |  Peter&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -41,7 +41,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-Mathematics-Mathematic-Models" class="article article-type-post" itemscope
+  <article id="post-Mathematics-随机过程复习总结" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -49,7 +49,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Mathematics Models
+  随机过程复习总结
 </h1>
  
 
@@ -58,14 +58,10 @@
 
     
     <div class="article-meta">
-      <a href="/2020/02/01/Mathematics-Mathematic-Models/" class="article-date">
-  <time datetime="2020-02-01T12:28:07.000Z" itemprop="datePublished">2020-02-01</time>
+      <a href="/2020/09/07/Mathematics-%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2020-09-06T18:36:57.000Z" itemprop="datePublished">2020-09-07</time>
 </a>
       
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Mathematics/">Mathematics</a> / <a class="article-category-link" href="/categories/Mathematics/Mathematics-Modeling/">Mathematics Modeling</a>
-  </div>
-
       
       
 <div class="word_count">
@@ -73,7 +69,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -82,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -107,146 +103,114 @@
       
 
       
-      <h1 id="数学建模-模型学习">数学建模 模型学习</h1>
-<h2 id="确定性连续模型">1 确定性连续模型</h2>
-<h2 id="静态优化模型微分法建模">1.1 静态优化模型/微分法建模</h2>
-<h3 id="不允许缺货的存贮模型">1.1.1 不允许缺货的存贮模型</h3>
-<ol type="1">
-<li><p>模型假设：</p>
+      <h1 id="随机过程复习总结">随机过程复习总结</h1>
+<p><em>Peter_H</em></p>
+<h2 id="markov-过程">1. Markov 过程</h2>
+<h3 id="状态转移矩阵">状态转移矩阵</h3>
+<p><span class="math inline">\(p_{ij}^n=P(X_{t_0+n}=j\mid X_{t_0}=i)\)</span></p>
+<p>CK方程： <span class="math inline">\(\vec\mu^{(n)}=\vec\mu^{0}P^n\)</span></p>
+<h3 id="常返和暂留">常返和暂留</h3>
+<p>常返：状态 <span class="math inline">\(i\)</span> 出发有限次可回</p>
+<p><em>常见考点</em>：求出所有互达等价类，各状态的周期和常返性，计算所有正常返态的平均回转时，计算极限概率</p>
+<p><strong>是否常返</strong>：</p>
 <ul>
-<li>每天存货费用：<span class="math inline">\(c_1\)</span> 元/吨</li>
-<li>每次订货费用：<span class="math inline">\(c_2\)</span> 元</li>
-<li>每天货物需求量：<span class="math inline">\(r\)</span> 吨/天</li>
-<li>任意时刻 <span class="math inline">\(t\)</span> 的货物贮存量：<span class="math inline">\(q(t)\)</span></li>
-<li>订货周期：<span class="math inline">\(T\)</span> 天</li>
-<li>每次订货数量：<span class="math inline">\(Q\)</span> 吨</li>
-</ul></li>
-<li><p>模型假设：</p>
-<p>每次订货后库存量均匀下降： <span class="math display">\[
-\frac{dq}{dt}=-r,\qquad q(0)=Q \\
-q(t)=-r\cdot t+Q
-\]</span></p></li>
-<li><p>模型建立：</p>
-<ul>
-<li>订货数量、订货周期、每日货物需求的关系：</li>
+<li>有限马尔可夫链可以利用闭互达等价类直接判断：如果状态空间 <span class="math inline">\(I\)</span> 有限，则状态 <span class="math inline">\(i\)</span> 常返当且仅当 <span class="math inline">\(i\)</span> 的互达等价类是闭的，且这时 <span class="math inline">\(i\)</span> 一定是正常返</li>
+<li><p>利用互达等价类减少计算：若状态 <span class="math inline">\(i\)</span> 和 <span class="math inline">\(j\)</span> 互达，则 <span class="math inline">\(d(i)=d(j)\)</span> （周期相等），<span class="math inline">\(i\)</span> 常返/正常返当且仅当 <span class="math inline">\(j\)</span> 常返/正常返</p></li>
+<li><p>通过计算来判断：计算 <span class="math inline">\(f_{ii}=\sum\limits_{n}f_{ii}^{(n)}\)</span>, <span class="math inline">\(f_{ii}=1\)</span> 常返，<span class="math inline">\(f_{ii}&lt;1\)</span> 暂留。其中 <span class="math inline">\(f_{ij}^{(n)}\)</span> 是 <span class="math inline">\(i\)</span> 出发在第 <span class="math inline">\(n\)</span> 步首次击中 <span class="math inline">\(j\)</span> 的概率。对于非封闭的互达等价类，通过计算 <span class="math inline">\(f_{ii}\)</span> 说明暂留性。</p></li>
+<li><p>是否正常返：计算平均回转时 <span class="math inline">\(\mu_i=\sum\limits_n nf_{ii}^{(n)}\)</span>, 看是否有限, 若无限则为零常返</p></li>
 </ul>
-<p><span class="math display">\[
-Q=r\cdot T
-\]</span></p>
+<p><strong>极限概率：</strong></p>
 <ul>
-<li>每日平均花费：</li>
+<li>利用平稳分布</li>
+<li>若状态 <span class="math inline">\(j\)</span> 为暂留或零常返，则对所有 <span class="math inline">\(i\)</span>, <span class="math inline">\(\lim_\limits{n\to\infty} p_{ij}^{(n)}=0\)</span></li>
 </ul>
-<p><span class="math display">\[
-Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
-\]</span></p>
+<h3 id="平稳分布">平稳分布</h3>
+<p>初始分布与一步分布相同：<span class="math inline">\(\pi P=\pi\)</span>。</p>
+<p>比如：<span class="math inline">\(\pi_1=\frac 1 2 \pi_1+\frac 1 3\pi_2\)</span> , 是指从初始状态 <span class="math inline">\(\pi_1\)</span> 一步后到 <span class="math inline">\(\pi_1\)</span> 再从 <span class="math inline">\(\pi_1\)</span> 以 <span class="math inline">\(\frac 1 2\)</span> 概率回到 <span class="math inline">\(\pi_1\)</span>， 一步后到 <span class="math inline">\(\pi_2\)</span> 再从 <span class="math inline">\(\pi_2\)</span> 以 <span class="math inline">\(\frac 1 3\)</span> 概率回到 <span class="math inline">\(\pi_1\)</span>。</p>
+<p>对互达等价类（不可约状态集）的计算：</p>
 <ul>
-<li>目标：<span class="math inline">\(min[Cost]\)</span></li>
+<li>闭的 <span class="math inline">\(\implies\)</span> 正常返 <span class="math inline">\(\implies\)</span> 平稳分布存在且唯一， <span class="math inline">\(\pi_i=\frac 1 {\mu_i}\)</span></li>
+<li>若为非周期正常返，则任何状态 <span class="math inline">\(i,j,\lim_\limits{n\to\infty}p_{ij}^{(n)}=\pi_j\)</span></li>
 </ul>
-<p><span class="math display">\[
-\frac{dCost}{dT}=0\\=&gt; T=\sqrt{\frac{2c_2}{c_1r}},\quad Q=\sqrt{\frac{2c_2r}{c_1}}
-\]</span></p></li>
-</ol>
-<p>$ \ $ <a id="more"></a></p>
-<h3 id="允许缺货的存贮模型">1.1.2 允许缺货的存贮模型</h3>
-<h2 id="遗传算法-ga">2 遗传算法 GA</h2>
-<h3 id="算法流程">2.1 算法流程</h3>
+<h3 id="吸收概率和平均吸收时间">吸收概率和平均吸收时间</h3>
+<p>用递推的思想。</p>
+<p>设 <span class="math inline">\(h_i=P(T_a&lt;\infty\mid X_0=i)\)</span> 表示从状态 <span class="math inline">\(i\)</span> 出发在有限时间内能访问状态 <span class="math inline">\(a\)</span> 的概率，其中 <span class="math inline">\(T_a\)</span> 为首次访问状态 <span class="math inline">\(a\)</span> 的时间，有 <span class="math inline">\(h_i=\sum_\limits{j}p_{ij}h_j\)</span>.</p>
+<p>设 <span class="math inline">\(a_i=E(T_a\mid X_0=i)\)</span> 表示从 <span class="math inline">\(i\)</span> 出发首次访问 <span class="math inline">\(a\)</span> 的平均步数，有 <span class="math inline">\(a_i=1+\sum_\limits{j}p_{ij}a_j\)</span>.</p>
+<h2 id="独立增量过程">2. 独立增量过程</h2>
+<h3 id="泊松过程">泊松过程</h3>
+<h4 id="定义">定义</h4>
 <ul>
-<li><p>适应度函数</p>
-<p>目标函数，函数的最优值便是适应度最高（最适合生存）的种群的适应度</p></li>
-<li><p>变异</p>
-<p>产生跳出局部最优解的可能</p></li>
+<li><p>独立增量过程</p></li>
+<li><span class="math inline">\(N(0)=0\)</span></li>
+<li><span class="math inline">\(N(t)-N(s)\sim \pi(\lambda(t-s))\)</span></li>
+<li><p><span class="math inline">\(\displaystyle P(N(t)-N(s)=k)=\frac{[\lambda (t-s)]^ke^{-\lambda(t-s)}}{k!}\)</span></p></li>
 </ul>
-<h3 id="单目标优化">2.2 单目标优化</h3>
-<p>pass</p>
-<h2 id="综合评价方法">3 综合评价方法</h2>
-<h3 id="层次分析法-ahp">3.1 层次分析法 AHP</h3>
-<p>Analytic Hierarchy Process.</p>
-<p><a href="https://zhuanlan.zhihu.com/p/38207837" target="_blank" rel="noopener">算法流程</a>：</p>
+<h4 id="数字特征">数字特征</h4>
 <ul>
-<li><p>建模，确定各层次因素</p></li>
-<li><p>进行单层次排序（从上往下）</p>
-<ul>
-<li>对于每一个上一层对元素，挨个分析每一层因素的相对重要性，构建成对比较矩阵（使用<strong>1-9标度法</strong>）</li>
-<li>进行一致性检验（传递性），不通过则需要调整相对重要性</li>
-<li>获得归一化的最大特征向量，最为当前层对上一层对权重向量</li>
-</ul></li>
-<li><p>进行层次总排序，获得最下层每个元素对最终目标的归一化权重向量（从下往上）</p></li>
-<li><p>得到决策结果</p></li>
+<li>均值 <span class="math inline">\(\mu_N(t)=E(N(t))=\lambda t\)</span></li>
+<li>方差 <span class="math inline">\(D_N(t)=\lambda t\)</span></li>
+<li>自协方差函数 <span class="math inline">\(C_N(s,t)=\lambda \min\{s,t\}\)</span></li>
+<li>自相关函数 <span class="math inline">\(R_N(s,t)=E(N(s)N(t))=\lambda \min\{s,t\}+\lambda^2 st\)</span></li>
 </ul>
-<p>为什么特征向量可以作为权重？</p>
-<p>可证充分性。<span class="math inline">\(AX\)</span>的列向量的第 <span class="math inline">\(i\)</span> 个元素可以作为第 <span class="math inline">\(i\)</span> 个指标的综合评价（=<span class="math inline">\(\sum_j\)</span>第 <span class="math inline">\(i\)</span> 个元素对第 <span class="math inline">\(j\)</span> 个元素的重要程度<span class="math inline">\(\times\)</span> 第 <span class="math inline">\(j\)</span> 个元素的最终权重），正比于第 <span class="math inline">\(i\)</span> 个元素的最终权重（$AX=X $）</p>
-<h3 id="主成分分析-pca">3.2 主成分分析 PCA</h3>
-<p>Principle Component Analysis.</p>
-<p>应用：</p>
+<h4 id="推广">推广</h4>
 <ul>
-<li><p>变量较多，需要从数据中挖掘出主要成分。通过正交变换，消除变量之间的相关影响。</p></li>
-<li><p>对多变量的截面数据表进行最佳综合简化。</p></li>
-<li><p>对指标进行客观赋权。（从相关系数矩阵的特征值引出的信息贡献率可作为”新变量“的权重）</p></li>
+<li>合成、分解后依旧是泊松过程</li>
+<li><p>非齐次：<span class="math inline">\(\lambda=\lambda(t)\)</span></p></li>
+<li><p><span class="math inline">\(\{N(t)\}\)</span> 为强度 <span class="math inline">\(\lambda\)</span> 的泊松过程 <span class="math inline">\(\iff\)</span> 时间间隔 <span class="math inline">\(T_1,T_2,\cdots\)</span> 相互独立，且服从均值为 <span class="math inline">\(1/\lambda\)</span> 的指数分布</p></li>
 </ul>
-<p>算法流程：</p>
+<h3 id="布朗运动">布朗运动</h3>
+<p>特殊的正态过程</p>
+<h4 id="定义-1">定义</h4>
 <ul>
-<li>设指标变量为 <span class="math inline">\(\mathbf{x}=[x_1,\cdots,x_n]\)</span></li>
-<li>将变量标准化、去除量纲：<span class="math inline">\(\mathbf{\widetilde x}=\displaystyle\frac{\mathbf{x}-\mu}{\sigma}\)</span></li>
-<li>获得 <span class="math inline">\(\mathbf{\widetilde x}\)</span> 的相关系数矩阵 <span class="math inline">\(R=(r_{ij})_{n\times n }\)</span></li>
-<li>计算 <span class="math inline">\(R\)</span> 的特征值 <span class="math inline">\(\lambda_1\geq\cdots \geq\lambda_n\)</span> 和对应的特征(列)向量 <span class="math inline">\(\mathbf{\mu_1,\cdots\mu_n}\)</span></li>
-<li>设 <span class="math inline">\(\mathbf{\mu_i}=[\mu_{1i},\cdots,\mu_{ni}]^T\)</span>, 得到新的变量：<span class="math inline">\(\mathbf{y_i}=\sum_j \mu_{ji}\cdot\widetilde x_i\)</span></li>
-<li>特征值 <span class="math inline">\(\lambda_i\)</span> 的信息贡献率 <span class="math inline">\(b_i=\lambda_i\big/(\sum_i \lambda_i)\)</span>, 累计贡献率 <span class="math inline">\(\alpha_p=(\sum_{j=1}^p \lambda_j)\big/(\sum_i\lambda_i)\)</span></li>
-<li>根据累计贡献率挑选出主成分</li>
-<li>根据信息贡献率得到基于主成分的综合评价得分：<span class="math inline">\(Z=\sum_{j=1}^p b_j y_j\)</span></li>
+<li><p>独立增量过程</p></li>
+<li><span class="math inline">\(X(0)=0\)</span></li>
+<li><p><span class="math inline">\(X(t)-X(s)\sim N(0,\sigma^2(t-s))\)</span></p></li>
 </ul>
-<h3 id="模糊综合评价">3.3 模糊综合评价</h3>
-<p>Fuzzy Comprehension Evaluation.</p>
-<p>应用：评价的人多的时候比较好，比如人事考核，军训打分。</p>
-<h4 id="一级模糊综合评判">（1）一级模糊综合评判</h4>
+<h4 id="数字特征-1">数字特征</h4>
+<p>对标准布朗运动 <span class="math inline">\(B(t)=\{X(t)/\sigma\}\)</span></p>
 <ul>
-<li><p>确定因素集 <span class="math inline">\(U=\{u_1,\cdots,u_n\}\)</span></p></li>
-<li><p>确定各因素权重 <span class="math inline">\(A=[a_1,\cdots,a_n]\)</span></p>
-<ul>
-<li>主成分分析</li>
-<li><a href="https://zhuanlan.zhihu.com/p/28067337" target="_blank" rel="noopener">熵权法</a>（基于多个样本在指标下的离散程度赋权）</li>
-<li>专家评估</li>
-<li>众人打分</li>
-</ul></li>
-<li><p>确定评语集 <span class="math inline">\(V=\{v_1,\cdots,v_m\}\)</span></p></li>
-<li><p>对每个因素 <span class="math inline">\(u_i\)</span> 获得一个对应评语集的评价向量 <span class="math inline">\(R_i=[r_{i1},\cdots,r_{im}]\)</span>, 得到模糊综合判断矩阵 <span class="math inline">\(R=(r_{ij})_{n\times m}\)</span> （<span class="math inline">\(r_{ij}\%\)</span> 的人认为第 <span class="math inline">\(i\)</span> 个因素可以达到评语 <span class="math inline">\(v_j\)</span> ）</p></li>
-<li><p>综合评判 <span class="math inline">\(B=A\cdot R=[b_1,\cdots, b_m]\)</span>, 可取数值最大的评语作为最终结果（最大隶属度原则）</p></li>
+<li><span class="math inline">\(\mu_B(t)=0\)</span></li>
+<li><span class="math inline">\(D_B(t)=t\)</span></li>
+<li><span class="math inline">\(C_B(s,t)=\min\{s,t\}\)</span></li>
+<li><span class="math inline">\(R_B(s,t)=\min\{s,t\}\)</span></li>
 </ul>
-<h4 id="多级模糊综合评判">（2）多级模糊综合评判</h4>
-<p><a href="http://html.rhhz.net/ZGJCYJ/html/2007-03-30.htm" target="_blank" rel="noopener">例子</a></p>
-<h3 id="灰色关联评估">3.4 灰色关联评估</h3>
-<p>灰色系统理论的一个分支，应用于受多种相互关联因素影响的事物和现象的综合评价问题。</p>
-<h3 id="可作为综合题练习">3.5 可作为综合题练习</h3>
-<p>第1辑第3章医疗保健系统评估问题。</p>
-<h2 id="模拟仿真方法">模拟/仿真方法</h2>
-<h3 id="元胞自动机">元胞自动机</h3>
-<p>制定规则，模拟。</p>
+<h4 id="推广-1">推广</h4>
+<p><span class="math inline">\(\{B(t);t\geq 0\}\)</span> 是标准布朗运动，则：</p>
 <ul>
-<li><a href="https://blog.csdn.net/Harrytsz/article/details/85094334" target="_blank" rel="noopener">模拟交通流</a></li>
-<li><a href="https://blog.csdn.net/weixin_39590507/article/details/86760958" target="_blank" rel="noopener">模拟游客疏散</a></li>
-<li><a href="https://github.com/chen622/Louvre" target="_blank" rel="noopener">比较全面地模拟游客疏散</a></li>
-<li><a href="https://blog.csdn.net/your_answer/article/details/79287367" target="_blank" rel="noopener">模拟流言传播</a></li>
+<li><span class="math inline">\(\{B(t+\tau)-B(\tau)\}\)</span> 也是</li>
+<li><span class="math inline">\(\{\displaystyle \frac 1 c B(c^2t)\}\)</span> 也是</li>
+<li>$B(t)=tB(1 t) $ 也是 （定义 <span class="math inline">\(0\)</span> 处为 <span class="math inline">\(0\)</span>）</li>
 </ul>
-<h2 id="模型">模型</h2>
+<p>布朗桥过程：</p>
 <ul>
-<li><p>贝叶斯信念网络 （概率图）</p></li>
-<li><p>小世界模型</p></li>
-<li><p>Lotka–Volterra方程（捕食者-被捕食者方程） 可发挥创造性推广至多捕食者多被捕食者的动态网络。</p></li>
-<li>扩散模型
-<ul>
-<li>扩散方程</li>
-<li>高斯烟流模式：大气污染预测</li>
-<li>技术扩散模型：Bass Diffusion Model</li>
-<li>创新扩散模型：Diffusion of Innovations Theory</li>
-</ul></li>
-<li><p>拓扑网络</p>
-<ul>
-<li>局部中心</li>
-<li>影响度</li>
-<li>Pagerank 佩奇排名算法度量网络节中心性</li>
-</ul></li>
-<li><p>普林斯顿海洋模型（POM） 47、48</p></li>
-<li><p>Forrester 世界模型 51</p></li>
+<li><span class="math inline">\(\{B(t);0\leq t\leq 1\mid B(1)=0\}\)</span></li>
+<li><span class="math inline">\(\mu=0\)</span></li>
+<li><span class="math inline">\(\sigma^2=t(1-t)\)</span></li>
+<li>对 <span class="math inline">\(0\leq s\leq t\leq 1, \operatorname{Cov}(B(s),B(t)\mid B(1)=0)=s(1-t)\)</span></li>
 </ul>
+<h4 id="首中时间相关">首中时间相关</h4>
+<p><span class="math inline">\(P(\max\limits_{0\leq s\leq t}B(s)\geq y)=P(T_y\leq t)=2P(B(t)\geq y)\)</span></p>
+<h2 id="平稳过程">3. 平稳过程</h2>
+<h4 id="宽平稳过程">宽平稳过程</h4>
+<ul>
+<li>均值为常数</li>
+<li>自相关函数只和时间差有关</li>
+</ul>
+<h4 id="各态历经性">各态历经性</h4>
+<p>记 <span class="math inline">\(\langle X(t)\rangle=\displaystyle\lim_\limits{T\to \infty} \frac{1}{2T}\int_{-T}^{T}X(t)dt\)</span></p>
+<ul>
+<li>均值各态历经性： <span class="math inline">\(\langle X(t)\rangle=\mu_X\)</span></li>
+<li>自相关函数各态历经性：<span class="math inline">\(\langle X(t)X(t+\tau)\rangle=E[X(t)X(t+\tau)]=R_X(\tau)\)</span></li>
+<li>（宽）各态历经过程：均值函数和自相关函数都有各态历经性</li>
+</ul>
+<p>重要推论：</p>
+<p>若 $_{} R_X() $ 存在，则 <span class="math inline">\(\{X(t)\}\)</span> 对均值具有各态历经性当且仅当 <span class="math inline">\(\lim_\limits{\tau\to \infty} R_X(\tau)=\mu_X^2\)</span></p>
+<h4 id="频率域表述">频率域表述</h4>
+<ul>
+<li><p>平均功率 <span class="math inline">\(= R_X(0)=\displaystyle \frac 1 {2\pi}\int_{-\infty}^{\infty} S_X(\omega) \operatorname{d} \omega\)</span></p></li>
+<li><p>维纳-辛钦公式：<span class="math inline">\(S_X(\omega)\)</span> 和 <span class="math inline">\(R_X(t)\)</span> 互为傅立叶变换对</p></li>
+</ul>
+<p>常用变换：<span class="math inline">\(\displaystyle e^{-a|\tau|}\leftrightarrow \frac{2a}{a^2+\omega^w}\)</span></p>
 
       
       <!-- reward -->
@@ -311,7 +275,7 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://longqianh.com/2020/02/01/Mathematics-Mathematic-Models/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://longqianh.com/2020/09/07/Mathematics-%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -327,19 +291,19 @@ Cost(T)=\frac{1}{T}\cdot(c_2+c_1\int_0^Tq(t)dt)=\frac{c_2}{T}+\frac{1}{2}c_1 rT
   
   <nav class="article-nav">
     
-      <a href="/2020/02/06/Other-Things-%E5%AD%A6%E4%B9%A0%E8%A7%84%E5%88%92/" class="article-nav-link">
+      <a href="/2020/09/14/Computer-Science-Machine-Learning-PyTorch-Notes/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            学习规划
+            PyTorch Notes
           
         </div>
       </a>
     
     
-      <a href="/2020/01/30/Computer-Science-Deep-Learning-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+      <a href="/2020/08/26/Life-TP-LINK%E7%94%B5%E5%AD%90%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">神经网络学习</div>
+        <div class="article-nav-title">Post</div>
       </a>
     
   </nav>

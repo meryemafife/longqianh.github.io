@@ -69,7 +69,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">682</span>
+            <span class="post-count">702</span>
         </span>
     </span>
 
@@ -118,8 +118,8 @@
 <ul>
 <li><p>频率就用ADC采样，得到两个最大值之间的时间就行了，可以用判断去掉太高的短脉冲</p></li>
 <li><p>占空比就采固定的点数，用高电平数一比就好了</p></li>
-<li><p>相位差自习想想，其实也不难，就是内心对定时的恐惧一直阻挡着我。syf说要用两个ADC，一个有干扰，这个有些没懂。不过自己思考了一下，发现 <span class="math inline">\(\Delta\varphi/2\pi=cnt_{\Delta}/cnt\)</span>, 似乎可以。</p></li>
-<li><p>关于失真度，一直不知道怎么办。测评的时候学到了使用示波器，用math指令的FFT显示波形，然后用curser的y移动到基波的频率，再到一次谐波的频率，然后好像做了什么运算（好像是除，忘记了）。这样看的话，必须要用单片机实现FFT，以后有机会可以仔细研究。</p></li>
+<li><p>相位差自习想想，其实也不难，就是内心对定时的恐惧一直阻挡着我。syf说要用两个ADC，一个有干扰，这个有些没懂。不过自己思考了一下，发现 $ /2=cnt_{}/cnt $, 似乎可以。</p></li>
+<li><p>关于失真度，一直不知道怎么办。测评的时候学到了使用示波器，用math指令的FFT显示波形，然后用curser的y移动到基波的频率，再到一次谐波的频率，然后好像做了什么运算（好像是除，忘记了）。这样看的话，必须要用单片机实现FFT，以后有机会可以仔细研究。突然想到，可以用示波器的FFT看滤出来的正弦波是否干净。</p></li>
 <li><p>焊接电路板的时候可以用AD先布个局，然后再从正面布线，测评时看到信电的一些作品真的超级美观</p></li>
 </ul>
 
@@ -201,6 +201,15 @@
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/09/07/Mathematics-%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%E5%A4%8D%E4%B9%A0%E6%80%BB%E7%BB%93/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            随机过程复习总结
+          
+        </div>
+      </a>
     
     
       <a href="/2020/08/22/Projects-Stringless-Piano/" class="article-nav-link">

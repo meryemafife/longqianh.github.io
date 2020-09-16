@@ -80,6 +80,806 @@
     
     
     
+    <article id="post-Physics-Holography-Road" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/06/Physics-Holography-Road/"
+    >Holography</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/06/Physics-Holography-Road/" class="article-date">
+  <time datetime="2020-08-06T12:25:38.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is a notes for my works in holography field.</p>
+<p>And big thanks to Zhongyuan Guo.</p>
+<h2 id="laser-holography">Laser Holography</h2>
+<p>I started doing semi-conductor holography with my roommates and Jiahao Jiang who has graduated now in our Sophomore year.</p>
+<p>Here is the <a href="/2020/05/03/Projects-Laser-holography/index.html">link</a> to that project.</p>
+<p>I have to say that I forget most of the details, but configuring my own fixer and developer (显影液和定影液) and building the optic path and finally seeing the results is a procedure that has no technical content but somehow a sense of accomplishment.</p>
+<h2 id="dim-holography">3-dim Holography</h2>
+<p>全息的路艰难而漫长，但是充满有趣与理想。我想，还是不写蹩脚的英文了，用中文回顾一下我的所思所想。</p>
+<h3 id="原理">原理</h3>
+<p>光从激光器发出，进入相位型空间光调制器，然后转了个角度出来，到达我们的观察平面。</p>
+<p>这中间发生了什么？</p>
+<p>我们要对光进行建模，用硬核而真实的物理去解释它。</p>
+<h4 id="入射光">入射光</h4>
+<p>入射光为激光器发射出的激光，可以看成电磁场（光场），它满足麦克斯韦方程，进而满足<a href="https://zhuanlan.zhihu.com/p/65634398" target="_blank" rel="noopener">波动方程</a> <span class="math display">\[
+\nabla^2 \vec E-\frac 1 {c^2} \frac{\partial^2 \vec E}{\partial t^2}=0
+\]</span> 假设解为一般形式 <span class="math display">\[
+U(\vec r,t)=U(\vec r)e^{-2i\pi\nu t}
+\]</span> 带入可以得到三类解，第一类为角谱衍射积分，第二、三类为瑞丽-索末菲积分，我们不进行研究。</p>
+<p>对角谱衍射积分中的根号进行一阶近似，就可以得到菲涅尔衍射积分： <span class="math display">\[
+\begin{align}
+U(x,y,d_0)=\frac{\exp(ikd_0)}{i\lambda d_0}\exp\left[\frac{i\pi}{\lambda d_0}(x^2+y^2)\right]\times\notag\\
+\iint U(X,Y,0)\exp\left[\frac{i\pi}{\lambda d_0}(X^2+Y^2)\right]\notag \\
+\exp\left[-2i\pi\left(\frac{x}{\lambda d_0}X+\frac{y}{\lambda d_0}Y\right)\right]dXdY
+\end{align}
+\]</span> 这个积分在数值计算中就是程序中的 <code>s_fft</code> 函数。</p>
+<h4 id="传播与slm调制">传播与SLM调制</h4>
+<p>光经过空间光调制器（SLM）然后出来。这中间又发生了什么？</p>
+<p>(SLM)可以在空间上调制光的强度和相位分布，是一种动态光学元件。</p>
+<p>入射光经过了相位型SLM的调制，相位发生了变化。</p>
+<p>具体怎么变得还需要再探究啊。</p>
+<h3 id="三维物体的数值编码">三维物体的数值编码</h3>
+<p>弄不清楚SLM调制的原理是一个很让人头大的事情，但是还是要把东西捋一遍，看看我都干了啥。</p>
+<p>这一部分主要是记录如何将三维物体编码成相息图，也算是Matlab程序的一个说明。</p>
+<p>将相息图加载到相位型空间光调制器上，激光一照就可以神奇地显示我们准备展示的三维物体。</p>
+<h4 id="加载三维物体">1 加载三维物体</h4>
+<p>加载好的三维物体为一个 <span class="math inline">\(P\times3\)</span> 的矩阵，<span class="math inline">\(P\)</span> 为点数，<span class="math inline">\(3\)</span> 分别对应 <span class="math inline">\(xyz\)</span> 坐标。</p>
+<h4 id="切片">2 切片</h4>
+<p>对应 <code>cut_pieces</code> 函数。</p>
+<p>首先整理三维物体，把它的最小 <span class="math inline">\(z\)</span> 坐标归 <span class="math inline">\(0\)</span>。然后按照 <span class="math inline">\(z\)</span> 坐标从小到大对点重排，最后按照特定的步长 <span class="math inline">\(\Delta\)</span> 进行切片，<span class="math inline">\(z\)</span> 坐标在某 <span class="math inline">\(\Delta\)</span> 范围内的所有点都投影到一个平面上，这个投影后的图片就是我们的“切片”。</p>
+<p><del>整体思路是将每张切片图编码成相息图，最后叠加起来。我想，简单叠加是可行的，原因是这样的：比如一开始的相息图是一个兔子的耳朵，光照射后就是兔子的耳朵。加上一张兔子的身子的相息图，那么光照射后显然就会多了兔子的身子。加上兔子的身子的相息图并不会改变兔子的耳朵（位置不一样的话），既然可以把三维物体分为两截点的简单和（耳朵+兔子），那么三维物体的相息图就可以分解为相息图的简单和（耳朵的相息图+兔子的相息图）。这应该是由于二者的一一对应：纵观编码过程我们应该不难得到二者的一个 <span class="math inline">\(mapping\)</span> 函数。我愿称之为<strong>相息图的可加性。</strong></del></p>
+<p><del>备注：相息图的可加性应该是非常非常有用的。如果相息图足够大，那么我们就可以构建自己的三维王国了。</del></p>
+<h4 id="数据预处理">3 数据预处理</h4>
+<p>对应 <code>initialize</code> 函数。</p>
+<p>生成像素点阵列并调整所切图片。</p>
+<p>这里有点绕，和自己想的有些不一样，我按照实验成功的代码的顺序解释。</p>
+<p>空间光调制器的面为“观察平面”（即衍射积分后的平面），上面的点为 <code>x,y</code>；</p>
+<p>全息像所成在的有机玻璃板为“衍射平面”，上面的点为<code>x0,y0</code>。</p>
+<p><strong>对切好的图片进行调整和缩放，调整是把大小调为与空间光调制器分辨率一致，缩放是将周围补上 <span class="math inline">\(0\)</span>。</strong></p>
+<p>最后在图片上加入随机相位，生成复振幅 <span class="math inline">\(U_0\)</span> 和振幅 <span class="math inline">\(A_0\)</span>。</p>
+<h4 id="三维物体信息编码">4 三维物体信息编码</h4>
+<p>将每张切片进行 S-FFT（菲涅尔衍射积分数值计算）后的复振幅全部加起来，再提取出相位，就得到了三维物体的相息图。</p>
+<h5 id="为什么这么编码">为什么这么编码</h5>
+<p>我也感觉怪怪的，自己的解释是当时把观察平面当作衍射平面，从观察平面到SLM进行S-FFT编码，把光调制成了编码后的相位，这也许可以看作逆编码。光入射到SLM后会反射，这个过程有一个菲涅尔衍射积分来表述，可以看成从SLM到观察平面到正编码，也就是光的传播是一个解码过程。因此光一照，就可以看到三维图像了。</p>
+<h4 id="模拟再现">5 模拟再现</h4>
+<p>对切片进行 I-FFT（逆变换），然后用其乘原图振幅。</p>
+<p>取结果的振幅，然后乘一个增加亮度的系数，就得到了亮度增强的模拟再现图。</p>
+<h4 id="实验效果图">6 实验效果图</h4>
+<p>非常好看！感动地哭！</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ghr77l5ggkj313z0u00ya.jpg" alt="res" /><figcaption>res</figcaption>
+</figure>
+<h3 id="三维显示">三维显示</h3>
+<p>刘旭老师说，“用一个小杯子，里面掺进去一些牛奶，形成各种浓度的悬浊液，如果是三维显示，那么在悬浊液中就会有体三维的效果，浓度要好好的调一下，不能太浓，太浓的话就一个长长的光束的尾巴”，一定要好好做一下！</p>
+<h3 id="ideas">ideas</h3>
+<ul>
+<li>深度学习GAN，生成相息图。</li>
+<li>尝试叠加相息图，看一下有没有可加性</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-Deep-Learning-Action-Recognition-Road" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/06/Computer-Science-Deep-Learning-Action-Recognition-Road/"
+    >Action-Recognition-Road</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/06/Computer-Science-Deep-Learning-Action-Recognition-Road/" class="article-date">
+  <time datetime="2020-08-06T12:19:55.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is a notes for action recognition things in deep learning field. Started this in 2020’s summer in a Huawei’s Ascend project with Hongyu Chen, Yifan Yu and Longzhong Lin.</p>
+<h2 id="pose-estimation">Pose Estimation</h2>
+<ul>
+<li>OpenPose</li>
+<li>Tf-pose</li>
+<li>AlphaPose</li>
+</ul>
+<h2 id="action-recognition">Action Recognition</h2>
+<ul>
+<li>ST-GCN</li>
+<li>MS-G3D</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-Deep-Learning-Image-Matching-Road" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/06/Computer-Science-Deep-Learning-Image-Matching-Road/"
+    >Image-Matching Road</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/06/Computer-Science-Deep-Learning-Image-Matching-Road/" class="article-date">
+  <time datetime="2020-08-06T11:25:01.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is a notes for image imatching things in deep learning field.</p>
+<p>Started this in 2020’s summer and it is a part of a SRTP project regarding an AR app, with Haojie He and Lingming Zhang.</p>
+<h2 id="superpoint-superglue">SuperPoint &amp; SuperGlue</h2>
+<h3 id="overview">Overview</h3>
+<p>SuperPoint is a great feature extractor.</p>
+<p>SuperGlue is a good image matching network based on features extracted from image.</p>
+<p>It is a really nice project by Magic Leap.</p>
+<p>I did a little simplification and put the code <a href="https://github.com/longqianh/Image-Matching.git" target="_blank" rel="noopener">here</a>.</p>
+<h3 id="experience-and-thoughts">Experience and thoughts</h3>
+<p>For SuperPoint, I think it is a mature network and can be used as a helpful feature extracting tool. (And there are some wonderful tricks in the code! )</p>
+<p>For SuperGlue, I didn’t quite get the key of it, such as the Attention Network, the Encoding Method.</p>
+<p>In addition, it is quite hard to transfer models from SuperGlue. I have already transferred SuperPoint into Libtorch code and it can be used in C++. It is also easy to be transfered to ONNX or other frameworks. However, I suffered a lot to transfer SuperGlue into libtorch code or ONNX. Hence the SuperGlue can work fine on Python but has some difficulty ( for me ) to be deployed.</p>
+<p>So I think later on I will find a more simple ( hopefully, also more powerful ) matching network so that it can be easily deployed. Or maybe I can create my own networks and do some trainings.</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-C-CMake-Notes" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/04/Computer-Science-C-CMake-Notes/"
+    >Cmake Notes</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/08/04/Computer-Science-C-CMake-Notes/" class="article-date">
+  <time datetime="2020-08-04T12:05:05.000Z" itemprop="datePublished">2020-08-04</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="notes-for-cmake-commands">Notes for cmake commands</h2>
+<p><code>add_executable(executable_name main.cpp)</code></p>
+<p>使用给定的源文件，为工程引入一个可执行文件。</p>
+<h3 id="add-libraries">add libraries</h3>
+<p>添加静态库。</p>
+<ul>
+<li>internal library</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(say-hello hello.hpp hello.cpp)</span><br><span class="line"><span class="comment"># will generate static library *.a</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(a main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(a PRIVATE say-hello)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>external library : take <strong>opencv</strong> as an example</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(OpenCV_DIR /usr/local/Cellar/opencv/<span class="number">4.4</span>.<span class="number">0</span>/lib/cmake/opencv4) <span class="comment"># path to opencv where there is .cmake file</span></span><br><span class="line"><span class="keyword">find_package</span>(OpenCV REQUIRED)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(a <span class="variable">$&#123;OpenCV_LIBS&#125;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="add_link_libraries">add_link_libraries</h3>
+<p>添加动态链接库。</p>
+<h4 id="internal">internal</h4>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">link_directories</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib) <span class="comment"># path to the dylib</span></span><br><span class="line"><span class="keyword">add_executable</span>(a main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> dylibpath)</span><br></pre></td></tr></table></figure>
+<h4 id="external">external</h4>
+<p>Take <strong>libtorch</strong> as an example.</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(Torch REAUIRED) <span class="comment"># find an external project, and load its settings</span></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"find libtorch in: $&#123;TORCH_LIBRARIES&#125;"</span>) <span class="comment"># print message</span></span><br><span class="line"><span class="keyword">add_executable</span>(a main.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(a <span class="variable">$&#123;TORCH_LIBRARIES&#125;</span>) </span><br><span class="line"><span class="keyword">set_property</span>(<span class="keyword">TARGET</span> a PROPERTY CXX_STANDARD <span class="number">14</span>) <span class="comment"># You need C++14 to compile PyTorch</span></span><br></pre></td></tr></table></figure>
+<h3 id="how-to-build">how to build</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake .. # CMakeLists.txt in ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Projects-FSO-communication-system" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/30/Projects-FSO-communication-system/"
+    >FSO Communication System</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/30/Projects-FSO-communication-system/" class="article-date">
+  <time datetime="2020-07-30T14:33:15.000Z" itemprop="datePublished">2020-07-30</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>This is the project I have done in 2020 UIUC’s OPTIC summer program.</p>
+<p>Thank you all , my teammates!</p>
+<ul>
+<li>Group Number : 3</li>
+<li>Group Leader : Longqian Huang</li>
+<li>Group members : Liang Sun, Yuxuan Liu, Junchi Feng, Yuhao Ma, Jinquan Shi, Zhuo Cheng, Yiru Pan, Dongao Cui, Muxi Zhao</li>
+</ul>
+<p>By the way, I think I did a great job in the presentation. The recording of our presentation is here. The powerpoint (Keynote) can be accessed <a href="https://mega.nz/folder/NcYTxASI#RFHN-JpP7UUpRwfXU4NIxw" target="_blank" rel="noopener">here</a>.</p>
+<p>Or you can get I quick view of the presentation below: (without the video)</p>
+
+
+	<div class="row">
+    <embed src="/pdf_files/FSOCS.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+<p>Next is our output article :)</p>
+<h1 id="free-space-optical-communication-system">Free Space Optical Communication System</h1>
+<h2 id="what-is-fso-communication-system">1. What is FSO Communication System</h2>
+<p>We read the review and searched the Wikipedia to get a overview of FSO Communication System.</p>
+<p>FSO Communication is an idea of wireless communication using light based on the theory of light propagation in free space.</p>
+<p>Devices using technology of FSO communication make up a system. It is a outdoor system of <em>wireless optical communication system</em> (WOCS) and has some branches. Below is a classification tree of WOCS [1] :</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9djubq55j30oo0ewq49.jpg" alt="WOCS classifications" /><figcaption>WOCS classifications</figcaption>
+</figure>
+<p>From that we know that we have choices of terrestrial links and space links. We considered both and think that terrestrial links is practical but space links is as well interesting and maybe a future-hot point.</p>
+<p>Below is a diagram of FSO communication link [1] (which maybe what we will construct in the next few days):</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9djwkyeuj30nu0eimyd.jpg" alt="System composition" /><figcaption>System composition</figcaption>
+</figure>
+<h2 id="system-design">2. System Design</h2>
+<h3 id="type-of-the-system">2.1 Type of the system</h3>
+<p>We will construct <em>Ground-to-Satellite Link</em> as the type of the FSO communication system. Below is a concept figure of the system.</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh6v9igawcj30of0dhabh.jpg" alt="qeyssat-satellite-879x485"  /></p>
+<h3 id="wavelength-to-use">2.2 Wavelength to use</h3>
+<p>The main consideration is attenuation after propagating long distance. From [2] we know to make attenuation less, infrared band is a good choice. Then we have two choices:</p>
+<ul>
+<li>850 nm</li>
+<li>1550 nm</li>
+</ul>
+<p>We digged further and found that 1550 nm lasers are considered &quot;eye safe&quot; at much higher power levels than traditionally used 850nm lasers.</p>
+<p>So our choice for wavelength is 1550 nm. And the benefits are as follows [1] :</p>
+<ul>
+<li>reduce background noise and Rayleigh scattering</li>
+<li>high transmitter power</li>
+<li>Eye-save wavelength ( the maximum permissible exposure for eye is much higher at 1550 nm wavelength )</li>
+</ul>
+<h3 id="laser-type">2.3 Laser Type</h3>
+<h4 id="led-or-cw">2.3.1 LED or CW</h4>
+<p>To be clear:</p>
+<ul>
+<li><p>A light-emitting diode (<em>LED</em>) is a semiconductor light source that emits light when current flows through it.</p></li>
+<li><p>A continuous wave (CW) laser is a laser that emits a continuous laser beam with a controlled heat output, as beam duration and intensity.</p></li>
+</ul>
+<p>For ground-to-satellite links, we don’t think a light of LED can surrive after passing the atmosphere. So we definitely choose CW laser.</p>
+<h4 id="comparasion">2.3.2 Comparasion</h4>
+<p>We have four choices and they all have own advantages and disadvantages:</p>
+<h5 id="gas-laser">Gas laser</h5>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk4mvtij30xc0iugos.jpg" alt="Carbon dioxide laser - Wikipedia" /><figcaption>Carbon dioxide laser - Wikipedia</figcaption>
+</figure>
+<ul>
+<li>Carbon dioxide laser are stable and less sensitive to atomospheric effects</li>
+<li>Large volume and unreliability</li>
+</ul>
+<h5 id="solid-state-laser">Solid-state laser</h5>
+<ul>
+<li>Stable and narrow spectral linewidth</li>
+<li>Very high peak power</li>
+</ul>
+<h5 id="semiconductor-laser">Semiconductor laser</h5>
+<ul>
+<li>Compact in size, light weight, easy to operate</li>
+<li>Quite low output power hence <strong>require additional amplifier</strong> for long distance communication</li>
+<li>Diodes require great care</li>
+</ul>
+<h5 id="fiber-laser-4">Fiber laser [4]</h5>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk51ei3j30zk0k075c.jpg" alt="Fiber laser cutting machine FOL-3015AJ" /><figcaption>Fiber laser cutting machine FOL-3015AJ</figcaption>
+</figure>
+<ul>
+<li>The laser light is both generated and delivered by an inherently flexible medium, which allows easier delivery to the focusing location and target.</li>
+<li>Fiber lasers can have active regions several kilometers long, and so can provide very high optical gain.</li>
+<li>Fiber lasers are compact compared to solid-state or gas lasers of comparable power ( because the fiber can be bent and coiled)</li>
+<li>The additional power and better beam quality provide cleaner cut edges and faster cutting speeds</li>
+</ul>
+<h4 id="choice-of-laser-device-type">2.3.3 Choice of laser device type</h4>
+<p>It seems that fiber laser is great in comparison with others. We first considered solid state laser but fiber laser seems to be better and it has many applications in telecommunications. So we choose <strong>fiber laser</strong> as our type of laser device.</p>
+<h3 id="modulator">2.4 Modulator</h3>
+<p>We have two consideration of the modulator, to be clear:</p>
+<ul>
+<li><p>Electro-optic modulator [6]</p>
+<p>An electro-optic modulator (EOM) is an optical device in which a signal-controlled element exhibiting an electro-optic effect is used to modulate a beam of light.</p></li>
+<li><p>Acoustic-optic modulator [5]</p>
+<p>An acousto-optic modulator (AOM), uses the acousto-optic effect to and shift the frequency of light using sound waves.</p></li>
+</ul>
+<p>We found little applications in telecommunications about acoustic-optic modulator and it seems electro-optic modulator has a more mature technology. We found that <span class="math inline">\(LiNbO_3\)</span> has nice performance in the application of long distance communication and there are a lot of type we could choose as provided in [7]. So we choose electro-optic modulator for our ground-to-satellite FOS communication system goal.</p>
+<p>To be more specific, we will use <em><span class="math inline">\(LiNbO_3\)</span> Mach-Zehnder Modulator</em> for its good performance.</p>
+<h2 id="simulation">3. Simulation</h2>
+<h3 id="demo-fso-communication-system">3.1 Demo: FSO communication system</h3>
+<p>We considered the composition of the system and drew a structure graph as below:</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9djy58q7j31t00u0q79.jpg" alt="FSOCS" /><figcaption>FSOCS</figcaption>
+</figure>
+<p>We put our emphasis on the <em>Transmitter</em> part and the following sections are our simulation work.</p>
+<h4 id="layout">3.1.1 Layout</h4>
+<p>Below is the layout of our communication system. We used OptiSystem software to do the simulation.</p>
+<p>The transmitter part is in the left and we will dig into it later.</p>
+<p>In the middle is the FSO Channel. Since Ground-to-Satellite system has at least 90 km (see <em>regions of atmosphere</em> diagram below) , we set the range of the FSO channel 100 km. On the left and right of the FSO channel are two opticla amplifiers, from simulation result we can found their role in the system.</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk5x5ydj318t0rswih.jpg" alt="Regions of atmosphere" /><figcaption>Regions of atmosphere</figcaption>
+</figure>
+<p>On the right is the Receiver part. It consists of PIN Photodiode (which transfer optic wave into electric signal), Law Pass Bessel Filter (which is used to filter out noise) and Data Recovery Module (which do the demodulation and get the recovered signal).</p>
+<p>We use BER Analyter to analyse the bit error rate of the system.</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9djvig9aj31720cb7aq.jpg" alt="FSO demo layout" /><figcaption>FSO demo layout</figcaption>
+</figure>
+<h4 id="simulation-result">3.1.2 Simulation result</h4>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9djzynsxj318n0md140.jpg" alt="simulation result" /><figcaption>simulation result</figcaption>
+</figure>
+<p>Above is our simulation result from which we can found that loss is huge. The reason is FSO channel is too long.</p>
+<p>Because of the time and technology limitation, we didn’t get a good simulation result. Below is something we considered:</p>
+<ul>
+<li><p>how to overcome the problem of very big loss</p></li>
+<li><p>how to choose the laser power</p></li>
+<li><p>how to choose photodetector</p>
+<ul>
+<li>photodiode</li>
+<li>optical power detector</li>
+<li>optical phase detector</li>
+</ul></li>
+<li><p>how to choose filters</p>
+<ul>
+<li>low pass
+<ul>
+<li>Gaussian filter</li>
+<li>Bessel filter</li>
+<li>etc.</li>
+</ul></li>
+<li>height pass</li>
+<li>band pass</li>
+</ul></li>
+<li><p>how to set parameters of optical amplifier</p>
+<ul>
+<li>gain</li>
+<li>noise figure</li>
+</ul></li>
+</ul>
+<h3 id="optical-transmitter">3.2 Optical transmitter</h3>
+<p>From COSMOL, we get the some insight of the modulator. But it is not that clear.</p>
+<p>We use OptiSystem to construct our <em>optical transmitter</em> and further more, we digged a little deeper and build a demo of the whole <em>FSO communication system.</em></p>
+<p>Below are the layout of our system.</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk0rwezj30sm0cladg.jpg" alt="FSO-transmitter-layout" /><figcaption>FSO-transmitter-layout</figcaption>
+</figure>
+<p>From the figure we can see the structure of the transmitter clearly.</p>
+<ul>
+<li><p>We use simple <em>Bit Sequence Generator</em> to generate electric signal and use <em>NRZ Pulse Generator</em> to generate electric pulse.</p></li>
+<li>We use <em>Fiber Laser</em> as our laser device. As there isn’t Fiber Laser device in the software, we put a CW Laser and add a description. CW Laser can generate 1550 nm optical wave.</li>
+<li>We use <span class="math inline">\(LiNbO_3\)</span> Mach-Zehnder Modulator in our transmitter. The reasons have been stated in section 2.</li>
+<li><p>Put the optic signal and electric pulse into the MZ Modulator, we can get the modulated optical signal.</p></li>
+</ul>
+<p>Above are the details of our transmitter, we then use Optical Power Meter and Optical Spectrum Analyzer to do the simulation.</p>
+<p>Results are as follows :</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk1s5hnj312r0jtwln.jpg" alt="FSO-transmitter-simulation-result" /><figcaption>FSO-transmitter-simulation-result</figcaption>
+</figure>
+<p>We can see from the figure that the transmitter has <span class="math inline">\(2.485\)</span> dBm los and the output power is <span class="math inline">\(56.432\times 10^{-3} W\)</span>. We need optical amplifiers to make it larger.</p>
+<h3 id="electro-optic-modulation-process">3.3 Electro-optic Modulation Process</h3>
+<p>In order to give a more specific model, we use COMSOL to simulate the <em>Electro-optic modulation process</em>. Below are what we have done.</p>
+<p>We choose the <strong>wave optics module</strong>.</p>
+<p>Then we perform the 2D geometrical modeling since the system is symmetric.</p>
+<p>We can find that the structure has core and cladding:</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk3n0tdj30xo0hnaab.jpg" alt="structure of core and cladding" /><figcaption>structure of core and cladding</figcaption>
+</figure>
+<p>Next we set the boundary conditions so that the COSMOL can do the calculation. We set the applied voltage boundary of the light or rather the boundary of the wave:</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9djz4eraj309n09pmx5.jpg" alt="step1" /><figcaption>step1</figcaption>
+</figure>
+<p>Before calculation, we set some configurations:</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk2mm1hj309h05pa9y.jpg" alt="step2" /><figcaption>step2</figcaption>
+</figure>
+<p>(To be clear: “步骤 <span class="math inline">\(k\)</span> ” &lt;—&gt; “ Step <span class="math inline">\(k\)</span> ” , “求解器配置” &lt;—&gt; “Solver Configuration” and “作业配置” &lt;—&gt; “ Work Configuration” )</p>
+<p>Finally, we get the simulation result. In the figure it is the distribution of the electric field in the waveguide. We also get the loss, transmittance and reflectance of the system.</p>
+<p>(The first line of the figure “表面：电场模” &lt;—&gt; “Surface: Electric field mode” )</p>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk362bij30xd0h9wer.jpg" alt="EF distribution" /><figcaption>EF distribution</figcaption>
+</figure>
+<figure>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gh9dk16evoj30xe0grq39.jpg" alt="Property inside" /><figcaption>Property inside</figcaption>
+</figure>
+<p>However, we cannot get the change of the phase. It seems that the software has some limitation. And we didn’t consider the electric signals. These are something that can be improved.</p>
+<h2 id="reference">Reference</h2>
+<p>[1] Kaushal H, Jain V K, Kar S. Free space optical communication[M]. Gurgaon, Haryana: Springer, 2017.</p>
+<p>[2] 高瞻, 丁铁骑, 吕辉. 光无线通信系统通信波长的选择[J]. 通讯世界, 2002, 8(12): 70-71.</p>
+<p>[3] https://seminex.com/1550nm-lasers.aspx/</p>
+<p>[4] https://www.wikiwand.com/en/Fiber_laser</p>
+<p>[5] https://www.wikiwand.com/en/Acousto-optic_modulator</p>
+<p>[6] https://www.wikiwand.com/en/Electro-optic_modulator</p>
+<p>[7] https://www.newport.com/medias/sys_master/images/images/h31/hfb/8797089398814/Electro-Optic-Modulator-Brochure.pdf</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Projects/" rel="tag">Projects</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Computer-Science-艰难配环境" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/24/Computer-Science-%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83/"
+    >艰难配环境</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/24/Computer-Science-%E8%89%B0%E9%9A%BE%E9%85%8D%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time datetime="2020-07-24T06:46:47.000Z" itemprop="datePublished">2020-07-24</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="sublime-text-配-python3.7-macos">Sublime Text 配 Python3.7 （macOS）</h2>
+<p>Browse Packages —&gt; User —&gt;新建 Python3.7.sublime-build</p>
+<p>写入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"cmd"</span>: [<span class="string">"/usr/local/bin/python3"</span>, <span class="string">"-u"</span>, <span class="string">"<span class="variable">$file</span>"</span>],</span><br><span class="line">    <span class="string">"file_regex"</span>: <span class="string">"^[ ]*File \"(...*?)\", line ([0-9]*)"</span>,</span><br><span class="line">    <span class="string">"selector"</span>: <span class="string">"source.python"</span>,</span><br><span class="line">    <span class="string">"env"</span>:&#123;  <span class="string">"PYTHONPATH"</span>:<span class="string">"/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages:/Users/huanglongqian/anaconda3/lib/python3.7/site-packages"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>cmd的确定：相当于在terminal使用python3运行当前py文件，终端中使输入<code>which python3.7</code> 即可获得路径</p></li>
+<li><p>env的重要：添加环境变量，一番摸索后发现这个就相当于</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.append(<span class="string">'python_path'</span>)</span><br></pre></td></tr></table></figure>
+<p>往env中添加好后，就不需要每次都这样写了！</p></li>
+<li><p>我添加的这个，主要是<code>import cv2</code> 一直报错，但是终端中import却没问题，于是心生一计：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python3</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> cv2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>cv2.__file__</span><br></pre></td></tr></table></figure>
+<p>把得到的路径放到环境变量里就好了。</p></li>
+<li><p>发现 <code>import slidingwindow</code>也出了问题，一看原来放到了python3.8的里面，于是故伎重演，PYTHONPATH再加一个，注意中间是用冒号隔开</p></li>
+<li><p>太混乱了，<code>import tensorflow</code>居然也出了问题，找了一下目前改成annoconda的目录里面的tensorflow，pip3 install的不知道放到了哪里去了orz</p></li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
+    <article id="post-Projects-Optical-system-design" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/07/Projects-Optical-system-design/"
+    >Optical System Design</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/07/Projects-Optical-system-design/" class="article-date">
+  <time datetime="2020-07-07T04:15:21.000Z" itemprop="datePublished">2020-07-07</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="光学系统设计-project">光学系统设计 Project</h1>
+<h2 id="光路计算部分">光路计算部分</h2>
+<p>这是光学系统设计的光路计算 Project，具体的程序和发行版我已经放到了<a href="https://github.com/longqianh/simple-ray-tracing.git" target="_blank" rel="noopener">GitHub上</a>。</p>
+<p>这是一个非专业协作的非专业项目，一开始头文件和cpp没有分开，GitHub提交也比较混乱，文件、代码、GitHub 更加专业是我努力学习完善的方向。</p>
+<p>但是这是我较为满意的一次项目，至少我不认为这是学术垃圾。光线的计算程序写了三、四十个小时，在类的设计上花了不少功夫，我认为程序具有可拓展性、易理解性，比如要进行光路追迹，只需要声明光线，便可利用<code>ray_tracing(ray,ku,kw)</code> 函数得到输出光线。</p>
+<p>真的感谢吴恩宗做出一个无比美丽和强大的GUI，而且提供了非常细致的帮助文档。</p>
+<p>真的感谢孙昊天在我debug到绝望的时候陪着我一起de，让我看到了希望的光。</p>
+<h2 id="光学系统设计部分">光学系统设计部分</h2>
+<p>应该说，这一部分全靠两位队友带。</p>
+<p>我是直接奔着3个透镜去做的，因为都在紫金港，我可以直接去队友们的寝室里。中间遇到了很多困难，都是队友们在我旁边指导着克服的。因为同时有四个项目进行，我做完以后就算做完了，不再继续优化。</p>
+<p>吴恩宗设计了一个四透镜的，可以说，优化到了极致。孙昊天三四五都做了，而且都做得很棒，三透镜做到了F2.8，所以最后就用他的三透镜系统啦！</p>
+<p>项目报告就放到第三部分了。By the way，最后的答辩孙昊天非常认真地准备，我看着时间真的把握地很好，PPT也很妙，赞啊啊!</p>
+<h2 id="项目报告">项目报告</h2>
+
+
+	<div class="row">
+    <embed src="/pdf_files/光学系统设计-项目报告.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Projects/" rel="tag">Projects</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-Projects-Audio-Analysis" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -133,86 +933,6 @@
 <figure>
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlly1ggiob5huksj318e04ojrm.jpg" alt="grade" /><figcaption>grade</figcaption>
 </figure>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Life-一些心得" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/23/Life-%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/"
-    >一些心得</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/23/Life-%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97/" class="article-date">
-  <time datetime="2020-05-23T15:53:24.000Z" itemprop="datePublished">2020-05-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h1 id="心得们">心得们</h1>
-<h2 id="pre">Pre</h2>
-<ul>
-<li>做 Keynote, 列一个大纲, 把要讲的东西列出来, 顺序是什么.</li>
-</ul>
-<h2 id="做实验">做实验</h2>
-<ul>
-<li>去实验室之前列好自己要做的事情, 尽快做完不逗留.</li>
-</ul>
-<h2 id="一些现象的解释">一些现象的解释</h2>
-<ul>
-<li>钻石的闪亮光泽和缤纷火彩，来自于其异常高的折射率和色散程度</li>
-</ul>
-<h2 id="决心">决心</h2>
-<ul>
-<li>努力学习，努力科研，努力健身，努力提升自己</li>
-</ul>
 
       
       <!-- reward -->
@@ -453,469 +1173,6 @@ H(A,B)=\sum_{i=1}^np_A(x_i)\ln\left[p_B(x_i)\right]
 
 	<div class="row">
     <embed src="/pdf_files/半导体激光全息实验总结.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Projects-Optomechanical-Structural-Design" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Projects-Optomechanical-Structural-Design/"
-    >Optomechanical Structural Design</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Projects-Optomechanical-Structural-Design/" class="article-date">
-  <time datetime="2020-05-02T18:25:25.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a> / <a class="article-category-link" href="/categories/Projects/Optics/">Optics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is the major assignment for our optomechanical structural design course. Thanks a lot for Xiaowen Wang, Longxun Cao and Hanmo Mei. That week we all had little time for sleep and we finally made a really big guy! Although that period was very hard , I really cherish it.</p>
-<p>I will make it more detailed when I have time.</p>
-<h3 id="工程图汇总">工程图汇总</h3>
-
-
-	<div class="row">
-    <embed src="/pdf_files/钢铁侠手臂台灯-工程图汇总.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-<h3 id="设计文件">设计文件</h3>
-
-
-	<div class="row">
-    <embed src="/pdf_files/钢铁侠手臂台灯项目设计文件.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Notes-byhand-NA-notes" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Notes-byhand-NA-notes/"
-    >NA-Notes</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Notes-byhand-NA-notes/" class="article-date">
-  <time datetime="2020-05-02T18:12:18.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is my class notes for Numerical Analysis. Hopefully one day I can organize it into an electronic version.</p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/数值分析方法.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Notes-byhand-pde-notes" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Notes-byhand-pde-notes/"
-    >PDE-Notes</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Notes-byhand-pde-notes/" class="article-date">
-  <time datetime="2020-05-02T18:04:58.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/notes/">notes</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is my class notes for PDE (partial differential equations ) course.</p>
-<p>Due to the capacity limit, I cannot upload it (200+MB), but I found an alternative way. I uploaded it to MEGA and you can get access to the note by the following url.</p>
-<p><a href="https://mega.nz/file/cdoVkDiJ#qT23xZ6WbVRNxoJ8iNsJOmXdWt_pfr5fzG3UyVoem8Q" target="_blank" rel="noopener">PDE-Note-by-Peter :)</a></p>
-<p>By the way, the file seems too large so you need to wait for a moment or just download it, please execuse me.</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Projects-Optical-combination-experiment" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Projects-Optical-combination-experiment/"
-    >Optical Combination Experiment</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Projects-Optical-combination-experiment/" class="article-date">
-  <time datetime="2020-05-02T18:00:59.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a> / <a class="article-category-link" href="/categories/Projects/Optics/">Optics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is the optical combination experiment report I’ve done in the Aplied Optical Experiment course.</p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/光学组合实验实验报告.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Projects-iPhone-focal-length-measurement" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/03/Projects-iPhone-focal-length-measurement/"
-    >iPhone Focal Length Measurement</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/03/Projects-iPhone-focal-length-measurement/" class="article-date">
-  <time datetime="2020-05-02T17:55:17.000Z" itemprop="datePublished">2020-05-03</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a> / <a class="article-category-link" href="/categories/Projects/Optics/">Optics</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This is the mobile phone focal length measurement experiment report I’ve done in the Aplied Optical Experiment course.</p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/手机焦距测量实验报告.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="post-Projects-2020-ICM" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/02/Projects-2020-ICM/"
-    >2020-ICM</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/02/Projects-2020-ICM/" class="article-date">
-  <time datetime="2020-05-02T15:22:18.365Z" itemprop="datePublished">2020-05-02</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Projects/">Projects</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>This work is mainly about the football game team strategy based on big data and is our final paper for the D problem of 2020 Interdisciplinary Contest in Modelling (ICM 2020), contributed collaboratively and equally by R.C. Luo, Y.Z. Zhang and me.</p>
-<p>Thanks cordially to the combined efforts of whole group, we fortunately won an M-prize. Due to privacy and copyright, the control number in our paper is erased.</p>
-
-
-	<div class="row">
-    <embed src="/pdf_files/2020_ICM.pdf" width="100%" height="550" type="application/pdf">
 	</div>
 
 

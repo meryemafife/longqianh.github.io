@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">13.1k</span>
+            <span class="post-count">13.2k</span>
         </span>
     </span>
 
@@ -109,7 +109,7 @@
       
       <h1 id="数理方法整理">数理方法整理</h1>
 <center>
-作者：黄隆钤 混合1801
+Peter_H
 </center>
 <h2 id="一-数学物理定解问题">一 数学物理定解问题</h2>
 <h3 id="定解问题的导出">1.1 定解问题的导出</h3>
@@ -167,7 +167,7 @@ c\rho u_t-k\Delta u=F\left(x,y,z,t\right),\quad u_t=0
 \notag
 \]</span></p></li>
 <li><p>静电场方程 <span class="math display">\[
-\oiint \vec E \ dS=\int_V\nabla\cdot \vec E \ dV=\frac{1}{\varepsilon_0}\int_V \rho \ dV
+\oiint \vec E \cdot \text{d}\vec \sigma=\int_V\nabla\cdot \vec E\ \text{d}V=\frac{1}{\varepsilon_0}\int_V \rho \text{d}V
 \\
 \implies\nabla\cdot\vec E=\rho/\varepsilon_0,\qquad \vec E=-\nabla V
 \\
@@ -186,7 +186,7 @@ c\rho u_t-k\Delta u=F\left(x,y,z,t\right),\quad u_t=0
 <li><p>自由: 不受外力。以杆为例：<span class="math inline">\(YS\ u_x|_{x=x_0}=0=&gt;u_x|_{x=x_0}=0\)</span></p></li>
 <li><p>第三类边界条件：</p>
 <ul>
-<li><p>自由冷却：遵循牛顿冷却定律。单位时间单位面积散失的热量与温度差成正比。 <span class="math display">\[
+<li><p>自由冷却：遵循牛顿冷却定律: 单位时间单位面积散失的热量与温度差成正比。 <span class="math display">\[
 \Gamma |_{x=x_0}=h\left(u|_{x=x_0}-u_0\right),\quad \Gamma =-k u_x \\
 i.e. \quad \left(u_x+\frac{h}{k}u\right)|_{x=x_0}=\frac{u_0}{k}
 \notag
@@ -267,12 +267,12 @@ T_n=a_n\cos\left(\frac{n\pi}{l}t\right)+b_n\sin\left(\frac{n\pi}{l}t\right)
 <p><span class="math display">\[
 u\left(x,t\right)=\sum\limits_{n=0}^{\infty}X_nT_n=\sum\limits_{n=0}^\infty \left[A_n \cos\left(\frac{n\pi}{l}t\right)+B_n\sin\left(\frac{n\pi}{l}t\right)\right]\sin\left(\frac{n\pi}{l}x\right)\\
 put \ into \ \left(III\right)\implies A_n\sin\left(\frac{n\pi}{l}x\right)=\varphi\left(x\right)\\
-=&gt;A_n=\frac{\int_0^l\varphi\left(x\right)\sin\left(\frac{n\pi}{l}x\right)dx}{\int_0^l \sin\left(\frac{n\pi}{l}x\right)dx}=\frac{2}{l}\int_0^l\varphi\left(x\right)\sin\left(\frac{n\pi}{l}x\right)dx\\
+\implies A_n=\frac{\int_0^l\varphi\left(x\right)\sin\left(\frac{n\pi}{l}x\right)dx}{\int_0^l \sin\left(\frac{n\pi}{l}x\right)dx}=\frac{2}{l}\int_0^l\varphi\left(x\right)\sin\left(\frac{n\pi}{l}x\right)dx\\
 B_n=\frac{2}{n\pi}\int_0^l\psi\left(x\right)\sin\left(\frac{n\pi}{l}x\right)dx
 \notag
 \]</span></p>
 <p><span class="math display">\[
-=&gt;u\left(x,t\right)=\sum\limits_{n=0}^\infty \left[A_n \cos\left(\frac{n\pi}{l}t\right)+B_n\sin\left(\frac{n\pi}{l}t\right)\right]\sin\left(\frac{n\pi}{l}x\right),\qquad A_n,B_n \ are \ as \ above.
+\implies u\left(x,t\right)=\sum\limits_{n=0}^\infty \left[A_n \cos\left(\frac{n\pi}{l}t\right)+B_n\sin\left(\frac{n\pi}{l}t\right)\right]\sin\left(\frac{n\pi}{l}x\right),\qquad A_n,B_n \ are \ as \ above.
 \]</span></p>
 <h4 id="非齐次边界">（2）非齐次边界</h4>
 <p>首先将边界条件齐次化。再回到2.1。</p>
@@ -319,7 +319,7 @@ u|_{t=0}=0,\ u_t|_{t=0}=0,
 \]</span></p>
 <p>解 （<span class="math inline">\(I\)</span>）可得 <span class="math inline">\(u_I\)</span></p>
 <p>解（<span class="math inline">\(II\)</span>）： <span class="math display">\[
-u_{II}=\int_0^tw\left(x,\tau\right)d\tau,\quad w\ satisfy:\\
+u_{II}=\int_0^tw\left(x,\tau\right)\text{d}\tau, \quad w \ \text{satisfy}:\\
 \left(III\right)\quad\begin{cases}
 w_{tt}-a^2w_{xx}=0\\
 w|_{x=0}=w|_{x=l}=0\\
@@ -435,7 +435,7 @@ x^2\frac{d^2R}{dr^2}+x\frac{dR}{dx}-\left(x^2+m^2\right)R=0
 <p><span class="math inline">\((\ref{EulerODE})\)</span> 为欧拉型 ODE，解为 <span class="math inline">\(\displaystyle R\left(r\right)=Cr^l+D\frac{1}{r^{l+1}}\)</span></p>
 <p>$ ()$为 <strong>球函数方程</strong>， 现进一步分离变量，设 <span class="math inline">\(Y\left(\theta,\varphi\right)=H\left(\theta\right)\cdot\Phi\left(\varphi\right)\)</span> , 代入得 : $$ \begin{aligned}&amp;()+H+l(l+1)H=0\ &amp; ()+l(l+1)^2=-\ &amp;''+=0 ,()+[l(l+1)^2-]H=0</p>
 <p>\end{aligned} $$</p>
-<p>关于 <span class="math inline">\(\Phi\)</span> 的方程再加上<em>自然周期条件</em> <span class="math inline">\(\Phi\left(\varphi\right)=\Phi\left(\varphi+2\pi\right)\)</span>, 可得： <span class="math display">\[
+<p>关于 <span class="math inline">\(\Phi\)</span> 的方程结合自然周期条件 <span class="math inline">\(\Phi\left(\varphi\right)=\Phi\left(\varphi+2\pi\right)\)</span>, 可得： <span class="math display">\[
 \lambda=m^2,\quad m=0,1,2,3,\cdots\\
 \Phi\left(\varphi\right)=A\cos m\varphi+B\sin m\varphi
 \notag
@@ -628,7 +628,7 @@ y\left(x\right)=C_1 J_m\left(x\right)+C_2 N_m \left(x\right)
 y\left(x\right)=C_1I_{\nu}\left(x\right)+C_2I_{-\nu}\left(x\right).
 \]</span></p>
 <h5 id="整数-m-阶虚宗量贝塞尔方程">整数 <span class="math inline">\(m\)</span> 阶虚宗量贝塞尔方程</h5>
-<p>整数 <span class="math inline">\(m\)</span> 阶虚宗量贝塞尔方程的一般解：将来学完整理。</p>
+<p>整数 <span class="math inline">\(m\)</span> 阶虚宗量贝塞尔方程的一般解：<del>将来学完整理。学完了也没时间整理了</del></p>
 <h3 id="s-l本征值问题">4.3 S-L本征值问题</h3>
 <h4 id="s-l-型方程">（1）S-L 型方程</h4>
 <p><span class="math display">\[
@@ -1118,8 +1118,8 @@ N_m^2&amp;=\int_0^{r_0}\left[j_l(k_mr)\right]^2r^2dr\notag\\
 <li>求解亥姆霍兹方程（柱/球）</li>
 </ul>
 <p>注意一个点：</p>
-<p>​ 柱侧面齐次边界，则为贝塞尔函数系列；</p>
-<p>​ 柱上下底面齐次边界，则为虚宗量贝塞尔函数系列。</p>
+<p>​ 柱侧面齐次边界，需要 <span class="math inline">\(\rho\)</span> 方向有零点，<span class="math inline">\(\mu\geq0\)</span>, 为贝塞尔函数系列；</p>
+<p>​ 柱上下底面齐次边界，需要 <span class="math inline">\(z\)</span> 方向有零点，<span class="math inline">\(\mu\leq0\)</span>，为虚宗量贝塞尔函数系列。</p>
 <h2 id="七-格林函数法">七 格林函数法</h2>
 <h3 id="格林公式">7.1 格林公式</h3>
 <p><span class="math display">\[
@@ -1223,7 +1223,7 @@ f\left(x\right)&amp;=\frac 1 {2\pi}\int_{-\infty}^\infty F\left(\omega\right)e^{
 \mathcal{F}\left[f\left(x-x_0\right)\right]=e^{-i\omega x_0}F \left(\omega\right)
 \]</span></p></li>
 <li><p>频移 <span class="math display">\[
-\mathcal{F}\left[f\left(x\right)e^{i\omega x_0}\right]=F\left(\omega-\omega_0\right)
+\mathcal{F}\left[f\left(x\right)e^{i\omega_0 x}\right]=F\left(\omega-\omega_0\right)
 \]</span></p></li>
 <li><p>求导 <span class="math display">\[
 \mathcal{F}\left[f&#39;\left(x\right)\right]=i\omega F \left(\omega \right)
@@ -1256,12 +1256,14 @@ f\left(x,y,z\right)&amp;=\frac 1 {\left(2\pi\right)^3}\iiint_{-\infty}^\infty F\
 \end{align}
 \]</span></p>
 <h4 id="常用变换">（4）常用变换</h4>
-<p>$$ <span class="math display">\[\begin{align}
+<p><span class="math display">\[
+\begin{align}
 \mathcal{F}\left[e^{-x^2}\right]&amp;=\sqrt{\pi}e^{-\frac{\omega^2}{4}}\\
 \mathcal{F}\left[e^{-a|x|}\right]&amp;=\frac{2a}{a^2+\omega^2}\\
-\mathcal{F}\left[\frac{a}{a^2+\omega^2}\right]&amp;=\pi e^{-a|x|}
-
-\end{align}\]</span> $$</p>
+\mathcal{F}\left[\frac{a}{a^2+\omega^2}\right]&amp;=\pi e^{-a|x|}\\
+\int_{-\infty}^{\infty} e^{-a^2k^2}e^{b^2k} \text{d}k&amp;=\frac{\sqrt{\pi}}{|a|}e^{-b^2/4a^2}
+\end{align}
+\]</span></p>
 <h4 id="应用">（5）应用</h4>
 <ul>
 <li><p>证明 Helmholtz 定理</p></li>
@@ -1321,6 +1323,13 @@ Res\left[f\left(t\right)\right]=\lim_{z\to z_0}\frac 1 {\left(n-1\right)!}\frac 
 <h4 id="求定解问题">（5）求定解问题</h4>
 <p>整体思路：先做积分变换，在变换域求解，然后做逆变换。</p>
 <h2 id="九-保角变换法">九 保角变换法</h2>
+<p><span class="math display">\[
+\begin{align}
+z&amp;\mapsto \zeta(z)\\
+u_{xx}+u_{yy}=f(x,y)&amp;\mapsto u_{\xi\xi}+u_{\eta\eta}=\frac{1}{|\zeta&#39;(z)|^2}f(\xi,\eta)
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\zeta\)</span> 改变了边界，却没有改变方程的形式，这会很有用处。</p>
 <h3 id="分式线型变换">9.1 分式线型变换</h3>
 <p><span class="math display">\[
 \zeta\left(z\right)=k\frac{z-\alpha}{z-\beta}
@@ -1482,11 +1491,11 @@ u=c_1\ln|\zeta|+c_2
   
   <nav class="article-nav">
     
-      <a href="/2020/02/23/Computer-Science-Machine-Learning-Deep-learning-%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-L2-Net/" class="article-nav-link">
+      <a href="/2020/02/23/Computer-Science-Machine-Learning-Deep-learning-%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0-SOS-Net/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            L2-Net
+            SOS-Net
           
         </div>
       </a>
